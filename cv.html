@@ -180,6 +180,12 @@ details[open]{display:grid; gap:8px}
   <section id="p-build">
     <div class="builder">
       <form class="form" id="cvForm" autocomplete="on">
+        <label class="drop" for="b-file" id="b-drop">
+          <input id="b-file" type="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+          <span class="drop-t">📄 عندك سيرة؟ ارفعها ونعبي الخانات لك</span>
+          <span class="muted">PDF أو Word (.docx). نحولها لقالب ATS، وأنت تراجع وتعدل. الملف ما يطلع من جهازك.</span>
+        </label>
+        <div id="b-status" class="cvstatus"></div>
         <fieldset>
           <legend>اللغة</legend>
           <div class="row">
@@ -533,7 +539,16 @@ async function readPdf(buf){
   let out = [];
   for(let i=1; i<=Math.min(pdf.numPages, 6); i++){
     const page = await pdf.getPage(i); const c = await page.getTextContent();
-    out.push(c.items.map(it=>it.str).join(" "));
+    let line = "", lastY = null, lines = [];
+    c.items.forEach(it=>{
+      const y = it.transform ? Math.round(it.transform[5]) : null;
+      if(lastY !== null && y !== null && Math.abs(y - lastY) > 2 && line.trim()){ lines.push(line.trim()); line = ""; }
+      line += (line && !line.endsWith(" ") && it.str && !it.str.startsWith(" ") ? " " : "") + it.str;
+      if(it.hasEOL){ if(line.trim()) lines.push(line.trim()); line = ""; }
+      if(y !== null) lastY = y;
+    });
+    if(line.trim()) lines.push(line.trim());
+    out.push(lines.join("\n"));
   }
   return {text: out.join("\n"), pages: pdf.numPages};
 }
@@ -568,11 +583,126 @@ async function handleFile(file){
   }
 }
 $("#m-file").addEventListener("change", e=>handleFile(e.target.files[0]));
-const drop = document.querySelector(".drop");
+const drop = document.querySelector('label[for="m-file"]');
 ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev, e=>{ e.preventDefault(); drop.classList.add("drag"); }));
 ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev, e=>{ e.preventDefault(); drop.classList.remove("drag"); }));
 drop.addEventListener("drop", e=>handleFile(e.dataTransfer.files[0]));
 function rerun(){ if(CURRENT && CURRENT.job) pickJob(CURRENT.job.id); else if(CURRENT) runMatch(CURRENT.kws, null); }
+
+// ===== تحويل سيرة جاهزة إلى خانات صانع السيرة =====
+const SECTIONS = [
+  ["summary", /^(summary|professional summary|profile|professional profile|about me|about|objective|career objective|نبذة|نبذة عني|نبذة مختصرة|الملخص|الملخص المهني|الهدف الوظيفي|الهدف)$/],
+  ["edu", /^(education|academic background|academic qualifications|educational background|التعليم|المؤهلات العلمية|المؤهل العلمي|المؤهلات الأكاديمية)$/],
+  ["exp", /^(experience|work experience|professional experience|employment|employment history|work history|internships?|internship experience|training|volunteer(ing)?( experience| work)?|extracurricular( activities)?|activities|leadership( experience)?|الخبرات|الخبرة|الخبرات العملية|الخبرة العملية|التدريب|التدريب التعاوني|العمل التطوعي|الأنشطة|الخبرات والأنشطة)$/],
+  ["proj", /^(projects|academic projects|personal projects|key projects|selected projects|المشاريع|مشاريع)$/],
+  ["skills", /^(skills|technical skills|core skills|key skills|tools|technologies|tools (and|&) technologies|skills (and|&) tools|المهارات|المهارات التقنية|المهارات الفنية)$/],
+  ["soft", /^(languages|soft skills|personal skills|interests|اللغات|المهارات الشخصية|المهارات الشخصية واللغات)$/],
+  ["certs", /^(certifications?|certificates?|courses|licenses( (and|&) certifications)?|certifications (and|&) courses|awards|honors|achievements|الشهادات|الدورات|الشهادات والدورات|الدورات التدريبية|الجوائز|الإنجازات)$/]
+];
+const headKey = line => {
+  const t = line.toLowerCase().replace(/[:：\-–—_|•*#]+/g," ").replace(/\s+/g," ").trim();
+  if(!t || t.length > 42) return null;
+  for(const [k, re] of SECTIONS) if(re.test(t)) return k;
+  return null;
+};
+const BULLET = /^\s*[•●▪◦‣∙·\-–—*➢►✓]\s*/;
+const DATE = /((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?(19|20)\d{2}\s*(-|–|—|to|إلى|الى)\s*((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?((19|20)\d{2}|\bpresent\b|\bcurrent\b|\bnow\b|حتى الآن|الآن|الحالي)|((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?(19|20)\d{2}|\bpresent\b/i;
+function splitEntries(lines){
+  const entries = []; let cur = null;
+  lines.forEach(raw=>{
+    const isB = BULLET.test(raw); const line = raw.replace(BULLET,"").trim(); if(!line) return;
+    const labelLine = /^[^:]{2,25}:\s/.test(line) && !DATE.test(line);
+    const headLike = !isB && !labelLine && line.length <= 75 && !/[.。]$/.test(line) && !VERB.test(line);
+    if(headLike && (!cur || cur.bullets.length || cur.head.length >= 2 || (DATE.test(line) && cur.head.some(h=>DATE.test(h))))){
+      cur = {head:[line], bullets:[]}; entries.push(cur);
+    } else if(headLike && cur && !cur.bullets.length){
+      cur.head.push(line);
+    } else {
+      if(!cur){ cur = {head:[], bullets:[]}; entries.push(cur); }
+      cur.bullets.push(line);
+    }
+  });
+  return entries.map(e=>{
+    const all = e.head.join("  ");
+    const m = all.match(DATE); const dates = m ? m[0].trim() : "";
+    const head = e.head.map(h=>h.replace(DATE,"").replace(/[|,–—\-\s]+$/,"").replace(/^[|,–—\-\s]+/,"").trim()).filter(Boolean);
+    return {head, dates, bullets:e.bullets};
+  });
+}
+function parseCV(text){
+  const lines = text.split(/\n/).map(l=>l.replace(/\s+/g," ").trim()).filter(Boolean);
+  const out = {header:[], summary:[], edu:[], exp:[], proj:[], skills:[], soft:[], certs:[]};
+  let sec = "header";
+  lines.forEach(l=>{ const k = headKey(l); if(k){ sec = k; return; } out[sec].push(l); });
+  const all = text;
+  const email = (all.match(/[\w.+-]+@[\w-]+\.[\w.]+/)||[""])[0];
+  const phone = ((all.match(/(\+?966|00966|0)\s?5\d(?:[\s-]?\d){7}/)||all.match(/\+\d[\d\s-]{8,15}\d/)||[""])[0]).trim();
+  const linkedin = (all.match(/(https?:\/\/)?([a-z]{2,3}\.)?linkedin\.com\/in\/[\w\-%]+\/?/i)||[""])[0].replace(/^https?:\/\//,"");
+  const portfolio = (all.match(/(https?:\/\/)?(github\.com\/[\w\-]+|[\w-]+\.github\.io[\w\/-]*|behance\.net\/[\w-]+)/i)||[""])[0].replace(/^https?:\/\//,"");
+  const contactish = l => (email && l.includes(email)) || (phone && l.includes(phone.slice(-4))) || /linkedin|github|@|\+?\d{3}[\s-]?\d{3}/i.test(l);
+  const headerText = out.header.filter(l=>!contactish(l));
+  const name = headerText[0] || "";
+  let headline = "", city = "";
+  headerText.slice(1).forEach(l=>{
+    if(!city && /riyadh|jeddah|dammam|khobar|makkah|mecca|madinah|medina|saudi|الرياض|جدة|الدمام|الخبر|مكة|المدينة|السعودية/i.test(l) && l.length < 60) city = l.split(/[|•]/).find(p=>/riyadh|jeddah|dammam|khobar|makkah|mecca|madinah|medina|saudi|الرياض|جدة|الدمام|الخبر|مكة|المدينة|السعودية/i.test(p)).trim();
+    else if(!headline && l.length <= 60) headline = l;
+  });
+  if(!city){ const cl = out.header.find(l=>/riyadh|jeddah|dammam|khobar|saudi|الرياض|جدة|الدمام|السعودية/i.test(l)); if(cl) city = (cl.split(/[|•,]/).find(p=>/riyadh|jeddah|dammam|khobar|saudi|الرياض|جدة|الدمام|السعودية/i.test(p))||"").trim(); }
+  let summary = out.summary.join(" ");
+  if(!summary){ const longH = headerText.slice(1).filter(l=>l.length > 60); summary = longH.join(" "); }
+  const edu = splitEntries(out.edu).map(e=>{
+    const sIdx = e.head.findIndex(h=>/universit|college|institute|school|academy|جامعة|كلية|معهد|أكاديمية/i.test(h));
+    const school = sIdx>=0 ? e.head[sIdx] : (e.head[0]||"");
+    const degree = e.head.filter((h,i)=>i!==(sIdx>=0?sIdx:0)).join(" · ");
+    return {school, degree, dates:e.dates, notes:e.bullets.join("\n")};
+  });
+  const exp = splitEntries(out.exp).map(e=>{
+    let role = e.head[0]||"", org = e.head[1]||"";
+    if(!org){ const m = role.split(/\s+(?:at|@|—|–|-|\|)\s+|,\s+/); if(m.length>1){ role = m[0]; org = m.slice(1).join(", "); } }
+    return {role, org, dates:e.dates, notes:e.bullets.join("\n")};
+  });
+  const proj = splitEntries(out.proj).map(e=>{
+    const link = ((e.head.join(" ")+" "+e.bullets.join(" ")).match(/(https?:\/\/)?(github\.com|[\w-]+\.github\.io|[\w-]+\.(com|io|dev|app|sa))\/?[\w\/.-]*/i)||[""])[0].replace(/^https?:\/\//,"");
+    const title = (e.head[0]||"").replace(link,"").replace(/[|–—\-:\s]+$/,"").trim();
+    let tools = e.head.slice(1).join(", ").replace(link,"").trim();
+    const tm = title.match(/\(([^)]{3,80})\)\s*$/);
+    return {title: tm ? title.replace(tm[0],"").trim() : title, tools: tools || (tm?tm[1]:""), link, notes:e.bullets.join("\n")};
+  });
+  const splitList = arr => arr.join(" , ").split(/\s*[,،|•;·]\s*|\s{3,}/).map(x=>x.replace(BULLET,"").replace(/^[^:]{2,30}:\s*/,"").trim()).filter(x=>x && x.length < 50);
+  const softRe = /^(other|languages?|soft skills?|personal|interests|اللغات|المهارات الشخصية|أخرى)\s*:/i;
+  out.soft = out.soft.concat(out.skills.filter(l=>softRe.test(l)));
+  out.skills = out.skills.filter(l=>!softRe.test(l));
+  const skills = [...new Set(splitList(out.skills))].join(", ");
+  const soft = [...new Set(splitList(out.soft))].join(", ");
+  const certs = out.certs.map(l=>l.replace(BULLET,"").trim()).join("\n");
+  const arabic = (text.match(/[\u0600-\u06FF]/g)||[]).length > (text.match(/[A-Za-z]/g)||[]).length;
+  return {lang: arabic?"ar":"en", name, headline, email, phone, city, linkedin, portfolio, summary, skills, soft, certs,
+    edu: edu.length?edu:[{}], proj: proj.length?proj:[{}], exp: exp.length?exp:[{}],
+    _found: {edu:edu.length, exp:exp.length, proj:proj.length, skills:!!skills}};
+}
+function bStatus(kind, msg){ const b=$("#b-status"); b.className="cvstatus "+(kind||""); b.textContent=msg; }
+async function importCV(file){
+  if(!file) return;
+  const ext = file.name.split(".").pop().toLowerCase();
+  if(!["pdf","docx"].includes(ext)){ bStatus("bad","الملف لازم يكون PDF أو Word بصيغة ‎.docx‎."); return; }
+  const hasData = S.name || S.summary || S.exp.some(has) || S.proj.some(has);
+  if(hasData && !$("#b-drop").dataset.ok){ $("#b-drop").dataset.ok="1"; $("#b-file").value=""; bStatus("bad","فيه بيانات مكتوبة في الخانات، والرفع بيستبدلها. ارفع الملف مرة ثانية إذا متأكد."); return; }
+  bStatus("", "جاري قراءة سيرتك وتعبئة الخانات…");
+  try{
+    const buf = await file.arrayBuffer();
+    const {text} = ext==="pdf" ? await readPdf(buf) : await readDocx(buf);
+    if(text.replace(/\s/g,"").length < 80){ bStatus("bad","ما قدرنا نقرأ نص من سيرتك. غالبًا هي صورة أو سكان، وأنظمة ATS بعد ما تقدر تقرأها. عشان كذا الأفضل تكتبها هنا."); track("cv/import-unreadable","سيرة ما تنقرأ"); return; }
+    const p = parseCV(text); const f = p._found; delete p._found;
+    S = Object.assign({lang:"en", name:"", headline:"", email:"", phone:"", city:"", linkedin:"", portfolio:"", summary:"", skills:"", soft:"", certs:"", edu:[{}], proj:[{}], exp:[{}]}, p);
+    fillSimple(); renderLists(); update();
+    try{ localStorage.setItem(UP_KEY, JSON.stringify({name:file.name, text:text.replace(/\s+/g," ").trim()})); UPLOADED = text.replace(/\s+/g," ").trim(); cvStatus("ok", `سيرتك «${file.name}» جاهزة للمطابقة`); }catch(e){}
+    const got = [f.exp&&`${f.exp} خبرة`, f.proj&&`${f.proj} مشروع`, f.edu&&`${f.edu} تعليم`, f.skills&&"المهارات"].filter(Boolean).join("، ");
+    bStatus("ok", `✓ عبّينا الخانات من سيرتك${got?` (${got})`:""}. راجع كل قسم وعدل اللي يحتاج، لأن كل سيرة مكتوبة بطريقة مختلفة.`);
+    track("cv/import", ext); $("#b-drop").dataset.ok="";
+  }catch(err){ bStatus("bad","صار خطأ وحنا نقرأ الملف. تأكد إنه مو محمي بكلمة مرور."); }
+}
+$("#b-file").addEventListener("change", e=>importCV(e.target.files[0]));
+(()=>{ const d=$("#b-drop"); ["dragenter","dragover"].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault(); d.classList.add("drag");})); ["dragleave","drop"].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault(); d.classList.remove("drag");})); d.addEventListener("drop",e=>importCV(e.dataTransfer.files[0])); })();
 
 let MJOBS = [];
 const mnorm = t => String(t||"").toLowerCase().replace(/[أإآ]/g,"ا").replace(/ة/g,"ه");
