@@ -630,7 +630,18 @@ function splitEntries(lines){
   });
 }
 function parseCV(text){
-  const lines = text.split(/\n/).map(l=>l.replace(/\s+/g," ").trim()).filter(Boolean);
+  const raw = text.split(/\n/).map(l=>l.replace(/\s+/g," ").trim()).filter(Boolean);
+  // نرجع الأسطر المكسورة (السطر اللي انقسم على سطرين في الـ PDF) لسطر واحد
+  const lines = [];
+  raw.forEach(l=>{
+    const prev = lines[lines.length-1];
+    const contact = x => /@|https?:|www\.|linkedin|github|\+?\d{3}[\s-]?\d{3}/i.test(x);
+    const cont = prev && !headKey(prev) && !headKey(l) && !BULLET.test(l) && !contact(l) && !contact(prev) && (
+      /^[a-z(&,;:/\-]/.test(l) ||                                    // يبدأ بحرف صغير أو رمز = تكملة
+      (/[,;&/\-]$|\b(and|or|of|the|to|in|for|with|a|an)$/i.test(prev)) // السطر اللي قبله انقطع في نص الجملة
+    );
+    if(cont) lines[lines.length-1] = prev + " " + l; else lines.push(l);
+  });
   const out = {header:[], summary:[], edu:[], exp:[], proj:[], skills:[], soft:[], certs:[]};
   let sec = "header";
   lines.forEach(l=>{ const k = headKey(l); if(k){ sec = k; return; } out[sec].push(l); });
@@ -638,7 +649,8 @@ function parseCV(text){
   const email = (all.match(/[\w.+-]+@[\w-]+\.[\w.]+/)||[""])[0];
   const phone = ((all.match(/(\+?966|00966|0)\s?5\d(?:[\s-]?\d){7}/)||all.match(/\+\d[\d\s-]{8,15}\d/)||[""])[0]).trim();
   const linkedin = (all.match(/(https?:\/\/)?([a-z]{2,3}\.)?linkedin\.com\/in\/[\w\-%]+\/?/i)||[""])[0].replace(/^https?:\/\//,"");
-  const portfolio = (all.match(/(https?:\/\/)?(github\.com\/[\w\-]+|[\w-]+\.github\.io[\w\/-]*|behance\.net\/[\w-]+)/i)||[""])[0].replace(/^https?:\/\//,"");
+  const headerAll = out.header.join(" ");
+  const portfolio = (headerAll.match(/(https?:\/\/)?(github\.com\/[\w\-]+|[\w-]+\.github\.io[\w\/-]*|behance\.net\/[\w-]+)/i)||[""])[0].replace(/^https?:\/\//,"");
   const contactish = l => (email && l.includes(email)) || (phone && l.includes(phone.slice(-4))) || /linkedin|github|@|\+?\d{3}[\s-]?\d{3}/i.test(l);
   const headerText = out.header.filter(l=>!contactish(l));
   const name = headerText[0] || "";
