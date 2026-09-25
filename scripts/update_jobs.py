@@ -20,7 +20,7 @@ SOURCES = [
     {"company": "تابي",     "companyEn": "Tabby",             "ats": "pinpoint",   "id": "tabby"},
     {"company": "لين",      "companyEn": "Lean Technologies", "ats": "ashby",      "id": "leantech"},
     {"company": "هلا",      "companyEn": "HALA",              "ats": "greenhouse", "id": "hala"},
-    {"company": "تمارا",    "companyEn": "Tamara",            "ats": "greenhouse", "id": "tamara", "region": "eu"},
+    {"company": "تمارا",    "companyEn": "Tamara",            "ats": "greenhouse", "id": "tamara"},
     {"company": "فودكس",    "companyEn": "Foodics",           "ats": "workable",   "id": "foodics"},
     {"company": "سلة",      "companyEn": "Salla",             "ats": "workable",   "id": "salla"},
     {"company": "لوسيديا",  "companyEn": "Lucidya",           "ats": "workable",   "id": "lucidya"},
@@ -34,7 +34,7 @@ SOURCES = [
 
 # ---------- الفلاتر ----------
 BEGINNER = re.compile(
-    r"\b(intern|internship|interns|trainee|traineeship|apprentice|graduate|graduates|grad|fresh|junior|jr\.?|entry[\s-]?level|co-?op|tamheer)\b"
+    r"\b(intern|internship|interns|trainee|traineeship|apprentice|graduate|graduates|grad|fresh|junior|jr\.?|entry[\s-]?level|co-?op|tamheer|builders)\b"
     r"|تمهير|تدريب|متدرب|حديثي|تعاوني", re.I)
 EXCLUDE = re.compile(r"\b(senior|sr\.?|lead|head|manager|director|principal|staff)\b", re.I)
 SAUDI = re.compile(r"saudi|\bksa\b|riyadh|jeddah|jiddah|dammam|khobar|makkah|mecca|madinah|medina|dhahran|السعودية|الرياض|جدة", re.I)
@@ -54,7 +54,7 @@ FIELD_RULES = [
 def classify_type(title, experience=""):
     t = f"{title} {experience}".lower()
     if re.search(r"co-?op|تعاوني|graduation requirement", t): return "coop"
-    if re.search(r"graduate program|trainee|traineeship|development program|تمهير|tamheer", t): return "grad"
+    if re.search(r"graduate program|builders program|trainee|traineeship|development program|تمهير|tamheer", t): return "grad"
     if re.search(r"intern", t): return "internship"
     return "entry"
 
@@ -69,7 +69,7 @@ def city_ar(raw):
     return CITY_AR.get(raw.lower(), raw or "السعودية")
 
 def is_beginner(title, experience=""):
-    if EXCLUDE.search(title) and not re.search(r"intern|graduate|trainee|tamheer|تمهير", title, re.I):
+    if EXCLUDE.search(title) and not re.search(r"intern|graduate|trainee|tamheer|builders|تمهير", title, re.I):
         return False
     return bool(BEGINNER.search(title)) or experience.lower() in ("entry level", "internship")
 
