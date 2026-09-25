@@ -1,8 +1,8 @@
 [
  {
   "date": "2026-09-25",
-  "open": 28,
-  "total": 32,
+  "open": 25,
+  "total": 29,
   "new": 6,
   "newIds": [
    "tabby-people",
@@ -13,21 +13,20 @@
    "tabby-product-design-intern-tabby-image"
   ],
   "byCompany": {
-   "Salla": 6,
    "Tabby": 6,
    "Lucidya": 5,
-   "Ninja": 3,
+   "Salla": 5,
+   "Ninja": 2,
    "Atheer Connectivity": 1,
    "Unifonic": 1,
    "Thmanyah": 1,
    "Tamara": 1,
    "COGNNA": 1,
-   "Foodics": 1,
    "Mrsool": 1,
    "Mozn": 1
   },
   "byField": {
-   "business": 14,
+   "business": 11,
    "tech": 5,
    "media": 4,
    "product": 4,
@@ -35,8 +34,8 @@
   },
   "byType": {
    "internship": 10,
-   "entry": 8,
    "grad": 6,
+   "entry": 5,
    "coop": 4
   }
  }
