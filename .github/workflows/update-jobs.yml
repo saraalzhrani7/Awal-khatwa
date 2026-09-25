@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: update-jobs      # تشغيل واحد بس في نفس الوقت
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -28,7 +32,13 @@ jobs:
           git add data/listings.json
           if git diff --staged --quiet; then
             echo "ما فيه إعلانات جديدة اليوم."
-          else
-            git commit -m "تحديث الفرص تلقائيًا $(date +%F)"
-            git push
+            exit 0
           fi
+          git commit -m "تحديث الفرص تلقائيًا $(date +%F)"
+          # لو انرفع تعديل ثاني أثناء التشغيل، ناخذه أول وبعدين نرفع
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && exit 0
+            sleep 5
+          done
+          echo "ما قدرنا نرفع التحديث بعد 3 محاولات"
+          exit 1
