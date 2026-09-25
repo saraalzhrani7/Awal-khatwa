@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>أول خطوة | فرص تدريب ووظائف للمبتدئين في الشركات الناشئة السعودية</title>
+<meta name="description" content="فرص تدريب وتعاوني وبرامج خريجين ووظائف Entry Level في الشركات الناشئة السعودية، مع روابط التقديم الرسمية.">
+<meta property="og:title" content="أول خطوة">
+<meta property="og:description" content="فرص تدريب ووظائف Entry Level في الشركات الناشئة السعودية للي توهم يبدون.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://saraalzhrani7.github.io/Awal-khatwa/">
+<meta property="og:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta property="og:locale" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B7A5C'/%3E%3Cpath d='M9 22h6v-6h8' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Lalezar&display=swap">
+<style>
+:root{
+  --bg:#F2F5F3; --surface:#FFFFFF; --ink:#0F201B; --muted:#5A6B65; --line:#D9E2DE;
+  --accent:#0B7A5C; --accent-ink:#FFFFFF; --accent-soft:#E0F0EA;
+  --saffron:#A8651A; --saffron-soft:#F8EBD8;
+  --closed:#8A9690; --closed-soft:#ECEFED;
+  --focus:#0B7A5C;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0C1613; --surface:#13211D; --ink:#E3EEEA; --muted:#93A8A0; --line:#243731;
+    --accent:#3CC39A; --accent-ink:#06231A; --accent-soft:#16372D;
+    --saffron:#E3A857; --saffron-soft:#3A2B17;
+    --closed:#7E8E88; --closed-soft:#1B2925; --focus:#3CC39A;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C1613; --surface:#13211D; --ink:#E3EEEA; --muted:#93A8A0; --line:#243731;
+  --accent:#3CC39A; --accent-ink:#06231A; --accent-soft:#16372D;
+  --saffron:#E3A857; --saffron-soft:#3A2B17;
+  --closed:#7E8E88; --closed-soft:#1B2925; --focus:#3CC39A;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg); color:var(--ink); font-family:"IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif; font-size:15px; line-height:1.65; padding-inline:16px; padding-block:0 48px}
+.wrap{max-width:1080px; margin-inline:auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--focus); outline-offset:2px; border-radius:6px}
+button{font:inherit; color:inherit}
+.ltr{direction:ltr; unicode-bidi:isolate}
+
+header.top{display:flex; flex-wrap:wrap; align-items:end; justify-content:space-between; gap:20px; padding-block:40px 22px}
+.brand h1{font-family:"Lalezar","IBM Plex Sans Arabic",sans-serif; font-weight:400; font-size:clamp(36px,6.5vw,56px); line-height:1.05; margin:0}
+.brand h1 span{color:var(--accent)}
+.brand p{margin:10px 0 0; color:var(--muted); max-width:52ch; text-wrap:pretty}
+.stats{display:flex; gap:26px; font-variant-numeric:tabular-nums}
+.stat b{display:block; font-weight:400; font-family:"Lalezar",sans-serif; font-size:30px; line-height:1.1}
+.stat b.live{color:var(--accent)}
+.stat small{color:var(--muted); font-size:12px}
+
+.glossary{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px; padding-block:18px; border-block:1px solid var(--line)}
+.gloss{display:flex; flex-direction:column; gap:4px; align-items:start}
+.gloss .k{flex:none; font-size:12px; font-weight:600; padding:2px 9px; border-radius:6px; background:var(--accent-soft); color:var(--accent)}
+.gloss p{margin:0; font-size:13px; color:var(--muted)}
+.gloss p b{color:var(--ink); font-weight:600}
+
+.tabs{display:flex; gap:4px; margin-top:22px; border-bottom:1px solid var(--line)}
+.tab{background:none; border:0; border-bottom:2px solid transparent; padding:10px 16px; cursor:pointer; color:var(--muted); font-weight:500; margin-bottom:-1px}
+.tab[aria-selected="true"]{color:var(--ink); border-color:var(--accent)}
+.tab .n{font-variant-numeric:tabular-nums; opacity:.7; margin-inline-start:4px}
+
+.controls{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); padding-block:14px 10px; display:grid; gap:10px}
+.searchrow{display:flex; gap:10px; flex-wrap:wrap}
+.search{flex:1 1 260px; display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding-inline:12px}
+.search svg{flex:none; color:var(--muted)}
+.search input{flex:1; min-width:0; border:0; background:transparent; color:var(--ink); font:inherit; padding-block:11px; outline:none}
+.toggle{display:inline-flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:0 14px; cursor:pointer; min-height:46px}
+.toggle[aria-pressed="true"]{background:var(--accent-soft); border-color:var(--accent)}
+.toggle .dot{width:8px; height:8px; border-radius:50%; background:var(--accent)}
+.chips{display:flex; gap:8px; overflow-x:auto; padding-bottom:3px; scrollbar-width:thin}
+.chip{flex:none; border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:5px 13px; font-size:13.5px; cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.chip .n{opacity:.65; margin-inline-start:4px; font-variant-numeric:tabular-nums}
+.resultline{color:var(--muted); font-size:13px}
+
+.list{display:grid; gap:10px; margin-top:4px}
+.job{position:relative; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px; display:grid; grid-template-columns:1fr auto; gap:6px 18px; overflow:hidden}
+.job::before{content:""; position:absolute; inset-block:0; inset-inline-start:0; width:4px; background:var(--accent)}
+.job.seasonal::before,.job.rolling::before{background:var(--saffron)}
+.job.closed::before{background:var(--closed)}
+.job.closed{background:var(--closed-soft)}
+.job-main{min-width:0; display:grid; gap:6px}
+.job-co{font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+.job-co b{color:var(--ink); font-weight:600}
+.job h3{margin:0; font-size:17px; font-weight:600; line-height:1.35; text-wrap:balance}
+.meta{display:flex; flex-wrap:wrap; gap:6px; font-size:12.5px}
+.tag{border:1px solid var(--line); border-radius:6px; padding:1px 8px; color:var(--muted); background:var(--surface)}
+.tag.type{border-color:transparent; background:var(--accent-soft); color:var(--accent); font-weight:600}
+.who{margin:0; font-size:14px; text-wrap:pretty; max-width:70ch}
+.job-side{display:flex; flex-direction:column; align-items:end; gap:10px; justify-content:space-between; min-width:150px}
+.pill{font-size:12px; font-weight:600; border-radius:999px; padding:3px 11px; white-space:nowrap}
+.pill.open{background:var(--accent-soft); color:var(--accent)}
+.pill.rolling,.pill.seasonal{background:var(--saffron-soft); color:var(--saffron)}
+.pill.closed{background:var(--closed-soft); color:var(--closed); border:1px solid var(--line)}
+.due{font-size:12.5px; color:var(--muted); font-variant-numeric:tabular-nums; text-align:end}
+.due.hot{color:var(--saffron); font-weight:600}
+.btn{display:inline-block; text-align:center; text-decoration:none; border-radius:8px; padding:9px 16px; font-size:13.5px; font-weight:600; border:1px solid var(--line); background:var(--surface); cursor:pointer; white-space:nowrap}
+.btn.primary{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.btn:hover{filter:brightness(1.06)}
+.del{background:none; border:0; color:var(--saffron); font-size:12.5px; cursor:pointer; text-decoration:underline}
+.empty{text-align:center; color:var(--muted); padding:48px 0}
+@media (max-width:620px){
+  .job{grid-template-columns:1fr}
+  .job-side{flex-direction:row; align-items:center; min-width:0; flex-wrap:wrap}
+  .job-side .btns{flex:1 1 100%}
+  .job-side .btn{flex:1}
+}
+
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:12px; margin-top:4px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:9px}
+.card-head{display:flex; align-items:start; gap:12px}
+.mono{flex:none; width:42px; height:42px; border-radius:10px; display:grid; place-items:center; font-family:"Lalezar",sans-serif; font-weight:400; font-size:19px; background:var(--accent-soft); color:var(--accent)}
+.names{flex:1; min-width:0}
+.names h3{margin:0; font-size:16.5px; font-weight:600; line-height:1.3}
+.names .en{color:var(--muted); font-size:12.5px}
+.desc{margin:0; font-size:14px}
+.actions{display:flex; gap:8px; margin-top:auto}
+.actions .btn{flex:1; padding-inline:8px}
+.has-jobs{font-size:12px; color:var(--accent); font-weight:600}
+
+section.more{margin-top:44px; display:grid; gap:14px}
+section.more h2{font-family:"Lalezar",sans-serif; font-weight:400; font-size:22px; margin:0}
+.boards{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px}
+.board{display:block; text-decoration:none; padding:12px 14px; border-radius:10px; border:1px dashed var(--line)}
+.board b{display:block; font-size:14.5px}
+.board span{color:var(--muted); font-size:12.5px}
+
+footer{margin-top:36px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:12.5px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px}
+footer p{margin:0; max-width:66ch}
+.linkbtn{background:none; border:0; padding:0; color:var(--muted); text-decoration:underline; cursor:pointer; font-size:12.5px}
+
+.admin{background:var(--surface); border:1px solid var(--accent); border-radius:12px; padding:18px; margin-top:14px; display:grid; gap:12px}
+.admin h2{margin:0; font-size:17px}
+.form{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px}
+.form label{display:grid; gap:4px; font-size:12.5px; color:var(--muted)}
+.form .wide{grid-column:1/-1}
+.form input,.form select{font:inherit; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:8px 10px; min-width:0}
+.formrow{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.msg{font-size:13px; color:var(--saffron)}
+.sitenav{display:flex; gap:4px; flex-wrap:wrap; padding-top:16px; font-size:14px}
+.sitenav a{text-decoration:none; color:var(--muted); padding:6px 12px; border-radius:8px}
+.sitenav a[aria-current="page"]{color:var(--ink); background:var(--surface); border:1px solid var(--line)}
+.sitenav a:hover{color:var(--ink)}
+.new{font-size:11.5px; font-weight:600; color:var(--saffron); background:var(--saffron-soft); border-radius:6px; padding:1px 8px}
+.share{cursor:pointer}
+.btns{display:flex; gap:8px}
+.job.target{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+footer .about{display:grid; gap:6px}
+footer .contact{display:flex; gap:14px; flex-wrap:wrap}
+footer .contact a{color:var(--ink); font-weight:500}
+@media (prefers-reduced-motion:no-preference){ .job,.card{transition:border-color .15s} .job:hover,.card:hover{border-color:var(--accent)} }
+</style>
+<script data-goatcounter="https://awal-khatwa.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="wrap" dir="rtl" lang="ar">
+  <nav class="sitenav" aria-label="صفحات الموقع">
+    <a href="./" aria-current="page">الفرص</a>
+    <a href="guide.html">دليل المبتدئ</a>
+    <a href="stats.html">الإحصائيات</a>
+  </nav>
+  <header class="top">
+    <div class="brand">
+      <h1>أول <span>خطوة</span></h1>
+      <p>فرص تدريب ووظائف Entry Level في الشركات الناشئة السعودية، للي توهم يبدون رحلتهم المهنية. كل إعلان يوديك لصفحة التقديم الرسمية.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b class="live" id="stOpen">–</b><small>فرصة مفتوحة الآن</small></div>
+      <div class="stat"><b id="stAll">–</b><small>إعلان وبرنامج</small></div>
+      <div class="stat"><b id="stCo">–</b><small>شركة ناشئة</small></div>
+    </div>
+  </header>
+
+  <div class="glossary" aria-label="أنواع الفرص">
+    <div class="gloss"><span class="k">تدريب</span><p><b>Internship:</b> تدريب لمدة 3 إلى 6 شهور، غالبًا مدفوع، لطلاب آخر سنة أو حديثي التخرج.</p></div>
+    <div class="gloss"><span class="k">تعاوني</span><p><b>Co-op:</b> تدريب يحتاجه طالب الجامعة كمتطلب تخرج، وتنسقه جامعته.</p></div>
+    <div class="gloss"><span class="k">برنامج خريجين</span><p><b>Graduate Program:</b> دفعة من الخريجين يتدربون مع بعض، وأحيانًا ينتهي بتوظيف.</p></div>
+    <div class="gloss"><span class="k">Entry Level</span><p><b>وظيفة أولى:</b> وظيفة كاملة ما تطلب خبرة سابقة أو تطلب سنة وحدة بالكثير.</p></div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-jobs" aria-selected="true" type="button">الفرص <span class="n" id="nJobs"></span></button>
+    <button class="tab" role="tab" id="tab-cos" aria-selected="false" type="button">الشركات <span class="n" id="nCos"></span></button>
+  </div>
+
+  <div id="panel-jobs">
+    <div class="controls">
+      <div class="searchrow">
+        <label class="search" for="q">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" placeholder="ابحث بالمسمى أو الشركة… مثل: أمن، بيانات، Tabby" autocomplete="off">
+        </label>
+        <button class="toggle" id="openBtn" aria-pressed="true" type="button"><span class="dot"></span>المتاحة للتقديم بس</button>
+      </div>
+      <div class="chips" id="typeChips" role="group" aria-label="نوع الفرصة"></div>
+      <div class="chips" id="fieldChips" role="group" aria-label="المجال"></div>
+      <div class="chips" id="cityChips" role="group" aria-label="المدينة"></div>
+      <div class="resultline" id="resultline"></div>
+    </div>
+    <div class="list" id="list"><div class="empty">جاري تحميل الفرص…</div></div>
+  </div>
+
+  <div id="panel-cos" hidden>
+    <div class="controls">
+      <div class="searchrow">
+        <label class="search" for="q2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q2" type="search" placeholder="ابحث باسم الشركة أو القطاع…" autocomplete="off">
+        </label>
+      </div>
+      <div class="chips" id="secChips" role="group" aria-label="القطاعات"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <section class="more">
+    <h2>برامج ومنصات تفيد حديثي التخرج</h2>
+    <div class="boards">
+      <a class="board" href="https://www.hrdf.org.sa/products-and-services/programs/individuals/training/graduate-development/" target="_blank" rel="noopener"><b>تمهير (هدف)</b><span>تدريب 3 إلى 6 شهور بمكافأة 3,000 ريال شهريًا، للسعوديين تحت 30 سنة</span></a>
+      <a class="board" href="https://www.hrdf.org.sa/products-and-services/programs/individuals/training/cooperative-training/" target="_blank" rel="noopener"><b>التدريب التعاوني (هدف)</b><span>دعم تدريب طلاب الجامعات والكليات في القطاع الخاص</span></a>
+      <a class="board" href="https://hub.misk.org.sa/programs/" target="_blank" rel="noopener"><b>برامج مسك</b><span>برامج تدريب مع شركات، منها هيوماين وميسر</span></a>
+      <a class="board" href="https://jadarat.sa/" target="_blank" rel="noopener"><b>جدارات</b><span>المنصة الوطنية الموحدة للتوظيف</span></a>
+      <a class="board" href="https://buildsaudi.co/" target="_blank" rel="noopener"><b>BuildSaudi</b><span>وظائف الستارت أب السعودية حسب القطاع</span></a>
+      <a class="board" href="https://www.linkedin.com/jobs/search/?keywords=intern&location=Saudi%20Arabia&f_E=1" target="_blank" rel="noopener"><b>LinkedIn</b><span>بحث جاهز عن Internship في السعودية</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="about">
+      <p><b>أول خطوة</b> موقع مستقل وغير تابع لأي من الشركات المذكورة. الإعلانات مأخوذة من صفحات التوظيف الرسمية، ونحدّثها تلقائيًا كل يوم.</p>
+      <p id="checkedLine">الفرص تتغير بسرعة، فتأكد من الحالة في صفحة التقديم قبل ما تقدم.</p>
+      <div class="contact" id="contact"></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+// ===== بيانات التواصل: عدّليها هنا =====
+const CONTACT = {
+  linkedin: "",   // رابط بروفايلك في لينكدإن
+  email: ""       // الإيميل
+};
+// =========================================
+
+const REGIONS = {
+  riyadh: {label:"الرياض", test:j=>/الرياض/.test(j.city||"")},
+  west:   {label:"جدة ومكة", test:j=>/جدة|مكة|المدينة/.test(j.city||"")},
+  east:   {label:"الشرقية", test:j=>/الدمام|الخبر|الظهران|الشرقية|الجبيل|الأحساء/.test(j.city||"")},
+  remote: {label:"عن بُعد", test:j=>!!j.remote || /عن ب[ُ]?عد/.test(j.city||"")}
+};
+const TYPES = {internship:"تدريب", coop:"تعاوني", grad:"برنامج خريجين", entry:"Entry Level"};
+const FIELDS = {tech:"تقنية وبرمجة", data:"بيانات وذكاء اصطناعي", cyber:"أمن سيبراني", product:"منتج وتصميم", business:"أعمال وموارد بشرية", media:"إعلام ومحتوى"};
+const STATUS = {open:"مفتوح", rolling:"مستمر", seasonal:"موسمي", closed:"مغلق حاليًا"};
+const RANK = {open:0, rolling:1, seasonal:2, closed:3};
+
+const LI = n => "https://www.linkedin.com/jobs/search/?keywords=" + encodeURIComponent(n) + "&location=Saudi%20Arabia&f_E=1%2C2";
+const COS = [
+ {ar:"ثمانية",en:"Thmanyah",sector:"إعلام ومحتوى",desc:"بودكاست ووثائقيات وصحافة رقمية، ومنصة تقنية خاصة فيها.",careers:"https://jobs.company.thmanyah.com/"},
+ {ar:"كلماشي",en:"Kalamashii",sector:"إعلام ومحتوى",desc:"منصة إعلامية لأسلوب المعيشة السعودي: محتوى وفعاليات ومنتجات.",careers:"https://sa.linkedin.com/company/kalamashii"},
+ {ar:"فودكس",en:"Foodics",sector:"برمجيات للأعمال",desc:"نظام نقاط بيع سحابي وإدارة للمطاعم.",careers:"https://apply.workable.com/foodics/"},
+ {ar:"رواء",en:"Rewaa",sector:"برمجيات للأعمال",desc:"نظام إدارة مخزون ونقاط بيع لمحلات التجزئة.",careers:"https://www.rewaatech.com/en/careers/"},
+ {ar:"قيود",en:"Qoyod",sector:"برمجيات للأعمال",desc:"برنامج محاسبة سحابي للمنشآت الصغيرة والمتوسطة.",careers:"https://www.qoyod.com/en/careers/"},
+ {ar:"جسر",en:"Jisr",sector:"برمجيات للأعمال",desc:"منصة موارد بشرية ورواتب للشركات.",careers:"https://careers.smartrecruiters.com/Jisr"},
+ {ar:"ركاز",en:"Rekaz",sector:"برمجيات للأعمال",desc:"حجوزات ومدفوعات للأندية والصالونات والعيادات.",careers:"https://forms.rekaz.io/"},
+ {ar:"يونيفونك",en:"Unifonic",sector:"برمجيات للأعمال",desc:"منصة اتصالات سحابية للرسائل وخدمة العملاء.",careers:"https://jobs.unifonic.com/"},
+ {ar:"تمارا",en:"Tamara",sector:"تقنية مالية",desc:"اشترِ الآن وادفع لاحقًا، ومن شركات اليونيكورن السعودية.",careers:"https://tamara.co/en-sa/careers"},
+ {ar:"تابي",en:"Tabby",sector:"تقنية مالية",desc:"تقسيط المشتريات وخدمات مالية، مقرها الرئيسي في الرياض.",careers:"https://tabby.ai/en-AE/careers"},
+ {ar:"لين",en:"Lean Technologies",sector:"تقنية مالية",desc:"بنية تحتية للمصرفية المفتوحة والمدفوعات.",careers:"https://jobs.ashbyhq.com/leantech"},
+ {ar:"ميسر",en:"Moyasar",sector:"تقنية مالية",desc:"بوابة دفع إلكتروني للمتاجر والتطبيقات.",careers:"https://moyasar.com/en/resources/careers/"},
+ {ar:"هايبرباي",en:"HyperPay",sector:"تقنية مالية",desc:"بوابة دفع وحلول مدفوعات للتجار.",careers:"https://hyperpay.elevatus.jobs/"},
+ {ar:"ليندو",en:"Lendo",sector:"تقنية مالية",desc:"تمويل جماعي بالدين للمنشآت الصغيرة.",careers:"https://jobs.lendo.sa/"},
+ {ar:"هلا",en:"HALA",sector:"تقنية مالية",desc:"مدفوعات وحسابات رقمية للمنشآت الصغيرة.",careers:"https://job-boards.greenhouse.io/hala"},
+ {ar:"نقودلت",en:"Nqoodlet",sector:"تقنية مالية",desc:"بطاقات وإدارة مصروفات الشركات.",careers:"https://careers.nqoodlet.com/"},
+ {ar:"تويك",en:"Tweeq",sector:"تقنية مالية",desc:"محفظة رقمية وبطاقة للأفراد.",careers:"https://www.linkedin.com/company/tweeq"},
+ {ar:"رسن",en:"Rasan",sector:"تقنية مالية",desc:"تقنية تأمين، ومنها منصة «تأميني».",careers:"https://careers.rasan.co/"},
+ {ar:"سلة",en:"Salla",sector:"تجارة إلكترونية",desc:"منصة إنشاء متاجر إلكترونية لأكثر من 100 ألف تاجر.",careers:"https://jobs.salla.com/"},
+ {ar:"زد",en:"Zid",sector:"تجارة إلكترونية",desc:"منصة متاجر إلكترونية وحلول شحن ومدفوعات.",careers:"https://zid.sa/en/career/"},
+ {ar:"فلاورد",en:"Floward",sector:"تجارة إلكترونية",desc:"توصيل الورد والهدايا أونلاين في الخليج.",careers:"https://careers.floward.com/"},
+ {ar:"ساري",en:"Sary",sector:"تجارة إلكترونية",desc:"سوق إلكتروني يربط المحلات بالموردين.",careers:"https://apply.workable.com/sary"},
+ {ar:"جاهز",en:"Jahez",sector:"توصيل",desc:"تطبيق توصيل طلبات المطاعم.",careers:"https://career.jahez.net/"},
+ {ar:"مرسول",en:"Mrsool",sector:"توصيل",desc:"توصيل أي طلب من أي مكان.",careers:"https://apply.workable.com/mrsool-3/"},
+ {ar:"نينجا",en:"Ninja",sector:"توصيل",desc:"توصيل بقالة سريع على مدار الساعة.",careers:"https://apply.workable.com/ananinja/"},
+ {ar:"نعناع",en:"Nana",sector:"توصيل",desc:"تطبيق بقالة وتوصيل من المتاجر.",careers:"https://apply.workable.com/nana-grocery-direct/"},
+ {ar:"جاذر إن",en:"Gathern",sector:"سياحة وضيافة",desc:"حجز شاليهات وشقق واستراحات.",careers:"https://www.linkedin.com/company/gathern.co"},
+ {ar:"لوسيديا",en:"Lucidya",sector:"ذكاء اصطناعي",desc:"تحليل تجربة العملاء بالذكاء الاصطناعي بالعربي.",careers:"https://apply.workable.com/lucidya/"},
+ {ar:"مزن",en:"Mozn",sector:"ذكاء اصطناعي",desc:"ذكاء اصطناعي لمكافحة الاحتيال وتحليل البيانات.",careers:"https://www.mozn.ai/careers"},
+ {ar:"هيوماين",en:"HUMAIN",sector:"ذكاء اصطناعي",desc:"شركة ذكاء اصطناعي سعودية تابعة لصندوق الاستثمارات العامة.",careers:"https://hub.misk.org.sa/programs/skills/misk-x-humain-traineeship-program-future-ai-builders/"},
+ {ar:"كوقنا",en:"COGNNA",sector:"أمن سيبراني",desc:"منصة مركز عمليات أمنية (SOC) بالذكاء الاصطناعي.",careers:"https://apply.workable.com/cognna/"},
+ {ar:"أثير",en:"Atheer Connectivity",sector:"اتصالات",desc:"تقنيات اتصال لاسلكي لإيصال الإنترنت للمناطق البعيدة.",careers:"https://freehire.me/jobs/software-engineer-intern-coop-atheer-ct-mkhhu7ik"}
+];
+
+const $ = s => document.querySelector(s);
+const esc = t => String(t ?? "").replace(/[&<>"]/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const norm = t => String(t).toLowerCase().replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي");
+const hasLatin = t => /[A-Za-z]/.test(t) && !/[؀-ۿ]/.test(t);
+const today = new Date(); today.setHours(0,0,0,0);
+
+let JOBS = [];
+const st = {q:"", type:"all", field:"all", region:"all", openOnly:true, q2:"", sector:"الكل"};
+function isNew(j){ if(!j.firstSeen) return false; const d=-daysLeft(j.firstSeen); return d>=0 && d<=3; }
+const track = (path, title) => { try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path, title, event:true}); }catch(e){} };
+
+function daysLeft(d){ if(!d) return null; const t=new Date(d+"T00:00:00"); return Math.round((t-today)/864e5); }
+function effStatus(j){ const d=daysLeft(j.deadline); if(j.status==="open" && d!==null && d<0) return "closed"; return j.status; }
+function isApplyable(j){ const s=effStatus(j); return s==="open"||s==="rolling"; }
+
+function fmtDate(d){ try{ return new Date(d+"T00:00:00").toLocaleDateString("ar-SA-u-ca-gregory-nu-latn",{day:"numeric",month:"long",year:"numeric"}); }catch(e){ return d; } }
+
+function chipsHTML(map, cur, counts){
+  return [`<button class="chip" type="button" data-v="all" aria-pressed="${cur==="all"}">الكل</button>`]
+    .concat(Object.entries(map).filter(([k])=>counts[k]).map(([k,v])=>`<button class="chip" type="button" data-v="${k}" aria-pressed="${cur===k}"><bdi>${v}</bdi><span class="n">${counts[k]}</span></button>`)).join("");
+}
+
+function renderJobs(){
+  const pool = JOBS.filter(j => !st.openOnly || isApplyable(j));
+  const tc={}, fc={}, rc={};
+  pool.forEach(j=>{ tc[j.type]=(tc[j.type]||0)+1; fc[j.field]=(fc[j.field]||0)+1;
+    Object.entries(REGIONS).forEach(([k,r])=>{ if(r.test(j)) rc[k]=(rc[k]||0)+1; }); });
+  $("#typeChips").innerHTML = chipsHTML(TYPES, st.type, tc);
+  $("#fieldChips").innerHTML = chipsHTML(FIELDS, st.field, fc);
+  $("#cityChips").innerHTML = chipsHTML(Object.fromEntries(Object.entries(REGIONS).map(([k,r])=>[k,r.label])), st.region, rc);
+  const q = norm(st.q.trim());
+  const list = pool.filter(j =>
+    (st.type==="all"||j.type===st.type) && (st.field==="all"||j.field===st.field) &&
+    (st.region==="all"||REGIONS[st.region].test(j)) &&
+    (!q || norm([j.company,j.companyEn,j.title,j.who,j.city,TYPES[j.type],FIELDS[j.field]].join(" ")).includes(q))
+  ).sort((a,b)=>{
+    const r = RANK[effStatus(a)]-RANK[effStatus(b)]; if(r) return r;
+    const n = isNew(b)-isNew(a); if(n) return n;
+    const da=daysLeft(a.deadline), db=daysLeft(b.deadline);
+    if(da!==null && db!==null) return da-db; if(da!==null) return -1; if(db!==null) return 1; return 0;
+  });
+  $("#resultline").textContent = st.openOnly
+    ? `${list.length} فرصة متاحة للتقديم. طفّ الفلتر عشان تشوف البرامج الموسمية والمغلقة وتستعد للدفعة الجاية.`
+    : `${list.length} من ${JOBS.length} إعلان وبرنامج`;
+  $("#list").innerHTML = list.length ? list.map(jobHTML).join("") : `<div class="empty">ما فيه فرص بهالفلاتر. جرّب مجال ثاني أو طفّ «المتاحة للتقديم بس».</div>`;
+}
+
+function jobHTML(j){
+  const s = effStatus(j), d = daysLeft(j.deadline);
+  let due = "";
+  if(d!==null && d>=0) due = `<div class="due ${d<=7?"hot":""}">${d===0?"آخر يوم اليوم":d===1?"باقي يوم واحد":`باقي ${d} يوم`}<br>${fmtDate(j.deadline)}</div>`;
+  else if(d!==null) due = `<div class="due">انتهى التقديم ${fmtDate(j.deadline)}</div>`;
+  const meta = [`<span class="tag type">${TYPES[j.type]||""}</span>`, `<span class="tag">${FIELDS[j.field]||""}</span>`, j.city&&`<span class="tag">${esc(j.city)}</span>`, (j.remote && !/عن ب/.test(j.city||""))&&`<span class="tag">عن بُعد</span>`, j.duration&&`<span class="tag">${esc(j.duration)}</span>`, j.paid&&`<span class="tag">${esc(j.paid)}</span>`].filter(Boolean).join("");
+  const label = s==="closed" ? "صفحة البرنامج" : "صفحة التقديم";
+  return `<article class="job ${s}" id="job-${esc(j.id)}">
+    <div class="job-main">
+      <div class="job-co"><b>${esc(j.company)}</b>${j.companyEn?`<span class="ltr">${esc(j.companyEn)}</span>`:""}${isNew(j)?'<span class="new">جديد</span>':""}</div>
+      <h3 ${hasLatin(j.title)?'dir="ltr" style="text-align:right"':""}>${esc(j.title)}</h3>
+      <div class="meta">${meta}</div>
+      ${j.who?`<p class="who">${esc(j.who)}</p>`:""}
+      ${adminOn?`<div><button class="del" type="button" data-del="${esc(j.id)}">حذف الإعلان</button></div>`:""}
+    </div>
+    <div class="job-side">
+      <span class="pill ${s}">${STATUS[s]}</span>
+      ${due}
+      <div class="btns"><a class="btn ${s==="closed"?"":"primary"}" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">${label}</a><button class="btn share" type="button" data-share="${esc(j.id)}">مشاركة</button></div>
+    </div>
+  </article>`;
+}
+
+function renderCos(){
+  const sectors = ["الكل", ...new Set(COS.map(c=>c.sector))];
+  $("#secChips").innerHTML = sectors.map(s=>`<button class="chip" type="button" data-s="${s}" aria-pressed="${s===st.sector}">${s}</button>`).join("");
+  const q = norm(st.q2.trim());
+  const openBy = {}; JOBS.filter(isApplyable).forEach(j=>{ if(j.companyEn) openBy[j.companyEn]=(openBy[j.companyEn]||0)+1; });
+  const list = COS.filter(c=>(st.sector==="الكل"||c.sector===st.sector) && (!q||norm([c.ar,c.en,c.sector,c.desc].join(" ")).includes(q)))
+    .sort((a,b)=>(openBy[b.en]||0)-(openBy[a.en]||0));
+  $("#grid").innerHTML = list.map(c=>`<article class="card">
+    <div class="card-head"><div class="mono" aria-hidden="true">${esc(c.ar[0])}</div>
+      <div class="names"><h3>${esc(c.ar)}</h3><div class="en ltr">${esc(c.en)}</div></div></div>
+    <div class="meta"><span class="tag">${esc(c.sector)}</span>${openBy[c.en]?`<span class="has-jobs">${openBy[c.en]} فرصة مفتوحة للمبتدئين</span>`:""}</div>
+    <p class="desc">${esc(c.desc)}</p>
+    <div class="actions"><a class="btn primary" href="${esc(c.careers)}" target="_blank" rel="noopener">صفحة التوظيف</a><a class="btn" href="${LI(c.en)}" target="_blank" rel="noopener">وظائف المبتدئين في LinkedIn</a></div>
+  </article>`).join("") || `<div class="empty">ما فيه نتائج.</div>`;
+}
+
+function renderStats(){
+  $("#stOpen").textContent = JOBS.filter(isApplyable).length;
+  $("#stAll").textContent = JOBS.length;
+  $("#stCo").textContent = COS.length;
+  $("#nJobs").textContent = JOBS.filter(isApplyable).length;
+  $("#nCos").textContent = COS.length;
+  const last = JOBS.map(j=>j.checked).filter(Boolean).sort().pop();
+  if(last) $("#checkedLine").textContent = `آخر تحديث للإعلانات: ${fmtDate(last)}. الفرص تتغير بسرعة، فتأكد من الحالة في صفحة التقديم قبل ما تقدم.`;
+}
+function renderAll(){ renderStats(); renderJobs(); renderCos(); }
+
+// events
+$("#typeChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.type=b.dataset.v; renderJobs();});
+$("#fieldChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.field=b.dataset.v; renderJobs();});
+$("#cityChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.region=b.dataset.v; renderJobs();});
+$("#q").addEventListener("input",e=>{st.q=e.target.value; renderJobs();});
+$("#list").addEventListener("click", async e=>{
+  const a = e.target.closest("[data-apply]");
+  if(a){ const j=JOBS.find(x=>x.id===a.dataset.apply); if(j) track("apply/"+j.id, `${j.company} - ${j.title}`); return; }
+  const b = e.target.closest("[data-share]"); if(!b) return;
+  const j = JOBS.find(x=>x.id===b.dataset.share); if(!j) return;
+  const url = location.origin + location.pathname + "#job-" + j.id;
+  const text = `${j.title} في ${j.company}\nلقيتها في «أول خطوة»:`;
+  track("share/"+j.id, `${j.company} - ${j.title}`);
+  if(navigator.share){ try{ await navigator.share({title:j.title, text, url}); return; }catch(err){ if(err && err.name==="AbortError") return; } }
+  try{ await navigator.clipboard.writeText(text+"\n"+url); b.textContent="انتسخ الرابط ✓"; }
+  catch(err){ window.prompt("انسخ الرابط:", url); }
+  setTimeout(()=>{ b.textContent="مشاركة"; }, 2200);
+});
+function focusHash(){
+  const m = location.hash.match(/^#job-(.+)$/); if(!m) return;
+  const j = JOBS.find(x=>x.id===decodeURIComponent(m[1])); if(!j) return;
+  showTab("jobs");
+  if(!isApplyable(j) && st.openOnly){ st.openOnly=false; $("#openBtn").setAttribute("aria-pressed","false"); renderJobs(); }
+  const el = document.getElementById("job-"+j.id);
+  if(el){ el.classList.add("target"); el.scrollIntoView({block:"center"}); }
+}
+window.addEventListener("hashchange", focusHash);
+$("#openBtn").addEventListener("click",e=>{st.openOnly=!st.openOnly; e.currentTarget.setAttribute("aria-pressed",st.openOnly); st.type="all"; st.field="all"; renderJobs();});
+$("#q2").addEventListener("input",e=>{st.q2=e.target.value; renderCos();});
+$("#secChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.sector=b.dataset.s; renderCos();});
+function showTab(which){
+  const jobs = which==="jobs";
+  $("#tab-jobs").setAttribute("aria-selected",jobs); $("#tab-cos").setAttribute("aria-selected",!jobs);
+  $("#panel-jobs").hidden=!jobs; $("#panel-cos").hidden=jobs;
+}
+$("#tab-jobs").addEventListener("click",()=>showTab("jobs"));
+$("#tab-cos").addEventListener("click",()=>showTab("cos"));
+if(location.hash==="#companies") showTab("cos");
+
+const adminOn=false;
+
+fetch("data/listings.json",{cache:"no-store"}).then(r=>{ if(!r.ok) throw 0; return r.json(); })
+  .then(d=>{ JOBS = Array.isArray(d)?d:[]; renderAll(); focusHash(); })
+  .catch(()=>{ renderStats(); renderCos(); $("#list").innerHTML='<div class="empty">ما قدرنا نحمّل الفرص. حدّث الصفحة وجرّب مرة ثانية.</div>'; });
+renderCos();
+
+// التواصل
+(function(){
+  const parts = [];
+  if(CONTACT.linkedin) parts.push(`<a href="${esc(CONTACT.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`);
+  if(CONTACT.email) parts.push(`<span>للاقتراحات أو طلب إزالة إعلان: <a href="mailto:${esc(CONTACT.email)}">${esc(CONTACT.email)}</a></span>`);
+  $("#contact").innerHTML = parts.join("");
+})();
+</script>
+</body>
+</html>
