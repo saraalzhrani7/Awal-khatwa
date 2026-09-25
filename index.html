@@ -158,6 +158,8 @@ footer p{margin:0; max-width:66ch}
 .new{font-size:11.5px; font-weight:600; color:var(--saffron); background:var(--saffron-soft); border-radius:6px; padding:1px 8px}
 .share{cursor:pointer}
 .btns{display:flex; gap:8px}
+.matchlink{font-size:13px; font-weight:600; color:var(--accent); text-decoration:none; justify-self:start}
+.matchlink:hover{text-decoration:underline}
 .job.target{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
 footer .about{display:grid; gap:6px}
 footer .contact{display:flex; gap:14px; flex-wrap:wrap}
@@ -170,6 +172,7 @@ footer .contact a{color:var(--ink); font-weight:500}
 <div class="wrap" dir="rtl" lang="ar">
   <nav class="sitenav" aria-label="صفحات الموقع">
     <a href="./" aria-current="page">الفرص</a>
+    <a href="cv.html">سيرتك</a>
     <a href="guide.html">دليل المبتدئ</a>
     <a href="stats.html">الإحصائيات</a>
   </nav>
@@ -230,6 +233,7 @@ footer .contact a{color:var(--ink); font-weight:500}
   <section class="more">
     <h2>برامج ومنصات تفيد حديثي التخرج</h2>
     <div class="boards">
+      <a class="board" href="cv.html" style="border-style:solid;border-color:var(--accent)"><b>اكتب سيرتك مجانًا</b><span>صانع سيرة ذاتية متوافق مع أنظمة ATS، ويطابق سيرتك مع أي إعلان</span></a>
       <a class="board" href="https://www.hrdf.org.sa/products-and-services/programs/individuals/training/graduate-development/" target="_blank" rel="noopener"><b>تمهير (هدف)</b><span>تدريب 3 إلى 6 شهور بمكافأة 3,000 ريال شهريًا، للسعوديين تحت 30 سنة</span></a>
       <a class="board" href="https://www.hrdf.org.sa/products-and-services/programs/individuals/training/cooperative-training/" target="_blank" rel="noopener"><b>التدريب التعاوني (هدف)</b><span>دعم تدريب طلاب الجامعات والكليات في القطاع الخاص</span></a>
       <a class="board" href="https://hub.misk.org.sa/programs/" target="_blank" rel="noopener"><b>برامج مسك</b><span>برامج تدريب مع شركات، منها هيوماين وميسر</span></a>
@@ -363,6 +367,7 @@ function jobHTML(j){
       <h3 ${hasLatin(j.title)?'dir="ltr" style="text-align:right"':""}>${esc(j.title)}</h3>
       <div class="meta">${meta}</div>
       ${j.who?`<p class="who">${esc(j.who)}</p>`:""}
+      ${(j.keywords&&j.keywords.length&&s!=="closed")?`<a class="matchlink" href="cv.html#match-${encodeURIComponent(j.id)}">طابق سيرتك مع هالوظيفة ←</a>`:""}
       ${adminOn?`<div><button class="del" type="button" data-del="${esc(j.id)}">حذف الإعلان</button></div>`:""}
     </div>
     <div class="job-side">

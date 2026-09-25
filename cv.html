@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>سيرتك | أول خطوة</title>
+<meta name="description" content="اكتب سيرتك الذاتية الأولى بقالب متوافق مع أنظمة ATS، وطابقها مع أي إعلان وظيفة. مجانًا، وبياناتك ما تطلع من جهازك.">
+<meta property="og:title" content="اكتب سيرتك | أول خطوة">
+<meta property="og:description" content="صانع سيرة ذاتية مجاني متوافق مع أنظمة ATS، مع مطابقة السيرة مع الإعلان.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B7A5C'/%3E%3Cpath d='M9 22h6v-6h8' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Lalezar&display=swap">
+<style>
+:root{
+  --bg:#F2F5F3; --surface:#FFFFFF; --ink:#0F201B; --muted:#5A6B65; --line:#D9E2DE;
+  --accent:#0B7A5C; --accent-ink:#FFFFFF; --accent-soft:#E0F0EA;
+  --saffron:#A8651A; --saffron-soft:#F8EBD8; --focus:#0B7A5C;
+  --good:#0B7A5C; --warn:#A8651A;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0C1613; --surface:#13211D; --ink:#E3EEEA; --muted:#93A8A0; --line:#243731;
+    --accent:#3CC39A; --accent-ink:#06231A; --accent-soft:#16372D;
+    --saffron:#E3A857; --saffron-soft:#3A2B17; --focus:#3CC39A;
+    --good:#3CC39A; --warn:#E3A857;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C1613; --surface:#13211D; --ink:#E3EEEA; --muted:#93A8A0; --line:#243731;
+  --accent:#3CC39A; --accent-ink:#06231A; --accent-soft:#16372D;
+  --saffron:#E3A857; --saffron-soft:#3A2B17; --focus:#3CC39A;
+  --good:#3CC39A; --warn:#E3A857;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg); color:var(--ink); font-family:"IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif; font-size:15px; line-height:1.65; padding-inline:16px; padding-block:0 56px}
+.wrap{max-width:1180px; margin-inline:auto}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--focus); outline-offset:2px; border-radius:6px}
+button{font:inherit; color:inherit}
+.sitenav{display:flex; gap:4px; flex-wrap:wrap; padding-top:16px; font-size:14px}
+.sitenav a{text-decoration:none; color:var(--muted); padding:6px 12px; border-radius:8px}
+.sitenav a[aria-current="page"]{color:var(--ink); background:var(--surface); border:1px solid var(--line)}
+.sitenav a:hover{color:var(--ink)}
+header{padding-block:32px 18px}
+h1{font-family:"Lalezar","IBM Plex Sans Arabic",sans-serif; font-weight:400; font-size:clamp(34px,6vw,50px); line-height:1.1; margin:0}
+h1 span{color:var(--accent)}
+.lead{color:var(--muted); margin:8px 0 0; max-width:64ch}
+.privacy{display:inline-flex; gap:8px; align-items:center; margin-top:12px; font-size:13px; background:var(--accent-soft); color:var(--ink); border-radius:8px; padding:6px 12px}
+.tabs{display:flex; gap:4px; border-bottom:1px solid var(--line); margin-top:8px; flex-wrap:wrap}
+.tab{background:none; border:0; border-bottom:2px solid transparent; padding:10px 16px; cursor:pointer; color:var(--muted); font-weight:500; margin-bottom:-1px}
+.tab[aria-selected="true"]{color:var(--ink); border-color:var(--accent)}
+
+.builder{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:18px; margin-top:18px; align-items:start}
+@media (max-width:960px){ .builder{grid-template-columns:1fr} }
+.form{display:grid; gap:14px}
+fieldset{border:1px solid var(--line); background:var(--surface); border-radius:12px; padding:14px 16px 16px; margin:0; display:grid; gap:10px; min-width:0}
+legend{font-weight:600; padding-inline:6px; font-size:15px}
+.tip{font-size:12.5px; color:var(--muted); margin:-4px 0 2px}
+.row{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px}
+label{display:grid; gap:4px; font-size:12.5px; color:var(--muted)}
+input,textarea,select{font:inherit; font-size:14px; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:8px 10px; min-width:0; width:100%}
+textarea{resize:vertical; min-height:74px; line-height:1.5}
+input[dir="ltr"],textarea[dir="ltr"]{text-align:left}
+.entry{border:1px dashed var(--line); border-radius:10px; padding:10px 12px; display:grid; gap:8px}
+.entry-head{display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--muted)}
+.linkbtn{background:none; border:0; padding:0; color:var(--saffron); cursor:pointer; font-size:12.5px; text-decoration:underline}
+.add{justify-self:start; background:none; border:1px dashed var(--accent); color:var(--accent); border-radius:8px; padding:6px 12px; cursor:pointer; font-size:13.5px}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:6px; text-decoration:none; border-radius:8px; padding:10px 18px; font-size:14px; font-weight:600; border:1px solid var(--line); background:var(--surface); cursor:pointer}
+.btn.primary{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.actions{display:flex; gap:8px; flex-wrap:wrap}
+
+.side{position:sticky; top:12px; display:grid; gap:12px}
+@media (max-width:960px){ .side{position:static} }
+.paperwrap{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px; overflow:auto; max-height:78vh}
+@media (max-width:960px){ .paperwrap{max-height:none} }
+.checks{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px 16px; display:grid; gap:6px}
+.checks h2{font-size:15px; margin:0 0 4px}
+.check{display:flex; gap:8px; font-size:13.5px; align-items:start}
+.check .i{flex:none; width:18px; height:18px; border-radius:50%; display:grid; place-items:center; font-size:11px; font-weight:700; margin-top:2px}
+.check.ok .i{background:var(--accent-soft); color:var(--good)}
+.check.no .i{background:var(--saffron-soft); color:var(--warn)}
+
+/* ===== the CV sheet (ATS-safe: one column, real text, standard headings) ===== */
+.paper{background:#fff; color:#111; width:100%; max-width:794px; margin-inline:auto; padding:40px 44px; font-family:Arial,Helvetica,"Segoe UI",Tahoma,sans-serif; font-size:10.5pt; line-height:1.4; box-shadow:0 1px 3px rgb(0 0 0 / .12)}
+.paper h1{font-family:inherit; font-size:20pt; font-weight:700; margin:0; color:#111; letter-spacing:0}
+.paper .headline{font-size:11pt; margin:2px 0 4px; color:#333}
+.paper .contact{font-size:9.5pt; color:#333}
+.paper h2{font-size:11pt; font-weight:700; text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid #999; padding-bottom:2px; margin:14px 0 6px; color:#111}
+.paper[dir="rtl"] h2{text-transform:none; letter-spacing:0}
+.paper .item{margin-bottom:7px}
+.paper .item-head{display:flex; justify-content:space-between; gap:12px; font-weight:700}
+.paper .item-head span:last-child{font-weight:400; white-space:nowrap; color:#333}
+.paper .item-sub{font-style:italic; color:#333}
+.paper[dir="rtl"] .item-sub{font-style:normal}
+.paper ul{margin:3px 0 0; padding-inline-start:18px}
+.paper li{margin:1px 0}
+.paper p{margin:0}
+.paper .empty{color:#999; font-style:italic}
+
+/* ===== match tool ===== */
+.match{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:18px; margin-top:18px; align-items:start}
+@media (max-width:860px){ .match{grid-template-columns:1fr} }
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px; display:grid; gap:10px; min-width:0}
+.panel h2{font-size:16px; margin:0}
+.score{font-family:"Lalezar",sans-serif; font-size:46px; line-height:1; font-variant-numeric:tabular-nums}
+.meter{height:10px; border-radius:999px; background:var(--bg); border:1px solid var(--line); overflow:hidden}
+.meter span{display:block; height:100%; background:var(--accent)}
+.kw{display:flex; flex-wrap:wrap; gap:6px}
+.kw span{font-size:13px; border-radius:6px; padding:2px 9px; direction:ltr}
+.kw .have{background:var(--accent-soft); color:var(--good)}
+.kw .miss{background:var(--saffron-soft); color:var(--warn)}
+.muted{color:var(--muted); font-size:13px}
+.joblist{display:grid; gap:6px; max-height:320px; overflow:auto; padding:2px}
+.jobpick{display:grid; gap:1px; text-align:start; background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:8px 12px; cursor:pointer}
+.jobpick b{font-size:14px; font-weight:600; direction:ltr; text-align:start}
+.jobpick span{font-size:12.5px; color:var(--muted)}
+.jobpick[aria-pressed="true"]{border-color:var(--accent); background:var(--accent-soft)}
+details summary{cursor:pointer; color:var(--accent); font-size:13.5px}
+details[open]{display:grid; gap:8px}
+
+/* ===== paid review ===== */
+.review{margin-top:36px; background:var(--surface); border:1px solid var(--accent); border-radius:14px; padding:22px; display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:22px}
+@media (max-width:820px){ .review{grid-template-columns:1fr} }
+.review h2{font-family:"Lalezar",sans-serif; font-weight:400; font-size:28px; margin:0}
+.review ul{margin:8px 0 0; padding-inline-start:20px; display:grid; gap:4px}
+.price{font-family:"Lalezar",sans-serif; font-size:40px; line-height:1}
+.price small{font-family:"IBM Plex Sans Arabic",sans-serif; font-size:14px; color:var(--muted)}
+.soon{display:inline-block; font-size:13px; font-weight:600; color:var(--saffron); background:var(--saffron-soft); border-radius:6px; padding:3px 10px}
+.fine{font-size:12.5px; color:var(--muted)}
+
+@media print{
+  @page{size:A4; margin:0}
+  body{background:#fff; padding:0}
+  body > *:not(#printArea){display:none!important}
+  #printArea{display:block!important}
+  #printArea .paper{box-shadow:none; max-width:none; width:auto; padding:16mm 16mm}
+}
+#printArea{display:none}
+</style>
+<script data-goatcounter="https://awal-khatwa.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <nav class="sitenav" aria-label="صفحات الموقع">
+    <a href="./">الفرص</a>
+    <a href="cv.html" aria-current="page">سيرتك</a>
+    <a href="guide.html">دليل المبتدئ</a>
+    <a href="stats.html">الإحصائيات</a>
+  </nav>
+
+  <header>
+    <h1>اكتب <span>سيرتك</span></h1>
+    <p class="lead">سيرة ذاتية لأول وظيفة بقالب تقرأه أنظمة الفرز الآلي (ATS) صح: عمود واحد، وعناوين قياسية، ونص حقيقي. عبّ الخانات، وشوفها تتكون قدامك، وحملها PDF.</p>
+    <div class="privacy">🔒 بياناتك ما تطلع من جهازك. كل شي ينحفظ في متصفحك بس.</div>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="t-build" aria-selected="true" type="button">صانع السيرة</button>
+    <button class="tab" role="tab" id="t-match" aria-selected="false" type="button">طابق سيرتك مع الإعلان</button>
+  </div>
+
+  <!-- ===== BUILDER ===== -->
+  <section id="p-build">
+    <div class="builder">
+      <form class="form" id="cvForm" autocomplete="on">
+        <fieldset>
+          <legend>اللغة</legend>
+          <div class="row">
+            <label>لغة السيرة
+              <select id="f-lang"><option value="en">English (أغلب الشركات الناشئة)</option><option value="ar">العربية</option></select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>معلوماتك</legend>
+          <div class="row">
+            <label>الاسم الكامل<input id="f-name" data-dir></label>
+            <label>المسمى اللي تبيه<input id="f-headline" data-dir placeholder="Cybersecurity Graduate"></label>
+          </div>
+          <div class="row">
+            <label>الإيميل<input id="f-email" type="email" dir="ltr"></label>
+            <label>الجوال<input id="f-phone" dir="ltr" placeholder="+966 5X XXX XXXX"></label>
+            <label>المدينة<input id="f-city" data-dir placeholder="Riyadh, Saudi Arabia"></label>
+          </div>
+          <div class="row">
+            <label>رابط لينكدإن<input id="f-linkedin" dir="ltr" placeholder="linkedin.com/in/..."></label>
+            <label>GitHub أو معرض أعمال<input id="f-portfolio" dir="ltr" placeholder="github.com/..."></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>نبذة قصيرة</legend>
+          <p class="tip">سطرين أو ثلاثة: تخصصك، ووش تبي تشتغل فيه، وأقوى شي عندك.</p>
+          <textarea id="f-summary" data-dir rows="3"></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>التعليم</legend>
+          <div id="list-edu"></div>
+          <button class="add" type="button" data-add="edu">+ إضافة تعليم</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>المشاريع</legend>
+          <p class="tip">أهم قسم للمبتدئ. كل سطر نقطة: وش سويت، وبأي أداة، ووش النتيجة. وحط رقم لو تقدر.</p>
+          <div id="list-proj"></div>
+          <button class="add" type="button" data-add="proj">+ إضافة مشروع</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>الخبرات</legend>
+          <p class="tip">تدريب تعاوني، Internship، تطوع، أندية طلابية، عمل جزئي. ابدأ كل نقطة بفعل، مثل: Built, Analyzed, Led.</p>
+          <div id="list-exp"></div>
+          <button class="add" type="button" data-add="exp">+ إضافة خبرة</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>المهارات والشهادات</legend>
+          <label>المهارات التقنية (افصل بينها بفاصلة)<input id="f-skills" data-dir placeholder="Python, SQL, Power BI, Wireshark"></label>
+          <label>المهارات الشخصية واللغات<input id="f-soft" data-dir placeholder="Arabic (Native), English (Fluent), Teamwork"></label>
+          <label>الشهادات (كل وحدة في سطر)<textarea id="f-certs" data-dir rows="2" placeholder="CompTIA Security+ — 2026"></textarea></label>
+        </fieldset>
+
+        <div class="actions">
+          <button class="btn primary" type="button" id="printBtn">⬇ تحميل PDF</button>
+          <button class="btn" type="button" id="sampleBtn">عبّ مثال</button>
+          <button class="btn" type="button" id="clearBtn">مسح الكل</button>
+        </div>
+        <p class="fine">طريقة التحميل: اضغط «تحميل PDF»، وفي نافذة الطباعة اختر <b>Save as PDF</b> أو «حفظ كملف PDF». ولو طلع لك خيار Headers and footers، طفّه.</p>
+      </form>
+
+      <aside class="side">
+        <div class="paperwrap"><div id="paper"></div></div>
+        <div class="checks" id="checks"></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===== MATCH ===== -->
+  <section id="p-match" hidden>
+    <div class="match">
+      <div class="panel">
+        <h2>1. اختر الوظيفة</h2>
+        <p class="muted">اختر أي فرصة من «أول خطوة»، ونطابق سيرتك معها على طول.</p>
+        <input id="m-search" type="search" placeholder="ابحث باسم الوظيفة أو الشركة…" autocomplete="off">
+        <div class="joblist" id="m-jobs"><p class="muted">جاري تحميل الفرص…</p></div>
+        <details id="m-paste">
+          <summary>الوظيفة مو موجودة هنا؟ الصق وصفها</summary>
+          <textarea id="m-jd" dir="ltr" rows="9" placeholder="Paste the job description here..."></textarea>
+          <button class="btn" type="button" id="m-run">طابق مع النص الملصوق</button>
+        </details>
+        <h2>2. سيرتك</h2>
+        <p class="muted">نستخدم السيرة اللي كتبتها في «صانع السيرة» تلقائيًا.</p>
+        <details>
+          <summary>عندك سيرة جاهزة؟ الصق نصها بدالها</summary>
+          <textarea id="m-cv" dir="ltr" rows="6" placeholder="Paste your CV text..."></textarea>
+        </details>
+      </div>
+      <div class="panel" id="m-out">
+        <h2>النتيجة</h2>
+        <p class="muted">اختر وظيفة من القائمة، ونطلع لك أهم الكلمات في إعلانها، ونوريك وش موجود منها في سيرتك ووش ناقص.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PAID REVIEW ===== -->
+  <section class="review" id="review">
+    <div>
+      <h2>خلّ سيرتك جاهزة للتقديم</h2>
+      <p>مراجعة شخصية لسيرتك، وتعديلها على الوظيفة اللي تبي تقدم عليها:</p>
+      <ul>
+        <li>مراجعة المحتوى والصياغة، بالعربي أو الإنجليزي</li>
+        <li>تعديل السيرة على متطلبات الإعلان وكلماته</li>
+        <li>ملاحظات مكتوبة على كل قسم توضح وش تغير وليش</li>
+        <li>جولة تعديل ثانية بعد ما تستلم النسخة الأولى</li>
+      </ul>
+    </div>
+    <div style="display:grid; gap:12px; align-content:start">
+      <div id="reviewPrice"></div>
+      <div id="reviewCta"></div>
+      <p class="fine">لما ترسل سيرتك نستخدمها بس عشان المراجعة، وتنحذف بعد ما نسلمك النسخة النهائية، وما نشاركها مع أي أحد.</p>
+    </div>
+  </section>
+</div>
+
+<div id="printArea"></div>
+
+<script>
+// ===== إعدادات الخدمة المدفوعة: عدّليها هنا =====
+const REVIEW = {
+  enabled: false,              // خليها true لما تكونين جاهزة تستقبلين طلبات
+  price: "99",                 // السعر بالريال
+  delivery: "خلال 3 أيام عمل",
+  orderUrl: "",                // رابط الطلب (مثلًا منتج في سلة، أو نموذج Google Forms)
+  email: ""                    // أو إيميل لاستقبال الطلبات
+};
+// ==================================================
+
+const $ = s => document.querySelector(s);
+const esc = t => String(t ?? "").replace(/[&<>"]/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const track = (path, title) => { try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path, title, event:true}); }catch(e){} };
+const KEY = "awal-khatwa-cv-v1";
+
+const L = {
+  en:{summary:"Summary", edu:"Education", proj:"Projects", exp:"Experience", skills:"Skills", tech:"Technical", soft:"Other", certs:"Certifications", present:"Present"},
+  ar:{summary:"نبذة", edu:"التعليم", proj:"المشاريع", exp:"الخبرات", skills:"المهارات", tech:"تقنية", soft:"أخرى", certs:"الشهادات", present:"حتى الآن"}
+};
+const FIELDS = {
+  edu:  [["school","الجامعة أو الكلية"],["degree","الدرجة والتخصص"],["dates","التاريخ","2022 – 2026"],["notes","ملاحظات (المعدل، مواد مهمة) كل سطر نقطة","",true]],
+  proj: [["title","اسم المشروع"],["tools","الأدوات","Python, Power BI"],["link","رابط (اختياري)","github.com/..."],["notes","وش سويت ووش النتيجة، كل سطر نقطة","",true]],
+  exp:  [["role","المسمى","Cybersecurity Co-op Trainee"],["org","الجهة"],["dates","التاريخ","Jun 2025 – Aug 2025"],["notes","وش سويت، كل سطر نقطة","",true]]
+};
+
+let S = {lang:"en", name:"", headline:"", email:"", phone:"", city:"", linkedin:"", portfolio:"", summary:"", skills:"", soft:"", certs:"", edu:[{}], proj:[{}], exp:[{}]};
+try{ const saved = JSON.parse(localStorage.getItem(KEY)||"null"); if(saved) S = Object.assign(S, saved); }catch(e){}
+const save = () => { try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} };
+
+const SIMPLE = ["lang","name","headline","email","phone","city","linkedin","portfolio","summary","skills","soft","certs"];
+function setDirs(){
+  const d = S.lang==="ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-dir]").forEach(el=>{ el.dir = d; el.style.textAlign = d==="ltr"?"left":"right"; });
+}
+function fillSimple(){ SIMPLE.forEach(k=>{ const el=$("#f-"+k); if(el) el.value = S[k]||""; }); setDirs(); }
+
+function renderLists(){
+  ["edu","proj","exp"].forEach(kind=>{
+    const box = $("#list-"+kind); box.textContent = "";
+    S[kind].forEach((it, i)=>{
+      const e = document.createElement("div"); e.className = "entry";
+      const head = document.createElement("div"); head.className = "entry-head";
+      head.innerHTML = `<span>${i+1}</span>`;
+      const rm = document.createElement("button"); rm.type="button"; rm.className="linkbtn"; rm.textContent="حذف";
+      rm.onclick = ()=>{ S[kind].splice(i,1); if(!S[kind].length) S[kind].push({}); renderLists(); update(); };
+      head.append(rm); e.append(head);
+      const row = document.createElement("div"); row.className = "row";
+      FIELDS[kind].forEach(([f,label,ph,multi])=>{
+        const lab = document.createElement("label"); lab.textContent = label;
+        const inp = document.createElement(multi?"textarea":"input");
+        inp.id = `f-${kind}-${i}-${f}`; inp.value = it[f]||""; if(ph) inp.placeholder = ph;
+        inp.dir = S.lang==="ar" ? "rtl" : "ltr"; inp.style.textAlign = S.lang==="ar"?"right":"left";
+        if(multi){ inp.rows = 3; inp.placeholder = S.lang==="ar" ? "مثال: حللت بيانات 5,000 عميل…" : "e.g. Analyzed 5,000 customer records to…"; }
+        inp.oninput = ()=>{ S[kind][i][f] = inp.value; update(); };
+        lab.append(inp);
+        (multi ? e : row).append(lab);
+      });
+      e.insertBefore(row, e.children[1]);
+      box.append(e);
+    });
+  });
+}
+
+const lines = t => String(t||"").split(/\n/).map(s=>s.replace(/^[\s•\-–*]+/,"").trim()).filter(Boolean);
+const has = o => Object.values(o||{}).some(v=>String(v||"").trim());
+
+function cvHTML(){
+  const t = L[S.lang]; const dir = S.lang==="ar"?"rtl":"ltr";
+  const contact = [S.email, S.phone, S.city, S.linkedin, S.portfolio].filter(Boolean).map(esc).join("  |  ");
+  let h = `<div class="paper" dir="${dir}" lang="${S.lang}">`;
+  h += `<h1>${esc(S.name) || '<span class="empty">'+(S.lang==="ar"?"اسمك":"Your Name")+'</span>'}</h1>`;
+  if(S.headline) h += `<div class="headline">${esc(S.headline)}</div>`;
+  if(contact) h += `<div class="contact">${contact}</div>`;
+  if(S.summary.trim()) h += `<h2>${t.summary}</h2><p>${esc(S.summary.trim())}</p>`;
+  const edu = S.edu.filter(has);
+  if(edu.length){ h += `<h2>${t.edu}</h2>`; edu.forEach(e=>{
+    h += `<div class="item"><div class="item-head"><span>${esc(e.school)}</span><span>${esc(e.dates)}</span></div>`;
+    if(e.degree) h += `<div class="item-sub">${esc(e.degree)}</div>`;
+    const b = lines(e.notes); if(b.length) h += `<ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
+    h += `</div>`; }); }
+  const exp = S.exp.filter(has);
+  if(exp.length){ h += `<h2>${t.exp}</h2>`; exp.forEach(e=>{
+    h += `<div class="item"><div class="item-head"><span>${esc(e.role)}${e.org?(S.lang==="ar"?" – ":" — ")+esc(e.org):""}</span><span>${esc(e.dates)}</span></div>`;
+    const b = lines(e.notes); if(b.length) h += `<ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
+    h += `</div>`; }); }
+  const proj = S.proj.filter(has);
+  if(proj.length){ h += `<h2>${t.proj}</h2>`; proj.forEach(p=>{
+    h += `<div class="item"><div class="item-head"><span>${esc(p.title)}</span><span>${esc(p.link)}</span></div>`;
+    if(p.tools) h += `<div class="item-sub">${esc(p.tools)}</div>`;
+    const b = lines(p.notes); if(b.length) h += `<ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
+    h += `</div>`; }); }
+  if(S.skills.trim() || S.soft.trim()){
+    h += `<h2>${t.skills}</h2>`;
+    if(S.skills.trim()) h += `<p><b>${t.tech}:</b> ${esc(S.skills.trim())}</p>`;
+    if(S.soft.trim()) h += `<p><b>${t.soft}:</b> ${esc(S.soft.trim())}</p>`;
+  }
+  const certs = lines(S.certs);
+  if(certs.length) h += `<h2>${t.certs}</h2><ul>${certs.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
+  return h + `</div>`;
+}
+
+function cvText(){
+  const all = [S.name,S.headline,S.summary,S.skills,S.soft,S.certs];
+  ["edu","proj","exp"].forEach(k=>S[k].forEach(o=>all.push(...Object.values(o||{}))));
+  return all.join("\n");
+}
+
+const VERB = /^(built|developed|designed|analy[sz]ed|led|created|implemented|improved|managed|automated|organized|researched|conducted|monitored|identified|collaborated|presented|reduced|increased|wrote|configured|deployed|trained|supported|coordinated|launched|delivered|investigated|assessed|tested|documented|volunteered|taught|planned|streamlined|established|achieved)/i;
+function renderChecks(){
+  const bullets = [...S.exp, ...S.proj].flatMap(o=>lines(o.notes));
+  const words = cvText().split(/\s+/).filter(Boolean).length;
+  const items = [
+    [!!S.name.trim(), "الاسم مكتوب"],
+    [/.+@.+\..+/.test(S.email), "إيميل صحيح"],
+    [S.phone.replace(/\D/g,"").length >= 9, "رقم جوال"],
+    [!!S.linkedin.trim(), "رابط لينكدإن"],
+    [S.summary.trim().length >= 60 && S.summary.trim().length <= 450, "نبذة بين سطرين وخمسة أسطر"],
+    [S.proj.filter(has).length >= 1, "مشروع واحد على الأقل"],
+    [bullets.length >= 3, "3 نقاط أو أكثر تشرح شغلك"],
+    [S.lang==="ar" || (bullets.length>0 && bullets.filter(b=>VERB.test(b)).length/bullets.length >= .6), "أغلب النقاط تبدأ بفعل (Built, Analyzed…)"],
+    [bullets.some(b=>/\d/.test(b)), "فيه أرقام أو نتائج قابلة للقياس"],
+    [S.skills.split(",").filter(s=>s.trim()).length >= 4, "4 مهارات تقنية أو أكثر"],
+    [words <= 650, "طولها مناسب لصفحة وحدة"]
+  ];
+  const ok = items.filter(x=>x[0]).length;
+  $("#checks").innerHTML = `<h2>فحص السيرة: ${ok} من ${items.length}</h2>` + items.map(([pass,txt])=>
+    `<div class="check ${pass?"ok":"no"}"><span class="i">${pass?"✓":"!"}</span><span>${txt}</span></div>`).join("");
+}
+
+function update(){ $("#paper").innerHTML = cvHTML(); renderChecks(); save(); }
+
+SIMPLE.forEach(k=>{ const el=$("#f-"+k); if(!el) return; el.addEventListener("input", ()=>{ S[k]=el.value; if(k==="lang"){ setDirs(); renderLists(); } update(); }); });
+document.querySelectorAll("[data-add]").forEach(b=>b.addEventListener("click", ()=>{ S[b.dataset.add].push({}); renderLists(); update(); }));
+
+$("#printBtn").addEventListener("click", ()=>{
+  $("#printArea").innerHTML = cvHTML();
+  const prev = document.title; document.title = (S.name||"CV").trim().replace(/\s+/g,"-") + "-CV";
+  track("cv/download", "تحميل سيرة");
+  window.print();
+  setTimeout(()=>{ document.title = prev; }, 500);
+});
+$("#clearBtn").addEventListener("click", e=>{
+  const b = e.currentTarget;
+  if(b.dataset.confirm!=="1"){ b.dataset.confirm="1"; b.textContent="متأكد؟ اضغط مرة ثانية"; setTimeout(()=>{ b.dataset.confirm=""; b.textContent="مسح الكل"; }, 3000); return; }
+  S = {lang:S.lang, name:"", headline:"", email:"", phone:"", city:"", linkedin:"", portfolio:"", summary:"", skills:"", soft:"", certs:"", edu:[{}], proj:[{}], exp:[{}]};
+  b.dataset.confirm=""; b.textContent="مسح الكل"; fillSimple(); renderLists(); update();
+});
+$("#sampleBtn").addEventListener("click", ()=>{
+  S = {lang:"en", name:"Noura Alharbi", headline:"Data Analytics Graduate", email:"noura.alharbi@email.com", phone:"+966 50 000 0000", city:"Riyadh, Saudi Arabia", linkedin:"linkedin.com/in/noura-example", portfolio:"github.com/noura-example",
+    summary:"Information Systems graduate focused on data analysis and visualization. Built three end-to-end dashboards using SQL and Power BI, and completed a co-op at a fintech startup. Looking for an entry-level data analyst role.",
+    skills:"SQL, Python (pandas), Power BI, Excel, Tableau, Git", soft:"Arabic (Native), English (Fluent), Presentation, Teamwork", certs:"Google Data Analytics Certificate — 2026",
+    edu:[{school:"King Saud University", degree:"B.Sc. Information Systems", dates:"2022 – 2026", notes:"GPA: 4.5 / 5\nRelevant courses: Databases, Statistics, Data Mining"}],
+    exp:[{role:"Data Analytics Co-op Trainee", org:"Example Fintech", dates:"Jun 2025 – Aug 2025", notes:"Analyzed 12,000 payment records in SQL to find the top reasons for failed transactions\nBuilt a weekly Power BI report used by the operations team\nPresented findings that reduced manual review time by 20%"}],
+    proj:[{title:"Saudi Startup Jobs Tracker", tools:"Python, GitHub Actions, JavaScript", link:"github.com/noura-example/jobs", notes:"Built a website that collects entry-level jobs from 15 startups and updates daily\nAutomated data collection from 5 applicant tracking systems"}]};
+  fillSimple(); renderLists(); update();
+});
+
+// tabs
+function showTab(w){ const b = w==="build"; $("#t-build").setAttribute("aria-selected",b); $("#t-match").setAttribute("aria-selected",!b); $("#p-build").hidden=!b; $("#p-match").hidden=b; }
+$("#t-build").onclick = ()=>showTab("build");
+$("#t-match").onclick = ()=>showTab("match");
+if(/^#match/.test(location.hash)) showTab("match");
+
+// ===== match tool =====
+const STOP = new Set("a an and are as at be been being but by can could do does for from has have having he her his how i if in into is it its may more most must no not of on or our out over own per should so some such than that the their them then there these they this those to under up us very was we were what when where which while who will with within without would you your about above across after again against all also among any because before below between both during each few further here just less many much only other same shall since still through too until upon via whether yet able ability abilities work working works job role roles team teams company candidate candidates looking join years year experience experiences strong good great excellent knowledge understanding skills skill including include includes using use used new well etc e.g ie required requirements preferred plus bonus opportunity responsibilities responsibility qualifications qualification degree related field fields based across ensure support day days key help make across within other level levels familiarity familiar bachelor bachelors master masters phd riyadh jeddah dammam khobar saudi arabia ksa junior senior intern interns internship graduate graduates fresh entry full time part hybrid remote onsite apply applicants ideal minimum preferably proven solid excellent demonstrated similar equivalent".split(" "));
+const PHRASES = ["a/b testing","machine learning","deep learning","data analysis","data analytics","data science","data visualization","power bi","project management","product management","customer service","customer success","business development","social media","content writing","problem solving","attention to detail","communication skills","time management","rest api","rest apis","unit testing","version control","incident response","threat intelligence","penetration testing","vulnerability assessment","risk management","financial analysis","user research","ui design","ux design","google analytics","microsoft excel","ms office","full stack","front end","back end","frontend","backend","cloud computing","network security","information security","sql server","node.js","react native","computer science","information systems","software engineering","iso 27001","nca ecc"];
+function keywords(text){
+  const low = text.toLowerCase();
+  const found = new Map();
+  PHRASES.forEach(p=>{ const n = low.split(p).length-1; if(n) found.set(p, n*3); });
+  let stripped = low; PHRASES.forEach(p=>{ stripped = stripped.split(p).join(" "); });
+  (stripped.match(/[a-z][a-z0-9+#.\-]{1,}/g)||[]).forEach(w=>{
+    w = w.replace(/[.\-]+$/,""); if(w.length<3 && !/^(c#|c\+\+|go|r|ai|ml|bi|qa|ux|ui|it|hr|sql)$/.test(w)) return;
+    if(STOP.has(w) || /^\d+$/.test(w)) return;
+    found.set(w, (found.get(w)||0)+1);
+  });
+  return [...found.entries()].sort((a,b)=>b[1]-a[1]).slice(0,24).map(x=>x[0]);
+}
+function runMatch(kws, job){
+  const out = $("#m-out");
+  const cv = ($("#m-cv").value.trim() || cvText()).toLowerCase();
+  if(cv.replace(/\s/g,"").length < 40){ out.innerHTML = `<h2>النتيجة</h2><p class="muted">اكتب سيرتك في «صانع السيرة» أول، أو الصق نصها في خانة «عندك سيرة جاهزة؟».</p>`; return; }
+  if(!kws.length){ out.innerHTML = `<h2>النتيجة</h2><p class="muted">ما لقينا كلمات كافية في هالإعلان.</p>`; return; }
+  const haveK = kws.filter(k=>cv.includes(k)), missK = kws.filter(k=>!cv.includes(k));
+  const pct = kws.length ? Math.round(haveK.length/kws.length*100) : 0;
+  track("cv/match", job ? `${job.company} - ${job.title}` : "نص ملصوق");
+  out.innerHTML = `<h2>النتيجة${job?`: <span dir="ltr">${esc(job.title)}</span>`:""}</h2>${job?`<p class="muted" style="margin:-6px 0 0">${esc(job.company)} · <a href="${esc(job.url)}" target="_blank" rel="noopener">صفحة التقديم</a></p>`:""}
+    <div><span class="score">${pct}%</span> <span class="muted">من أهم كلمات الإعلان موجودة في سيرتك</span></div>
+    <div class="meter"><span style="width:${pct}%"></span></div>
+    <div><b>موجودة في سيرتك (${haveK.length})</b><div class="kw">${haveK.map(k=>`<span class="have">${esc(k)}</span>`).join("")||'<span class="muted">ولا وحدة</span>'}</div></div>
+    <div><b>ناقصة (${missK.length})</b><div class="kw">${missK.map(k=>`<span class="miss">${esc(k)}</span>`).join("")||'<span class="muted">ممتاز، ما فيه شي ناقص</span>'}</div></div>
+    <p class="muted">أضف الكلمات الناقصة لسيرتك <b>بس إذا كانت تنطبق عليك فعلًا</b>، في النبذة أو المهارات أو نقاط المشاريع. ما نحتاج 100%، بس فوق 60% بداية زينة. الأداة تعد الكلمات بس، وما تحكم على جودة السيرة.</p>`;
+  if(innerWidth < 860) out.scrollIntoView({behavior:"smooth", block:"start"});
+}
+$("#m-run").addEventListener("click", ()=>{
+  const jd = $("#m-jd").value.trim();
+  if(jd.length < 80){ $("#m-out").innerHTML = `<h2>النتيجة</h2><p class="muted">الصق وصف الوظيفة كامل، النص قصير مرة.</p>`; return; }
+  document.querySelectorAll(".jobpick").forEach(b=>b.setAttribute("aria-pressed","false"));
+  runMatch(keywords(jd), null);
+});
+
+// الفرص من ملف الموقع
+let MJOBS = [];
+const mnorm = t => String(t||"").toLowerCase().replace(/[أإآ]/g,"ا").replace(/ة/g,"ه");
+function renderJobPicks(){
+  const q = mnorm($("#m-search").value.trim());
+  const list = MJOBS.filter(j=>!q || mnorm(j.title+" "+j.company+" "+j.companyEn).includes(q));
+  const box = $("#m-jobs"); box.textContent = "";
+  if(!MJOBS.length){ box.innerHTML = '<p class="muted">القائمة تتعبى تلقائيًا مع تحديث الفرص اليومي. إلى ذاك الحين، الصق وصف الوظيفة تحت.</p>'; $("#m-paste").open = true; return; }
+  if(!list.length){ box.innerHTML = '<p class="muted">ما لقينا وظيفة بهالاسم.</p>'; return; }
+  list.forEach(j=>{
+    const b = document.createElement("button"); b.type="button"; b.className="jobpick"; b.dataset.id=j.id; b.setAttribute("aria-pressed","false");
+    const t = document.createElement("b"); t.textContent = j.title;
+    const c = document.createElement("span"); c.textContent = `${j.company} · ${j.city||""}`;
+    b.append(t,c); b.onclick = ()=>pickJob(j.id); box.append(b);
+  });
+}
+function pickJob(id){
+  const j = MJOBS.find(x=>x.id===id); if(!j) return;
+  document.querySelectorAll(".jobpick").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.id===id)));
+  runMatch(j.keywords, j);
+}
+$("#m-search").addEventListener("input", renderJobPicks);
+fetch("data/listings.json",{cache:"no-store"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(d=>{
+  const today = new Date().toISOString().slice(0,10);
+  MJOBS = (Array.isArray(d)?d:[]).filter(j=>Array.isArray(j.keywords) && j.keywords.length && ["open","rolling"].includes(j.status) && !(j.deadline && j.deadline < today));
+  renderJobPicks();
+  hashPick();
+});
+function hashPick(){ const m = location.hash.match(/^#match-(.+)$/); if(m){ showTab("match"); pickJob(decodeURIComponent(m[1])); } }
+addEventListener("hashchange", hashPick);
+
+// ===== paid review block =====
+(function(){
+  if(REVIEW.enabled && (REVIEW.orderUrl || REVIEW.email)){
+    $("#reviewPrice").innerHTML = `<div class="price">${esc(REVIEW.price)} <small>ريال · ${esc(REVIEW.delivery)}</small></div>`;
+    $("#reviewCta").innerHTML = REVIEW.orderUrl
+      ? `<a class="btn primary" href="${esc(REVIEW.orderUrl)}" target="_blank" rel="noopener" id="orderBtn">اطلب مراجعة سيرتك</a>`
+      : `<div>ارسل سيرتك على: <b dir="ltr">${esc(REVIEW.email)}</b></div>`;
+    const ob = $("#orderBtn"); if(ob) ob.addEventListener("click", ()=>track("cv/order","طلب مراجعة"));
+  } else {
+    $("#reviewPrice").innerHTML = `<span class="soon">قريبًا</span>`;
+    $("#reviewCta").innerHTML = `<p class="muted">الخدمة بتفتح قريب. إلى ذاك الحين، استخدم صانع السيرة والمطابقة مجانًا.</p>`;
+  }
+})();
+
+fillSimple(); renderLists(); update();
+</script>
+</body>
+</html>
