@@ -92,6 +92,7 @@ footer{margin-top:28px; color:var(--muted); font-size:12.5px}
 <div class="wrap">
   <nav class="sitenav" aria-label="صفحات الموقع">
     <a href="./">الفرص</a>
+    <a href="cv.html">سيرتك</a>
     <a href="guide.html">دليل المبتدئ</a>
     <a href="stats.html" aria-current="page">الإحصائيات</a>
   </nav>
@@ -289,5 +290,6 @@ Promise.all([getJSON("data/listings.json"), getJSON("data/history.json")]).then(
   LISTINGS = Array.isArray(l)?l:[]; HISTORY = Array.isArray(h)?h:[]; render();
 });
 </script>
+<script src="feedback.js" defer></script>
 </body>
 </html>
