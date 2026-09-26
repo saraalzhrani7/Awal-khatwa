@@ -705,7 +705,7 @@ const SECTIONS = [
   ["edu", /^(education|academic background|academic qualifications|educational background|التعليم|المؤهلات العلمية|المؤهل العلمي|المؤهلات الأكاديمية)$/],
   ["exp", /^(experience|work experience|professional experience|employment|employment history|work history|internships?|internship experience|training|volunteer(ing)?( experience| work)?|extracurricular( activities)?|activities|leadership( experience)?|الخبرات|الخبرة|الخبرات العملية|الخبرة العملية|التدريب|التدريب التعاوني|العمل التطوعي|الأنشطة|الخبرات والأنشطة)$/],
   ["proj", /^(projects|academic projects|personal projects|key projects|selected projects|المشاريع|مشاريع)$/],
-  ["skills", /^(skills|technical skills|core skills|key skills|tools|technologies|tools (and|&) technologies|skills (and|&) tools|المهارات|المهارات التقنية|المهارات الفنية)$/],
+  ["skills", /^(skills|technical skills|core skills|key skills|(key |core )?competencies|areas of expertise|expertise|skills (and|&) competencies|الكفاءات|الكفاءات الأساسية|مجالات الخبرة|tools|technologies|tools (and|&) technologies|skills (and|&) tools|المهارات|المهارات التقنية|المهارات الفنية)$/],
   ["soft", /^(languages|soft skills|personal skills|interests|اللغات|المهارات الشخصية|المهارات الشخصية واللغات)$/],
   ["certs", /^(certifications?|certificates?|courses|licenses( (and|&) certifications)?|certifications (and|&) courses|awards|honors|achievements|الشهادات|الدورات|الشهادات والدورات|الدورات التدريبية|الجوائز|الإنجازات)$/]
 ];
@@ -717,14 +717,14 @@ const headKey = line => {
 };
 const BULLET = /^\s*[•●▪◦‣∙·\-–—*➢►✓]\s*/;
 const DATE = /((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?(19|20)\d{2}\s*(-|–|—|to|إلى|الى)\s*((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?((19|20)\d{2}|\bpresent\b|\bcurrent\b|\bnow\b|حتى الآن|الآن|الحالي)|((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?(19|20)\d{2}|\bpresent\b/i;
-const LOC = /^(remote|hybrid|on-?site|عن بعد|عن بُعد|(riyadh|jeddah|dammam|khobar|dhahran|makkah|mecca|madinah|medina|abha|taif|tabuk|qassim|buraydah|jubail|yanbu|neom|saudi arabia|ksa|dubai|abu dhabi|doha|kuwait|manama|cairo|london|الرياض|جدة|الدمام|الخبر|الظهران|مكة|المدينة|أبها|الطائف|تبوك|القصيم|السعودية)([\s,،\-–]+[a-z\u0600-\u06FF ]{2,20})?)$/i;
+const LOC = /^(remote|hybrid|on-?site|عن بعد|عن بُعد|(riyadh|jeddah|dammam|khobar|dhahran|makkah|mecca|madinah|medina|abha|taif|tabuk|qassim|buraydah|jubail|yanbu|neom|saudi arabia|ksa|dubai|abu dhabi|doha|kuwait|manama|cairo|london|الرياض|جدة|الدمام|الخبر|الظهران|مكة|المدينة|أبها|الطائف|تبوك|القصيم|السعودية)([\s,،\-–—|]+[a-z\u0600-\u06FF .]{2,20})?)$/i;
 const ROLEW = /\b(researcher|engineer|intern|internship|analyst|developer|designer|trainee|co-?op|manager|specialist|assistant|consultant|lead|officer|coordinator|associate|scientist|volunteer|member|president|head|representative|administrator|architect|tutor|teacher|ambassador|founder|agent)\b|باحث|مهندس|متدرب|محلل|مطور|مصمم|أخصائي|اخصائي|مساعد|منسق|متطوع|مشرف|رئيس|عضو|ممثل/i;
 function splitEntries(lines){
   const entries = []; let cur = null;
   lines.forEach(raw=>{
     const isB = BULLET.test(raw); const line = raw.replace(BULLET,"").trim(); if(!line) return;
     const labelLine = /^[^:]{2,25}:\s/.test(line) && !DATE.test(line);
-    const headLike = !isB && !labelLine && line.length <= 75 && !/[.。]$/.test(line) && !VERB.test(line);
+    const headLike = !isB && !labelLine && (line.length <= 75 || (line.length <= 130 && /\s[—–|]\s/.test(line))) && !/[.。]$/.test(line) && !VERB.test(line);
     const extra = cur && !cur.bullets.length && cur.head.length < 4 && ((DATE.test(line) && !cur.head.some(h=>DATE.test(h))) || LOC.test(line));
     if(headLike && (!cur || cur.bullets.length || (cur.head.filter(h=>!LOC.test(h) && !(DATE.test(h) && h.replace(DATE,"").replace(/[\s|,–—\-]/g,"").length<3)).length >= 2 && !extra) || (DATE.test(line) && cur.head.some(h=>DATE.test(h))))){
       cur = {head:[line], bullets:[]}; entries.push(cur);
@@ -789,10 +789,22 @@ function parseCV(text){
   });
   const exp = splitEntries(out.exp).map(e=>{
     let role = e.head[0]||"", org = e.head[1]||"";
+    let loc = e.loc||"";
+    const parts = role.split(/\s+[—–|]\s+/);
+    if(parts.length >= 3 || (parts.length === 2 && !org)){
+      const locI = parts.findIndex(x=>LOC.test(x));
+      if(locI >= 0 && !loc) loc = parts.slice(locI).join(", ");
+      const rest = locI >= 0 ? parts.slice(0, locI) : parts;
+      const rI = rest.map(x=>ROLEW.test(x)).lastIndexOf(true);
+      if(rI >= 0 && rest.length > 1){ role = rest[rI]; org = rest.filter((x,i)=>i!==rI).join(" — ") + (org ? ", "+org : ""); }
+      else if(rest.length > 1){ role = rest[rest.length-1]; org = rest.slice(0,-1).join(" — ") + (org ? ", "+org : ""); }
+      else role = rest[0]||role;
+      e = Object.assign({}, e, {loc});
+    }
     if(!org){ const m = role.split(/\s+(?:at|@|—|–|-|\|)\s+|,\s+/); if(m.length>1){ role = m[0]; org = m.slice(1).join(", "); } }
     // «الشركة — المسمى» أو «المسمى — الشركة»: المسمى هو الجزء اللي فيه كلمة وظيفة
     if(org && !ROLEW.test(role) && ROLEW.test(org)) [role, org] = [org, role];
-    const city = e.loc ? e.loc.split(/[,،]/)[0].trim() : "";
+    const city = e.loc ? e.loc.split(/[,،—–|]/)[0].trim() : "";
     if(city && !org.toLowerCase().includes(city.toLowerCase())) org = org ? `${org}, ${city}` : city;
     return {role, org, dates:e.dates, notes:e.bullets.join("\n")};
   });
