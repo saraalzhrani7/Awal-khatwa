@@ -115,12 +115,7 @@ header.top{display:flex; flex-wrap:wrap; align-items:end; justify-content:space-
 .btn:hover{filter:brightness(1.06)}
 .del{background:none; border:0; color:var(--saffron); font-size:12.5px; cursor:pointer; text-decoration:underline}
 .empty{text-align:center; color:var(--muted); padding:48px 0}
-@media (max-width:620px){
-  .job{grid-template-columns:1fr}
-  .job-side{flex-direction:row; align-items:center; min-width:0; flex-wrap:wrap}
-  .job-side .btns{flex:1 1 100%}
-  .job-side .btn{flex:1}
-}
+@media (max-width:640px){ .job{grid-template-columns:1fr} }
 
 .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:12px; margin-top:4px}
 .card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:9px}
@@ -174,6 +169,76 @@ footer .about{display:grid; gap:6px}
 footer .contact{display:flex; gap:14px; flex-wrap:wrap}
 footer .contact a{color:var(--ink); font-weight:500}
 @media (prefers-reduced-motion:no-preference){ .job,.card{transition:border-color .15s} .job:hover,.card:hover{border-color:var(--accent)} }
+
+/* ===== الكمبيوتر: نفس الشكل القديم ===== */
+.gloss-toggle,.fbtn,.fhead,.flabel,.fdone,.fback,.star-m{display:none}
+.btns .btn.star-m{display:none}
+.fpanel{display:grid; gap:10px}
+.btn.ico{display:inline-flex; align-items:center; justify-content:center; gap:6px}
+.btn.ico .i{flex:none}
+.btn.share .i{display:none}
+.btn.share.done{color:var(--accent)}
+.due .dd{display:block}
+.badge{min-width:20px; height:20px; border-radius:999px; background:var(--accent); color:var(--accent-ink); font-size:12px; font-weight:600; display:inline-grid; place-items:center; padding-inline:5px}
+
+/* ===== الجوال ===== */
+@media (max-width:640px){
+  header.top{padding-block:22px 14px; gap:14px}
+  .brand p{font-size:14px; margin-top:6px}
+  .stat b{font-size:26px}
+  .gloss-toggle{display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 14px; font-size:13.5px; font-weight:600; color:var(--accent); cursor:pointer; text-align:start}
+  .gloss-toggle::after{content:"▾"; color:var(--muted); transition:transform .15s}
+  .gloss-toggle[aria-expanded="true"]::after{transform:rotate(180deg)}
+  .glossary{display:none; border:0; padding-block:12px 4px; gap:12px}
+  .glossary.open{display:grid}
+  .tabs{margin-top:14px}
+
+  .controls{padding-block:10px 8px; gap:8px}
+  .searchrow{flex-wrap:nowrap; gap:8px}
+  .search{flex:1 1 auto}
+  .search input{font-size:16px; padding-block:10px}
+  .fbtn{display:inline-flex; gap:6px; padding:0 12px; min-height:46px; flex:none; font-weight:600}
+  .fbtn[aria-expanded="true"]{border-color:var(--accent)}
+  .resultline{font-size:12.5px}
+  .rl-hint{display:none}
+
+  .fpanel{position:fixed; inset-inline:0; bottom:0; z-index:80; background:var(--surface); border-top:1px solid var(--line); border-radius:18px 18px 0 0; padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px)); max-height:80vh; overflow:auto; gap:8px; box-shadow:0 -10px 30px rgb(0 0 0 / .18); transform:translateY(105%); visibility:hidden; transition:transform .22s ease, visibility .22s}
+  .fpanel.open{transform:none; visibility:visible}
+  .fback{display:block; position:fixed; inset:0; z-index:79; background:rgb(0 0 0 / .4)}
+  .fback[hidden]{display:none!important}
+  .fhead{display:flex; justify-content:space-between; align-items:center; font-size:16px}
+  .flabel{display:block; font-size:12.5px; color:var(--muted); font-weight:600; margin-top:6px}
+  .frow{display:flex; gap:8px; flex-wrap:wrap}
+  .frow .toggle{min-height:40px; font-size:14px}
+  .fpanel .chips{flex-wrap:wrap; overflow:visible}
+  .fdone{display:block; width:100%; margin-top:10px; padding-block:12px; font-size:15px}
+  body.sheet-open{overflow:hidden}
+  body.sheet-open .fb-btn{display:none}
+
+  .job{padding:14px 14px 12px; gap:8px}
+  .job h3{font-size:16px}
+  .job-main{gap:5px}
+  .meta{font-size:12px; gap:5px}
+  .tag.dur{display:none}
+  .who{font-size:13.5px; color:var(--muted); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+  .matchlink{font-size:12.5px}
+  .job-side{display:flex; flex-direction:row; flex-wrap:wrap; align-items:center; gap:8px 10px; min-width:0}
+  .side-top{order:1}
+  .side-top:has(.pill.open){display:none}
+  .star-d{display:none}
+  .due{order:2; display:flex; gap:6px; font-size:12px; text-align:start}
+  .due .dd{display:inline}
+  .due .dd::before{content:"· "}
+  .job-side .btns{order:3; flex:1 1 100%; display:flex; flex-wrap:nowrap; gap:8px}
+  .job-side .btn{flex:none}
+  .job-side .btn.apply{flex:1 1 auto; padding-block:10px}
+  .btn.ico{width:44px; height:44px; padding:0; flex:none}
+  .btn.ico .lbl{display:none}
+  .btn.share .i{display:block}
+  .btns .btn.star-m{display:inline-flex; font-size:20px; color:var(--muted); border:1px solid var(--line); background:var(--surface); border-radius:8px; line-height:1}
+  .star-m[aria-pressed="true"]{color:var(--saffron); border-color:var(--saffron)}
+  .remind-menu{order:4; flex:1 1 100%}
+}
 </style>
 <script data-goatcounter="https://awal-khatwa.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
@@ -197,7 +262,8 @@ footer .contact a{color:var(--ink); font-weight:500}
     </div>
   </header>
 
-  <div class="glossary" aria-label="أنواع الفرص">
+  <button class="gloss-toggle" id="glossToggle" type="button" aria-expanded="false" aria-controls="glossary">وش الفرق بين أنواع الفرص؟</button>
+  <div class="glossary" id="glossary" aria-label="أنواع الفرص">
     <div class="gloss"><span class="k">تدريب تعاوني</span><p><b>Co-op:</b> التدريب اللي يكون متطلب تخرج في الجامعة، وجامعتك تعتمده وتتابعه.</p></div>
     <div class="gloss"><span class="k">Internship</span><p><b>تدريب مو متطلب جامعي:</b> لحديثي التخرج أو الطلاب في الصيف، مدته 3 إلى 6 شهور وغالبًا مدفوع.</p></div>
     <div class="gloss"><span class="k">برنامج خريجين</span><p><b>Graduate Program:</b> دفعة من الخريجين يتدربون مع بعض، وأحيانًا ينتهي بتوظيف.</p></div>
@@ -216,12 +282,22 @@ footer .contact a{color:var(--ink); font-weight:500}
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
           <input id="q" type="search" placeholder="ابحث بالمسمى أو الشركة… مثل: أمن، بيانات، Tabby" autocomplete="off">
         </label>
+        <button class="toggle fbtn" id="filterBtn" type="button" aria-expanded="false" aria-controls="fpanel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>فلترة<span class="badge" id="fCount" hidden></span></button>
         <button class="toggle" id="openBtn" aria-pressed="true" type="button"><span class="dot"></span>المتاحة للتقديم بس</button>
         <button class="toggle" id="savedBtn" aria-pressed="false" type="button">★ المحفوظة <span id="savedN" class="n"></span></button>
       </div>
-      <div class="chips" id="typeChips" role="group" aria-label="نوع الفرصة"></div>
-      <div class="chips" id="fieldChips" role="group" aria-label="المجال"></div>
-      <div class="chips" id="cityChips" role="group" aria-label="المدينة"></div>
+      <div class="fback" id="fback" hidden></div>
+      <div class="fpanel" id="fpanel" role="group" aria-label="الفلاتر">
+        <div class="fhead"><b>فلترة الفرص</b><button class="linkbtn" id="fReset" type="button">مسح الفلاتر</button></div>
+        <div class="frow" id="fToggles"></div>
+        <div class="flabel">نوع الفرصة</div>
+        <div class="chips" id="typeChips" role="group" aria-label="نوع الفرصة"></div>
+        <div class="flabel">المجال</div>
+        <div class="chips" id="fieldChips" role="group" aria-label="المجال"></div>
+        <div class="flabel">المدينة</div>
+        <div class="chips" id="cityChips" role="group" aria-label="المدينة"></div>
+        <button class="btn primary fdone" id="fDone" type="button">عرض النتائج</button>
+      </div>
       <div class="resultline" id="resultline"></div>
     </div>
     <div class="list" id="list"><div class="empty">جاري تحميل الفرص…</div></div>
@@ -344,6 +420,8 @@ function chipsHTML(map, cur, counts){
 
 function renderJobs(){
   $("#savedN").textContent = SAVED.size ? SAVED.size : "";
+  const nf = (st.type!=="all") + (st.field!=="all") + (st.region!=="all") + (!st.openOnly) + (st.saved);
+  $("#fCount").textContent = nf; $("#fCount").hidden = !nf;
   const pool = st.saved ? JOBS.filter(j => SAVED.has(j.id)) : JOBS.filter(j => !st.openOnly || isApplyable(j));
   const tc={}, fc={}, rc={};
   pool.forEach(j=>{ tc[j.type]=(tc[j.type]||0)+1; fc[j.field]=(fc[j.field]||0)+1;
@@ -362,21 +440,28 @@ function renderJobs(){
     const da=daysLeft(a.deadline), db=daysLeft(b.deadline);
     if(da!==null && db!==null) return da-db; if(da!==null) return -1; if(db!==null) return 1; return 0;
   });
-  $("#resultline").textContent = st.openOnly
-    ? `${list.length} فرصة متاحة للتقديم. طفّ الفلتر عشان تشوف البرامج الموسمية والمغلقة وتستعد للدفعة الجاية.`
+  $("#resultline").innerHTML = st.openOnly
+    ? `${list.length} فرصة متاحة للتقديم<span class="rl-hint">. طفّ الفلتر عشان تشوف البرامج الموسمية والمغلقة وتستعد للدفعة الجاية.</span>`
     : `${list.length} من ${JOBS.length} إعلان وبرنامج`;
   $("#list").innerHTML = list.length ? list.map(jobHTML).join("") : (st.saved
     ? `<div class="empty">ما حفظت أي فرصة للحين. اضغط ☆ على أي إعلان عشان تحفظه وترجع له بعدين.</div>`
     : `<div class="empty">ما فيه فرص بهالفلاتر. جرّب مجال ثاني أو طفّ «المتاحة للتقديم بس».</div>`);
   if(st.saved) $("#resultline").textContent = `${list.length} فرصة محفوظة. الحفظ في متصفحك بس.`;
+  $("#fDone").textContent = list.length ? `عرض ${list.length} فرصة` : "ما فيه نتائج، غيّر الفلاتر";
 }
 
+const ICON = {
+  share:'<svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>',
+  cal:'<svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>'
+};
+function starBtn(j, cls){ const on = SAVED.has(j.id), t = on?"إزالة من المحفوظة":"حفظ الفرصة";
+  return `<button class="star ${cls}" type="button" data-save="${esc(j.id)}" aria-pressed="${on}" aria-label="${t}" title="${t}">${on?"★":"☆"}</button>`; }
 function jobHTML(j){
   const s = effStatus(j), d = daysLeft(j.deadline);
   let due = "";
-  if(d!==null && d>=0) due = `<div class="due ${d<=7?"hot":""}">${d===0?"آخر يوم اليوم":d===1?"باقي يوم واحد":`باقي ${d} يوم`}<br>${fmtDate(j.deadline)}</div>`;
+  if(d!==null && d>=0) due = `<div class="due ${d<=7?"hot":""}"><span>${d===0?"آخر يوم اليوم":d===1?"باقي يوم واحد":`باقي ${d} يوم`}</span><span class="dd">${fmtDate(j.deadline)}</span></div>`;
   else if(d!==null) due = `<div class="due">انتهى التقديم ${fmtDate(j.deadline)}</div>`;
-  const meta = [`<span class="tag type">${TYPES[j.type]||""}</span>`, `<span class="tag">${FIELDS[j.field]||""}</span>`, j.city&&`<span class="tag">${esc(j.city)}</span>`, (j.remote && !/عن ب/.test(j.city||""))&&`<span class="tag">عن بُعد</span>`, j.duration&&`<span class="tag">${esc(j.duration)}</span>`, j.paid&&`<span class="tag">${esc(j.paid)}</span>`].filter(Boolean).join("");
+  const meta = [`<span class="tag type">${TYPES[j.type]||""}</span>`, `<span class="tag">${FIELDS[j.field]||""}</span>`, j.city&&`<span class="tag">${esc(j.city)}</span>`, (j.remote && !/عن ب/.test(j.city||""))&&`<span class="tag">عن بُعد</span>`, j.duration&&`<span class="tag dur">${esc(j.duration)}</span>`, j.paid&&`<span class="tag">${esc(j.paid)}</span>`].filter(Boolean).join("");
   const label = s==="closed" ? "صفحة البرنامج" : "صفحة التقديم";
   return `<article class="job ${s}" id="job-${esc(j.id)}">
     <div class="job-main">
@@ -388,9 +473,9 @@ function jobHTML(j){
       ${adminOn?`<div><button class="del" type="button" data-del="${esc(j.id)}">حذف الإعلان</button></div>`:""}
     </div>
     <div class="job-side">
-      <div class="side-top"><button class="star" type="button" data-save="${esc(j.id)}" aria-pressed="${SAVED.has(j.id)}" aria-label="${SAVED.has(j.id)?"إزالة من المحفوظة":"حفظ الفرصة"}" title="${SAVED.has(j.id)?"إزالة من المحفوظة":"حفظ الفرصة"}">${SAVED.has(j.id)?"★":"☆"}</button><span class="pill ${s}">${STATUS[s]}</span></div>
+      <div class="side-top">${starBtn(j, "star-d")}<span class="pill ${s}">${STATUS[s]}</span></div>
       ${due}
-      <div class="btns"><a class="btn ${s==="closed"?"":"primary"}" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">${label}</a><button class="btn share" type="button" data-share="${esc(j.id)}">مشاركة</button>${s!=="closed"?`<button class="btn" type="button" data-remind="${esc(j.id)}">📅 ذكرني</button>`:""}</div>
+      <div class="btns"><a class="btn apply ${s==="closed"?"":"primary"}" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">${label}</a><button class="btn share ico" type="button" data-share="${esc(j.id)}" aria-label="مشاركة" title="مشاركة">${ICON.share}<span class="lbl">مشاركة</span></button>${s!=="closed"?`<button class="btn ico" type="button" data-remind="${esc(j.id)}" aria-label="ذكرني بآخر موعد" title="ذكرني بآخر موعد">${ICON.cal}<span class="lbl">ذكرني</span></button>`:""}${starBtn(j, "star-m btn ico")}</div>
       <div class="remind-menu" id="rm-${esc(j.id)}" hidden></div>
     </div>
   </article>`;
@@ -474,9 +559,10 @@ $("#list").addEventListener("click", async e=>{
   const text = `${j.title} في ${j.company}\nلقيتها في «أول خطوة»:`;
   track("share/"+j.id, `${j.company} - ${j.title}`);
   if(navigator.share){ try{ await navigator.share({title:j.title, text, url}); return; }catch(err){ if(err && err.name==="AbortError") return; } }
-  try{ await navigator.clipboard.writeText(text+"\n"+url); b.textContent="انتسخ الرابط ✓"; }
+  const lbl = b.querySelector(".lbl");
+  try{ await navigator.clipboard.writeText(text+"\n"+url); lbl.textContent="انتسخ ✓"; b.classList.add("done"); }
   catch(err){ window.prompt("انسخ الرابط:", url); }
-  setTimeout(()=>{ b.textContent="مشاركة"; }, 2200);
+  setTimeout(()=>{ lbl.textContent="مشاركة"; b.classList.remove("done"); }, 2200);
 });
 function focusHash(){
   const m = location.hash.match(/^#job-(.+)$/); if(!m) return;
@@ -496,6 +582,25 @@ function showTab(which){
   $("#panel-jobs").hidden=!jobs; $("#panel-cos").hidden=jobs;
 }
 $("#tab-jobs").addEventListener("click",()=>showTab("jobs"));
+// ===== الجوال: الفلاتر في لوحة تطلع من تحت، وشرح الأنواع ينطوي =====
+const MOBILE = window.matchMedia("(max-width:640px)");
+function placeToggles(){
+  const home = $("#q").closest(".searchrow"), box = $("#fToggles");
+  const target = MOBILE.matches ? box : home;
+  [$("#openBtn"), $("#savedBtn")].forEach(b=>{ if(b.parentElement !== target) target.append(b); });
+  if(!MOBILE.matches) closeFilters();
+}
+function openFilters(){ $("#fpanel").classList.add("open"); $("#fback").hidden = false; $("#filterBtn").setAttribute("aria-expanded","true"); document.body.classList.add("sheet-open"); }
+function closeFilters(){ $("#fpanel").classList.remove("open"); $("#fback").hidden = true; $("#filterBtn").setAttribute("aria-expanded","false"); document.body.classList.remove("sheet-open"); }
+$("#filterBtn").addEventListener("click", ()=> $("#fpanel").classList.contains("open") ? closeFilters() : openFilters());
+$("#fDone").addEventListener("click", ()=>{ closeFilters(); $("#list").scrollIntoView({block:"start"}); });
+$("#fback").addEventListener("click", closeFilters);
+document.addEventListener("keydown", e=>{ if(e.key==="Escape" && $("#fpanel").classList.contains("open")) closeFilters(); });
+$("#fReset").addEventListener("click", ()=>{ st.type="all"; st.field="all"; st.region="all"; st.saved=false; st.openOnly=true;
+  $("#savedBtn").setAttribute("aria-pressed","false"); $("#openBtn").setAttribute("aria-pressed","true"); renderJobs(); });
+(MOBILE.addEventListener ? MOBILE.addEventListener("change", placeToggles) : MOBILE.addListener(placeToggles));
+placeToggles();
+$("#glossToggle").addEventListener("click", e=>{ const g=$("#glossary"); const on = !g.classList.contains("open"); g.classList.toggle("open", on); e.currentTarget.setAttribute("aria-expanded", on); });
 $("#tab-cos").addEventListener("click",()=>showTab("cos"));
 if(location.hash==="#companies") showTab("cos");
 

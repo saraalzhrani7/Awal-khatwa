@@ -37,6 +37,7 @@ const FEEDBACK = {
   /* مساحة فاضية تحت الصفحة عشان الزر ما يغطي آخر سطر */
   body.fb-pad{padding-bottom:76px}
   @media (max-width:640px){ body.fb-pad{padding-bottom:136px} body.fb-pad.fb-hide-mobile{padding-bottom:0} }
+  @media (max-width:640px){ .fb-btn{transition:transform .2s ease, opacity .2s} .fb-btn.fb-away{transform:translateY(140px); opacity:0; pointer-events:none} }
   @media print{ .fb-btn,.fb-back{display:none!important} }`;
   const st = document.createElement("style"); st.textContent = css; document.head.append(st);
   document.body.classList.add("fb-pad");
@@ -105,6 +106,16 @@ const FEEDBACK = {
       setTimeout(()=>{ e.target.textContent = "نسخ"; }, 2000);
     });
   }
+
+  // في الجوال: الزر يختفي وأنت تنزل في الصفحة، ويرجع أول ما تطلع لفوق أو توصل آخر الصفحة
+  let lastY = scrollY;
+  addEventListener("scroll", ()=>{
+    const b = document.querySelector(".fb-btn"); if(!b) return;
+    const y = scrollY, atEnd = innerHeight + y >= document.documentElement.scrollHeight - 40;
+    if(y > lastY + 6 && y > 200 && !atEnd) b.classList.add("fb-away");
+    else if(y < lastY - 6 || atEnd) b.classList.remove("fb-away");
+    lastY = y;
+  }, {passive:true});
 
   // سطر التواصل تحت كل صفحة
   const wrap = document.querySelector(".wrap");
