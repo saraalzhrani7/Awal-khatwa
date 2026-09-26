@@ -32,7 +32,13 @@ SOURCES = [
     {"company": "كوقنا",    "companyEn": "COGNNA",            "ats": "workable",   "id": "cognna"},
     {"company": "مزن",      "companyEn": "Mozn",              "ats": "workable",   "id": "mozn-ai"},
     {"company": "زد",       "companyEn": "Zid",               "ats": "smartrecruiters", "id": "Zid1"},
-    {"company": "جسر",      "companyEn": "Jisr",              "ats": "smartrecruiters", "id": "Jisr"},
+    {"company": "جسر",      "companyEn": "Jisr",              "ats": "smartrecruiters", "id": "Jisr"}, 
+    {"company": "ويبوك",    "companyEn": "webook",            "ats": "workable",   "id": "webook"},
+    {"company": "سرج",      "companyEn": "Sarj",              "ats": "ashby",      "id": "sarjai"},
+    {"company": "ملاءة",    "companyEn": "Malaa",             "ats": "pinpoint",   "id": "malaa"},
+    {"company": "ليكورا",   "companyEn": "LAKEORA",           "ats": "ashby",      "id": "lakeora"},
+    {"company": "ميراي",    "companyEn": "Mirai",             "ats": "workable",   "id": "playmirai"},
+    {"company": "أدري",     "companyEn": "Adree",             "ats": "workable",   "id": "adree"},
 ]
 
 # ---------- الفلاتر ----------
