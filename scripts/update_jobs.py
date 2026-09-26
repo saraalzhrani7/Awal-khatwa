@@ -412,7 +412,7 @@ def write_job_pages(listings):
 <meta property="og:title" content="{_xml(title)}">
 <meta property="og:description" content="{_xml(desc)}">
 <meta property="og:url" content="{SITE}j/{_xml(name)}">
-<meta property="og:image" content="{SITE}og-image.png?v=2">
+<meta property="og:image" content="{SITE}og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{SITE}#job-{_xml(x['id'])}">
 <meta http-equiv="refresh" content="0; url={_xml(target)}">
