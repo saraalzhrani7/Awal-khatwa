@@ -298,7 +298,7 @@ def post_json(url, body):
 
 def get_text(url):
     req = urllib.request.Request(url, headers={**UA, "Accept": "text/html,application/xml;q=0.9,*/*;q=0.8"})
-    with urllib.request.urlopen(req, timeout=40) as r:
+    with urllib.request.urlopen(req, timeout=60) as r:
         return r.read().decode("utf-8", "replace")
 
 MONTHS = {m: i for i, m in enumerate(["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"], 1)}
@@ -313,11 +313,23 @@ def _date(s):
     if m and m.group(2).lower() in MONTHS: return f"{m.group(3)}-{MONTHS[m.group(2).lower()]:02d}-{int(m.group(1)):02d}"
     return ""
 
+def each_term(terms, fn, name=""):
+    """يشغل البحث لكل كلمة، ولو فشلت كلمة (مثل انتهاء الوقت) يكمل الباقي. يفشل بس لو فشلت كلها."""
+    ok, last = 0, None
+    for q in terms:
+        try:
+            fn(q); ok += 1
+        except Exception as e:
+            last = e
+            print(f"   (تخطينا البحث عن «{q}» في {name}: {e})", file=sys.stderr)
+    if not ok and last:
+        raise last
+
 def fetch_workday(src):
     host, tenant, site = src["host"], src["tenant"], src["site"]
     base = f"https://{host}/wday/cxs/{tenant}/{site}"
     seen = {}
-    for q in (GLOBAL_TERMS if src.get("global") else SEARCH_TERMS):
+    def search(q):
         offset = 0
         while offset < 100:
             d = post_json(base + "/jobs", {"appliedFacets": {}, "limit": 20, "offset": offset, "searchText": q})
@@ -328,6 +340,7 @@ def fetch_workday(src):
             offset += 20
             if len(posts) < 20 or offset >= (d.get("total") or 0):
                 break
+    each_term(GLOBAL_TERMS if src.get("global") else SEARCH_TERMS, search, src.get("companyEn", ""))
     for path, p in seen.items():
         title = p.get("title", "")
         if not is_beginner(title):
@@ -348,13 +361,14 @@ def fetch_workday(src):
 def fetch_oracle(src):
     host, site = src["host"], src["site"]
     seen = {}
-    for q in (GLOBAL_TERMS if src.get("global") else SEARCH_TERMS):
+    def search(q):
         finder = urllib.parse.quote(f'findReqs;siteNumber={site},limit=50,keyword="{q}",sortBy=POSTING_DATES_DESC', safe="")
         d = get_json(f"https://{host}/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList&finder={finder}")
         for it in d.get("items", []):
             for r in it.get("requisitionList") or []:
                 if r.get("Id"):
                     seen.setdefault(str(r["Id"]), r)
+    each_term(GLOBAL_TERMS if src.get("global") else SEARCH_TERMS, search, src.get("companyEn", ""))
     for rid, r in seen.items():
         loc = " ".join(filter(None, [r.get("PrimaryLocation"), "Saudi Arabia" if (r.get("PrimaryLocationCountry") or "").upper() == "SA" else ""]))
         end = (r.get("PostingEndDate") or "")[:10]
@@ -394,7 +408,7 @@ def fetch_successfactors(src):
     dom, path = src["domain"], src.get("path", "")
     extra = f"&locationsearch={urllib.parse.quote(src['loc'])}" if src.get("loc") else ""
     seen = {}
-    for q in SEARCH_TERMS:
+    def search(q):
         rows = []
         try:
             xml = get_text(f"https://{dom}{path}/services/rss/job/?locale=en_US&keywords={urllib.parse.quote(q)}{extra}")
@@ -406,6 +420,7 @@ def fetch_successfactors(src):
             rows = _sf_html(get_text(f"https://{dom}{path}/search/?q={urllib.parse.quote(q)}&locale=en_US&sortColumn=referencedate&sortDirection=desc{extra}"), dom)
         for r in rows:
             seen.setdefault(r["url"], r)
+    each_term(SEARCH_TERMS, search, src.get("companyEn", ""))
     for url, r in seen.items():
         loc = re.sub(r"(^|,|-)\s*SA\b", r"\1 Saudi Arabia", (r["location"] or "").strip())   # «SA» أو «Riyadh, SA»
         yield dict(title=r["title"], url=url, location=loc, city=guess_city(loc), experience="", dept="", deadline="",
