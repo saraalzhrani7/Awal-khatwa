@@ -469,8 +469,10 @@ function cvHTML(){
   { let h = "";
   const proj = S.proj.filter(has);
   if(proj.length){ h += `<h2>${t.proj}</h2>`; proj.forEach(p=>{
-    h += `<div class="item"><div class="item-head"><span>${esc(p.title)}</span><span>${p.link?lk(url(p.link.trim()), p.link.trim().replace(/^https?:\/\/(www\.)?/i,"")):""}</span></div>`;
-    if(p.tools) h += `<div class="item-sub">${esc(p.tools)}</div>`;
+    // الرابط في سطر الأدوات عشان روابط GitHub الطويلة ما تضغط اسم المشروع
+    const link = p.link ? lk(url(p.link.trim()), p.link.trim().replace(/^https?:\/\/(www\.)?/i,"")) : "";
+    h += `<div class="item"><div class="item-head"><span>${esc(p.title)}</span><span></span></div>`;
+    if(p.tools || link) h += `<div class="item-sub">${[p.tools?esc(p.tools):"", link].filter(Boolean).join(" · ")}</div>`;
     const b = lines(p.notes); if(b.length) h += `<ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
     h += `</div>`; }); }
   blocks.proj = h; }
@@ -493,7 +495,7 @@ function cvText(){
 }
 
 const WEAKV = /^(participated|played|helped|assisted|worked|was|were|involved|responsible|handled|did|got|tried)\b/i;
-const VERB = /^([a-z]{3,}(ed|ied)\b|built|wrote|led|ran|made|taught|won|drove|grew|built|developed|designed|analy[sz]ed|led|created|implemented|improved|managed|automated|organized|researched|conducted|monitored|identified|collaborated|presented|reduced|increased|wrote|configured|deployed|trained|supported|coordinated|launched|delivered|investigated|assessed|tested|documented|volunteered|taught|planned|streamlined|established|achieved)/i;
+const VERB = /^([a-z]{3,}(ed|ied)\b|built|wrote|led|ran|made|taught|won|drove|grew|built|developed|designed|analy[sz]ed|led|created|implemented|improved|managed|automated|organized|researched|conducted|monitored|identified|collaborated|presented|reduced|increased|wrote|configured|deployed|trained|supported|coordinated|launched|delivered|investigated|assessed|tested|documented|volunteered|taught|planned|streamlined|established|achieved)\b/i;
 function bulletTips(line, kind){
   const tips = [];
   const en = !/[\u0600-\u06FF]/.test(line);
@@ -601,13 +603,27 @@ function keywords(text){
   });
   return [...found.entries()].sort((a,b)=>b[1]-a[1]).slice(0,24).map(x=>x[0]);
 }
+// كلمات عامة ما تفرق في المطابقة (للإعلانات القديمة قبل ما يتحدث السكربت)
+const MATCH_NOISE = new Set("someone curious expected real rather run runs operate operating closely provide providing motivated motivation issues issue hands-on improvement improvements results result tasks task critical exposure practices practice environments associate modern high-quality programme ownership collaborating collaborate collaboration squads designers engineers managers engineer manager passionate passion eager excited exciting driven self-starter detail-oriented dynamic fast-paced thrive impact impactful meaningful various multiple ensure ensuring deliver delivering related day-to-day across end-to-end world-class cutting-edge innovative mindset attitude values culture mission vision goals goal ways way things thing part parts high low large small big key main core daily weekly monthly timely quickly effectively efficiently successfully highly closely directly actively proactive proactively ability contribute contributing gain gaining exposure hands someone expected rather".split(" "));
+// الكلمة موجودة في السيرة؟ نقبل المفرد والجمع، والتهجئة البريطانية، والشرطة بدل المسافة
+function cvHas(cv, k){
+  const base = k.replace(/ies$/,"y").replace(/([^s])s$/,"$1");
+  const forms = new Set([k, base, k.replace(/-/g," "), k.replace(/-related$/,""), base.replace(/lling/,"ling"), base.replace(/lled/,"led"), base.replace(/is(e|ing|ation)/,"iz$1"), base.replace(/our/,"or"), base.replace(/ion$/,""), base.replace(/ment$/,"")]);
+  for(const f of forms){
+    if(f.length < 2) continue;
+    if(f.length <= 3){ if(new RegExp("(^|[^a-z0-9])" + f.replace(/[.*+?^${}()|[\]\\#]/g,"\\$&") + "([^a-z0-9]|$)").test(cv)) return true; }
+    else if(cv.includes(f)) return true;
+  }
+  return false;
+}
 function runMatch(kws, job){
   CURRENT = {kws, job};
   const out = $("#m-out");
   const cv = (UPLOADED || $("#m-cv").value.trim() || cvText()).toLowerCase();
   if(cv.replace(/\s/g,"").length < 40){ out.innerHTML = `<h2>النتيجة</h2><p class="muted">اكتب سيرتك في «صانع السيرة» أول، أو ارفع سيرتك الجاهزة فوق.</p>`; return; }
   if(!kws.length){ out.innerHTML = `<h2>النتيجة</h2><p class="muted">ما لقينا كلمات كافية في هالإعلان.</p>`; return; }
-  const haveK = kws.filter(k=>cv.includes(k)), missK = kws.filter(k=>!cv.includes(k));
+  kws = kws.filter(k=>!MATCH_NOISE.has(k));
+  const haveK = kws.filter(k=>cvHas(cv, k)), missK = kws.filter(k=>!cvHas(cv, k));
   const pct = kws.length ? Math.round(haveK.length/kws.length*100) : 0;
   track("cv/match", job ? `${job.company} - ${job.title}` : "نص ملصوق");
   out.innerHTML = `<h2>النتيجة${job?`: <span dir="ltr">${esc(job.title)}</span>`:""}</h2>${job?`<p class="muted" style="margin:-6px 0 0">${esc(job.company)} · <a href="${esc(job.url)}" target="_blank" rel="noopener">صفحة التقديم</a></p>`:""}
@@ -703,20 +719,31 @@ function rerun(){ if(CURRENT && CURRENT.job) pickJob(CURRENT.job.id); else if(CU
 const SECTIONS = [
   ["summary", /^(summary|professional summary|profile|professional profile|about me|about|objective|career objective|نبذة|نبذة عني|نبذة مختصرة|الملخص|الملخص المهني|الهدف الوظيفي|الهدف)$/],
   ["edu", /^(education|academic background|academic qualifications|educational background|التعليم|المؤهلات العلمية|المؤهل العلمي|المؤهلات الأكاديمية)$/],
-  ["exp", /^(experience|work experience|professional experience|employment|employment history|work history|internships?|internship experience|training|volunteer(ing)?( experience| work)?|extracurricular( activities)?|activities|leadership( experience)?|الخبرات|الخبرة|الخبرات العملية|الخبرة العملية|التدريب|التدريب التعاوني|العمل التطوعي|الأنشطة|الخبرات والأنشطة)$/],
+  ["exp", /^(internships? and volunteer(ing)?( experience)?|volunteer(ing)? and internships?|experience|work experience|professional experience|employment|employment history|work history|internships?|internship experience|training|volunteer(ing)?( experience| work)?|extracurricular( activities)?|activities|leadership( experience)?|الخبرات|الخبرة|الخبرات العملية|الخبرة العملية|التدريب|التدريب التعاوني|العمل التطوعي|الأنشطة|الخبرات والأنشطة)$/],
   ["proj", /^(projects|academic projects|personal projects|key projects|selected projects|المشاريع|مشاريع)$/],
   ["skills", /^(skills|technical skills|core skills|key skills|(key |core )?competencies|areas of expertise|expertise|skills (and|&) competencies|الكفاءات|الكفاءات الأساسية|مجالات الخبرة|tools|technologies|tools (and|&) technologies|skills (and|&) tools|المهارات|المهارات التقنية|المهارات الفنية)$/],
   ["soft", /^(languages|soft skills|personal skills|interests|اللغات|المهارات الشخصية|المهارات الشخصية واللغات)$/],
-  ["certs", /^(certifications?|certificates?|courses|licenses( (and|&) certifications)?|certifications (and|&) courses|awards|honors|achievements|الشهادات|الدورات|الشهادات والدورات|الدورات التدريبية|الجوائز|الإنجازات)$/]
+  ["certs", /^(certifications? and (training|courses)|training and certifications?|certificates? and courses|certifications?|certificates?|courses|licenses( (and|&) certifications)?|certifications (and|&) courses|awards|honors|achievements|الشهادات|الدورات|الشهادات والدورات|الدورات التدريبية|الجوائز|الإنجازات)$/]
 ];
 const headKey = line => {
-  const t = line.toLowerCase().replace(/[:：\-–—_|•*#]+/g," ").replace(/\s+/g," ").trim();
-  if(!t || t.length > 42) return null;
+  const t = line.toLowerCase().replace(/&/g," and ").replace(/[:：\-–—_|•*#]+/g," ").replace(/\s+/g," ").trim();
+  if(!t || t.length > 48) return null;
   for(const [k, re] of SECTIONS) if(re.test(t)) return k;
+  // عنوان قسم مكتوب كله بحروف كبيرة، مثل INTERNSHIP & VOLUNTEER EXPERIENCE
+  const caps = /[A-Z]/.test(line) && line === line.toUpperCase() && t.split(" ").length <= 6;
+  if(caps){
+    if(/certif|licen|courses|award|honou?r/.test(t)) return "certs";
+    if(/project/.test(t)) return "proj";
+    if(/educat|academic/.test(t)) return "edu";
+    if(/language|interest/.test(t)) return "soft";
+    if(/skill|competenc|tools|technolog/.test(t)) return "skills";
+    if(/experience|internship|volunteer|employment|work|leadership|activities|training/.test(t)) return "exp";
+    if(/summary|profile|objective|about/.test(t)) return "summary";
+  }
   return null;
 };
 const BULLET = /^\s*[•●▪◦‣∙·\-–—*➢►✓]\s*/;
-const DATE = /((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?(19|20)\d{2}\s*(-|–|—|to|إلى|الى)\s*((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?((19|20)\d{2}|\bpresent\b|\bcurrent\b|\bnow\b|حتى الآن|الآن|الحالي)|((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?(19|20)\d{2}|\bpresent\b/i;
+const DATE = /(\b(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*((19|20)\d{2})?|(19|20)\d{2})\s*(-|–|—|\bto\b|إلى|الى)\s*((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?((19|20)\d{2}|\bpresent\b|\bcurrent\b|\bnow\b|حتى الآن|الآن|الحالي)|(\b(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?(19|20)\d{2}|\bpresent\b/i;
 const LOC = /^(remote|hybrid|on-?site|عن بعد|عن بُعد|(riyadh|jeddah|dammam|khobar|dhahran|makkah|mecca|madinah|medina|abha|taif|tabuk|qassim|buraydah|jubail|yanbu|neom|saudi arabia|ksa|dubai|abu dhabi|doha|kuwait|manama|cairo|london|الرياض|جدة|الدمام|الخبر|الظهران|مكة|المدينة|أبها|الطائف|تبوك|القصيم|السعودية)([\s,،\-–—|]+[a-z\u0600-\u06FF .]{2,20})?)$/i;
 const ROLEW = /\b(researcher|engineer|intern|internship|analyst|developer|designer|trainee|co-?op|manager|specialist|assistant|consultant|lead|officer|coordinator|associate|scientist|volunteer|member|president|head|representative|administrator|architect|tutor|teacher|ambassador|founder|agent)\b|باحث|مهندس|متدرب|محلل|مطور|مصمم|أخصائي|اخصائي|مساعد|منسق|متطوع|مشرف|رئيس|عضو|ممثل/i;
 function splitEntries(lines){
@@ -724,7 +751,7 @@ function splitEntries(lines){
   lines.forEach(raw=>{
     const isB = BULLET.test(raw); const line = raw.replace(BULLET,"").trim(); if(!line) return;
     const labelLine = /^[^:]{2,25}:\s/.test(line) && !DATE.test(line);
-    const headLike = !isB && !labelLine && (line.length <= 75 || (line.length <= 130 && /\s[—–|]\s/.test(line))) && !/[.。]$/.test(line) && !VERB.test(line);
+    const headLike = !isB && !labelLine && (line.length <= 75 || (line.length <= 130 && /\s[—–|]\s/.test(line)) || (line.length <= 160 && /(github\.com|github\.io|behance\.net|https?:\/\/)\S*\s*$/i.test(line))) && !/[.。]$/.test(line) && !VERB.test(line);
     const extra = cur && !cur.bullets.length && cur.head.length < 4 && ((DATE.test(line) && !cur.head.some(h=>DATE.test(h))) || LOC.test(line));
     if(headLike && (!cur || cur.bullets.length || (cur.head.filter(h=>!LOC.test(h) && !(DATE.test(h) && h.replace(DATE,"").replace(/[\s|,–—\-]/g,"").length<3)).length >= 2 && !extra) || (DATE.test(line) && cur.head.some(h=>DATE.test(h))))){
       cur = {head:[line], bullets:[]}; entries.push(cur);
@@ -738,7 +765,7 @@ function splitEntries(lines){
   return entries.map(e=>{
     const all = e.head.join("  ");
     const m = all.match(DATE); const dates = m ? m[0].trim() : "";
-    let head = e.head.map(h=>h.replace(DATE,"").replace(/[|,–—\-\s]+$/,"").replace(/^[|,–—\-\s]+/,"").trim()).filter(Boolean);
+    let head = e.head.map(h=>h.replace(DATE,"").replace(/\(\s*\)/g,"").replace(/[|,–—\-\s]+$/,"").replace(/^[|,–—\-\s]+/,"").trim()).filter(Boolean);
     // المدينة في سطر لحالها أو في آخر السطر: نفصلها
     let loc = "";
     head = head.filter(h=>{ if(!loc && LOC.test(h)){ loc = h; return false; } return true; });
@@ -752,7 +779,7 @@ function parseCV(text){
   raw.forEach(l=>{
     const prev = lines[lines.length-1];
     const contact = x => /@|https?:|www\.|linkedin|github|\+?\d{3}[\s-]?\d{3}/i.test(x);
-    const cont = prev && !headKey(prev) && !headKey(l) && !BULLET.test(l) && !contact(l) && !contact(prev) && (
+    const cont = prev && !headKey(prev) && (!headKey(l) || /^[a-z]/.test(l)) && !BULLET.test(l) && !contact(l) && !contact(prev) && (
       /^[a-z(&,;:/\-]/.test(l) ||                                    // يبدأ بحرف صغير أو رمز = تكملة
       (/[,;&/\-]$|\b(and|or|of|the|to|in|for|with|a|an)$/i.test(prev)) // السطر اللي قبله انقطع في نص الجملة
     );
@@ -781,6 +808,11 @@ function parseCV(text){
   let summary = out.summary.join(" ");
   if(!summary){ const longH = headerText.slice(1).filter(l=>l.length > 60); summary = longH.join(" "); }
   const edu = splitEntries(out.edu).map(e=>{
+    if(e.head.length === 1 && /\s[—–|]\s/.test(e.head[0])){
+      const parts = e.head[0].split(/\s+[—–|]\s+/);
+      const si = parts.findIndex(x=>/universit|college|institute|school|academy|جامعة|كلية|معهد|أكاديمية/i.test(x));
+      if(si >= 0) e = Object.assign({}, e, {head:[parts[si], ...parts.filter((x,i)=>i!==si)]});
+    }
     const sIdx = e.head.findIndex(h=>/universit|college|institute|school|academy|جامعة|كلية|معهد|أكاديمية/i.test(h));
     const school = sIdx>=0 ? e.head[sIdx] : (e.head[0]||"");
     const degree = e.head.filter((h,i)=>i!==(sIdx>=0?sIdx:0)).join(" · ");
@@ -815,8 +847,9 @@ function parseCV(text){
     const tm = title.match(/\(([^)]{3,80})\)\s*$/);
     return {title: tm ? title.replace(tm[0],"").trim() : title, tools: tools || (tm?tm[1]:""), link, notes:e.bullets.join("\n")};
   });
-  const splitList = arr => arr.join(" , ").split(/\s*[,،|•;·]\s*|\s{3,}/).map(x=>x.replace(BULLET,"").replace(/^[^:]{2,30}:\s*/,"").trim()).filter(x=>x && x.length < 50);
+  const splitList = arr => arr.join(" , ").split(/\s*[,،|•;·]\s*|\s{3,}/).map(x=>x.replace(BULLET,"").replace(/^[^:]{2,30}:\s*/,"").trim()).filter(x=>x && x.length < 90);
   const softRe = /^(other|languages?|soft skills?|personal|interests|اللغات|المهارات الشخصية|أخرى)\s*:/i;
+  out.skills = out.skills.reduce((acc,l)=>{ if(acc.length && /^[^:]{2,30}:/.test(acc[0]) && !/^[^:]{2,30}:/.test(l) && !BULLET.test(l)) acc[acc.length-1] += " " + l; else acc.push(l); return acc; }, []);
   out.soft = out.soft.concat(out.skills.filter(l=>softRe.test(l)));
   out.skills = out.skills.filter(l=>!softRe.test(l));
   const skills = [...new Set(splitList(out.skills))].join(", ");
