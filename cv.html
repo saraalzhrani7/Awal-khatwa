@@ -106,6 +106,9 @@ input[dir="ltr"],textarea[dir="ltr"]{text-align:left}
 .paper .item-head span:last-child{font-weight:400; white-space:nowrap; color:#333}
 .paper .item-sub{font-style:italic; color:#333}
 .paper[dir="rtl"] .item-sub{font-style:normal}
+/* الطباعة: لا ينفصل عنوان القسم أو عنوان الخبرة عن اللي تحته، ولا تنقسم النقطة بين صفحتين */
+.paper h2,.paper .item-head,.paper .item-sub{break-after:avoid; page-break-after:avoid}
+.paper li,.paper .item-head,.paper .item-sub{break-inside:avoid; page-break-inside:avoid}
 .paper ul{margin:3px 0 0; padding-inline-start:18px}
 .paper li{margin:1px 0}
 .paper p{margin:0}
@@ -189,11 +192,11 @@ details[open]{display:grid; gap:8px}
   .panel{padding:12px}
 }
 @media print{
-  @page{size:A4; margin:0}
+  @page{size:A4; margin:12mm 0 10mm}
   body{background:#fff; padding:0}
   body > *:not(#printArea){display:none!important}
   #printArea{display:block!important}
-  #printArea .paper{box-shadow:none; max-width:none; width:auto; padding:16mm 16mm}
+  #printArea .paper{box-shadow:none; max-width:none; width:auto; padding:3mm 16mm 0}
 }
 #printArea{display:none}
 </style>
