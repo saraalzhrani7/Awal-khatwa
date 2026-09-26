@@ -13,7 +13,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "listings.json"
 HISTORY = ROOT / "data" / "history.json"
+FEED = ROOT / "feed.xml"
+JOBS_DIR = ROOT / "j"
+SITE = "https://saraalzhrani7.github.io/Awal-khatwa/"
 TODAY = datetime.date.today().isoformat()
+MANUAL_MAX_AGE = 60   # الإعلان اليدوي اللي ما تحدث من 60 يوم ينقفل تلقائيًا
+TYPES_AR = {"coop": "تدريب تعاوني", "internship": "Internship", "grad": "برنامج خريجين", "entry": "Entry Level"}
 
 # ---------- الشركات ومصادرها ----------
 # لإضافة شركة: انسخي سطر وغيّري الاسم ونوع النظام ومعرّف الشركة فيه
@@ -236,7 +241,7 @@ def slug(s):
 
 def main():
     old = json.loads(DATA.read_text(encoding="utf-8")) if DATA.exists() else []
-    manual = [x for x in old if x.get("source") != "auto"]
+    manual = expire_manual([x for x in old if x.get("source") != "auto"])
     old_auto = {key_of(x): x for x in old if x.get("source") == "auto"}
     manual_keys = {key_of(x) for x in manual}
 
@@ -308,6 +313,8 @@ def main():
     result = manual + sorted(fresh.values(), key=lambda x: x.get("posted", ""), reverse=True)
 
     record_history(result)
+    write_feed(result)
+    write_job_pages(result)
 
     def strip_dates(lst):
         return [{kk: vv for kk, vv in x.items() if kk != "checked"} for x in lst]
@@ -316,6 +323,111 @@ def main():
         return
     DATA.write_text(json.dumps(result, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"انحفظ: {len(manual)} يدوي + {len(fresh)} تلقائي")
+
+# ---------- الإعلانات اليدوية: تنتهي لحالها ----------
+def expire_manual(items):
+    """يشيل الإعلان اليدوي إذا عدّى تاريخ "expires"، ويقفله إذا ما تحدث (checked) من فترة طويلة."""
+    out = []
+    limit = (datetime.date.today() - datetime.timedelta(days=MANUAL_MAX_AGE)).isoformat()
+    for x in items:
+        if x.get("expires") and x["expires"] < TODAY:
+            print(f"   ⌛ شلنا الإعلان اليدوي «{x.get('title')}»: انتهى في {x['expires']}")
+            continue
+        if x.get("status") in ("open", "rolling") and not x.get("expires") and (x.get("checked") or "") < limit:
+            x = dict(x, status="closed")
+            print(f"   ⌛ قفلنا «{x.get('title')}»: ما تحدث من أكثر من {MANUAL_MAX_AGE} يوم")
+        out.append(x)
+    return out
+
+# ---------- RSS: كل فرصة جديدة (للتطبيقات وقنوات تيليجرام) ----------
+def _xml(t):
+    return html.escape(str(t or ""), quote=True)
+
+def _rfc822(d):
+    try:
+        dt = datetime.datetime.strptime(d, "%Y-%m-%d").replace(hour=6, tzinfo=datetime.timezone(datetime.timedelta(hours=3)))
+    except Exception:
+        dt = datetime.datetime.now(datetime.timezone.utc)
+    return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
+
+def job_summary(x):
+    parts = [TYPES_AR.get(x.get("type"), ""), x.get("city", "")]
+    if x.get("deadline"):
+        parts.append(f"آخر موعد {x['deadline']}")
+    if x.get("paid"):
+        parts.append(x["paid"])
+    return " · ".join(p for p in parts if p)
+
+def write_if_changed(path, text):
+    if path.exists() and path.read_text(encoding="utf-8") == text:
+        return False
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")
+    return True
+
+def write_feed(listings):
+    items = sorted([x for x in listings if is_open(x)], key=lambda x: (x.get("firstSeen") or x.get("posted") or ""), reverse=True)[:60]
+    rows = []
+    for x in items:
+        link = f"{SITE}j/{x['id']}.html"
+        rows.append(f"""  <item>
+    <title>{_xml(x['title'])} — {_xml(x['company'])}</title>
+    <link>{_xml(link)}</link>
+    <guid isPermaLink="false">awal-khatwa-{_xml(x['id'])}</guid>
+    <pubDate>{_rfc822(x.get('firstSeen') or x.get('posted') or TODAY)}</pubDate>
+    <description>{_xml(job_summary(x))}</description>
+  </item>""")
+    text = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>أول خطوة: فرص المبتدئين في الشركات الناشئة السعودية</title>
+  <link>{SITE}</link>
+  <description>تدريب تعاوني وInternship وبرامج خريجين ووظائف Entry Level، تتحدث كل يوم.</description>
+  <language>ar</language>
+{chr(10).join(rows)}
+</channel>
+</rss>
+"""
+    if write_if_changed(FEED, text):
+        print(f"RSS: {len(rows)} فرصة")
+
+# ---------- صفحة صغيرة لكل فرصة (عشان المعاينة لما أحد يشاركها) ----------
+def write_job_pages(listings):
+    keep = set()
+    for x in listings:
+        name = f"{x['id']}.html"
+        keep.add(name)
+        title = f"{x['title']} — {x['company']}"
+        desc = job_summary(x) + " · قدّم من صفحة التوظيف الرسمية عن طريق «أول خطوة»"
+        target = f"../#job-{x['id']}"
+        page = f"""<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{_xml(title)} | أول خطوة</title>
+<meta name="description" content="{_xml(desc)}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="أول خطوة">
+<meta property="og:title" content="{_xml(title)}">
+<meta property="og:description" content="{_xml(desc)}">
+<meta property="og:url" content="{SITE}j/{_xml(name)}">
+<meta property="og:image" content="{SITE}og-image.png?v=2">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="{SITE}#job-{_xml(x['id'])}">
+<meta http-equiv="refresh" content="0; url={_xml(target)}">
+<script>location.replace({json.dumps(target)});</script>
+</head>
+<body style="font-family:system-ui,sans-serif;padding:24px">
+<p><a href="{_xml(target)}">{_xml(title)}</a></p>
+</body>
+</html>
+"""
+        write_if_changed(JOBS_DIR / name, page)
+    if JOBS_DIR.exists():
+        for f in JOBS_DIR.glob("*.html"):
+            if f.name not in keep:
+                f.unlink()
 
 # ---------- سجل يومي للإحصائيات ----------
 def is_open(x):
