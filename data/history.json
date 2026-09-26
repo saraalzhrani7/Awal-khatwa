@@ -42,10 +42,11 @@
  },
  {
   "date": "2026-09-26",
-  "open": 41,
-  "total": 45,
-  "new": 16,
+  "open": 43,
+  "total": 47,
+  "new": 18,
   "newIds": [
+   "kpmg-kpmg-audit-internship-program-accounting-graduates-jedd",
    "sarj-marketing-intern",
    "adree-sales-development-representative",
    "lakeora-training-coordinator-intern",
@@ -61,6 +62,7 @@
    "webook-junior-software-engineer",
    "webook-tamheer-hr-trainee",
    "webook-tamheer-internship-sales-business-development",
+   "parsons-tamheer-intern-human-resources-saudi-national",
    "malaa-facility-management-intern"
   ],
   "byCompany": {
@@ -75,24 +77,31 @@
    "Thmanyah": 1,
    "Tamara": 1,
    "COGNNA": 1,
+   "KPMG": 1,
    "Mrsool": 1,
    "Adree": 1,
    "LAKEORA": 1,
    "Mozn": 1,
+   "Parsons": 1,
    "Malaa": 1
   },
   "byField": {
-   "business": 20,
-   "tech": 8,
-   "media": 6,
-   "product": 5,
+   "business": 13,
+   "marketing": 8,
+   "tech": 7,
+   "product": 7,
+   "engineering": 2,
+   "media": 1,
+   "finance": 1,
+   "supply": 1,
+   "legal": 1,
    "cyber": 1,
    "data": 1
   },
   "byType": {
-   "internship": 19,
+   "internship": 20,
    "entry": 9,
-   "grad": 8,
+   "grad": 9,
    "coop": 5
   }
  }

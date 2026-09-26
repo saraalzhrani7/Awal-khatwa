@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-  <title>أول خطوة: فرص المبتدئين في الشركات الناشئة السعودية</title>
+  <title>أول خطوة: فرص المبتدئين في السعودية</title>
   <link>https://saraalzhrani7.github.io/Awal-khatwa/</link>
   <description>تدريب تعاوني وInternship وبرامج خريجين ووظائف Entry Level، تتحدث كل يوم.</description>
   <language>ar</language>
+  <item>
+    <title>KPMG Audit Internship Program | Accounting Graduates (Jeddah, Madinah, and Khobar) — كي بي إم جي</title>
+    <link>https://saraalzhrani7.github.io/Awal-khatwa/j/kpmg-kpmg-audit-internship-program-accounting-graduates-jedd.html</link>
+    <guid isPermaLink="false">awal-khatwa-kpmg-kpmg-audit-internship-program-accounting-graduates-jedd</guid>
+    <pubDate>Sat, 26 Sep 2026 06:00:00 +0300</pubDate>
+    <description>Internship · المدينة</description>
+  </item>
   <item>
     <title>Marketing Intern — سرج</title>
     <link>https://saraalzhrani7.github.io/Awal-khatwa/j/sarj-marketing-intern.html</link>
@@ -111,6 +118,13 @@
     <description>برنامج خريجين · الرياض</description>
   </item>
   <item>
+    <title>Tamheer Intern (Human Resources) (Saudi National) — بارسونز</title>
+    <link>https://saraalzhrani7.github.io/Awal-khatwa/j/parsons-tamheer-intern-human-resources-saudi-national.html</link>
+    <guid isPermaLink="false">awal-khatwa-parsons-tamheer-intern-human-resources-saudi-national</guid>
+    <pubDate>Sat, 26 Sep 2026 06:00:00 +0300</pubDate>
+    <description>برنامج خريجين · الرياض</description>
+  </item>
+  <item>
     <title>Facility Management Intern — ملاءة</title>
     <link>https://saraalzhrani7.github.io/Awal-khatwa/j/malaa-facility-management-intern.html</link>
     <guid isPermaLink="false">awal-khatwa-malaa-facility-management-intern</guid>
@@ -171,7 +185,7 @@
     <link>https://saraalzhrani7.github.io/Awal-khatwa/j/ninja-sales-representative.html</link>
     <guid isPermaLink="false">awal-khatwa-ninja-sales-representative</guid>
     <pubDate>Mon, 21 Sep 2026 06:00:00 +0300</pubDate>
-    <description>Entry Level · Najran أو Yanbu أو Jazan</description>
+    <description>Entry Level · نجران أو ينبع أو جازان</description>
   </item>
   <item>
     <title>Customer Success COOP — كوقنا</title>
