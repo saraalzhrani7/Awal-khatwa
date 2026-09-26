@@ -42,14 +42,33 @@
  },
  {
   "date": "2026-09-26",
-  "open": 25,
-  "total": 29,
-  "new": 0,
-  "newIds": [],
+  "open": 41,
+  "total": 45,
+  "new": 16,
+  "newIds": [
+   "sarj-marketing-intern",
+   "adree-sales-development-representative",
+   "lakeora-training-coordinator-intern",
+   "sarj-agent-engineering-intern",
+   "webook-legal-intern",
+   "webook-sales-admin-intern",
+   "webook-product-design-intern",
+   "sarj-quality-assurance-intern",
+   "webook-governance-operations-intern",
+   "webook-event-operations-coordinator-anti-fraud",
+   "webook-coop-trainee-opportunities",
+   "webook-contact-center-agent",
+   "webook-junior-software-engineer",
+   "webook-tamheer-hr-trainee",
+   "webook-tamheer-internship-sales-business-development",
+   "malaa-facility-management-intern"
+  ],
   "byCompany": {
+   "webook": 10,
    "Tabby": 6,
    "Lucidya": 5,
    "Salla": 5,
+   "Sarj": 3,
    "Ninja": 2,
    "Atheer Connectivity": 1,
    "Unifonic": 1,
@@ -57,20 +76,24 @@
    "Tamara": 1,
    "COGNNA": 1,
    "Mrsool": 1,
-   "Mozn": 1
+   "Adree": 1,
+   "LAKEORA": 1,
+   "Mozn": 1,
+   "Malaa": 1
   },
   "byField": {
-   "business": 11,
-   "tech": 5,
-   "media": 4,
-   "product": 4,
+   "business": 20,
+   "tech": 8,
+   "media": 6,
+   "product": 5,
+   "cyber": 1,
    "data": 1
   },
   "byType": {
-   "internship": 10,
-   "grad": 6,
-   "entry": 5,
-   "coop": 4
+   "internship": 19,
+   "entry": 9,
+   "grad": 8,
+   "coop": 5
   }
  }
 ]
