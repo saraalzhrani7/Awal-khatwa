@@ -395,7 +395,7 @@ def fetch_successfactors(src):
         for r in rows:
             seen.setdefault(r["url"], r)
     for url, r in seen.items():
-        loc = re.sub(r",\s*SA\b", ", Saudi Arabia", r["location"])
+        loc = re.sub(r"(^|,|-)\s*SA\b", r"\1 Saudi Arabia", (r["location"] or "").strip())   # «SA» أو «Riyadh, SA»
         yield dict(title=r["title"], url=url, location=loc, city=guess_city(loc), experience="", dept="", deadline="",
                    posted=r.get("posted", ""), remote=bool(re.search(r"remote", loc, re.I)),
                    desc=None, load_desc=(lambda u=url: _sf_desc(u)))
