@@ -76,6 +76,13 @@ input[dir="ltr"],textarea[dir="ltr"]{text-align:left}
 .bfb div{display:flex; gap:6px; font-size:12px; line-height:1.45; color:var(--muted); align-items:baseline}
 .bfb b{flex:none; font-weight:600; color:var(--warn)}
 .bfb .okk b{color:var(--good)}
+.bfb .sug{display:grid; gap:6px; margin:2px 0 6px; padding:8px 10px; border:1px dashed var(--line); border-radius:8px; background:var(--bg); font-size:12.5px; color:var(--ink)}
+.bfb .sug .st{color:var(--muted); font-size:11.5px; font-weight:600}
+.bfb .sug .txt{direction:ltr; text-align:left; white-space:pre-line; line-height:1.5}
+.bfb .sug .txt[dir="rtl"]{direction:rtl; text-align:right}
+.bfb .sug button{justify-self:start; font:inherit; font-size:12px; font-weight:600; border:1px solid var(--accent); color:var(--accent); background:transparent; border-radius:6px; padding:3px 10px; cursor:pointer}
+.bfb .undo{background:none; border:0; padding:0; font:inherit; font-size:12px; color:var(--accent); text-decoration:underline; cursor:pointer}
+.bfb .sug button:hover{background:var(--accent); color:var(--accent-ink,#fff)}
 .entry-head{display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--muted)}
 .linkbtn{background:none; border:0; padding:0; color:var(--saffron); cursor:pointer; font-size:12.5px; text-decoration:underline}
 .add{justify-self:start; background:none; border:1px dashed var(--accent); color:var(--accent); border-radius:8px; padding:6px 12px; cursor:pointer; font-size:13.5px}
@@ -514,6 +521,79 @@ function bulletTips(line, kind){
   else if(words < 5 && kind!=="edu") tips.push("قصيرة مرة. وضّح وش سويت، وبأي أداة، ووش النتيجة");
   return tips;
 }
+// ===== اقتراحات تعديل تنطبق بضغطة =====
+// قواعد ثابتة (مو ذكاء اصطناعي): تغيّر الصياغة بس، وما تضيف أرقام أو معلومات من عندها
+const IRREG = {build:"built", run:"ran", lead:"led", write:"wrote", make:"made", teach:"taught", do:"did", take:"took", drive:"drove", grow:"grew", win:"won", give:"gave", set:"set", put:"put", hold:"held", begin:"began", find:"found", get:"got", keep:"kept", speak:"spoke", sell:"sold", think:"thought", bring:"brought", buy:"bought", draw:"drew", undertake:"undertook", oversee:"oversaw", rebuild:"rebuilt"};
+const BASEV = "build develop design analyze analyse lead create implement improve manage automate organize research conduct monitor identify collaborate present reduce increase write configure deploy train support coordinate launch deliver investigate assess test document teach plan streamline establish achieve prepare maintain clean visualize model forecast optimize migrate integrate evaluate review track report produce draft translate facilitate mentor run".split(" ");
+const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+function pastOf(w){
+  const l = w.toLowerCase();
+  if(IRREG[l]) return IRREG[l];
+  if(/[^aeiou]y$/.test(l)) return l.slice(0,-1) + "ied";
+  if(/e$/.test(l)) return l + "d";
+  if(/^(plan|stop|ship|map|scrap|chat|log)$/.test(l)) return l + l.slice(-1) + "ed";
+  return l + "ed";
+}
+function pastOfGerund(g){
+  const l = g.toLowerCase().replace(/ing$/,"");
+  const irr = Object.keys(IRREG).find(k=>k===l || k===l+"e" || (l.length>3 && l.slice(-1)===l.slice(-2,-1) && k===l.slice(0,-1)));
+  if(irr) return IRREG[irr];
+  return l + "ed";   // creating→created، managing→managed، planning→planned، redesigning→redesigned
+}
+function suggestFor(line, kind){
+  const out = [], seen = new Set([line]);
+  const add = (label, text) => { text = text.replace(/\s+([,.;:)])/g,"$1").replace(/\s{2,}/g," ").trim(); if(text && !seen.has(text)){ seen.add(text); out.push({label, text}); } };
+  const en = !/[\u0600-\u06FF]/.test(line);
+  if(!en || kind === "edu") return out;
+  let t = line.trim(), m;
+  // 1) بداية ضعيفة → فعل ماضي واضح
+  if((m = t.match(/^(?:i |we )?(?:was |were )?(?:responsible for|in charge of|involved in|tasked with)\s+(\w+ing)\b(.*)$/i))) add("ابدأ بالفعل مباشرة", cap(pastOfGerund(m[1])) + m[2]);
+  else if((m = t.match(/^played an? (?:key |major |vital |significant |critical |central |active |important )?(?:role|part) in\s+(\w+ing)\b(.*)$/i))) add("ابدأ باللي سويته فعلًا", cap(pastOfGerund(m[1])) + m[2]);
+  else if((m = t.match(/^played an? (?:key |major |vital |significant |critical |central |active |important )?(?:role|part) in\s+(.*)$/i))) add("ابدأ بفعل أقوى", "Contributed to " + m[1]);
+  else if((m = t.match(/^participated in\s+(.*)$/i))) add("ابدأ بفعل يوضح دورك", "Contributed to " + m[1]);
+  else if((m = t.match(/^(?:helped|assisted)(?: to| in| with)?\s+(\w+)\b(.*)$/i))){
+    // ما نحوّلها لـ Built لحالها عشان ما نكبّر دورك: نخليها مشاركة بس بصياغة أقوى
+    const w = m[1].toLowerCase();
+    const ing = /ing$/.test(w) ? w : BASEV.includes(w) ? (IRREG[w]==="ran"||/^(plan|map|log)$/.test(w) ? w + w.slice(-1) : w.replace(/([^e])e$/,"$1")) + "ing" : "";
+    if(ing) add("صياغة أقوى بدون ما تبالغ في دورك", "Contributed to " + ing + m[2]);
+    else add("فعل أقوى من Helped", "Supported " + m[1] + m[2]);
+  }
+  else if((m = t.match(/^worked on\s+(.*)$/i))) add("فعل أوضح من Worked on", "Developed " + m[1]);
+  else if((m = t.match(/^handled\s+(.*)$/i))) add("فعل أوضح", "Managed " + m[1]);
+  else if((m = t.match(/^(?:i|we|my team and i)\s+(\w+)(.*)$/i))) add("بدون I", cap(m[1]) + m[2]);
+  // 2) فعل مضارع أو بصيغة ing → ماضي
+  if((m = t.match(/^(\w+?)(s)?\b(.*)$/)) && BASEV.includes(m[1].toLowerCase()) ) add("اكتبها بالماضي", cap(pastOf(m[1])) + m[3]);
+  if((m = t.match(/^(\w+ing)\b(.*)$/)) && BASEV.includes(m[1].toLowerCase().replace(/ing$/,"")) || (m && BASEV.includes(m[1].toLowerCase().replace(/ing$/,"e")))) add("اكتبها بالماضي", cap(pastOfGerund(m[1])) + m[2]);
+  if(/^[a-z]/.test(t) && !out.length) add("حرف كبير في البداية", cap(t));
+  // 3) طويلة → نختصر أو نقسم
+  const words = t.split(/\s+/).length;
+  if(words > 32){
+    const noAside = t.replace(/\s+[—–]\s+[^—–]{8,}?\s+[—–]\s+/," ").replace(/\s+[—–]\s+[^—–]{8,}$/,"");
+    if(noAside !== t && noAside.split(/\s+/).length >= 8) add("اختصار: شلنا التفاصيل اللي بين الشرطتين", noAside);
+    const noParen = t.replace(/\s*\((?:[^()]*\s){3,}[^()]*\)/g,"");
+    if(noParen !== t && noParen.split(/\s+/).length >= 8) add("اختصار: شلنا الشرح اللي بين القوسين", noParen);
+    let parts = t.split(/;\s+/);
+    if(parts.length < 2){ const i = t.search(/,?\s+and\s+(?=[a-z]+ed\b)/i); if(i > 30) parts = [t.slice(0,i), t.slice(i).replace(/^,?\s+and\s+/i,"")]; }
+    if(parts.length === 2 && parts.every(p=>p.split(/\s+/).length >= 5)) add("قسّمها نقطتين", parts.map(p=>cap(p.trim()).replace(/[,;]$/,"")).join("\n"));
+  }
+  return out.slice(0,3);
+}
+function applySuggestion(inp, idx, text, box){
+  const prev = inp.value;
+  const ls = inp.value.split("\n"); let n = -1;
+  for(let i=0;i<ls.length;i++){ if(ls[i].trim()){ n++; if(n===idx){ ls[i] = text; break; } } }
+  inp.value = ls.join("\n");
+  inp.dispatchEvent(new Event("input", {bubbles:true}));
+  if(typeof growAll === "function") growAll();
+  track("cv/suggest", "تطبيق اقتراح");
+  if(box){
+    const u = document.createElement("div"); u.className = "okk";
+    const b1 = document.createElement("b"); b1.textContent = "✓ انطبق الاقتراح";
+    const b2 = document.createElement("button"); b2.type = "button"; b2.className = "undo"; b2.textContent = "تراجع";
+    b2.addEventListener("click", ()=>{ inp.value = prev; inp.dispatchEvent(new Event("input", {bubbles:true})); if(typeof growAll === "function") growAll(); });
+    u.append(b1, b2); box.prepend(u);
+  }
+}
 function bulletFeedback(kind, inp, box){
   if(!box) return;
   const ls = lines(inp.value);
@@ -529,6 +609,14 @@ function bulletFeedback(kind, inp, box){
     if(tips.length){ tag.textContent = `النقطة ${idx+1}:`; msg.textContent = tips.join(" · "); }
     else { row.className = "okk"; tag.textContent = `النقطة ${idx+1}: ✓`; msg.textContent = "ممتازة"; }
     row.append(tag, msg); box.append(row);
+    if(tips.length) suggestFor(l, kind).forEach(sg=>{
+      const c = document.createElement("div"); c.className = "sug";
+      const st = document.createElement("span"); st.className = "st"; st.textContent = "💡 " + sg.label;
+      const tx = document.createElement("div"); tx.className = "txt"; tx.textContent = sg.text;
+      const bt = document.createElement("button"); bt.type = "button"; bt.textContent = "استخدم الاقتراح";
+      bt.addEventListener("click", ()=>applySuggestion(inp, idx, sg.text, box));
+      c.append(st, tx, bt); box.append(c);
+    });
   });
 }
 function renderChecks(){
