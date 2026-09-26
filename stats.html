@@ -131,7 +131,7 @@ footer{margin-top:28px; color:var(--muted); font-size:12.5px}
     </div>
   </div>
 
-  <div class="summary">
+  <div class="summary" id="ownerPost" hidden>
     <h2>منشور الشهر في لينكدإن</h2>
     <p class="hint" style="margin:-4px 0 0; color:var(--muted); font-size:13px">منشور جاهز من أرقام هالشهر. انسخه وانشره، أو عدّل عليه بأسلوبك.</p>
     <p id="summaryText">جاري التحميل…</p>
@@ -296,8 +296,18 @@ $("#copySummary").addEventListener("click", async e=>{
   const b = e.currentTarget;
   try{ await navigator.clipboard.writeText($("#summaryText").textContent); b.textContent = "انتسخ ✓"; }
   catch(err){ const r=document.createRange(); r.selectNodeContents($("#summaryText")); const s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "حدد النص وانسخه"; }
-  setTimeout(()=>{ b.textContent = "نسخ الملخص"; }, 2200);
+  setTimeout(()=>{ b.textContent = "نسخ المنشور"; }, 2200);
 });
+// قسم المنشور يطلع لسارة بس: افتحي stats.html#sara مرة وحدة، ويتذكرك المتصفح. للإخفاء: stats.html#hide
+(function(){
+  const K = "awal-khatwa-owner";
+  try{
+    if(location.hash === "#sara") localStorage.setItem(K, "1");
+    if(location.hash === "#hide") localStorage.removeItem(K);
+    if(localStorage.getItem(K) === "1") $("#ownerPost").hidden = false;
+  }catch(e){ if(location.hash === "#sara") $("#ownerPost").hidden = false; }
+  if(location.hash === "#sara" || location.hash === "#hide") history.replaceState(null, "", location.pathname);
+})();
 let rt; addEventListener("resize", ()=>{ clearTimeout(rt); rt = setTimeout(()=>renderTrend(HISTORY), 150); });
 
 const getJSON = u => fetch(u,{cache:"no-store"}).then(r=>r.ok?r.json():[]).catch(()=>[]);
