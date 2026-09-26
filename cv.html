@@ -524,7 +524,7 @@ function bulletTips(line, kind){
 // ===== اقتراحات تعديل تنطبق بضغطة =====
 // قواعد ثابتة (مو ذكاء اصطناعي): تغيّر الصياغة بس، وما تضيف أرقام أو معلومات من عندها
 const IRREG = {build:"built", run:"ran", lead:"led", write:"wrote", make:"made", teach:"taught", do:"did", take:"took", drive:"drove", grow:"grew", win:"won", give:"gave", set:"set", put:"put", hold:"held", begin:"began", find:"found", get:"got", keep:"kept", speak:"spoke", sell:"sold", think:"thought", bring:"brought", buy:"bought", draw:"drew", undertake:"undertook", oversee:"oversaw", rebuild:"rebuilt"};
-const BASEV = "build develop design analyze analyse lead create implement improve manage automate organize research conduct monitor identify collaborate present reduce increase write configure deploy train support coordinate launch deliver investigate assess test document teach plan streamline establish achieve prepare maintain clean visualize model forecast optimize migrate integrate evaluate review track report produce draft translate facilitate mentor run".split(" ");
+const BASEV = "trace detect use reduce build develop design analyze analyse lead create implement improve manage automate organize research conduct monitor identify collaborate present reduce increase write configure deploy train support coordinate launch deliver investigate assess test document teach plan streamline establish achieve prepare maintain clean visualize model forecast optimize migrate integrate evaluate review track report produce draft translate facilitate mentor run".split(" ");
 const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
 function pastOf(w){
   const l = w.toLowerCase();
@@ -561,6 +561,14 @@ function suggestFor(line, kind){
   else if((m = t.match(/^worked on\s+(.*)$/i))) add("فعل أوضح من Worked on", "Developed " + m[1]);
   else if((m = t.match(/^handled\s+(.*)$/i))) add("فعل أوضح", "Managed " + m[1]);
   else if((m = t.match(/^(?:i|we|my team and i)\s+(\w+)(.*)$/i))) add("بدون I", cap(m[1]) + m[2]);
+  else if((m = t.match(/^(?:used|utilized|utilised|leveraged|applied)\s+(.{3,60}?)\s+to\s+(\w+)\s+(.*)$/i)) && BASEV.includes(m[2].toLowerCase())){
+    // Used Wireshark to detect X; ... → Detected X using Wireshark; ...
+    let rest = m[3], tail = "";
+    const cut = rest.search(/;|, (?=[a-z]+ed\b)/);
+    if(cut > 0){ tail = rest.slice(cut); rest = rest.slice(0, cut); }
+    rest = rest.replace(/\b(and|or)\s+(\w+)\b/g, (x, c, v)=> BASEV.includes(v.toLowerCase()) ? `${c} ${pastOf(v)}` : x);
+    add("ابدأ بالنتيجة، والأداة بعدها", `${cap(pastOf(m[2]))} ${rest} using ${m[1]}${tail}`);
+  }
   // 2) فعل مضارع أو بصيغة ing → ماضي
   if((m = t.match(/^(\w+?)(s)?\b(.*)$/)) && BASEV.includes(m[1].toLowerCase()) ) add("اكتبها بالماضي", cap(pastOf(m[1])) + m[3]);
   if((m = t.match(/^(\w+ing)\b(.*)$/)) && BASEV.includes(m[1].toLowerCase().replace(/ing$/,"")) || (m && BASEV.includes(m[1].toLowerCase().replace(/ing$/,"e")))) add("اكتبها بالماضي", cap(pastOfGerund(m[1])) + m[2]);
@@ -577,6 +585,25 @@ function suggestFor(line, kind){
     if(parts.length === 2 && parts.every(p=>p.split(/\s+/).length >= 5)) add("قسّمها نقطتين", parts.map(p=>cap(p.trim()).replace(/[,;]$/,"")).join("\n"));
   }
   return out.slice(0,3);
+}
+// اقتراح مكان للرقم: نحط [N] وأنت تبدلها بالرقم الحقيقي
+const COUNTABLE = /^(reports|workshops|records|dashboards|exercises|sessions|labs|tickets|events|users|participants|students|clients|customers|projects|models|tests|interviews|surveys|alerts|incidents|datasets|queries|pages|features|campaigns|posts|videos|articles|cases|requests|documents|files|transactions|rows|entries|accounts|stakeholders|teams|members|trainees|attendees|visitors|products|screens|prototypes|apps|scripts|pipelines|kpis|metrics|courses|lessons|audits|assessments|policies|procedures|visuali[sz]ations|charts|tables|emails|calls|meetings|presentations|slides)$/i;
+const NUMWORD = /\b(two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|dozens?|hundreds?|thousands?|multiple)\b/i;
+const STOPW = /^(for|of|in|on|to|with|across|from|and|or|by|into|at|over|a|an|the|their|its|our|my|his|her)$/i;
+function numberSuggestion(line){
+  if(/\d|\[N\]/.test(line) || NUMWORD.test(line) || /[\u0600-\u06FF]/.test(line)) return null;
+  const w = line.split(/\s+/);
+  const ci = w.findIndex((x,i)=> i>0 && COUNTABLE.test(x.replace(/[^a-z]/gi,"")));
+  if(ci > 0 && ci < 14){
+    let j = ci;
+    while(j-1 > 0 && !STOPW.test(w[j-1]) && !/[,;]$/.test(w[j-1]) && !/(ed|ied)$/i.test(w[j-1]) && j > ci-4) j--;
+    if(/^(a|an|the)$/i.test(w[j-1]) && j-1 > 0) { w.splice(j-1, 1, "[N]"); }
+    else w.splice(j, 0, "[N]");
+    return w.join(" ");
+  }
+  const m = line.match(/^(analy[sz]ed|cleaned|processed|reviewed|validated|organized|entered|managed)\s+(.*)$/i);
+  if(m) return `${m[1]} [N]+ records of ${m[2].replace(/^(the|a|an)\s+/i,"")}`;
+  return null;
 }
 function applySuggestion(inp, idx, text, box){
   const prev = inp.value;
@@ -599,17 +626,22 @@ function bulletFeedback(kind, inp, box){
   const ls = lines(inp.value);
   if(!ls.length){ box.textContent = ""; return; }
   box.textContent = "";
-  const anyNum = ls.some(l=>/\d/.test(l));
+  const anyNum = ls.some(l=>/\d|\[N\]/.test(l) || NUMWORD.test(l));
+  let numIdx = -1, numSug = null;
+  if(kind!=="edu" && !anyNum){ numIdx = 0; for(let i=0;i<ls.length;i++){ const sg = numberSuggestion(ls[i]); if(sg){ numIdx = i; numSug = sg; break; } } }
   ls.forEach((l, idx)=>{
     const tips = bulletTips(l, kind);
-    if(kind!=="edu" && !anyNum && idx===0) tips.push("ولا نقطة فيها رقم. أضف نتيجة تنقاس في نقطة وحدة على الأقل: كم، أو نسبة، أو مدة، أو عدد");
+    if(idx===numIdx) tips.push("ولا نقطة فيها رقم. أضف نتيجة تنقاس في نقطة وحدة على الأقل: كم، أو نسبة، أو مدة، أو عدد");
+    if(/\[N\]/.test(l)) tips.push("بدّل [N] بالرقم الحقيقي قبل ما تحمل السيرة");
     const row = document.createElement("div");
     const tag = document.createElement("b");
     const msg = document.createElement("span");
     if(tips.length){ tag.textContent = `النقطة ${idx+1}:`; msg.textContent = tips.join(" · "); }
     else { row.className = "okk"; tag.textContent = `النقطة ${idx+1}: ✓`; msg.textContent = "ممتازة"; }
     row.append(tag, msg); box.append(row);
-    if(tips.length) suggestFor(l, kind).forEach(sg=>{
+    const sugs = tips.length ? suggestFor(l, kind) : [];
+    if(idx===numIdx && numSug) sugs.push({label:"مكان للرقم: بعد ما تطبقه بدّل [N] بالعدد الحقيقي", text:numSug});
+    sugs.forEach(sg=>{
       const c = document.createElement("div"); c.className = "sug";
       const st = document.createElement("span"); st.className = "st"; st.textContent = "💡 " + sg.label;
       const tx = document.createElement("div"); tx.className = "txt"; tx.textContent = sg.text;
@@ -635,6 +667,7 @@ function renderChecks(){
     [S.skills.split(",").filter(s=>s.trim()).length >= 4, "4 مهارات تقنية أو أكثر"],
     [words <= 650, "طولها مناسب لصفحة وحدة"]
   ];
+  if(cvText().includes("[N]")) items.push([false, "فيه [N] ما تبدلت برقم حقيقي"]);
   const ok = items.filter(x=>x[0]).length;
   $("#checks").innerHTML = `<h2>فحص السيرة: ${ok} من ${items.length}</h2>` + items.map(([pass,txt])=>
     `<div class="check ${pass?"ok":"no"}"><span class="i">${pass?"✓":"!"}</span><span>${txt}</span></div>`).join("");
