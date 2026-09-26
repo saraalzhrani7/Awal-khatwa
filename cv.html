@@ -199,7 +199,13 @@ details[open]{display:grid; gap:8px}
   .panel{padding:12px}
 }
 @media print{
-  @page{size:A4; margin:12mm 0 10mm}
+  /* هامش الصفحة صفر عشان المتصفح ما يطبع رابط الموقع والتاريخ فوق وتحت.
+     الهامش الحقيقي يجي من جدول رأسه وذيله يتكررون في كل صفحة */
+  @page{size:A4; margin:0}
+  #printArea .pt{width:100%; border-collapse:collapse}
+  #printArea .pt td{padding:0}
+  #printArea .pt-top{height:12mm}
+  #printArea .pt-bot{height:10mm}
   body{background:#fff; padding:0}
   body > *:not(#printArea){display:none!important}
   #printArea{display:block!important}
@@ -683,7 +689,7 @@ SIMPLE.forEach(k=>{ const el=$("#f-"+k); if(!el) return; el.addEventListener("in
 document.querySelectorAll("[data-add]").forEach(b=>b.addEventListener("click", ()=>{ S[b.dataset.add].push({}); renderLists(); update(); }));
 
 $("#printBtn").addEventListener("click", ()=>{
-  $("#printArea").innerHTML = cvHTML();
+  $("#printArea").innerHTML = `<table class="pt" role="presentation"><thead><tr><td><div class="pt-top"></div></td></tr></thead><tfoot><tr><td><div class="pt-bot"></div></td></tr></tfoot><tbody><tr><td>${cvHTML()}</td></tr></tbody></table>`;
   const prev = document.title; document.title = (S.name||"CV").trim().replace(/\s+/g,"-") + "-CV";
   track("cv/download", "تحميل سيرة");
   window.print();
