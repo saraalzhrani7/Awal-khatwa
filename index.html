@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>أول خطوة | فرص تدريب ووظائف للمبتدئين في الشركات الناشئة السعودية</title>
-<meta name="description" content="فرص تدريب وتعاوني وبرامج خريجين ووظائف Entry Level في الشركات الناشئة السعودية، مع روابط التقديم الرسمية.">
+<title>أول خطوة | تدريب تعاوني وInternship ووظائف للمبتدئين في الشركات الناشئة السعودية</title>
+<meta name="description" content="فرص تدريب تعاوني وInternship وبرامج خريجين ووظائف Entry Level لحديثي التخرج في الشركات الناشئة السعودية بالرياض وجدة والشرقية. تتحدث كل يوم من صفحات التوظيف الرسمية.">
+<link rel="canonical" href="https://saraalzhrani7.github.io/Awal-khatwa/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"أول خطوة","alternateName":"Awal Khatwa","url":"https://saraalzhrani7.github.io/Awal-khatwa/","inLanguage":"ar","description":"فرص تدريب تعاوني وInternship ووظائف للمبتدئين في الشركات الناشئة السعودية"}</script>
 <meta property="og:title" content="أول خطوة">
 <meta property="og:description" content="فرص تدريب ووظائف Entry Level في الشركات الناشئة السعودية للي توهم يبدون.">
 <meta property="og:type" content="website">
@@ -157,7 +159,14 @@ footer p{margin:0; max-width:66ch}
 .sitenav a:hover{color:var(--ink)}
 .new{font-size:11.5px; font-weight:600; color:var(--saffron); background:var(--saffron-soft); border-radius:6px; padding:1px 8px}
 .share{cursor:pointer}
-.btns{display:flex; gap:8px}
+.btns{display:flex; gap:8px; flex-wrap:wrap; justify-content:end}
+.star{background:none; border:0; cursor:pointer; font-size:22px; line-height:1; color:var(--muted); padding:2px 4px}
+.star[aria-pressed="true"]{color:var(--saffron)}
+.side-top{display:flex; align-items:center; gap:6px}
+.remind-menu{display:grid; gap:6px; background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px; font-size:13px; min-width:200px}
+.remind-menu a{color:var(--accent); font-weight:600; text-decoration:none}
+.remind-menu span{color:var(--muted); font-size:12px}
+#savedBtn[aria-pressed="true"]{background:var(--saffron-soft); border-color:var(--saffron)}
 .matchlink{font-size:13px; font-weight:600; color:var(--accent); text-decoration:none; justify-self:start}
 .matchlink:hover{text-decoration:underline}
 .job.target{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
@@ -208,6 +217,7 @@ footer .contact a{color:var(--ink); font-weight:500}
           <input id="q" type="search" placeholder="ابحث بالمسمى أو الشركة… مثل: أمن، بيانات، Tabby" autocomplete="off">
         </label>
         <button class="toggle" id="openBtn" aria-pressed="true" type="button"><span class="dot"></span>المتاحة للتقديم بس</button>
+        <button class="toggle" id="savedBtn" aria-pressed="false" type="button">★ المحفوظة <span id="savedN" class="n"></span></button>
       </div>
       <div class="chips" id="typeChips" role="group" aria-label="نوع الفرصة"></div>
       <div class="chips" id="fieldChips" role="group" aria-label="المجال"></div>
@@ -314,7 +324,10 @@ const hasLatin = t => /[A-Za-z]/.test(t) && !/[؀-ۿ]/.test(t);
 const today = new Date(); today.setHours(0,0,0,0);
 
 let JOBS = [];
-const st = {q:"", type:"all", field:"all", region:"all", openOnly:true, q2:"", sector:"الكل"};
+const st = {q:"", type:"all", field:"all", region:"all", openOnly:true, saved:false, q2:"", sector:"الكل"};
+const SAVE_KEY = "awal-khatwa-saved";
+let SAVED = new Set(); try{ SAVED = new Set(JSON.parse(localStorage.getItem(SAVE_KEY)||"[]")); }catch(e){}
+const persistSaved = () => { try{ localStorage.setItem(SAVE_KEY, JSON.stringify([...SAVED])); }catch(e){} };
 function isNew(j){ if(!j.firstSeen) return false; const d=-daysLeft(j.firstSeen); return d>=0 && d<=3; }
 const track = (path, title) => { try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path, title, event:true}); }catch(e){} };
 
@@ -330,7 +343,8 @@ function chipsHTML(map, cur, counts){
 }
 
 function renderJobs(){
-  const pool = JOBS.filter(j => !st.openOnly || isApplyable(j));
+  $("#savedN").textContent = SAVED.size ? SAVED.size : "";
+  const pool = st.saved ? JOBS.filter(j => SAVED.has(j.id)) : JOBS.filter(j => !st.openOnly || isApplyable(j));
   const tc={}, fc={}, rc={};
   pool.forEach(j=>{ tc[j.type]=(tc[j.type]||0)+1; fc[j.field]=(fc[j.field]||0)+1;
     Object.entries(REGIONS).forEach(([k,r])=>{ if(r.test(j)) rc[k]=(rc[k]||0)+1; }); });
@@ -351,7 +365,10 @@ function renderJobs(){
   $("#resultline").textContent = st.openOnly
     ? `${list.length} فرصة متاحة للتقديم. طفّ الفلتر عشان تشوف البرامج الموسمية والمغلقة وتستعد للدفعة الجاية.`
     : `${list.length} من ${JOBS.length} إعلان وبرنامج`;
-  $("#list").innerHTML = list.length ? list.map(jobHTML).join("") : `<div class="empty">ما فيه فرص بهالفلاتر. جرّب مجال ثاني أو طفّ «المتاحة للتقديم بس».</div>`;
+  $("#list").innerHTML = list.length ? list.map(jobHTML).join("") : (st.saved
+    ? `<div class="empty">ما حفظت أي فرصة للحين. اضغط ☆ على أي إعلان عشان تحفظه وترجع له بعدين.</div>`
+    : `<div class="empty">ما فيه فرص بهالفلاتر. جرّب مجال ثاني أو طفّ «المتاحة للتقديم بس».</div>`);
+  if(st.saved) $("#resultline").textContent = `${list.length} فرصة محفوظة. الحفظ في متصفحك بس.`;
 }
 
 function jobHTML(j){
@@ -371,9 +388,10 @@ function jobHTML(j){
       ${adminOn?`<div><button class="del" type="button" data-del="${esc(j.id)}">حذف الإعلان</button></div>`:""}
     </div>
     <div class="job-side">
-      <span class="pill ${s}">${STATUS[s]}</span>
+      <div class="side-top"><button class="star" type="button" data-save="${esc(j.id)}" aria-pressed="${SAVED.has(j.id)}" aria-label="${SAVED.has(j.id)?"إزالة من المحفوظة":"حفظ الفرصة"}" title="${SAVED.has(j.id)?"إزالة من المحفوظة":"حفظ الفرصة"}">${SAVED.has(j.id)?"★":"☆"}</button><span class="pill ${s}">${STATUS[s]}</span></div>
       ${due}
-      <div class="btns"><a class="btn ${s==="closed"?"":"primary"}" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">${label}</a><button class="btn share" type="button" data-share="${esc(j.id)}">مشاركة</button></div>
+      <div class="btns"><a class="btn ${s==="closed"?"":"primary"}" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">${label}</a><button class="btn share" type="button" data-share="${esc(j.id)}">مشاركة</button>${s!=="closed"?`<button class="btn" type="button" data-remind="${esc(j.id)}">📅 ذكرني</button>`:""}</div>
+      <div class="remind-menu" id="rm-${esc(j.id)}" hidden></div>
     </div>
   </article>`;
 }
@@ -408,9 +426,46 @@ function renderAll(){ renderStats(); renderJobs(); renderCos(); }
 // events
 $("#typeChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.type=b.dataset.v; renderJobs();});
 $("#fieldChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.field=b.dataset.v; renderJobs();});
+$("#savedBtn").addEventListener("click",e=>{ st.saved=!st.saved; e.currentTarget.setAttribute("aria-pressed",st.saved); st.type="all"; st.field="all"; st.region="all"; renderJobs(); });
 $("#cityChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.region=b.dataset.v; renderJobs();});
 $("#q").addEventListener("input",e=>{st.q=e.target.value; renderJobs();});
+function icsDate(d){ return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`; }
+function reminderFor(j){
+  const hasDl = !!j.deadline;
+  const day = hasDl ? new Date(j.deadline+"T00:00:00") : new Date(Date.now() + 2*864e5);
+  const next = new Date(day.getTime() + 864e5);
+  const title = hasDl ? `آخر يوم للتقديم: ${j.title} (${j.company})` : `قدّم على: ${j.title} (${j.company})`;
+  const details = `${j.title} في ${j.company}\nصفحة التقديم: ${j.url}\n\nمن «أول خطوة»: ${location.origin + location.pathname}#job-${j.id}`;
+  return {hasDl, day, next, title, details};
+}
+function icsFor(j){
+  const r = reminderFor(j), esc2 = t => String(t).replace(/([,;\\])/g,"\\$1").replace(/\n/g,"\\n");
+  const stamp = new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"");
+  return ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Awal Khatwa//AR","CALSCALE:GREGORIAN","BEGIN:VEVENT",
+    `UID:${j.id}-${icsDate(r.day)}@awal-khatwa`, `DTSTAMP:${stamp}`,
+    `DTSTART;VALUE=DATE:${icsDate(r.day)}`, `DTEND;VALUE=DATE:${icsDate(r.next)}`,
+    `SUMMARY:${esc2(r.title)}`, `DESCRIPTION:${esc2(r.details)}`, `URL:${j.url}`,
+    "BEGIN:VALARM","ACTION:DISPLAY",`DESCRIPTION:${esc2(r.title)}`, r.hasDl ? "TRIGGER:-PT39H" : "TRIGGER:PT9H","END:VALARM",
+    ...(r.hasDl ? ["BEGIN:VALARM","ACTION:DISPLAY",`DESCRIPTION:${esc2(r.title)}`,"TRIGGER:-PT15H","END:VALARM"] : []),
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+}
+function openRemind(j){
+  const box = document.getElementById("rm-"+j.id); if(!box) return;
+  if(!box.hidden){ box.hidden = true; return; }
+  const r = reminderFor(j);
+  const g = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(r.title)}&dates=${icsDate(r.day)}/${icsDate(r.next)}&details=${encodeURIComponent(r.details)}`;
+  const blob = URL.createObjectURL(new Blob([icsFor(j)], {type:"text/calendar;charset=utf-8"}));
+  box.innerHTML = `<span>${r.hasDl ? `نذكرك قبل آخر موعد (${fmtDate(j.deadline)}) بيومين وبيوم.` : "ما لهالفرصة موعد محدد، فنذكرك تقدم عليها بعد يومين."}</span>
+    <a href="${blob}" download="awal-khatwa-${esc(j.id)}.ics" data-cal="ics">📱 تقويم الجوال (آيفون وأوتلوك)</a>
+    <a href="${g}" target="_blank" rel="noopener" data-cal="google">🗓 تقويم قوقل (أندرويد)</a>`;
+  box.hidden = false;
+  box.querySelectorAll("[data-cal]").forEach(a=>a.addEventListener("click", ()=>{ track("remind/"+a.dataset.cal, `${j.company} - ${j.title}`); setTimeout(()=>{ box.hidden = true; }, 400); }));
+}
 $("#list").addEventListener("click", async e=>{
+  const sv = e.target.closest("[data-save]");
+  if(sv){ const id = sv.dataset.save; if(SAVED.has(id)) SAVED.delete(id); else { SAVED.add(id); track("save/"+id, id); } persistSaved(); renderJobs(); return; }
+  const rm = e.target.closest("[data-remind]");
+  if(rm){ const j = JOBS.find(x=>x.id===rm.dataset.remind); if(j) openRemind(j); return; }
   const a = e.target.closest("[data-apply]");
   if(a){ const j=JOBS.find(x=>x.id===a.dataset.apply); if(j) track("apply/"+j.id, `${j.company} - ${j.title}`); return; }
   const b = e.target.closest("[data-share]"); if(!b) return;

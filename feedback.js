@@ -28,8 +28,15 @@ const FEEDBACK = {
   .fb-copy{background:none; border:0; color:var(--accent,#0B7A5C); text-decoration:underline; cursor:pointer; font:inherit; font-size:13px; padding:0}
   .fb-foot{margin-top:10px; font-size:12.5px; color:var(--muted,#5A6B65)}
   .fb-foot a{color:var(--ink,#0F201B); font-weight:500}
+  @media (max-width:640px){
+    .fb-btn{width:48px; height:48px; padding:0; justify-content:center; font-size:0; gap:0; bottom:calc(76px + env(safe-area-inset-bottom,0px)); inset-inline-start:auto; inset-inline-end:12px; opacity:.92}
+    .fb-btn::before{content:"💬"; font-size:22px}
+  }
+  @media (max-width:640px){ .fb-hide-mobile .fb-btn{display:none} }
   @media print{ .fb-btn,.fb-back{display:none!important} }`;
   const st = document.createElement("style"); st.textContent = css; document.head.append(st);
+  // في صفحة السيرة الزر يغطي الخانات في الجوال، فنكتفي برابط الملاحظات تحت الصفحة
+  if(document.getElementById("cvForm")) document.body.classList.add("fb-hide-mobile");
 
   const track = (path, title) => { try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path, title, event:true}); }catch(e){} };
   const page = document.title.split("|")[0].trim() || "الموقع";
@@ -42,6 +49,7 @@ const FEEDBACK = {
   if(FEEDBACK.formUrl){
     const a = document.createElement("a");
     a.className = btn.className; a.textContent = btn.textContent; a.href = FEEDBACK.formUrl; a.target = "_blank"; a.rel = "noopener";
+    a.setAttribute("aria-label", "ملاحظاتك"); a.title = "ملاحظاتك";
     a.style.textDecoration = "none";
     a.addEventListener("click", ()=>track("feedback/form", page));
     btn.replaceWith(a);

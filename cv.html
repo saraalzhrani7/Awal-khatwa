@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>سيرتك | أول خطوة</title>
+<title>سيرتك | صانع سيرة ذاتية مجاني متوافق مع ATS | أول خطوة</title>
 <meta name="description" content="اكتب سيرتك الذاتية الأولى بقالب متوافق مع أنظمة ATS، وطابقها مع أي إعلان وظيفة. مجانًا، وبياناتك ما تطلع من جهازك.">
+<link rel="canonical" href="https://saraalzhrani7.github.io/Awal-khatwa/cv.html">
 <meta property="og:title" content="اكتب سيرتك | أول خطوة">
 <meta property="og:description" content="صانع سيرة ذاتية مجاني متوافق مع أنظمة ATS، مع مطابقة السيرة مع الإعلان.">
 <meta property="og:type" content="website">
@@ -70,6 +71,11 @@ input,textarea,select{font:inherit; font-size:14px; color:var(--ink); background
 textarea{resize:vertical; min-height:74px; line-height:1.5}
 input[dir="ltr"],textarea[dir="ltr"]{text-align:left}
 .entry{border:1px dashed var(--line); border-radius:10px; padding:10px 12px; display:grid; gap:8px}
+.bfb{display:grid; gap:3px; margin-top:-2px}
+.bfb:empty{display:none}
+.bfb div{display:flex; gap:6px; font-size:12px; line-height:1.45; color:var(--muted); align-items:baseline}
+.bfb b{flex:none; font-weight:600; color:var(--warn)}
+.bfb .okk b{color:var(--good)}
 .entry-head{display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--muted)}
 .linkbtn{background:none; border:0; padding:0; color:var(--saffron); cursor:pointer; font-size:12.5px; text-decoration:underline}
 .add{justify-self:start; background:none; border:1px dashed var(--accent); color:var(--accent); border-radius:8px; padding:6px 12px; cursor:pointer; font-size:13.5px}
@@ -103,6 +109,7 @@ input[dir="ltr"],textarea[dir="ltr"]{text-align:left}
 .paper ul{margin:3px 0 0; padding-inline-start:18px}
 .paper li{margin:1px 0}
 .paper p{margin:0}
+.paper a{color:inherit; text-decoration:none}
 .paper .empty{color:#999; font-style:italic}
 
 /* ===== match tool ===== */
@@ -144,6 +151,43 @@ details[open]{display:grid; gap:8px}
 .soon{display:inline-block; font-size:13px; font-weight:600; color:var(--saffron); background:var(--saffron-soft); border-radius:6px; padding:3px 10px}
 .fine{font-size:12.5px; color:var(--muted)}
 
+.pvtoggle{display:none}
+@media (max-width:640px){
+  body{font-size:14px; line-height:1.55; padding-inline:12px}
+  header{padding-block:16px 10px}
+  h1{font-size:30px}
+  .lead{font-size:13.5px}
+  .privacy{font-size:12px; padding:5px 10px; margin-top:8px}
+  .sitenav{padding-top:10px; font-size:13px; gap:2px}
+  .sitenav a{padding:5px 9px}
+  .tab{padding:8px 10px; font-size:14px}
+  .builder,.match{gap:12px; margin-top:12px}
+  .form{gap:10px}
+  fieldset{padding:10px 12px 12px; gap:8px; border-radius:10px}
+  legend{font-size:14px}
+  .tip{font-size:12px; margin:-2px 0 0}
+  .row{grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px}
+  label{font-size:11.5px; gap:2px}
+  input,textarea,select{font-size:16px; padding:6px 9px; border-radius:7px}  /* 16px يمنع الآيفون من التكبير التلقائي */
+  textarea{min-height:56px; line-height:1.4}
+  .entry{padding:8px 10px; gap:6px}
+  .entry .row{grid-template-columns:1fr}
+  .fine{font-size:12px}
+  .drop{padding:12px 10px}
+  .drop-t{font-size:14px}
+  .drop .muted{font-size:11.5px}
+  .btn{padding:9px 14px; font-size:13.5px}
+  .checks{padding:10px 12px}
+  .checks h2{font-size:14px}
+  .check{font-size:12.5px}
+  .pvtoggle{display:block; width:100%; font:inherit; font-weight:600; font-size:14px; padding:10px; border-radius:10px; border:1px solid var(--accent); background:var(--accent-soft); color:var(--ink); cursor:pointer}
+  .paperwrap{display:none; padding:8px}
+  .side.open .paperwrap{display:block}
+  .paperwrap .paper{zoom:.52}
+  .review{padding:16px; gap:14px; margin-top:24px}
+  .review h2{font-size:24px}
+  .panel{padding:12px}
+}
 @media print{
   @page{size:A4; margin:0}
   body{background:#fff; padding:0}
@@ -191,6 +235,13 @@ details[open]{display:grid; gap:8px}
           <div class="row">
             <label>لغة السيرة
               <select id="f-lang"><option value="en">English (أغلب الشركات الناشئة)</option><option value="ar">العربية</option></select>
+            </label>
+            <label>ترتيب الأقسام
+              <select id="f-order">
+                <option value="edu">التعليم أول (للطلاب وحديثي التخرج)</option>
+                <option value="exp">الخبرات أول (لو عندك تدريب أو خبرة قوية)</option>
+                <option value="proj">المشاريع أول (لو مشاريعك أقوى شي عندك)</option>
+              </select>
             </label>
           </div>
         </fieldset>
@@ -254,6 +305,7 @@ details[open]{display:grid; gap:8px}
       </form>
 
       <aside class="side">
+        <button type="button" class="pvtoggle" id="pvToggle" aria-expanded="false">👁 شوف سيرتك (معاينة)</button>
         <div class="paperwrap"><div id="paper"></div></div>
         <div class="checks" id="checks"></div>
       </aside>
@@ -341,18 +393,18 @@ const FIELDS = {
   exp:  [["role","المسمى","Cybersecurity Co-op Trainee"],["org","الجهة"],["dates","التاريخ","Jun 2025 – Aug 2025"],["notes","وش سويت، كل سطر نقطة","",true]]
 };
 
-let S = {lang:"en", name:"", headline:"", email:"", phone:"", city:"", linkedin:"", portfolio:"", summary:"", skills:"", soft:"", certs:"", edu:[{}], proj:[{}], exp:[{}]};
+let S = {lang:"en", order:"edu", name:"", headline:"", email:"", phone:"", city:"", linkedin:"", portfolio:"", summary:"", skills:"", soft:"", certs:"", edu:[{}], proj:[{}], exp:[{}]};
 try{ const saved = JSON.parse(localStorage.getItem(KEY)||"null"); if(saved) S = Object.assign(S, saved); }catch(e){}
 const save = () => { try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} };
 
-const SIMPLE = ["lang","name","headline","email","phone","city","linkedin","portfolio","summary","skills","soft","certs"];
+const SIMPLE = ["lang","order","name","headline","email","phone","city","linkedin","portfolio","summary","skills","soft","certs"];
 function setDirs(){
   const d = S.lang==="ar" ? "rtl" : "ltr";
   document.querySelectorAll("[data-dir]").forEach(el=>{ el.dir = d; el.style.textAlign = d==="ltr"?"left":"right"; });
 }
-function fillSimple(){ SIMPLE.forEach(k=>{ const el=$("#f-"+k); if(el) el.value = S[k]||""; }); setDirs(); }
+function fillSimple(){ SIMPLE.forEach(k=>{ const el=$("#f-"+k); if(el) el.value = S[k]||""; }); setDirs(); setTimeout(growAll, 0); }
 
-function renderLists(){
+function renderLists(){ setTimeout(growAll, 0);
   ["edu","proj","exp"].forEach(kind=>{
     const box = $("#list-"+kind); box.textContent = "";
     S[kind].forEach((it, i)=>{
@@ -369,9 +421,10 @@ function renderLists(){
         inp.id = `f-${kind}-${i}-${f}`; inp.value = it[f]||""; if(ph) inp.placeholder = ph;
         inp.dir = S.lang==="ar" ? "rtl" : "ltr"; inp.style.textAlign = S.lang==="ar"?"right":"left";
         if(multi){ inp.rows = 3; inp.placeholder = S.lang==="ar" ? "مثال: حللت بيانات 5,000 عميل…" : "e.g. Analyzed 5,000 customer records to…"; }
-        inp.oninput = ()=>{ S[kind][i][f] = inp.value; update(); };
+        inp.oninput = ()=>{ S[kind][i][f] = inp.value; update(); if(multi) bulletFeedback(kind, inp, fb); };
         lab.append(inp);
         (multi ? e : row).append(lab);
+        var fb; if(multi){ fb = document.createElement("div"); fb.className = "bfb"; fb.setAttribute("aria-live","polite"); e.append(fb); bulletFeedback(kind, inp, fb); }
       });
       e.insertBefore(row, e.children[1]);
       box.append(e);
@@ -384,29 +437,45 @@ const has = o => Object.values(o||{}).some(v=>String(v||"").trim());
 
 function cvHTML(){
   const t = L[S.lang]; const dir = S.lang==="ar"?"rtl":"ltr";
-  const contact = [S.email, S.phone, S.city, S.linkedin, S.portfolio].filter(Boolean).map(esc).join("  |  ");
+  const url = u => /^https?:\/\//i.test(u) ? u : "https://" + u;
+  const lk = (href, text) => `<a href="${esc(href)}">${esc(text)}</a>`;
+  const contact = [
+    S.email && lk("mailto:"+S.email.trim(), S.email.trim()),
+    S.phone && esc(S.phone), S.city && esc(S.city),
+    S.linkedin && lk(url(S.linkedin.trim()), S.linkedin.trim().replace(/^https?:\/\/(www\.)?/i,"")),
+    S.portfolio && lk(url(S.portfolio.trim()), S.portfolio.trim().replace(/^https?:\/\/(www\.)?/i,""))
+  ].filter(Boolean).join("  |  ");
   let h = `<div class="paper" dir="${dir}" lang="${S.lang}">`;
   h += `<h1>${esc(S.name) || '<span class="empty">'+(S.lang==="ar"?"اسمك":"Your Name")+'</span>'}</h1>`;
   if(S.headline) h += `<div class="headline">${esc(S.headline)}</div>`;
   if(contact) h += `<div class="contact">${contact}</div>`;
   if(S.summary.trim()) h += `<h2>${t.summary}</h2><p>${esc(S.summary.trim())}</p>`;
+  const blocks = {edu:"", exp:"", proj:""};
+  { let h = "";
   const edu = S.edu.filter(has);
   if(edu.length){ h += `<h2>${t.edu}</h2>`; edu.forEach(e=>{
     h += `<div class="item"><div class="item-head"><span>${esc(e.school)}</span><span>${esc(e.dates)}</span></div>`;
     if(e.degree) h += `<div class="item-sub">${esc(e.degree)}</div>`;
     const b = lines(e.notes); if(b.length) h += `<ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
     h += `</div>`; }); }
+  blocks.edu = h; }
+  { let h = "";
   const exp = S.exp.filter(has);
   if(exp.length){ h += `<h2>${t.exp}</h2>`; exp.forEach(e=>{
     h += `<div class="item"><div class="item-head"><span>${esc(e.role)}${e.org?(S.lang==="ar"?" – ":" — ")+esc(e.org):""}</span><span>${esc(e.dates)}</span></div>`;
     const b = lines(e.notes); if(b.length) h += `<ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
     h += `</div>`; }); }
+  blocks.exp = h; }
+  { let h = "";
   const proj = S.proj.filter(has);
   if(proj.length){ h += `<h2>${t.proj}</h2>`; proj.forEach(p=>{
-    h += `<div class="item"><div class="item-head"><span>${esc(p.title)}</span><span>${esc(p.link)}</span></div>`;
+    h += `<div class="item"><div class="item-head"><span>${esc(p.title)}</span><span>${p.link?lk(url(p.link.trim()), p.link.trim().replace(/^https?:\/\/(www\.)?/i,"")):""}</span></div>`;
     if(p.tools) h += `<div class="item-sub">${esc(p.tools)}</div>`;
     const b = lines(p.notes); if(b.length) h += `<ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
     h += `</div>`; }); }
+  blocks.proj = h; }
+  const ORDERS = {edu:["edu","exp","proj"], exp:["exp","proj","edu"], proj:["proj","exp","edu"]};
+  (ORDERS[S.order] || ORDERS.edu).forEach(k=>{ h += blocks[k]; });
   if(S.skills.trim() || S.soft.trim()){
     h += `<h2>${t.skills}</h2>`;
     if(S.skills.trim()) h += `<p><b>${t.tech}:</b> ${esc(S.skills.trim())}</p>`;
@@ -424,6 +493,35 @@ function cvText(){
 }
 
 const VERB = /^(built|developed|designed|analy[sz]ed|led|created|implemented|improved|managed|automated|organized|researched|conducted|monitored|identified|collaborated|presented|reduced|increased|wrote|configured|deployed|trained|supported|coordinated|launched|delivered|investigated|assessed|tested|documented|volunteered|taught|planned|streamlined|established|achieved)/i;
+function bulletTips(line, kind){
+  const tips = [];
+  const en = !/[\u0600-\u06FF]/.test(line);
+  const words = line.split(/\s+/).filter(Boolean).length;
+  if(kind!=="edu"){
+    if(en && !VERB.test(line) && !/^(gpa|relevant|courses|awarded|dean)/i.test(line)) tips.push("ابدأها بفعل ماضي قوي، مثل Built أو Analyzed أو Led");
+    if(!/\d/.test(line)) tips.push("ما فيها رقم. أضف نتيجة تنقاس: كم، أو نسبة، أو مدة، أو عدد");
+    if(/^(responsible for|worked on|helped|assisted|did|was|were|i |my )/i.test(line)) tips.push("صياغة ضعيفة. بدل «Responsible for / Helped» قل وش سويت بالضبط");
+    if(/^(كنت|قمت ب|ساعدت في|عملت على)/.test(line)) tips.push("وضّح وش سويت بالضبط، وأضف النتيجة");
+  }
+  if(words > 32) tips.push(`طويلة (${words} كلمة). خلها سطر أو سطرين، تقريبًا 15 إلى 25 كلمة`);
+  else if(words < 5 && kind!=="edu") tips.push("قصيرة مرة. وضّح وش سويت، وبأي أداة، ووش النتيجة");
+  return tips;
+}
+function bulletFeedback(kind, inp, box){
+  if(!box) return;
+  const ls = lines(inp.value);
+  if(!ls.length){ box.textContent = ""; return; }
+  box.textContent = "";
+  ls.forEach((l, idx)=>{
+    const tips = bulletTips(l, kind);
+    const row = document.createElement("div");
+    const tag = document.createElement("b");
+    const msg = document.createElement("span");
+    if(tips.length){ tag.textContent = `النقطة ${idx+1}:`; msg.textContent = tips.join(" · "); }
+    else { row.className = "okk"; tag.textContent = `النقطة ${idx+1}: ✓`; msg.textContent = "ممتازة"; }
+    row.append(tag, msg); box.append(row);
+  });
+}
 function renderChecks(){
   const bullets = [...S.exp, ...S.proj].flatMap(o=>lines(o.notes));
   const words = cvText().split(/\s+/).filter(Boolean).length;
@@ -446,6 +544,10 @@ function renderChecks(){
 }
 
 function update(){ $("#paper").innerHTML = cvHTML(); renderChecks(); save(); }
+$("#pvToggle").addEventListener("click", e=>{ const side=e.currentTarget.closest(".side"); const open=side.classList.toggle("open"); e.currentTarget.setAttribute("aria-expanded", open); e.currentTarget.textContent = open ? "إخفاء المعاينة" : "👁 شوف سيرتك (معاينة)"; });
+function autoGrow(el){ el.style.height = "auto"; el.style.height = Math.min(el.scrollHeight + 2, 420) + "px"; }
+function growAll(){ document.querySelectorAll("#cvForm textarea").forEach(autoGrow); }
+document.addEventListener("input", e=>{ if(e.target.matches && e.target.matches("#cvForm textarea")) autoGrow(e.target); });
 
 SIMPLE.forEach(k=>{ const el=$("#f-"+k); if(!el) return; el.addEventListener("input", ()=>{ S[k]=el.value; if(k==="lang"){ setDirs(); renderLists(); } update(); }); });
 document.querySelectorAll("[data-add]").forEach(b=>b.addEventListener("click", ()=>{ S[b.dataset.add].push({}); renderLists(); update(); }));

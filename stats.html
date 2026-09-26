@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>الإحصائيات | أول خطوة</title>
 <meta name="description" content="أرقام فرص المبتدئين في الشركات الناشئة السعودية: أكثر الشركات توظيفًا، وأكثر المجالات طلبًا، وعدد الفرص عبر الوقت.">
+<link rel="canonical" href="https://saraalzhrani7.github.io/Awal-khatwa/stats.html">
 <meta property="og:title" content="إحصائيات فرص المبتدئين | أول خطوة">
 <meta property="og:description" content="أكثر الشركات الناشئة السعودية توظيفًا للمبتدئين، وأكثر المجالات طلبًا.">
 <meta property="og:type" content="website">
@@ -131,9 +132,13 @@ footer{margin-top:28px; color:var(--muted); font-size:12.5px}
   </div>
 
   <div class="summary">
-    <h2>ملخص الشهر</h2>
+    <h2>منشور الشهر في لينكدإن</h2>
+    <p class="hint" style="margin:-4px 0 0; color:var(--muted); font-size:13px">منشور جاهز من أرقام هالشهر. انسخه وانشره، أو عدّل عليه بأسلوبك.</p>
     <p id="summaryText">جاري التحميل…</p>
-    <button class="btn" type="button" id="copySummary">نسخ الملخص</button>
+    <div style="display:flex; gap:8px; flex-wrap:wrap">
+      <button class="btn" type="button" id="copySummary">نسخ المنشور</button>
+      <a class="btn" id="liShare" href="https://www.linkedin.com/feed/" target="_blank" rel="noopener" style="background:var(--surface); color:var(--ink); border-color:var(--line); text-decoration:none">فتح لينكدإن</a>
+    </div>
   </div>
 
   <footer id="foot">الأرقام تشمل الفرص اللي يتابعها الموقع بس، مو كل سوق العمل.</footer>
@@ -263,16 +268,26 @@ function render(){
   renderBars($("#byField"), byField, open.length, k=>FIELDS[k]||"أخرى");
   renderBars($("#byType"), byType, open.length, k=>TYPES[k]||"أخرى");
   renderTrend(HISTORY);
-  const topCo = byCo[0], topF = byField[0];
-  const lines = [
-    `أرقام «أول خطوة» لشهر ${MONTHS[today.getMonth()]} ${today.getFullYear()}:`,
-    `• ${newMonth} فرصة جديدة للمبتدئين نزلت هالشهر`,
-    `• ${open.length} فرصة مفتوحة الحين في ${byCo.length} شركة ناشئة`,
-    topCo ? `• أكثر شركة توظف مبتدئين: ${nameAr[topCo[0]]||topCo[0]} (${topCo[1]})` : "",
-    topF ? `• أكثر مجال مطلوب: ${FIELDS[topF[0]]||"أخرى"} (${topF[1]})` : "",
-    `\nكل الفرص هنا: https://saraalzhrani7.github.io/Awal-khatwa/`
-  ].filter(Boolean);
-  $("#summaryText").textContent = lines.join("\n");
+  const topCo = byCo[0], topF = byField[0], topT = byType[0];
+  const month = MONTHS[today.getMonth()];
+  const nOpp = n => n===1 ? "فرصة وحدة" : n===2 ? "فرصتين" : `${n} ${n>=3&&n<=10?"فرص":"فرصة"}`;
+  const post = [
+    `📊 أرقام «أول خطوة» لشهر ${month}`,
+    ``,
+    `خلال ${month} نزل في الموقع ${nOpp(newMonth)} جديدة للمبتدئين في الشركات الناشئة السعودية.`,
+    ``,
+    topCo ? `• أكثر شركة فتحت فرص للمبتدئين: ${nameAr[topCo[0]]||topCo[0]} (${nOpp(topCo[1])})` : "",
+    topF ? `• أكثر مجال مطلوب: ${FIELDS[topF[0]]||"أخرى"}` : "",
+    topT ? `• وأكثر نوع: ${TYPES[topT[0]]||"أخرى"}` : "",
+    ``,
+    `والحين فيه ${nOpp(open.length)} مفتوحة للتقديم في ${byCo.length} شركة.`,
+    ``,
+    `إذا تعرف أحد يدور على تدريب تعاوني أو وظيفته الأولى، أرسل له الرابط 👇`,
+    `https://saraalzhrani7.github.io/Awal-khatwa/`,
+    ``,
+    `#أول_خطوة #حديثي_التخرج #تدريب_تعاوني #الشركات_الناشئة #وظائف_السعودية`
+  ].filter((l,i,a)=>l!=="" || (a[i-1]!=="" && a[i-1]!==undefined));
+  $("#summaryText").textContent = post.join("\n").replace(/\n{3,}/g,"\n\n");
   const last = HISTORY.at(-1)?.date || LISTINGS.map(j=>j.checked).filter(Boolean).sort().pop();
   if(last) $("#foot").textContent = `آخر تحديث: ${last}. الأرقام تشمل الفرص اللي يتابعها الموقع بس، مو كل سوق العمل.`;
 }
