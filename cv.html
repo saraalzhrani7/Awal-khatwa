@@ -114,7 +114,7 @@ input[dir="ltr"],textarea[dir="ltr"]{text-align:left}
 .paper .item-sub{font-style:italic; color:#333}
 .paper[dir="rtl"] .item-sub{font-style:normal}
 /* الطباعة: لا ينفصل عنوان القسم أو عنوان الخبرة عن اللي تحته، ولا تنقسم النقطة بين صفحتين */
-.paper h2,.paper .item-head,.paper .item-sub{break-after:avoid; page-break-after:avoid}
+.paper h2,.paper .item-head,.paper .item-sub:has(+ ul){break-after:avoid; page-break-after:avoid}
 .paper li,.paper .item-head,.paper .item-sub{break-inside:avoid; page-break-inside:avoid}
 .paper ul{margin:3px 0 0; padding-inline-start:18px}
 .paper li{margin:1px 0}
@@ -589,11 +589,11 @@ function suggestFor(line, kind){
 // اقتراح مكان للرقم: نحط [N] وأنت تبدلها بالرقم الحقيقي
 const COUNTABLE = /^(reports|workshops|records|dashboards|exercises|sessions|labs|tickets|events|users|participants|students|clients|customers|projects|models|tests|interviews|surveys|alerts|incidents|datasets|queries|pages|features|campaigns|posts|videos|articles|cases|requests|documents|files|transactions|rows|entries|accounts|stakeholders|teams|members|trainees|attendees|visitors|products|screens|prototypes|apps|scripts|pipelines|kpis|metrics|courses|lessons|audits|assessments|policies|procedures|visuali[sz]ations|charts|tables|emails|calls|meetings|presentations|slides)$/i;
 const NUMWORD = /\b(two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|dozens?|hundreds?|thousands?|multiple)\b/i;
-const STOPW = /^(for|of|in|on|to|with|across|from|and|or|by|into|at|over|a|an|the|their|its|our|my|his|her)$/i;
+const STOPW = /^(for|of|in|on|to|with|across|from|and|or|by|into|at|over|a|an|the|their|its|our|my|his|her|between|among|as|about|around|within|through|via|per|each|all|several|various|both|including|like|such)$/i;
 function numberSuggestion(line){
   if(/\d|\[N\]/.test(line) || NUMWORD.test(line) || /[\u0600-\u06FF]/.test(line)) return null;
   const w = line.split(/\s+/);
-  const ci = w.findIndex((x,i)=> i>0 && COUNTABLE.test(x.replace(/[^a-z]/gi,"")));
+  const ci = w.findIndex((x,i)=> i>0 && !/['’]/.test(x) && COUNTABLE.test(x.replace(/[^a-z]/gi,"")));
   if(ci > 0 && ci < 14){
     let j = ci;
     while(j-1 > 0 && !STOPW.test(w[j-1]) && !/[,;]$/.test(w[j-1]) && !/(ed|ied)$/i.test(w[j-1]) && j > ci-4) j--;
@@ -779,28 +779,71 @@ function cvStatus(kind, msg){
 }
 const PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
 const MAMMOTH = "https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js";
+// يحوّل قطع النص في صفحة PDF لأسطر. para=true: يدمج الأسطر المتقاربة (فقرة وحدة انلفّت في عمود ضيق)
+function pdfLines(items, para){
+  let line = "", lastY = null, lastEnd = null, top = null, h = 0; const out = [];
+  const push = ()=>{ if(line.trim()) out.push({t:line.trim(), y:top, h}); line = ""; lastEnd = null; top = null; };
+  items.forEach(it=>{
+    const y = it.transform ? Math.round(it.transform[5]) : null;
+    const x = it.transform ? it.transform[4] : null;
+    if(lastY !== null && y !== null && Math.abs(y - lastY) > 2 && line.trim()) push();
+    // قطع من نفس الكلمة (مثل fl وfi في بعض الخطوط) تجي ملاصقة لبعض، فما نحط بينها مسافة
+    const glued = lastEnd !== null && x !== null && /[A-Za-z]$/.test(line) && /^[A-Za-z]/.test(it.str||"") && (x - lastEnd) > -0.5 && (x - lastEnd) < 0.8;
+    line += (line && !glued && !line.endsWith(" ") && it.str && !it.str.startsWith(" ") ? " " : "") + it.str;
+    if(top === null && it.str.trim()) { top = y; h = Math.abs(it.transform ? it.transform[3] : 10) || 10; }
+    if(it.hasEOL) push();
+    else if(x !== null && it.width) lastEnd = x + it.width;
+    if(y !== null) lastY = y;
+  });
+  push();
+  if(!para) return out;
+  const merged = [];
+  out.forEach(o=>{
+    const prev = merged[merged.length-1];
+    if(prev && prev.y !== null && o.y !== null && (prev.last - o.y) <= prev.h * 1.85 && !headKey(prev.t) && !headKey(o.t)){ prev.t += (/[a-z]-$/i.test(prev.t) ? "" : " ") + o.t; prev.last = o.y; }
+    else merged.push({t:o.t, y:o.y, last:o.y, h:o.h});
+  });
+  return merged;
+}
 async function readPdf(buf){
   if(!window.pdfjsLib){ await loadScript(PDFJS + "pdf.min.js"); window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + "pdf.worker.min.js"; }
   const pdf = await window.pdfjsLib.getDocument({data: buf}).promise;
-  let out = [];
+  let out = []; const urls = new Set();
   for(let i=1; i<=Math.min(pdf.numPages, 6); i++){
     const page = await pdf.getPage(i); const c = await page.getTextContent();
-    let line = "", lastY = null, lastEnd = null, lines = [];
-    c.items.forEach(it=>{
-      const y = it.transform ? Math.round(it.transform[5]) : null;
-      const x = it.transform ? it.transform[4] : null;
-      if(lastY !== null && y !== null && Math.abs(y - lastY) > 2 && line.trim()){ lines.push(line.trim()); line = ""; lastEnd = null; }
-      // قطع من نفس الكلمة (مثل fl وfi في بعض الخطوط) تجي ملاصقة لبعض، فما نحط بينها مسافة
-      const glued = lastEnd !== null && x !== null && /[A-Za-z]$/.test(line) && /^[A-Za-z]/.test(it.str||"") && (x - lastEnd) > -0.5 && (x - lastEnd) < 0.8;
-      line += (line && !glued && !line.endsWith(" ") && it.str && !it.str.startsWith(" ") ? " " : "") + it.str;
-      if(it.hasEOL){ if(line.trim()) lines.push(line.trim()); line = ""; lastEnd = null; }
-      else if(x !== null && it.width) lastEnd = x + it.width;
-      if(y !== null) lastY = y;
+    const W = (page.view[2] - page.view[0]) || 600, H = (page.view[3] - page.view[1]) || 800;
+    const items = c.items.filter(it=>typeof it.str === "string").map(it=>Object.assign({}, it, {str: it.str.replace(/[\u200B-\u200D\uFEFF]/g,"")})).filter(it=>it.str.trim() || it.hasEOL);
+    // عمود جانبي (سايدبار): أسطر كثيرة تبدأ من نفس المكان في النص اليمين من الصفحة
+    let sideX = null;
+    const cand = items.filter(it=>it.transform && it.transform[4] > W*0.5 && it.str.trim().length > 2 && !DATE.test(it.str) && !/^[\s\d–—\-\/.]+$/.test(it.str));
+    const groups = {};
+    cand.forEach(it=>{ const k = Math.round(it.transform[4]/6); (groups[k] = groups[k] || []).push(it); });
+    Object.values(groups).forEach(g=>{
+      if(g.length < 6) return;
+      const ys = g.map(it=>it.transform[5]);
+      if(Math.max(...ys) - Math.min(...ys) < H*0.3) return;
+      const x = Math.min(...g.map(it=>it.transform[4]));
+      if(sideX === null || x < sideX) sideX = x;
     });
-    if(line.trim()) lines.push(line.trim());
+    let lines;
+    if(sideX !== null){
+      const main = pdfLines(items.filter(it=>!it.transform || it.transform[4] < sideX - 2), false);
+      const side = pdfLines(items.filter(it=>it.transform && it.transform[4] >= sideX - 2), true);
+      // اللي في العمود الجانبي فوق أول قسم (غالبًا بيانات التواصل) يروح للرأس
+      const firstHead = main.find(o=>headKey(o.t));
+      const cutY = firstHead && firstHead.y !== null ? firstHead.y : Infinity;
+      const top = side.filter(o=>o.y !== null && o.y > cutY), rest = side.filter(o=>!(o.y !== null && o.y > cutY));
+      lines = [...main.slice(0,1), ...top, ...main.slice(1), ...rest].map(o=>o.t);
+    } else lines = pdfLines(items, false).map(o=>o.t);
     out.push(lines.join("\n"));
+    try{ (await page.getAnnotations()).forEach(a=>{ if(a.url) urls.add(a.url); }); }catch(e){}
   }
-  return {text: out.join("\n"), pages: pdf.numPages};
+  // روابط مخفية تحت نص (مثل «LinkedIn» بدون الرابط مكتوب): نضيفها عشان تنقرأ
+  const text = out.join("\n");
+  const extra = [...urls].map(u=>u.replace(/^mailto:/i,"")).filter(u=>!text.includes(u.replace(/^https?:\/\/(www\.)?/i,"").replace(/\/$/,"")));
+  if(!extra.length) return {text, pages: pdf.numPages};
+  const nl = text.indexOf("\n");
+  return {text: nl < 0 ? text + "\n" + extra.join("\n") : text.slice(0, nl) + "\n" + extra.join("\n") + text.slice(nl), pages: pdf.numPages};
 }
 async function readDocx(buf){
   if(!window.mammoth) await loadScript(MAMMOTH);
@@ -931,11 +974,25 @@ function parseCV(text){
   if(!city){ const cl = out.header.find(l=>/riyadh|jeddah|dammam|khobar|saudi|الرياض|جدة|الدمام|السعودية/i.test(l)); if(cl) city = (cl.split(/[|•,]/).find(p=>/riyadh|jeddah|dammam|khobar|saudi|الرياض|جدة|الدمام|السعودية/i.test(p))||"").trim(); }
   let summary = out.summary.join(" ");
   if(!summary){ const longH = headerText.slice(1).filter(l=>l.length > 60); summary = longH.join(" "); }
-  const edu = splitEntries(out.edu).map(e=>{
+  const SCH = /universit|college|institute|school|academy|جامعة|كلية|معهد|أكاديمية/i;
+  // كذا برنامج في نفس الكتلة (كل سطر «البرنامج – الجهة»): نفصلها
+  const eduEntries = splitEntries(out.edu).flatMap(e=>{
+    const solo = e.head.filter(h=>SCH.test(h) && /\s[—–|]\s/.test(h));
+    if(e.head.length >= 2 && solo.length === e.head.length) return e.head.map((h,k)=>Object.assign({}, e, {head:[h], dates:k===0?e.dates:"", bullets:k===e.head.length-1?e.bullets:[]}));
+    return [e];
+  });
+  const edu = eduEntries.map(e=>{
     if(e.head.length === 1 && /\s[—–|]\s/.test(e.head[0])){
       const parts = e.head[0].split(/\s+[—–|]\s+/);
       const si = parts.findIndex(x=>/universit|college|institute|school|academy|جامعة|كلية|معهد|أكاديمية/i.test(x));
       if(si >= 0) e = Object.assign({}, e, {head:[parts[si], ...parts.filter((x,i)=>i!==si)]});
+    }
+    // «B.Sc. Sociology King Abdulaziz University» في سطر واحد: نفصل الدرجة عن الجامعة
+    if(e.head.length === 1 && /^(b\.?\s?sc|b\.?\s?a\b|bsc|ba\b|m\.?\s?sc|msc|mba|bachelor|master|diploma|associate|بكالوريوس|ماجستير|دبلوم)/i.test(e.head[0]) && SCH.test(e.head[0]) && !/\s[—–|]\s/.test(e.head[0])){
+      const h0 = e.head[0], w = h0.split(/\s+/);
+      let k = w.findIndex(x=>/^(king|imam|prince|princess|umm|taibah|qassim|effat|alfaisal|jazan|najran|tabuk|islamic|saudi|american|jeddah|riyadh|dammam|university|college|institute|academy|the|جامعة|كلية|معهد)$/i.test(x));
+      if(k < 0){ const u = w.findIndex(x=>SCH.test(x)); k = Math.max(1, u - 2); }
+      if(k > 0) e = Object.assign({}, e, {head:[w.slice(k).join(" "), w.slice(0,k).join(" ")]});
     }
     const sIdx = e.head.findIndex(h=>/universit|college|institute|school|academy|جامعة|كلية|معهد|أكاديمية/i.test(h));
     const school = sIdx>=0 ? e.head[sIdx] : (e.head[0]||"");
