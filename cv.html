@@ -492,15 +492,17 @@ function cvText(){
   return all.join("\n");
 }
 
-const VERB = /^(built|developed|designed|analy[sz]ed|led|created|implemented|improved|managed|automated|organized|researched|conducted|monitored|identified|collaborated|presented|reduced|increased|wrote|configured|deployed|trained|supported|coordinated|launched|delivered|investigated|assessed|tested|documented|volunteered|taught|planned|streamlined|established|achieved)/i;
+const WEAKV = /^(participated|played|helped|assisted|worked|was|were|involved|responsible|handled|did|got|tried)\b/i;
+const VERB = /^([a-z]{3,}(ed|ied)\b|built|wrote|led|ran|made|taught|won|drove|grew|built|developed|designed|analy[sz]ed|led|created|implemented|improved|managed|automated|organized|researched|conducted|monitored|identified|collaborated|presented|reduced|increased|wrote|configured|deployed|trained|supported|coordinated|launched|delivered|investigated|assessed|tested|documented|volunteered|taught|planned|streamlined|established|achieved)/i;
 function bulletTips(line, kind){
   const tips = [];
   const en = !/[\u0600-\u06FF]/.test(line);
   const words = line.split(/\s+/).filter(Boolean).length;
   if(kind!=="edu"){
-    if(en && !VERB.test(line) && !/^(gpa|relevant|courses|awarded|dean)/i.test(line)) tips.push("ابدأها بفعل ماضي قوي، مثل Built أو Analyzed أو Led");
-    if(!/\d/.test(line)) tips.push("ما فيها رقم. أضف نتيجة تنقاس: كم، أو نسبة، أو مدة، أو عدد");
-    if(/^(responsible for|worked on|helped|assisted|did|was|were|i |my )/i.test(line)) tips.push("صياغة ضعيفة. بدل «Responsible for / Helped» قل وش سويت بالضبط");
+    const weak = en && WEAKV.test(line);
+    if(weak){ const w = line.split(/\s+/)[0]; tips.push(`«${w}» فعل ضعيف. استخدم فعل يوضح دورك، مثل Led أو Designed أو Conducted`); }
+    else if(en && !VERB.test(line) && !/^(gpa|relevant|courses|awarded|dean)/i.test(line)) tips.push("ابدأها بفعل ماضي قوي، مثل Built أو Analyzed أو Led");
+    if(/^(i |my )/i.test(line)) tips.push("لا تبدأ بـ I أو My. ابدأ بالفعل مباشرة");
     if(/^(كنت|قمت ب|ساعدت في|عملت على)/.test(line)) tips.push("وضّح وش سويت بالضبط، وأضف النتيجة");
   }
   if(words > 32) tips.push(`طويلة (${words} كلمة). خلها سطر أو سطرين، تقريبًا 15 إلى 25 كلمة`);
@@ -512,8 +514,10 @@ function bulletFeedback(kind, inp, box){
   const ls = lines(inp.value);
   if(!ls.length){ box.textContent = ""; return; }
   box.textContent = "";
+  const anyNum = ls.some(l=>/\d/.test(l));
   ls.forEach((l, idx)=>{
     const tips = bulletTips(l, kind);
+    if(kind!=="edu" && !anyNum && idx===0) tips.push("ولا نقطة فيها رقم. أضف نتيجة تنقاس في نقطة وحدة على الأقل: كم، أو نسبة، أو مدة، أو عدد");
     const row = document.createElement("div");
     const tag = document.createElement("b");
     const msg = document.createElement("span");
@@ -641,12 +645,16 @@ async function readPdf(buf){
   let out = [];
   for(let i=1; i<=Math.min(pdf.numPages, 6); i++){
     const page = await pdf.getPage(i); const c = await page.getTextContent();
-    let line = "", lastY = null, lines = [];
+    let line = "", lastY = null, lastEnd = null, lines = [];
     c.items.forEach(it=>{
       const y = it.transform ? Math.round(it.transform[5]) : null;
-      if(lastY !== null && y !== null && Math.abs(y - lastY) > 2 && line.trim()){ lines.push(line.trim()); line = ""; }
-      line += (line && !line.endsWith(" ") && it.str && !it.str.startsWith(" ") ? " " : "") + it.str;
-      if(it.hasEOL){ if(line.trim()) lines.push(line.trim()); line = ""; }
+      const x = it.transform ? it.transform[4] : null;
+      if(lastY !== null && y !== null && Math.abs(y - lastY) > 2 && line.trim()){ lines.push(line.trim()); line = ""; lastEnd = null; }
+      // قطع من نفس الكلمة (مثل fl وfi في بعض الخطوط) تجي ملاصقة لبعض، فما نحط بينها مسافة
+      const glued = lastEnd !== null && x !== null && /[A-Za-z]$/.test(line) && /^[A-Za-z]/.test(it.str||"") && (x - lastEnd) > -0.5 && (x - lastEnd) < 0.8;
+      line += (line && !glued && !line.endsWith(" ") && it.str && !it.str.startsWith(" ") ? " " : "") + it.str;
+      if(it.hasEOL){ if(line.trim()) lines.push(line.trim()); line = ""; lastEnd = null; }
+      else if(x !== null && it.width) lastEnd = x + it.width;
       if(y !== null) lastY = y;
     });
     if(line.trim()) lines.push(line.trim());
@@ -709,13 +717,16 @@ const headKey = line => {
 };
 const BULLET = /^\s*[•●▪◦‣∙·\-–—*➢►✓]\s*/;
 const DATE = /((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?(19|20)\d{2}\s*(-|–|—|to|إلى|الى)\s*((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?((19|20)\d{2}|\bpresent\b|\bcurrent\b|\bnow\b|حتى الآن|الآن|الحالي)|((jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*)?(19|20)\d{2}|\bpresent\b/i;
+const LOC = /^(remote|hybrid|on-?site|عن بعد|عن بُعد|(riyadh|jeddah|dammam|khobar|dhahran|makkah|mecca|madinah|medina|abha|taif|tabuk|qassim|buraydah|jubail|yanbu|neom|saudi arabia|ksa|dubai|abu dhabi|doha|kuwait|manama|cairo|london|الرياض|جدة|الدمام|الخبر|الظهران|مكة|المدينة|أبها|الطائف|تبوك|القصيم|السعودية)([\s,،\-–]+[a-z\u0600-\u06FF ]{2,20})?)$/i;
+const ROLEW = /\b(researcher|engineer|intern|internship|analyst|developer|designer|trainee|co-?op|manager|specialist|assistant|consultant|lead|officer|coordinator|associate|scientist|volunteer|member|president|head|representative|administrator|architect|tutor|teacher|ambassador|founder|agent)\b|باحث|مهندس|متدرب|محلل|مطور|مصمم|أخصائي|اخصائي|مساعد|منسق|متطوع|مشرف|رئيس|عضو|ممثل/i;
 function splitEntries(lines){
   const entries = []; let cur = null;
   lines.forEach(raw=>{
     const isB = BULLET.test(raw); const line = raw.replace(BULLET,"").trim(); if(!line) return;
     const labelLine = /^[^:]{2,25}:\s/.test(line) && !DATE.test(line);
     const headLike = !isB && !labelLine && line.length <= 75 && !/[.。]$/.test(line) && !VERB.test(line);
-    if(headLike && (!cur || cur.bullets.length || cur.head.length >= 2 || (DATE.test(line) && cur.head.some(h=>DATE.test(h))))){
+    const extra = cur && !cur.bullets.length && cur.head.length < 4 && ((DATE.test(line) && !cur.head.some(h=>DATE.test(h))) || LOC.test(line));
+    if(headLike && (!cur || cur.bullets.length || (cur.head.filter(h=>!LOC.test(h) && !(DATE.test(h) && h.replace(DATE,"").replace(/[\s|,–—\-]/g,"").length<3)).length >= 2 && !extra) || (DATE.test(line) && cur.head.some(h=>DATE.test(h))))){
       cur = {head:[line], bullets:[]}; entries.push(cur);
     } else if(headLike && cur && !cur.bullets.length){
       cur.head.push(line);
@@ -727,12 +738,15 @@ function splitEntries(lines){
   return entries.map(e=>{
     const all = e.head.join("  ");
     const m = all.match(DATE); const dates = m ? m[0].trim() : "";
-    const head = e.head.map(h=>h.replace(DATE,"").replace(/[|,–—\-\s]+$/,"").replace(/^[|,–—\-\s]+/,"").trim()).filter(Boolean);
-    return {head, dates, bullets:e.bullets};
+    let head = e.head.map(h=>h.replace(DATE,"").replace(/[|,–—\-\s]+$/,"").replace(/^[|,–—\-\s]+/,"").trim()).filter(Boolean);
+    // المدينة في سطر لحالها أو في آخر السطر: نفصلها
+    let loc = "";
+    head = head.filter(h=>{ if(!loc && LOC.test(h)){ loc = h; return false; } return true; });
+    return {head, dates, loc, bullets:e.bullets};
   });
 }
 function parseCV(text){
-  const raw = text.split(/\n/).map(l=>l.replace(/\s+/g," ").trim()).filter(Boolean);
+  const raw = text.split(/\n/).map(l=>l.replace(/\s+/g," ").replace(/\s+([.,;:!?)])/g,"$1").trim()).filter(Boolean);
   // نرجع الأسطر المكسورة (السطر اللي انقسم على سطرين في الـ PDF) لسطر واحد
   const lines = [];
   raw.forEach(l=>{
@@ -745,8 +759,10 @@ function parseCV(text){
     if(cont) lines[lines.length-1] = prev + " " + l; else lines.push(l);
   });
   const out = {header:[], summary:[], edu:[], exp:[], proj:[], skills:[], soft:[], certs:[]};
-  let sec = "header";
-  lines.forEach(l=>{ const k = headKey(l); if(k){ sec = k; return; } out[sec].push(l); });
+  let sec = "header"; const seen = [];
+  lines.forEach(l=>{ const k = headKey(l); if(k){ sec = k; if(!seen.includes(k)) seen.push(k); return; } out[sec].push(l); });
+  // نحافظ على ترتيب الأقسام زي ما هو في سيرته الأصلية
+  const order = ["edu","exp","proj"].filter(k=>seen.includes(k)).sort((a,b)=>seen.indexOf(a)-seen.indexOf(b))[0] || "edu";
   const all = text;
   const email = (all.match(/[\w.+-]+@[\w-]+\.[\w.]+/)||[""])[0];
   const phone = ((all.match(/(\+?966|00966|0)\s?5\d(?:[\s-]?\d){7}/)||all.match(/\+\d[\d\s-]{8,15}\d/)||[""])[0]).trim();
@@ -768,11 +784,16 @@ function parseCV(text){
     const sIdx = e.head.findIndex(h=>/universit|college|institute|school|academy|جامعة|كلية|معهد|أكاديمية/i.test(h));
     const school = sIdx>=0 ? e.head[sIdx] : (e.head[0]||"");
     const degree = e.head.filter((h,i)=>i!==(sIdx>=0?sIdx:0)).join(" · ");
-    return {school, degree, dates:e.dates, notes:e.bullets.join("\n")};
+    const city = e.loc ? e.loc.split(/[,،]/)[0].trim() : "";
+    return {school: city && !school.includes(city) ? `${school}, ${city}` : school, degree, dates:e.dates, notes:e.bullets.join("\n")};
   });
   const exp = splitEntries(out.exp).map(e=>{
     let role = e.head[0]||"", org = e.head[1]||"";
     if(!org){ const m = role.split(/\s+(?:at|@|—|–|-|\|)\s+|,\s+/); if(m.length>1){ role = m[0]; org = m.slice(1).join(", "); } }
+    // «الشركة — المسمى» أو «المسمى — الشركة»: المسمى هو الجزء اللي فيه كلمة وظيفة
+    if(org && !ROLEW.test(role) && ROLEW.test(org)) [role, org] = [org, role];
+    const city = e.loc ? e.loc.split(/[,،]/)[0].trim() : "";
+    if(city && !org.toLowerCase().includes(city.toLowerCase())) org = org ? `${org}, ${city}` : city;
     return {role, org, dates:e.dates, notes:e.bullets.join("\n")};
   });
   const proj = splitEntries(out.proj).map(e=>{
@@ -790,7 +811,7 @@ function parseCV(text){
   const soft = [...new Set(splitList(out.soft))].join(", ");
   const certs = out.certs.map(l=>l.replace(BULLET,"").trim()).join("\n");
   const arabic = (text.match(/[\u0600-\u06FF]/g)||[]).length > (text.match(/[A-Za-z]/g)||[]).length;
-  return {lang: arabic?"ar":"en", name, headline, email, phone, city, linkedin, portfolio, summary, skills, soft, certs,
+  return {lang: arabic?"ar":"en", order, name, headline, email, phone, city, linkedin, portfolio, summary, skills, soft, certs,
     edu: edu.length?edu:[{}], proj: proj.length?proj:[{}], exp: exp.length?exp:[{}],
     _found: {edu:edu.length, exp:exp.length, proj:proj.length, skills:!!skills}};
 }
