@@ -1,6 +1,6 @@
 // أول خطوة: يخلي الموقع يفتح كتطبيق، ويشتغل حتى لو النت ضعيف
 const CACHE = "awal-khatwa-v1";
-const SHELL = ["./", "index.html", "cv.html", "guide.html", "stats.html", "feedback.js", "manifest.webmanifest", "icon-192.png", "og-image.png?v=2"];
+const SHELL = ["./", "index.html", "cv.html", "guide.html", "stats.html", "feedback.js", "manifest.webmanifest", "icon-192.png", "og-image.jpg"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).catch(() => {}));
