@@ -149,7 +149,6 @@
    "sales",
    "restaurant",
    "targets",
-   "motivated",
    "results-driven",
    "representative",
    "fast-growing",
@@ -165,7 +164,8 @@
    "play",
    "building",
    "increasing",
-   "revenue"
+   "revenue",
+   "partner"
   ],
   "source": "auto"
  },
@@ -194,20 +194,20 @@
    "onboarding",
    "account",
    "growth",
-   "proactive",
-   "mindset",
    "interest",
    "concepts",
-   "ownership",
    "side",
-   "motivated",
    "customer-focused",
    "coop",
-   "managers",
    "csms",
    "achieve",
-   "goals",
-   "fantastic"
+   "fantastic",
+   "ins",
+   "outs",
+   "relationship",
+   "management",
+   "administrative",
+   "maintenance"
   ],
   "source": "auto"
  },
@@ -238,10 +238,8 @@
    "quality",
    "improve",
    "real-time",
-   "engineers",
    "understand",
    "react",
-   "ownership",
    "write",
    "build",
    "applications",
@@ -249,7 +247,9 @@
    "redux",
    "product",
    "state",
-   "review"
+   "review",
+   "scale",
+   "don"
   ],
   "source": "auto"
  },
@@ -318,14 +318,10 @@
    "ai",
    "social media",
    "communication skills",
-   "innovative",
    "events",
    "market",
-   "hands-on",
-   "exposure",
    "efforts",
    "initiatives",
-   "contribute",
    "ideas",
    "grow",
    "take",
@@ -333,7 +329,11 @@
    "built",
    "leveraging",
    "silicon",
-   "valley"
+   "valley",
+   "expertise",
+   "creating",
+   "solutions",
+   "realm"
   ],
   "source": "auto"
  },
@@ -367,15 +367,15 @@
    "lead",
    "technology",
    "software",
-   "motivated",
    "results-driven",
    "representatives",
-   "dynamic",
    "responsible",
    "generating",
    "qualifying",
    "research",
-   "identify"
+   "identify",
+   "potential",
+   "channels"
   ],
   "source": "auto"
  },
@@ -412,12 +412,12 @@
    "reporting",
    "hris-related",
    "system",
-   "issues",
-   "motivated",
    "maintenance",
-   "improvement",
-   "provide",
-   "hands-on"
+   "process",
+   "currently",
+   "enrolled",
+   "microsoft",
+   "especially"
   ],
   "source": "auto"
  },
@@ -579,13 +579,13 @@
    "programs",
    "professional",
    "platforms",
-   "rather",
    "get",
    "enablement",
    "activities",
    "participants",
-   "hands-on",
-   "scheduling"
+   "scheduling",
+   "sessions",
+   "completion"
   ],
   "source": "auto"
  },
@@ -609,25 +609,25 @@
   "remote": false,
   "keywords": [
    "product",
-   "manager",
    "cross-functional",
    "user",
    "delivery",
-   "ownership",
    "design",
    "engineering",
    "communication",
-   "associate",
-   "squads",
    "scalable",
-   "high-quality",
-   "collaborating",
-   "closely",
-   "managers",
-   "designers",
-   "engineers",
-   "modern",
-   "saas"
+   "saas",
+   "serving",
+   "diverse",
+   "base",
+   "execution-focused",
+   "direct",
+   "cycles",
+   "designed",
+   "early-career",
+   "talent",
+   "demonstrate",
+   "potential"
   ],
   "source": "auto"
  },
@@ -656,20 +656,20 @@
    "automation",
    "engineering",
    "queries",
-   "practices",
    "attention to detail",
    "platforms",
-   "operate",
-   "environments",
-   "tasks",
-   "engineers",
    "performance",
-   "results",
    "reliability",
-   "curious",
-   "someone",
-   "critical",
-   "exposure"
+   "query",
+   "questions",
+   "investigating",
+   "benchmarking",
+   "experienced",
+   "write",
+   "sql",
+   "identify",
+   "monitoring",
+   "backup"
   ],
   "source": "auto"
  },
@@ -708,10 +708,10 @@
    "intelligence",
    "build",
    "trust",
-   "culture",
    "alongside",
    "supporting",
-   "drive"
+   "drive",
+   "version"
   ],
   "source": "auto"
  },
@@ -744,16 +744,16 @@
    "delivery",
    "calls",
    "testing",
-   "innovative",
    "voice",
    "product",
    "design",
    "build",
    "proof",
-   "end-to-end",
    "implementations",
    "interface",
-   "hands-on"
+   "concepts",
+   "workflows",
+   "questions"
   ],
   "source": "auto"
  },
@@ -779,11 +779,9 @@
    "legal",
    "research",
    "tracking",
-   "tasks",
    "preparation",
    "love",
    "difference",
-   "impact",
    "transform",
    "peoples",
    "lives",
@@ -795,7 +793,9 @@
    "yes",
    "webook.com",
    "event",
-   "ticketing"
+   "ticketing",
+   "booking",
+   "platforms"
   ],
   "source": "auto"
  },
@@ -831,13 +831,13 @@
    "system",
    "love",
    "difference",
-   "impact",
    "transform",
    "peoples",
    "lives",
    "believes",
    "disrupting",
-   "normal"
+   "normal",
+   "boring"
   ],
   "source": "auto"
  },
@@ -866,20 +866,20 @@
    "short",
    "term",
    "projects",
-   "contribute",
    "features",
-   "highly",
    "qualified",
-   "engineers",
    "participate",
    "innovation",
    "product",
    "uses",
-   "big",
    "analyze",
    "content",
    "several",
-   "sources"
+   "sources",
+   "cto",
+   "agile",
+   "demanding",
+   "expect"
   ],
   "source": "auto"
  },
@@ -906,11 +906,9 @@
    "attention to detail",
    "features",
    "design",
-   "designers",
    "user",
    "love",
    "difference",
-   "impact",
    "transform",
    "peoples",
    "lives",
@@ -921,7 +919,9 @@
    "average",
    "yes",
    "webook.com",
-   "event"
+   "event",
+   "ticketing",
+   "booking"
   ],
   "source": "auto"
  },
@@ -949,7 +949,6 @@
    "communication skills",
    "tamheer",
    "promising",
-   "passion",
    "mentoring",
    "coordinate",
    "industry",
@@ -963,7 +962,8 @@
    "professionals",
    "deep",
    "ecosystem",
-   "source"
+   "source",
+   "identify"
   ],
   "source": "auto"
  },
@@ -996,16 +996,16 @@
    "get",
    "stakeholders",
    "person",
-   "high",
    "aes",
    "top",
-   "large",
    "phone",
    "account",
    "meetings",
    "feedback",
    "doesn",
-   "picking"
+   "picking",
+   "don",
+   "back"
   ],
   "source": "auto"
  },
@@ -1037,17 +1037,17 @@
    "computer science",
    "engineering",
    "test",
-   "innovative",
    "assurance",
    "performance",
-   "contribute",
    "bugs",
-   "hands-on",
-   "practices",
    "high-growth",
    "start-up",
    "cases",
-   "software"
+   "software",
+   "built",
+   "leveraging",
+   "silicon",
+   "valley"
   ],
   "source": "auto"
  },
@@ -1082,14 +1082,14 @@
    "coordination",
    "date",
    "structured",
-   "exposure",
    "decisions",
    "actions",
    "management",
    "webook.com",
    "event",
    "technology",
-   "execution"
+   "execution",
+   "consistently"
   ],
   "source": "auto"
  },
@@ -1162,18 +1162,18 @@
    "event",
    "technology",
    "events",
-   "gain",
-   "hands-on",
    "love",
    "difference",
-   "impact",
    "transform",
    "peoples",
    "lives",
    "believes",
    "disrupting",
    "normal",
-   "boring"
+   "boring",
+   "average",
+   "yes",
+   "ticketing"
   ],
   "source": "auto"
  },
@@ -1211,11 +1211,11 @@
    "sales",
    "inbound",
    "outbound",
-   "provide",
    "services",
    "merchants",
    "events",
-   "enhance"
+   "enhance",
+   "satisfaction"
   ],
   "source": "auto"
  },
@@ -1248,7 +1248,6 @@
    "web",
    "hala",
    "yalla",
-   "impact",
    "webook.com",
    "fit",
    "applications",
@@ -1257,7 +1256,8 @@
    "transform",
    "peoples",
    "lives",
-   "believes"
+   "believes",
+   "disrupting"
   ],
   "source": "auto"
  },
@@ -1290,7 +1290,6 @@
    "payroll",
    "love",
    "difference",
-   "impact",
    "transform",
    "peoples",
    "lives",
@@ -1299,7 +1298,8 @@
    "normal",
    "boring",
    "average",
-   "yes"
+   "yes",
+   "webook.com"
   ],
   "source": "auto"
  },
@@ -1335,13 +1335,13 @@
    "follow-ups",
    "love",
    "difference",
-   "impact",
    "transform",
    "peoples",
    "lives",
    "believes",
    "disrupting",
-   "normal"
+   "normal",
+   "boring"
   ],
   "source": "auto"
  },
@@ -1370,7 +1370,6 @@
    "content",
    "platforms",
    "specialist",
-   "various",
    "engagement",
    "creating",
    "creative",
@@ -1381,9 +1380,10 @@
    "trends",
    "digital",
    "tamheer",
-   "gain",
-   "hands-on",
-   "aspects"
+   "aspects",
+   "specialize",
+   "three",
+   "driving"
   ],
   "source": "auto"
  },
@@ -1453,21 +1453,21 @@
    "quality",
    "modelling",
    "machine learning",
-   "real",
    "pipelines",
    "analytical",
    "models",
    "processing",
    "cost",
    "efficiency",
-   "programme",
-   "engineers",
    "analytics",
    "platforms",
    "production",
-   "expected",
    "maintain",
-   "orchestration"
+   "orchestration",
+   "workflows",
+   "metrics",
+   "sql",
+   "python"
   ],
   "source": "auto"
  },
@@ -1497,19 +1497,19 @@
    "workloads",
    "cloud",
    "engineering",
-   "real",
    "pipelines",
    "models",
-   "rather",
    "gcp",
-   "runs",
    "ml",
    "observability",
    "monitoring",
    "linux",
-   "expected",
-   "run",
-   "kubernetes"
+   "kubernetes",
+   "model",
+   "actually",
+   "gpu",
+   "networking",
+   "reliability"
   ],
   "source": "auto"
  },
@@ -1538,20 +1538,20 @@
    "workflow",
    "bug",
    "api",
-   "expected",
    "cases",
    "attention to detail",
    "computer science",
    "information systems",
    "users",
    "engineering",
-   "real",
-   "runs",
    "workflows",
    "keep",
    "changes",
    "failures",
-   "debugging"
+   "debugging",
+   "read",
+   "call",
+   "release"
   ],
   "source": "auto"
  },
@@ -1582,18 +1582,18 @@
    "figma",
    "enough",
    "link",
-   "real",
    "problem",
    "actually",
-   "engineers",
    "screen",
-   "way",
    "imagine",
    "winner",
    "form",
    "page",
    "file",
-   "entries"
+   "entries",
+   "read",
+   "panel",
+   "present"
   ],
   "source": "auto"
  },
@@ -1624,18 +1624,18 @@
    "figma",
    "enough",
    "link",
-   "real",
    "problem",
    "actually",
-   "engineers",
    "screen",
-   "way",
    "imagine",
    "winner",
    "form",
    "page",
    "file",
-   "entries"
+   "entries",
+   "read",
+   "panel",
+   "present"
   ],
   "source": "auto"
  },
@@ -1665,10 +1665,8 @@
    "maintenance",
    "requests",
    "attention to detail",
-   "day-to-day",
    "activities",
    "inventory",
-   "tasks",
    "service",
    "facility-related",
    "vendor",
@@ -1677,7 +1675,9 @@
    "documentation",
    "vendors",
    "administrative",
-   "facilities"
+   "facilities",
+   "services",
+   "follow"
   ],
   "source": "auto"
  }
