@@ -11,6 +11,9 @@
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B7A5C">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B7A5C'/%3E%3Cpath d='M9 22h6v-6h8' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,6 +82,16 @@ td:first-child small{display:block; color:var(--muted); font-weight:400; directi
 .when .t{font-weight:600; color:var(--accent)}
 .when p{margin:0; font-size:14.5px}
 @media (max-width:560px){ .when{grid-template-columns:1fr; gap:4px} }
+.star{display:grid; gap:4px; background:var(--surface); border:1px solid var(--line); border-inline-start:4px solid var(--accent); border-radius:12px; padding:12px 16px; margin-bottom:12px; font-size:14px}
+.star span{color:var(--muted)}
+.star span b{color:var(--accent)}
+.qa{display:grid; gap:8px}
+.qa details{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:0 16px}
+.qa summary{cursor:pointer; font-weight:600; padding:12px 0; list-style-position:inside}
+.qa ol{margin:0 0 12px; padding-inline-start:20px; display:grid; gap:10px}
+.qa li{font-size:14px}
+.qa q{display:block; direction:ltr; text-align:left; font-weight:600; quotes:none; unicode-bidi:isolate}
+.qa li span{color:var(--muted); font-size:13.5px}
 .note{font-size:13.5px; color:var(--muted); border-inline-start:3px solid var(--saffron); padding-inline-start:12px; margin-top:12px}
 ol.steps{padding-inline-start:22px; margin:0; display:grid; gap:8px; max-width:68ch}
 .back{display:inline-block; margin-top:44px; text-decoration:none; background:var(--accent); color:var(--accent-ink); padding:10px 18px; border-radius:8px; font-weight:600}
@@ -102,6 +115,7 @@ ol.steps{padding-inline-start:22px; margin:0; display:grid; gap:8px; max-width:6
       <a href="#cv">السيرة الذاتية</a>
       <a href="#calendar">المواعيد</a>
       <a href="#apply">قبل ما تقدم</a>
+      <a href="#interview">أسئلة المقابلة</a>
     </div>
   </header>
 
@@ -167,6 +181,80 @@ ol.steps{padding-inline-start:22px; margin:0; display:grid; gap:8px; max-width:6
       <li><b>تابع الشركة في لينكدإن</b>، وتواصل بلطف مع موظف في نفس الفريق إذا تبي تسأل عن الفرصة.</li>
       <li><b>قدّم على أكثر من فرصة.</b> الرفض جزء طبيعي من البداية، وكل تقديم يعلمك شي.</li>
     </ol>
+  </section>
+
+  <section id="interview">
+    <h2>أسئلة المقابلة للمبتدئين</h2>
+    <p class="sub">أشهر الأسئلة اللي تنسأل في مقابلات التدريب وأول وظيفة، حسب المجال. أغلب مقابلات الشركات الناشئة بالإنجليزي، فالأسئلة مكتوبة بالإنجليزي ومعها نصيحة للإجابة.</p>
+    <div class="star">
+      <b>طريقة STAR لأي سؤال عن تجربة:</b>
+      <span><b>S</b>ituation: وش كان الموقف؟</span>
+      <span><b>T</b>ask: وش كان المطلوب منك؟</span>
+      <span><b>A</b>ction: وش سويت أنت بالضبط؟</span>
+      <span><b>R</b>esult: وش النتيجة؟ وبرقم لو تقدر.</span>
+    </div>
+    <div class="qa">
+      <details open>
+        <summary>أسئلة عامة (لكل المجالات)</summary>
+        <ol>
+          <li><q>Tell me about yourself.</q> <span>دقيقة وحدة: تخصصك، وأقوى مشروع أو تدريب، وليش تبي هالفرصة. لا تعيد السيرة كلها.</span></li>
+          <li><q>Why do you want to join us?</q> <span>اقرأ عن الشركة قبل المقابلة، واذكر منتج أو قيمة عندهم بالاسم.</span></li>
+          <li><q>Tell me about a project you're proud of.</q> <span>استخدم STAR، وركز على دورك أنت مو الفريق.</span></li>
+          <li><q>Describe a time you faced a challenge or made a mistake.</q> <span>اختر موقف حقيقي، وخلّ أغلب كلامك عن وش تعلمت ووش غيرت بعده.</span></li>
+          <li><q>Where do you see yourself in 2–3 years?</q> <span>ربط واقعي بين الفرصة وتطورك في نفس المجال.</span></li>
+          <li><q>Do you have any questions for us?</q> <span>جهّز سؤالين دايمًا، مثل: وش شكل أول 3 شهور في الدور؟ أو كيف ينقاس النجاح فيه؟</span></li>
+        </ol>
+      </details>
+      <details>
+        <summary>تحليل البيانات والذكاء الاصطناعي</summary>
+        <ol>
+          <li><q>What's the difference between INNER JOIN and LEFT JOIN?</q> <span>اشرحها بمثال: عملاء وطلبات، ومين يطلع لو ما عنده طلب.</span></li>
+          <li><q>How do you handle missing or duplicate data?</q> <span>اذكر خطواتك: تكتشفها، تفهم سببها، وبعدها تقرر تحذف أو تعبي، ووثّق قرارك.</span></li>
+          <li><q>Walk me through a dashboard you built.</q> <span>ابدأ بالسؤال اللي يجاوب عليه، ثم المقاييس، ثم القرار اللي ساعد فيه.</span></li>
+          <li><q>How would you explain a finding to a non-technical manager?</q> <span>النتيجة أول، ثم رقم واحد يدعمها، ثم التوصية.</span></li>
+          <li><q>What is overfitting?</q> <span>لو الدور فيه ML: نموذج حافظ بيانات التدريب وما يعمم، وكيف تكتشفه بـ validation.</span></li>
+        </ol>
+      </details>
+      <details>
+        <summary>الأمن السيبراني</summary>
+        <ol>
+          <li><q>What's the difference between a vulnerability, a threat, and a risk?</q> <span>الثغرة نقطة ضعف، والتهديد اللي ممكن يستغلها، والخطر احتمال وأثر اجتماعهم.</span></li>
+          <li><q>How would you investigate a suspicious email?</q> <span>المرسل والروابط والمرفقات والـ headers، وبعدين تبلغ وتعزل.</span></li>
+          <li><q>What does a SOC analyst do in a day?</q> <span>مراقبة التنبيهات، والفرز (triage)، والتصعيد، والتوثيق. اذكر أداة جربتها مثل SIEM.</span></li>
+          <li><q>Explain the CIA triad.</q> <span>Confidentiality وIntegrity وAvailability، مع مثال لكل وحدة.</span></li>
+          <li><q>How do you keep up with new threats?</q> <span>اذكر مصادر حقيقية تتابعها، أو مختبرات حليتها.</span></li>
+        </ol>
+      </details>
+      <details>
+        <summary>البرمجة والتقنية</summary>
+        <ol>
+          <li><q>Walk me through how a web page loads.</q> <span>DNS ثم الطلب للسيرفر ثم الرد ثم عرض الصفحة، بدون تعمق زايد.</span></li>
+          <li><q>What's the difference between a list and a dictionary (or array and hash map)?</q> <span>متى تستخدم كل وحدة، ووقت البحث في كل وحدة.</span></li>
+          <li><q>How do you debug a problem you've never seen before?</q> <span>تعيد المشكلة، تصغر نطاقها، تقرأ الخطأ، وتجرب فرضية وحدة كل مرة.</span></li>
+          <li><q>Tell me about a time you used Git in a team.</q> <span>الفروع والـ pull requests وحل التعارضات.</span></li>
+          <li><q>Live coding: reverse a string / find duplicates.</q> <span>فكّر بصوت عالي، وابدأ بحل بسيط قبل ما تحسنه.</span></li>
+        </ol>
+      </details>
+      <details>
+        <summary>المنتج والتصميم</summary>
+        <ol>
+          <li><q>Pick an app you use daily. What would you improve?</q> <span>مين المستخدم، وش مشكلته، ووش التحسين، وكيف تقيس نجاحه.</span></li>
+          <li><q>How do you decide what to build first?</q> <span>الأثر مقابل الجهد، وأدلة من المستخدمين مو رأيك الشخصي.</span></li>
+          <li><q>Walk me through your design process.</q> <span>بحث، ثم نماذج، ثم اختبار مع مستخدمين، ثم تعديل.</span></li>
+          <li><q>How do you handle feedback you disagree with?</q> <span>تسمع، وتسأل عن السبب، وتقترح تجربة تحسم الخلاف بالبيانات.</span></li>
+        </ol>
+      </details>
+      <details>
+        <summary>الأعمال والتسويق والموارد البشرية</summary>
+        <ol>
+          <li><q>How would you market our product to university students?</q> <span>الجمهور، والقناة، والرسالة، ومؤشر تقيس فيه النجاح.</span></li>
+          <li><q>Tell me about a time you worked with a difficult teammate.</q> <span>STAR، وركز على التواصل والنتيجة، بدون ما تنتقد الشخص.</span></li>
+          <li><q>How do you organize your work when you have many tasks?</q> <span>اذكر طريقة حقيقية تستخدمها: قائمة مهام، أو أولويات بالمواعيد.</span></li>
+          <li><q>What do you know about the Saudi market in our sector?</q> <span>رقم أو ترند واحد قريته، وكيف يأثر على الشركة.</span></li>
+        </ol>
+      </details>
+    </div>
+    <p class="note">نصيحة: جاوب بصوت عالي قدام المراية أو مع صديق قبل المقابلة. الإجابة اللي تدربت عليها مرتين تطلع أوضح بكثير.</p>
     <a class="back" href="./">تصفح الفرص المتاحة الحين</a>
   </section>
 </div>

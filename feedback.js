@@ -14,6 +14,7 @@ const FEEDBACK = {
   .fb-btn:focus-visible{outline:2px solid var(--ink,#0F201B); outline-offset:3px}
   .fb-back{position:fixed; inset:0; z-index:60; background:rgb(0 0 0 / .45); display:grid; place-items:center; padding:16px}
   .fb-back[hidden]{display:none!important}
+  .fb-install[hidden]{display:none!important}
   .fb-card{width:min(460px,100%); background:var(--surface,#fff); color:var(--ink,#0F201B); border:1px solid var(--line,#D9E2DE); border-radius:14px; padding:20px; display:grid; gap:12px; font-family:inherit; direction:rtl; text-align:right; max-height:calc(100vh - 32px); overflow:auto}
   .fb-card h2{margin:0; font-size:18px}
   .fb-card p{margin:0; font-size:13.5px; color:var(--muted,#5A6B65)}
@@ -46,16 +47,18 @@ const FEEDBACK = {
 
   const track = (path, title) => { try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path, title, event:true}); }catch(e){} };
   const page = document.title.split("|")[0].trim() || "الموقع";
+  const EN = document.documentElement.lang === "en";
+  const tr = (ar, en) => EN ? en : ar;
 
   const btn = document.createElement("button");
-  btn.className = "fb-btn"; btn.type = "button"; btn.textContent = "💬 ملاحظاتك";
+  btn.className = "fb-btn"; btn.type = "button"; btn.textContent = tr("💬 ملاحظاتك", "💬 Feedback");
   btn.setAttribute("aria-haspopup", "dialog");
   document.body.append(btn);
 
   if(FEEDBACK.formUrl){
     const a = document.createElement("a");
     a.className = btn.className; a.textContent = btn.textContent; a.href = FEEDBACK.formUrl; a.target = "_blank"; a.rel = "noopener";
-    a.setAttribute("aria-label", "ملاحظاتك"); a.title = "ملاحظاتك";
+    a.setAttribute("aria-label", tr("ملاحظاتك","Feedback")); a.title = tr("ملاحظاتك","Feedback");
     a.style.textDecoration = "none";
     a.addEventListener("click", ()=>track("feedback/form", page));
     btn.replaceWith(a);
@@ -117,11 +120,29 @@ const FEEDBACK = {
     lastY = y;
   }, {passive:true});
 
+  // ===== تطبيق على الجوال (PWA) =====
+  if("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(()=>{});
+  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+  let installEvt = null;
+  const installLine = document.createElement("div"); installLine.className = "fb-foot fb-install"; installLine.hidden = true;
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+  if(!standalone && ios){
+    installLine.innerHTML = tr("📲 تبيه تطبيق على جوالك؟ من Safari اضغط زر المشاركة ثم «إضافة إلى الشاشة الرئيسية».", "📲 Want it as an app? In Safari, tap Share, then “Add to Home Screen”.");
+    installLine.hidden = false;
+  }
+  addEventListener("beforeinstallprompt", e=>{
+    e.preventDefault(); installEvt = e; if(standalone) return;
+    installLine.innerHTML = ""; const b = document.createElement("button"); b.type = "button"; b.className = "fb-copy"; b.textContent = tr("📲 ثبّت «أول خطوة» كتطبيق على جوالك", "📲 Install Awal Khatwa as an app");
+    b.onclick = async ()=>{ installEvt.prompt(); try{ const r = await installEvt.userChoice; track("pwa/"+r.outcome, "تثبيت التطبيق"); }catch(err){} installLine.hidden = true; };
+    installLine.append(b); installLine.hidden = false;
+  });
+
   // سطر التواصل تحت كل صفحة
   const wrap = document.querySelector(".wrap");
   if(wrap && !document.getElementById("contact")){
     const f = document.createElement("div"); f.className = "fb-foot";
-    f.innerHTML = `للتواصل والملاحظات: ${FEEDBACK.formUrl?`<a href="${FEEDBACK.formUrl}" target="_blank" rel="noopener">نموذج الملاحظات</a> · `:""}<a href="mailto:${FEEDBACK.email}" dir="ltr">${FEEDBACK.email}</a>${FEEDBACK.linkedin?` · <a href="${FEEDBACK.linkedin}" target="_blank" rel="noopener">LinkedIn</a>`:""}`;
+    f.innerHTML = `${tr("للتواصل والملاحظات:","Contact & feedback:")} ${FEEDBACK.formUrl?`<a href="${FEEDBACK.formUrl}" target="_blank" rel="noopener">${tr("نموذج الملاحظات","Feedback form")}</a> · `:""}<a href="mailto:${FEEDBACK.email}" dir="ltr">${FEEDBACK.email}</a>${FEEDBACK.linkedin?` · <a href="${FEEDBACK.linkedin}" target="_blank" rel="noopener">LinkedIn</a>`:""}`;
     wrap.append(f);
   }
+  if(wrap) wrap.append(installLine);
 })();

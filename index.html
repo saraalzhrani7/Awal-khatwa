@@ -17,6 +17,10 @@
 <meta property="og:locale" content="ar_SA">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.png?v=2">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="أول خطوة: فرص جديدة" href="feed.xml">
+<meta name="theme-color" content="#0B7A5C">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B7A5C'/%3E%3Cpath d='M9 22h6v-6h8' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -152,6 +156,7 @@ footer p{margin:0; max-width:66ch}
 .sitenav a{text-decoration:none; color:var(--muted); padding:6px 12px; border-radius:8px}
 .sitenav a[aria-current="page"]{color:var(--ink); background:var(--surface); border:1px solid var(--line)}
 .sitenav a:hover{color:var(--ink)}
+.langbtn{margin-inline-start:auto; background:none; border:1px solid var(--line); border-radius:8px; padding:5px 12px; font:inherit; font-size:13px; color:var(--ink); cursor:pointer}
 .new{font-size:11.5px; font-weight:600; color:var(--saffron); background:var(--saffron-soft); border-radius:6px; padding:1px 8px}
 .share{cursor:pointer}
 .btns{display:flex; gap:8px; flex-wrap:wrap; justify-content:end}
@@ -169,6 +174,23 @@ footer .about{display:grid; gap:6px}
 footer .contact{display:flex; gap:14px; flex-wrap:wrap}
 footer .contact a{color:var(--ink); font-weight:500}
 @media (prefers-reduced-motion:no-preference){ .job,.card{transition:border-color .15s} .job:hover,.card:hover{border-color:var(--accent)} }
+
+/* ===== قدّمت عليها + تقفل قريب ===== */
+.appl{font-size:11.5px; font-weight:600; color:var(--accent); background:var(--accent-soft); border-radius:6px; padding:1px 8px}
+.job.applied{opacity:.78}
+.applied-t{justify-self:start; background:none; border:0; padding:0; font:inherit; font-size:12.5px; color:var(--muted); text-decoration:underline; cursor:pointer}
+.applied-t[aria-pressed="true"]{color:var(--accent); text-decoration:none; font-weight:600}
+.soon{display:grid; gap:8px; margin:4px 0 10px; padding:12px 14px; border:1px solid var(--saffron); background:var(--saffron-soft); border-radius:12px}
+.soon b{font-size:14px; color:var(--saffron)}
+.soon-list{display:flex; gap:8px; overflow-x:auto; padding-bottom:2px}
+.soon-list a{flex:none; text-decoration:none; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:7px 11px; font-size:13px; display:grid; gap:1px; max-width:260px}
+.soon-list a span{color:var(--muted); font-size:12px}
+.soon-list a strong{font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.rss a{color:var(--ink); font-weight:600}
+.toast{position:fixed; inset-inline:16px; bottom:calc(16px + env(safe-area-inset-bottom,0px)); z-index:90; max-width:440px; margin-inline:auto; background:var(--ink); color:var(--bg); border-radius:12px; padding:12px 14px; display:flex; gap:10px; align-items:center; justify-content:space-between; box-shadow:0 8px 24px rgb(0 0 0 / .25); font-size:14px}
+.toast[hidden]{display:none}
+.toast button{flex:none; font:inherit; font-weight:600; border:0; border-radius:8px; padding:7px 12px; cursor:pointer; background:var(--accent); color:var(--accent-ink)}
+.toast .x{background:transparent; color:inherit; opacity:.7; padding:7px 6px}
 
 /* ===== الكمبيوتر: نفس الشكل القديم ===== */
 .gloss-toggle,.fbtn,.fhead,.flabel,.fdone,.fback,.star-m{display:none}
@@ -249,6 +271,7 @@ footer .contact a{color:var(--ink); font-weight:500}
     <a href="cv.html">سيرتك</a>
     <a href="guide.html">دليل المبتدئ</a>
     <a href="stats.html">الإحصائيات</a>
+    <button class="langbtn" id="langBtn" type="button" lang="en">English</button>
   </nav>
   <header class="top">
     <div class="brand">
@@ -284,7 +307,7 @@ footer .contact a{color:var(--ink); font-weight:500}
         </label>
         <button class="toggle fbtn" id="filterBtn" type="button" aria-expanded="false" aria-controls="fpanel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>فلترة<span class="badge" id="fCount" hidden></span></button>
         <button class="toggle" id="openBtn" aria-pressed="true" type="button"><span class="dot"></span>المتاحة للتقديم بس</button>
-        <button class="toggle" id="savedBtn" aria-pressed="false" type="button">★ المحفوظة <span id="savedN" class="n"></span></button>
+        <button class="toggle" id="savedBtn" aria-pressed="false" type="button">★ فرصي <span id="savedN" class="n"></span></button>
       </div>
       <div class="fback" id="fback" hidden></div>
       <div class="fpanel" id="fpanel" role="group" aria-label="الفلاتر">
@@ -300,6 +323,7 @@ footer .contact a{color:var(--ink); font-weight:500}
       </div>
       <div class="resultline" id="resultline"></div>
     </div>
+    <div class="soon" id="soon" hidden></div>
     <div class="list" id="list"><div class="empty">جاري تحميل الفرص…</div></div>
   </div>
 
@@ -332,6 +356,7 @@ footer .contact a{color:var(--ink); font-weight:500}
   <footer>
     <div class="about">
       <p><b>أول خطوة</b> موقع مستقل وغير تابع لأي من الشركات المذكورة. الإعلانات مأخوذة من صفحات التوظيف الرسمية، ونحدّثها تلقائيًا كل يوم.</p>
+      <p class="rss"><a href="feed.xml" id="rssLink">📡 تابع الفرص الجديدة (RSS)</a> <span id="rssHint">· تقدر تضيفه في تطبيق أخبار أو قناة تيليجرام</span></p>
       <p id="checkedLine">الفرص تتغير بسرعة، فتأكد من الحالة في صفحة التقديم قبل ما تقدم.</p>
       <div class="contact" id="contact"></div>
     </div>
@@ -339,6 +364,48 @@ footer .contact a{color:var(--ink); font-weight:500}
 </div>
 
 <script>
+// ===== النسخة الإنجليزية للأجزاء الثابتة =====
+const STATIC_EN = [
+  ['.sitenav a[href="./"]', 'Opportunities'], ['.sitenav a[href="cv.html"]', 'CV Builder'], ['.sitenav a[href="guide.html"]', 'Beginner Guide'], ['.sitenav a[href="stats.html"]', 'Stats'],
+  ['#langBtn', 'عربي'],
+  ['.brand h1', 'Awal <span>Khatwa</span>'],
+  ['.brand p', 'Internships, co-op training, graduate programs and entry-level jobs at Saudi startups, for people just starting their careers. Every listing links to the official application page.'],
+  ['#stOpen + small', 'open now'], ['#stAll + small', 'listings & programs'], ['#stCo + small', 'startups'],
+  ['#glossToggle', 'What’s the difference between these types?'],
+  ['#glossary', `<div class="gloss"><span class="k">Co-op Training</span><p><b>University requirement:</b> training you need to graduate, approved and followed up by your university.</p></div>
+    <div class="gloss"><span class="k">Internship</span><p><b>Not a university requirement:</b> for recent graduates or students in summer, usually 3 to 6 months and often paid.</p></div>
+    <div class="gloss"><span class="k">Graduate Program</span><p><b>A graduate cohort:</b> a group of graduates trained together, sometimes ending with a job offer.</p></div>
+    <div class="gloss"><span class="k">Entry Level</span><p><b>First job:</b> a full-time role that needs no prior experience, or one year at most.</p></div>`],
+  ['#tab-jobs', 'Opportunities <span class="n" id="nJobs"></span>'], ['#tab-cos', 'Companies <span class="n" id="nCos"></span>'],
+  ['#filterBtn', '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filters<span class="badge" id="fCount" hidden></span>'],
+  ['#openBtn', '<span class="dot"></span>Open only'], ['#savedBtn', '★ My list <span id="savedN" class="n"></span>'],
+  ['.fhead b', 'Filter opportunities'], ['#fReset', 'Clear filters'],
+  ['.flabel:nth-of-type(1)', 'Type'],
+  ['#fDone', 'Show results'],
+  ['section.more h2', 'Programs and platforms for new graduates'],
+  ['section.more .boards', `<a class="board" href="cv.html" style="border-style:solid;border-color:var(--accent)"><b>Write your CV for free</b><span>ATS-friendly CV builder that also matches your CV to any job</span></a>
+      <a class="board" href="https://www.hrdf.org.sa/products-and-services/programs/individuals/training/graduate-development/" target="_blank" rel="noopener"><b>Tamheer (HRDF)</b><span>3 to 6 months of training with a SAR 3,000 monthly stipend, for Saudis under 30</span></a>
+      <a class="board" href="https://www.hrdf.org.sa/products-and-services/programs/individuals/training/cooperative-training/" target="_blank" rel="noopener"><b>Co-op Training (HRDF)</b><span>Support for university and college students training in the private sector</span></a>
+      <a class="board" href="https://hub.misk.org.sa/programs/" target="_blank" rel="noopener"><b>Misk programs</b><span>Training programs with companies such as HUMAIN and Moyasar</span></a>
+      <a class="board" href="https://jadarat.sa/" target="_blank" rel="noopener"><b>Jadarat</b><span>The national unified employment platform</span></a>
+      <a class="board" href="https://buildsaudi.co/" target="_blank" rel="noopener"><b>BuildSaudi</b><span>Saudi startup jobs by sector</span></a>
+      <a class="board" href="https://www.linkedin.com/jobs/search/?keywords=intern&location=Saudi%20Arabia&f_E=1" target="_blank" rel="noopener"><b>LinkedIn</b><span>Ready-made search for internships in Saudi Arabia</span></a>`],
+  ['footer .about p:first-child', '<b>Awal Khatwa</b> is an independent site, not affiliated with any of the companies listed. Listings come from official careers pages and update automatically every day.'],
+  ['#rssLink', '📡 Follow new opportunities (RSS)'], ['#rssHint', '· add it to a news reader or a Telegram channel'],
+  ['#checkedLine', 'Listings change fast, so check the status on the application page before you apply.']
+];
+const PH_EN = {q:"Search by title or company… e.g. data, security, Tabby", q2:"Search by company or sector…"};
+function applyStatic(){
+  if(LANG !== "en") return;
+  document.documentElement.lang = "en"; document.documentElement.dir = "ltr";
+  const w = document.querySelector(".wrap"); w.setAttribute("dir","ltr"); w.setAttribute("lang","en");
+  document.title = "Awal Khatwa | Internships, Co-op and Entry-Level Jobs at Saudi Startups";
+  STATIC_EN.forEach(([sel, html])=>{ const el = document.querySelector(sel); if(el) el.innerHTML = html; });
+  const fl = document.querySelectorAll(".flabel"); ["Type","Field","City"].forEach((t,i)=>{ if(fl[i]) fl[i].textContent = t; });
+  Object.entries(PH_EN).forEach(([id,ph])=>{ const el = document.getElementById(id); if(el) el.placeholder = ph; });
+  $("#langBtn").setAttribute("lang","ar");
+}
+
 // ===== بيانات التواصل: عدّليها هنا =====
 const CONTACT = {
   linkedin: "",   // رابط بروفايلك في لينكدإن
@@ -346,6 +413,14 @@ const CONTACT = {
 };
 // =========================================
 
+// ===== اللغة: عربي / English =====
+const LANG_KEY = "awal-khatwa-lang";
+let LANG = "ar"; try{ LANG = localStorage.getItem(LANG_KEY) || (new URLSearchParams(location.search).get("lang")==="en" ? "en" : "ar"); }catch(e){}
+if(new URLSearchParams(location.search).get("lang")==="en") LANG = "en";
+const T = (ar, en) => LANG === "en" ? en : ar;
+const hasArabic = t => /[\u0600-\u06FF]/.test(t||"");
+const CITY_EN = [["الرياض","Riyadh"],["جدة","Jeddah"],["الدمام","Dammam"],["الخبر","Khobar"],["الظهران","Dhahran"],["مكة","Makkah"],["المدينة","Madinah"],["الجبيل","Jubail"],["الأحساء","Al-Ahsa"],["السعودية","Saudi Arabia"],["عن بُعد","Remote"],["عن بعد","Remote"],[" أو "," or "],["،",","]];
+const cityL = c => LANG === "en" ? CITY_EN.reduce((t,[a,b])=>t.split(a).join(b), c||"") : (c||"");
 const REGIONS = {
   riyadh: {label:"الرياض", test:j=>/الرياض/.test(j.city||"")},
   west:   {label:"جدة ومكة", test:j=>/جدة|مكة|المدينة/.test(j.city||"")},
@@ -355,62 +430,72 @@ const REGIONS = {
 const TYPES = {coop:"تدريب تعاوني", internship:"Internship", grad:"برنامج خريجين", entry:"Entry Level"};
 const FIELDS = {tech:"تقنية وبرمجة", data:"بيانات وذكاء اصطناعي", cyber:"أمن سيبراني", product:"منتج وتصميم", business:"أعمال وموارد بشرية", media:"إعلام ومحتوى"};
 const STATUS = {open:"مفتوح", rolling:"مستمر", seasonal:"موسمي", closed:"مغلق حاليًا"};
+const LABELS = {
+  ar:{types:{...TYPES}, fields:{...FIELDS}, status:{...STATUS}, regions:{riyadh:"الرياض", west:"جدة ومكة", east:"الشرقية", remote:"عن بُعد"}},
+  en:{types:{coop:"Co-op Training", internship:"Internship", grad:"Graduate Program", entry:"Entry Level"},
+      fields:{tech:"Tech & Software", data:"Data & AI", cyber:"Cybersecurity", product:"Product & Design", business:"Business & HR", media:"Media & Content"},
+      status:{open:"Open", rolling:"Rolling", seasonal:"Seasonal", closed:"Closed for now"},
+      regions:{riyadh:"Riyadh", west:"Jeddah & Makkah", east:"Eastern Province", remote:"Remote"}}
+};
+const SECT_EN = {"الكل":"All","إعلام ومحتوى":"Media & Content","برمجيات للأعمال":"Business Software","تقنية مالية":"Fintech","تجارة إلكترونية":"E-commerce","توصيل":"Delivery","سياحة وضيافة":"Travel & Hospitality","ذكاء اصطناعي":"AI","أمن سيبراني":"Cybersecurity","اتصالات":"Telecom","عقار وسكن":"Real Estate","فعاليات وترفيه":"Events & Entertainment","ألعاب":"Gaming","تقنية متقدمة":"Deep Tech"};
+const sectL = x => LANG === "en" ? (SECT_EN[x] || x) : x;
+function applyLabels(){ const L = LABELS[LANG]; Object.assign(TYPES, L.types); Object.assign(FIELDS, L.fields); Object.assign(STATUS, L.status); Object.entries(L.regions).forEach(([k,v])=>{ REGIONS[k].label = v; }); }
 const RANK = {open:0, rolling:1, seasonal:2, closed:3};
 
 const LI = n => "https://www.linkedin.com/jobs/search/?keywords=" + encodeURIComponent(n) + "&location=Saudi%20Arabia&f_E=1%2C2";
 const COS = [
- {ar:"ثمانية",en:"Thmanyah",sector:"إعلام ومحتوى",desc:"بودكاست ووثائقيات وصحافة رقمية، ومنصة تقنية خاصة فيها.",careers:"https://jobs.company.thmanyah.com/"},
- {ar:"كلماشي",en:"Kalamashii",sector:"إعلام ومحتوى",desc:"منصة إعلامية لأسلوب المعيشة السعودي: محتوى وفعاليات ومنتجات.",careers:"https://sa.linkedin.com/company/kalamashii"},
- {ar:"فودكس",en:"Foodics",sector:"برمجيات للأعمال",desc:"نظام نقاط بيع سحابي وإدارة للمطاعم.",careers:"https://apply.workable.com/foodics/"},
- {ar:"رواء",en:"Rewaa",sector:"برمجيات للأعمال",desc:"نظام إدارة مخزون ونقاط بيع لمحلات التجزئة.",careers:"https://www.rewaatech.com/en/careers/"},
- {ar:"قيود",en:"Qoyod",sector:"برمجيات للأعمال",desc:"برنامج محاسبة سحابي للمنشآت الصغيرة والمتوسطة.",careers:"https://www.qoyod.com/en/careers/"},
- {ar:"جسر",en:"Jisr",sector:"برمجيات للأعمال",desc:"منصة موارد بشرية ورواتب للشركات.",careers:"https://careers.smartrecruiters.com/Jisr"},
- {ar:"ركاز",en:"Rekaz",sector:"برمجيات للأعمال",desc:"حجوزات ومدفوعات للأندية والصالونات والعيادات.",careers:"https://forms.rekaz.io/"},
- {ar:"يونيفونك",en:"Unifonic",sector:"برمجيات للأعمال",desc:"منصة اتصالات سحابية للرسائل وخدمة العملاء.",careers:"https://jobs.unifonic.com/"},
- {ar:"تمارا",en:"Tamara",sector:"تقنية مالية",desc:"اشترِ الآن وادفع لاحقًا، ومن شركات اليونيكورن السعودية.",careers:"https://tamara.co/en-sa/careers"},
- {ar:"تابي",en:"Tabby",sector:"تقنية مالية",desc:"تقسيط المشتريات وخدمات مالية، مقرها الرئيسي في الرياض.",careers:"https://tabby.ai/en-AE/careers"},
- {ar:"لين",en:"Lean Technologies",sector:"تقنية مالية",desc:"بنية تحتية للمصرفية المفتوحة والمدفوعات.",careers:"https://jobs.ashbyhq.com/leantech"},
- {ar:"ميسر",en:"Moyasar",sector:"تقنية مالية",desc:"بوابة دفع إلكتروني للمتاجر والتطبيقات.",careers:"https://moyasar.com/en/resources/careers/"},
- {ar:"هايبرباي",en:"HyperPay",sector:"تقنية مالية",desc:"بوابة دفع وحلول مدفوعات للتجار.",careers:"https://hyperpay.elevatus.jobs/"},
- {ar:"ليندو",en:"Lendo",sector:"تقنية مالية",desc:"تمويل جماعي بالدين للمنشآت الصغيرة.",careers:"https://jobs.lendo.sa/"},
- {ar:"هلا",en:"HALA",sector:"تقنية مالية",desc:"مدفوعات وحسابات رقمية للمنشآت الصغيرة.",careers:"https://job-boards.greenhouse.io/hala"},
- {ar:"نقودلت",en:"Nqoodlet",sector:"تقنية مالية",desc:"بطاقات وإدارة مصروفات الشركات.",careers:"https://careers.nqoodlet.com/"},
- {ar:"تويك",en:"Tweeq",sector:"تقنية مالية",desc:"محفظة رقمية وبطاقة للأفراد.",careers:"https://www.linkedin.com/company/tweeq"},
- {ar:"رسن",en:"Rasan",sector:"تقنية مالية",desc:"تقنية تأمين، ومنها منصة «تأميني».",careers:"https://careers.rasan.co/"},
- {ar:"سلة",en:"Salla",sector:"تجارة إلكترونية",desc:"منصة إنشاء متاجر إلكترونية لأكثر من 100 ألف تاجر.",careers:"https://jobs.salla.com/"},
- {ar:"زد",en:"Zid",sector:"تجارة إلكترونية",desc:"منصة متاجر إلكترونية وحلول شحن ومدفوعات.",careers:"https://zid.sa/en/career/"},
- {ar:"فلاورد",en:"Floward",sector:"تجارة إلكترونية",desc:"توصيل الورد والهدايا أونلاين في الخليج.",careers:"https://careers.floward.com/"},
- {ar:"ساري",en:"Sary",sector:"تجارة إلكترونية",desc:"سوق إلكتروني يربط المحلات بالموردين.",careers:"https://apply.workable.com/sary"},
- {ar:"جاهز",en:"Jahez",sector:"توصيل",desc:"تطبيق توصيل طلبات المطاعم.",careers:"https://career.jahez.net/"},
- {ar:"مرسول",en:"Mrsool",sector:"توصيل",desc:"توصيل أي طلب من أي مكان.",careers:"https://apply.workable.com/mrsool-3/"},
- {ar:"نينجا",en:"Ninja",sector:"توصيل",desc:"توصيل بقالة سريع على مدار الساعة.",careers:"https://apply.workable.com/ananinja/"},
- {ar:"نعناع",en:"Nana",sector:"توصيل",desc:"تطبيق بقالة وتوصيل من المتاجر.",careers:"https://apply.workable.com/nana-grocery-direct/"},
- {ar:"جاذر إن",en:"Gathern",sector:"سياحة وضيافة",desc:"حجز شاليهات وشقق واستراحات.",careers:"https://www.linkedin.com/company/gathern.co"},
- {ar:"لوسيديا",en:"Lucidya",sector:"ذكاء اصطناعي",desc:"تحليل تجربة العملاء بالذكاء الاصطناعي بالعربي.",careers:"https://apply.workable.com/lucidya/"},
- {ar:"مزن",en:"Mozn",sector:"ذكاء اصطناعي",desc:"ذكاء اصطناعي لمكافحة الاحتيال وتحليل البيانات.",careers:"https://www.mozn.ai/careers"},
- {ar:"هيوماين",en:"HUMAIN",sector:"ذكاء اصطناعي",desc:"شركة ذكاء اصطناعي سعودية تابعة لصندوق الاستثمارات العامة.",careers:"https://hub.misk.org.sa/programs/skills/misk-x-humain-traineeship-program-future-ai-builders/"},
- {ar:"كوقنا",en:"COGNNA",sector:"أمن سيبراني",desc:"منصة مركز عمليات أمنية (SOC) بالذكاء الاصطناعي.",careers:"https://apply.workable.com/cognna/"},
- {ar:"سرج",en:"Sarj",sector:"ذكاء اصطناعي",desc:"وكلاء صوتيين عرب بالذكاء الاصطناعي للشركات، ويفتحون تدريب للمبتدئين.",careers:"https://jobs.ashbyhq.com/sarjai"},
- {ar:"ديب",en:"DEEP.SA",sector:"ذكاء اصطناعي",desc:"محركات ووكلاء ذكاء اصطناعي مبنية للسوق والبيانات السعودية.",careers:"https://www.linkedin.com/company/deepforai/jobs/"},
- {ar:"صوت",en:"Sawt",sector:"ذكاء اصطناعي",desc:"وكلاء صوتيين بالذكاء الاصطناعي لمراكز الاتصال باللهجات العربية.",careers:"https://www.linkedin.com/company/usesawt/jobs/"},
- {ar:"ريم",en:"RIME",sector:"ذكاء اصطناعي",desc:"ذكاء اصطناعي يشتغل على كاميرات فروع سلاسل التجزئة.",careers:"https://rime.sa/en/jobs"},
- {ar:"سايتي",en:"Sighti.ai",sector:"ذكاء اصطناعي",desc:"رؤية حاسوبية تحوّل كاميرات المحلات لتحليلات.",careers:"https://www.linkedin.com/company/sighti/jobs/"},
- {ar:"ويتفاي",en:"Wittify.ai",sector:"ذكاء اصطناعي",desc:"وكلاء محادثة بالذكاء الاصطناعي بالعربي ولهجاته لخدمة العملاء.",careers:"https://www.linkedin.com/company/wittify-ai/jobs/"},
- {ar:"عقود",en:"Oqood",sector:"ذكاء اصطناعي",desc:"مساحة عمل قانونية بالذكاء الاصطناعي لصياغة العقود.",careers:"https://oqood.ai/careers"},
- {ar:"جي بي تي",en:"GBT (GulfBoost)",sector:"ذكاء اصطناعي",desc:"أدوات خرائط وتوائم رقمية بالذكاء الاصطناعي للمدن الذكية.",careers:"https://gulfboost.com/careers"},
- {ar:"ليكورا",en:"LAKEORA",sector:"ذكاء اصطناعي",desc:"استشارات بيانات وذكاء اصطناعي للجهات السعودية.",careers:"https://jobs.ashbyhq.com/lakeora"},
- {ar:"ملاءة",en:"Malaa",sector:"تقنية مالية",desc:"بيانات مالية وتقييم ائتماني عن طريق المصرفية المفتوحة.",careers:"https://malaa.pinpointhq.com/"},
- {ar:"أبواب",en:"Abwab.ai",sector:"تقنية مالية",desc:"منصة ذكاء اصطناعي لتمويل المنشآت الصغيرة والمتوسطة.",careers:"https://www.revolutpeople.com/abwab/public/careers"},
- {ar:"إلمنتس",en:"Elements",sector:"تقنية مالية",desc:"نظام بالذكاء الاصطناعي للمدفوعات والتسويات والخزينة في الشركات.",careers:"https://runelements.com/"},
- {ar:"منزل",en:"Mnzil",sector:"عقار وسكن",desc:"منصة لسكن العمالة وخدماتهم، وعندهم وظائف Associate للمبتدئين.",careers:"https://mnzil.com/en/careers"},
- {ar:"آيا",en:"Aya",sector:"تجارة إلكترونية",desc:"منصة لاكتشاف وشراء العبايات والأزياء المحتشمة.",careers:"https://careers.aya.app/"},
- {ar:"فرناس",en:"Firnas",sector:"سياحة وضيافة",desc:"سفر الأعمال بالذكاء الاصطناعي: تخطيط الرحلات وحجزها.",careers:"https://firnas.ai/"},
- {ar:"ويبوك",en:"webook",sector:"فعاليات وترفيه",desc:"حجز التذاكر والفعاليات، ويفتحون تمهير وتدريب تعاوني وInternship.",careers:"https://apply.workable.com/webook/"},
- {ar:"ميراي",en:"Mirai",sector:"ألعاب",desc:"استوديو ألعاب ومحتوى بالذكاء الاصطناعي التوليدي.",careers:"https://apply.workable.com/playmirai/"},
- {ar:"أدري",en:"Adree",sector:"برمجيات للأعمال",desc:"اختبار البرمجيات والتحول الرقمي بتقنيات Low-code.",careers:"https://apply.workable.com/adree/"},
- {ar:"آلات",en:"Alat",sector:"تقنية متقدمة",desc:"تصنيع إلكترونيات وتقنيات متقدمة، تابعة لصندوق الاستثمارات العامة.",careers:"https://www.alat.com/en/careers/"},
- {ar:"نيو سبيس",en:"Neo Space Group",sector:"تقنية متقدمة",desc:"خدمات فضائية للاتصالات والرصد، تابعة لصندوق الاستثمارات العامة.",careers:"https://www.linkedin.com/company/neospacegroup/jobs/"},
- {ar:"أثير",en:"Atheer Connectivity",sector:"اتصالات",desc:"تقنيات اتصال لاسلكي لإيصال الإنترنت للمناطق البعيدة.",careers:"https://freehire.me/jobs/software-engineer-intern-coop-atheer-ct-mkhhu7ik"}
+ {ar:"ثمانية",en:"Thmanyah",sector:"إعلام ومحتوى",desc:"بودكاست ووثائقيات وصحافة رقمية، ومنصة تقنية خاصة فيها.",den:"Podcasts, documentaries and digital journalism, with its own tech platform.",careers:"https://jobs.company.thmanyah.com/"},
+ {ar:"كلماشي",en:"Kalamashii",sector:"إعلام ومحتوى",desc:"منصة إعلامية لأسلوب المعيشة السعودي: محتوى وفعاليات ومنتجات.",den:"Saudi lifestyle media platform: content, events and products.",careers:"https://sa.linkedin.com/company/kalamashii"},
+ {ar:"فودكس",en:"Foodics",sector:"برمجيات للأعمال",desc:"نظام نقاط بيع سحابي وإدارة للمطاعم.",den:"Cloud point-of-sale and restaurant management system.",careers:"https://apply.workable.com/foodics/"},
+ {ar:"رواء",en:"Rewaa",sector:"برمجيات للأعمال",desc:"نظام إدارة مخزون ونقاط بيع لمحلات التجزئة.",den:"Inventory and point-of-sale system for retail shops.",careers:"https://www.rewaatech.com/en/careers/"},
+ {ar:"قيود",en:"Qoyod",sector:"برمجيات للأعمال",desc:"برنامج محاسبة سحابي للمنشآت الصغيرة والمتوسطة.",den:"Cloud accounting software for small and medium businesses.",careers:"https://www.qoyod.com/en/careers/"},
+ {ar:"جسر",en:"Jisr",sector:"برمجيات للأعمال",desc:"منصة موارد بشرية ورواتب للشركات.",den:"HR and payroll platform for companies.",careers:"https://careers.smartrecruiters.com/Jisr"},
+ {ar:"ركاز",en:"Rekaz",sector:"برمجيات للأعمال",desc:"حجوزات ومدفوعات للأندية والصالونات والعيادات.",den:"Bookings and payments for gyms, salons and clinics.",careers:"https://forms.rekaz.io/"},
+ {ar:"يونيفونك",en:"Unifonic",sector:"برمجيات للأعمال",desc:"منصة اتصالات سحابية للرسائل وخدمة العملاء.",den:"Cloud communications platform for messaging and customer service.",careers:"https://jobs.unifonic.com/"},
+ {ar:"تمارا",en:"Tamara",sector:"تقنية مالية",desc:"اشترِ الآن وادفع لاحقًا، ومن شركات اليونيكورن السعودية.",den:"Buy now, pay later; one of Saudi Arabia’s unicorns.",careers:"https://tamara.co/en-sa/careers"},
+ {ar:"تابي",en:"Tabby",sector:"تقنية مالية",desc:"تقسيط المشتريات وخدمات مالية، مقرها الرئيسي في الرياض.",den:"Shopping installments and financial services, headquartered in Riyadh.",careers:"https://tabby.ai/en-AE/careers"},
+ {ar:"لين",en:"Lean Technologies",sector:"تقنية مالية",desc:"بنية تحتية للمصرفية المفتوحة والمدفوعات.",den:"Open banking and payments infrastructure.",careers:"https://jobs.ashbyhq.com/leantech"},
+ {ar:"ميسر",en:"Moyasar",sector:"تقنية مالية",desc:"بوابة دفع إلكتروني للمتاجر والتطبيقات.",den:"Online payment gateway for stores and apps.",careers:"https://moyasar.com/en/resources/careers/"},
+ {ar:"هايبرباي",en:"HyperPay",sector:"تقنية مالية",desc:"بوابة دفع وحلول مدفوعات للتجار.",den:"Payment gateway and payment solutions for merchants.",careers:"https://hyperpay.elevatus.jobs/"},
+ {ar:"ليندو",en:"Lendo",sector:"تقنية مالية",desc:"تمويل جماعي بالدين للمنشآت الصغيرة.",den:"Debt crowdfunding for small businesses.",careers:"https://jobs.lendo.sa/"},
+ {ar:"هلا",en:"HALA",sector:"تقنية مالية",desc:"مدفوعات وحسابات رقمية للمنشآت الصغيرة.",den:"Payments and digital accounts for small businesses.",careers:"https://job-boards.greenhouse.io/hala"},
+ {ar:"نقودلت",en:"Nqoodlet",sector:"تقنية مالية",desc:"بطاقات وإدارة مصروفات الشركات.",den:"Corporate cards and expense management.",careers:"https://careers.nqoodlet.com/"},
+ {ar:"تويك",en:"Tweeq",sector:"تقنية مالية",desc:"محفظة رقمية وبطاقة للأفراد.",den:"Digital wallet and card for individuals.",careers:"https://www.linkedin.com/company/tweeq"},
+ {ar:"رسن",en:"Rasan",sector:"تقنية مالية",desc:"تقنية تأمين، ومنها منصة «تأميني».",den:"Insurtech, including the Tameeni platform.",careers:"https://careers.rasan.co/"},
+ {ar:"سلة",en:"Salla",sector:"تجارة إلكترونية",desc:"منصة إنشاء متاجر إلكترونية لأكثر من 100 ألف تاجر.",den:"E-commerce store builder used by 100,000+ merchants.",careers:"https://jobs.salla.com/"},
+ {ar:"زد",en:"Zid",sector:"تجارة إلكترونية",desc:"منصة متاجر إلكترونية وحلول شحن ومدفوعات.",den:"E-commerce platform with shipping and payment solutions.",careers:"https://zid.sa/en/career/"},
+ {ar:"فلاورد",en:"Floward",sector:"تجارة إلكترونية",desc:"توصيل الورد والهدايا أونلاين في الخليج.",den:"Online flowers and gifts delivery across the Gulf.",careers:"https://careers.floward.com/"},
+ {ar:"ساري",en:"Sary",sector:"تجارة إلكترونية",desc:"سوق إلكتروني يربط المحلات بالموردين.",den:"B2B marketplace connecting shops with suppliers.",careers:"https://apply.workable.com/sary"},
+ {ar:"جاهز",en:"Jahez",sector:"توصيل",desc:"تطبيق توصيل طلبات المطاعم.",den:"Restaurant food delivery app.",careers:"https://career.jahez.net/"},
+ {ar:"مرسول",en:"Mrsool",sector:"توصيل",desc:"توصيل أي طلب من أي مكان.",den:"Deliver anything from anywhere.",careers:"https://apply.workable.com/mrsool-3/"},
+ {ar:"نينجا",en:"Ninja",sector:"توصيل",desc:"توصيل بقالة سريع على مدار الساعة.",den:"Fast 24/7 grocery delivery.",careers:"https://apply.workable.com/ananinja/"},
+ {ar:"نعناع",en:"Nana",sector:"توصيل",desc:"تطبيق بقالة وتوصيل من المتاجر.",den:"Grocery shopping and delivery from stores.",careers:"https://apply.workable.com/nana-grocery-direct/"},
+ {ar:"جاذر إن",en:"Gathern",sector:"سياحة وضيافة",desc:"حجز شاليهات وشقق واستراحات.",den:"Booking chalets, apartments and rest houses.",careers:"https://www.linkedin.com/company/gathern.co"},
+ {ar:"لوسيديا",en:"Lucidya",sector:"ذكاء اصطناعي",desc:"تحليل تجربة العملاء بالذكاء الاصطناعي بالعربي.",den:"AI customer-experience analytics in Arabic.",careers:"https://apply.workable.com/lucidya/"},
+ {ar:"مزن",en:"Mozn",sector:"ذكاء اصطناعي",desc:"ذكاء اصطناعي لمكافحة الاحتيال وتحليل البيانات.",den:"AI for fraud prevention and data analytics.",careers:"https://www.mozn.ai/careers"},
+ {ar:"هيوماين",en:"HUMAIN",sector:"ذكاء اصطناعي",desc:"شركة ذكاء اصطناعي سعودية تابعة لصندوق الاستثمارات العامة.",den:"Saudi AI company owned by the Public Investment Fund.",careers:"https://hub.misk.org.sa/programs/skills/misk-x-humain-traineeship-program-future-ai-builders/"},
+ {ar:"كوقنا",en:"COGNNA",sector:"أمن سيبراني",desc:"منصة مركز عمليات أمنية (SOC) بالذكاء الاصطناعي.",den:"AI-powered security operations center (SOC) platform.",careers:"https://apply.workable.com/cognna/"},
+ {ar:"سرج",en:"Sarj",sector:"ذكاء اصطناعي",desc:"وكلاء صوتيين عرب بالذكاء الاصطناعي للشركات، ويفتحون تدريب للمبتدئين.",den:"Arabic AI voice agents for enterprises; opens internships for beginners.",careers:"https://jobs.ashbyhq.com/sarjai"},
+ {ar:"ديب",en:"DEEP.SA",sector:"ذكاء اصطناعي",desc:"محركات ووكلاء ذكاء اصطناعي مبنية للسوق والبيانات السعودية.",den:"AI engines and agents built for Saudi market data.",careers:"https://www.linkedin.com/company/deepforai/jobs/"},
+ {ar:"صوت",en:"Sawt",sector:"ذكاء اصطناعي",desc:"وكلاء صوتيين بالذكاء الاصطناعي لمراكز الاتصال باللهجات العربية.",den:"AI voice agents for call centers in Arabic dialects.",careers:"https://www.linkedin.com/company/usesawt/jobs/"},
+ {ar:"ريم",en:"RIME",sector:"ذكاء اصطناعي",desc:"ذكاء اصطناعي يشتغل على كاميرات فروع سلاسل التجزئة.",den:"Edge AI running on retail branch cameras.",careers:"https://rime.sa/en/jobs"},
+ {ar:"سايتي",en:"Sighti.ai",sector:"ذكاء اصطناعي",desc:"رؤية حاسوبية تحوّل كاميرات المحلات لتحليلات.",den:"Computer vision that turns store cameras into analytics.",careers:"https://www.linkedin.com/company/sighti/jobs/"},
+ {ar:"ويتفاي",en:"Wittify.ai",sector:"ذكاء اصطناعي",desc:"وكلاء محادثة بالذكاء الاصطناعي بالعربي ولهجاته لخدمة العملاء.",den:"Arabic conversational AI agents for customer service.",careers:"https://www.linkedin.com/company/wittify-ai/jobs/"},
+ {ar:"عقود",en:"Oqood",sector:"ذكاء اصطناعي",desc:"مساحة عمل قانونية بالذكاء الاصطناعي لصياغة العقود.",den:"AI legal workspace for drafting contracts.",careers:"https://oqood.ai/careers"},
+ {ar:"جي بي تي",en:"GBT (GulfBoost)",sector:"ذكاء اصطناعي",desc:"أدوات خرائط وتوائم رقمية بالذكاء الاصطناعي للمدن الذكية.",den:"AI geospatial tools and digital twins for smart cities.",careers:"https://gulfboost.com/careers"},
+ {ar:"ليكورا",en:"LAKEORA",sector:"ذكاء اصطناعي",desc:"استشارات بيانات وذكاء اصطناعي للجهات السعودية.",den:"Data and AI consulting for Saudi organizations.",careers:"https://jobs.ashbyhq.com/lakeora"},
+ {ar:"ملاءة",en:"Malaa",sector:"تقنية مالية",desc:"بيانات مالية وتقييم ائتماني عن طريق المصرفية المفتوحة.",den:"Financial data and credit scoring through open banking.",careers:"https://malaa.pinpointhq.com/"},
+ {ar:"أبواب",en:"Abwab.ai",sector:"تقنية مالية",desc:"منصة ذكاء اصطناعي لتمويل المنشآت الصغيرة والمتوسطة.",den:"AI platform for SME lending.",careers:"https://www.revolutpeople.com/abwab/public/careers"},
+ {ar:"إلمنتس",en:"Elements",sector:"تقنية مالية",desc:"نظام بالذكاء الاصطناعي للمدفوعات والتسويات والخزينة في الشركات.",den:"AI system for company payments, reconciliation and treasury.",careers:"https://runelements.com/"},
+ {ar:"منزل",en:"Mnzil",sector:"عقار وسكن",desc:"منصة لسكن العمالة وخدماتهم، وعندهم وظائف Associate للمبتدئين.",den:"Worker housing and services platform; hires Associates for beginners.",careers:"https://mnzil.com/en/careers"},
+ {ar:"آيا",en:"Aya",sector:"تجارة إلكترونية",desc:"منصة لاكتشاف وشراء العبايات والأزياء المحتشمة.",den:"Marketplace to discover and buy abayas and modest fashion.",careers:"https://careers.aya.app/"},
+ {ar:"فرناس",en:"Firnas",sector:"سياحة وضيافة",desc:"سفر الأعمال بالذكاء الاصطناعي: تخطيط الرحلات وحجزها.",den:"AI business travel: trip planning and booking.",careers:"https://firnas.ai/"},
+ {ar:"ويبوك",en:"webook",sector:"فعاليات وترفيه",desc:"حجز التذاكر والفعاليات، ويفتحون تمهير وتدريب تعاوني وInternship.",den:"Tickets and events booking; offers Tamheer, co-op and internships.",careers:"https://apply.workable.com/webook/"},
+ {ar:"ميراي",en:"Mirai",sector:"ألعاب",desc:"استوديو ألعاب ومحتوى بالذكاء الاصطناعي التوليدي.",den:"Game and content studio using generative AI.",careers:"https://apply.workable.com/playmirai/"},
+ {ar:"أدري",en:"Adree",sector:"برمجيات للأعمال",desc:"اختبار البرمجيات والتحول الرقمي بتقنيات Low-code.",den:"Software testing and digital transformation with low-code.",careers:"https://apply.workable.com/adree/"},
+ {ar:"آلات",en:"Alat",sector:"تقنية متقدمة",desc:"تصنيع إلكترونيات وتقنيات متقدمة، تابعة لصندوق الاستثمارات العامة.",den:"Electronics and advanced tech manufacturing, owned by PIF.",careers:"https://www.alat.com/en/careers/"},
+ {ar:"نيو سبيس",en:"Neo Space Group",sector:"تقنية متقدمة",desc:"خدمات فضائية للاتصالات والرصد، تابعة لصندوق الاستثمارات العامة.",den:"Space services for communications and earth observation, owned by PIF.",careers:"https://www.linkedin.com/company/neospacegroup/jobs/"},
+ {ar:"أثير",en:"Atheer Connectivity",sector:"اتصالات",desc:"تقنيات اتصال لاسلكي لإيصال الإنترنت للمناطق البعيدة.",den:"Wireless tech bringing internet to remote areas.",careers:"https://freehire.me/jobs/software-engineer-intern-coop-atheer-ct-mkhhu7ik"}
 ];
 
 const $ = s => document.querySelector(s);
@@ -424,25 +509,37 @@ const st = {q:"", type:"all", field:"all", region:"all", openOnly:true, saved:fa
 const SAVE_KEY = "awal-khatwa-saved";
 let SAVED = new Set(); try{ SAVED = new Set(JSON.parse(localStorage.getItem(SAVE_KEY)||"[]")); }catch(e){}
 const persistSaved = () => { try{ localStorage.setItem(SAVE_KEY, JSON.stringify([...SAVED])); }catch(e){} };
+const APPLIED_KEY = "awal-khatwa-applied";
+let APPLIED = new Set(); try{ APPLIED = new Set(JSON.parse(localStorage.getItem(APPLIED_KEY)||"[]")); }catch(e){}
+const persistApplied = () => { try{ localStorage.setItem(APPLIED_KEY, JSON.stringify([...APPLIED])); }catch(e){} };
 function isNew(j){ if(!j.firstSeen) return false; const d=-daysLeft(j.firstSeen); return d>=0 && d<=3; }
 const track = (path, title) => { try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path, title, event:true}); }catch(e){} };
+applyLabels(); applyStatic();
+$("#langBtn").addEventListener("click", ()=>{
+  const next = LANG === "en" ? "ar" : "en";
+  try{ localStorage.setItem(LANG_KEY, next); }catch(e){}
+  track("lang/"+next, "تغيير اللغة");
+  const u = new URL(location.href); u.searchParams.delete("lang"); if(next==="en") u.searchParams.set("lang","en");
+  location.href = u.toString();
+});
 
 function daysLeft(d){ if(!d) return null; const t=new Date(d+"T00:00:00"); return Math.round((t-today)/864e5); }
 function effStatus(j){ const d=daysLeft(j.deadline); if(j.status==="open" && d!==null && d<0) return "closed"; return j.status; }
 function isApplyable(j){ const s=effStatus(j); return s==="open"||s==="rolling"; }
 
-function fmtDate(d){ try{ return new Date(d+"T00:00:00").toLocaleDateString("ar-SA-u-ca-gregory-nu-latn",{day:"numeric",month:"long",year:"numeric"}); }catch(e){ return d; } }
+function fmtDate(d){ try{ return new Date(d+"T00:00:00").toLocaleDateString(LANG==="en" ? "en-GB" : "ar-SA-u-ca-gregory-nu-latn",{day:"numeric",month:"long",year:"numeric"}); }catch(e){ return d; } }
 
 function chipsHTML(map, cur, counts){
-  return [`<button class="chip" type="button" data-v="all" aria-pressed="${cur==="all"}">الكل</button>`]
+  return [`<button class="chip" type="button" data-v="all" aria-pressed="${cur==="all"}">${T("الكل","All")}</button>`]
     .concat(Object.entries(map).filter(([k])=>counts[k]).map(([k,v])=>`<button class="chip" type="button" data-v="${k}" aria-pressed="${cur===k}"><bdi>${v}</bdi><span class="n">${counts[k]}</span></button>`)).join("");
 }
 
 function renderJobs(){
-  $("#savedN").textContent = SAVED.size ? SAVED.size : "";
+  const mine = new Set([...SAVED, ...APPLIED].filter(id=>JOBS.some(j=>j.id===id)));
+  $("#savedN").textContent = mine.size ? mine.size : "";
   const nf = (st.type!=="all") + (st.field!=="all") + (st.region!=="all") + (!st.openOnly) + (st.saved);
   $("#fCount").textContent = nf; $("#fCount").hidden = !nf;
-  const pool = st.saved ? JOBS.filter(j => SAVED.has(j.id)) : JOBS.filter(j => !st.openOnly || isApplyable(j));
+  const pool = st.saved ? JOBS.filter(j => SAVED.has(j.id) || APPLIED.has(j.id)) : JOBS.filter(j => !st.openOnly || isApplyable(j));
   const tc={}, fc={}, rc={};
   pool.forEach(j=>{ tc[j.type]=(tc[j.type]||0)+1; fc[j.field]=(fc[j.field]||0)+1;
     Object.entries(REGIONS).forEach(([k,r])=>{ if(r.test(j)) rc[k]=(rc[k]||0)+1; }); });
@@ -461,41 +558,44 @@ function renderJobs(){
     if(da!==null && db!==null) return da-db; if(da!==null) return -1; if(db!==null) return 1; return 0;
   });
   $("#resultline").innerHTML = st.openOnly
-    ? `${list.length} فرصة متاحة للتقديم<span class="rl-hint">. طفّ الفلتر عشان تشوف البرامج الموسمية والمغلقة وتستعد للدفعة الجاية.</span>`
-    : `${list.length} من ${JOBS.length} إعلان وبرنامج`;
+    ? T(`${list.length} فرصة متاحة للتقديم<span class="rl-hint">. طفّ الفلتر عشان تشوف البرامج الموسمية والمغلقة وتستعد للدفعة الجاية.</span>`, `${list.length} open opportunities<span class="rl-hint">. Turn off the filter to see seasonal and closed programs and get ready for the next intake.</span>`)
+    : T(`${list.length} من ${JOBS.length} إعلان وبرنامج`, `${list.length} of ${JOBS.length} listings`);
   $("#list").innerHTML = list.length ? list.map(jobHTML).join("") : (st.saved
-    ? `<div class="empty">ما حفظت أي فرصة للحين. اضغط ☆ على أي إعلان عشان تحفظه وترجع له بعدين.</div>`
-    : `<div class="empty">ما فيه فرص بهالفلاتر. جرّب مجال ثاني أو طفّ «المتاحة للتقديم بس».</div>`);
-  if(st.saved) $("#resultline").textContent = `${list.length} فرصة محفوظة. الحفظ في متصفحك بس.`;
-  $("#fDone").textContent = list.length ? `عرض ${list.length} فرصة` : "ما فيه نتائج، غيّر الفلاتر";
+    ? `<div class="empty">${T("ما عندك فرص للحين. اضغط ☆ عشان تحفظ فرصة، أو «قدّمت عليها؟» عشان تتابع تقديماتك.","Your list is empty. Tap ☆ to save an opportunity, or “Applied?” to track your applications.")}</div>`
+    : `<div class="empty">${T("ما فيه فرص بهالفلاتر. جرّب مجال ثاني أو طفّ «المتاحة للتقديم بس».","No opportunities match these filters. Try another field or turn off “Open only”.")}</div>`);
+  if(st.saved){ const na = list.filter(j=>APPLIED.has(j.id)).length; $("#resultline").textContent = T(`${list.length} فرصة في قائمتك${na?`، قدّمت على ${na} منها`:""}. القائمة محفوظة في متصفحك بس.`, `${list.length} in your list${na?`, applied to ${na}`:""}. Saved in this browser only.`); }
+  renderSoon();
+  $("#fDone").textContent = list.length ? T(`عرض ${list.length} فرصة`, `Show ${list.length} opportunities`) : T("ما فيه نتائج، غيّر الفلاتر","No results, change the filters");
 }
 
 const ICON = {
   share:'<svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>',
   cal:'<svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>'
 };
-function starBtn(j, cls){ const on = SAVED.has(j.id), t = on?"إزالة من المحفوظة":"حفظ الفرصة";
+function starBtn(j, cls){ const on = SAVED.has(j.id), t = on?T("إزالة من المحفوظة","Remove from saved"):T("حفظ الفرصة","Save");
   return `<button class="star ${cls}" type="button" data-save="${esc(j.id)}" aria-pressed="${on}" aria-label="${t}" title="${t}">${on?"★":"☆"}</button>`; }
 function jobHTML(j){
   const s = effStatus(j), d = daysLeft(j.deadline);
   let due = "";
-  if(d!==null && d>=0) due = `<div class="due ${d<=7?"hot":""}"><span>${d===0?"آخر يوم اليوم":d===1?"باقي يوم واحد":`باقي ${d} يوم`}</span><span class="dd">${fmtDate(j.deadline)}</span></div>`;
-  else if(d!==null) due = `<div class="due">انتهى التقديم ${fmtDate(j.deadline)}</div>`;
-  const meta = [`<span class="tag type">${TYPES[j.type]||""}</span>`, `<span class="tag">${FIELDS[j.field]||""}</span>`, j.city&&`<span class="tag">${esc(j.city)}</span>`, (j.remote && !/عن ب/.test(j.city||""))&&`<span class="tag">عن بُعد</span>`, j.duration&&`<span class="tag dur">${esc(j.duration)}</span>`, j.paid&&`<span class="tag">${esc(j.paid)}</span>`].filter(Boolean).join("");
-  const label = s==="closed" ? "صفحة البرنامج" : "صفحة التقديم";
-  return `<article class="job ${s}" id="job-${esc(j.id)}">
+  if(d!==null && d>=0) due = `<div class="due ${d<=7?"hot":""}"><span>${d===0?T("آخر يوم اليوم","Last day today"):d===1?T("باقي يوم واحد","1 day left"):T(`باقي ${d} يوم`,`${d} days left`)}</span><span class="dd">${fmtDate(j.deadline)}</span></div>`;
+  else if(d!==null) due = `<div class="due">${T("انتهى التقديم","Closed on")} ${fmtDate(j.deadline)}</div>`;
+  const meta = [`<span class="tag type">${TYPES[j.type]||""}</span>`, `<span class="tag">${FIELDS[j.field]||""}</span>`, j.city&&`<span class="tag">${esc(cityL(j.city))}</span>`, (j.remote && !/عن ب/.test(j.city||""))&&`<span class="tag">${T("عن بُعد","Remote")}</span>`, j.duration&&!(LANG==="en"&&hasArabic(j.duration))&&`<span class="tag dur">${esc(j.duration)}</span>`, j.paid&&!(LANG==="en"&&hasArabic(j.paid))&&`<span class="tag">${esc(j.paid)}</span>`].filter(Boolean).join("");
+  const label = s==="closed" ? T("صفحة البرنامج","Program page") : T("صفحة التقديم","Apply");
+  const whoTxt = LANG==="en" ? ((j.who||"").match(/^قسم (.+?)\.?$/) ? `${RegExp.$1} team.` : (hasArabic(j.who) ? "" : j.who||"")) : (j.who||"");
+  return `<article class="job ${s}${APPLIED.has(j.id)?" applied":""}" id="job-${esc(j.id)}">
     <div class="job-main">
-      <div class="job-co"><b>${esc(j.company)}</b>${j.companyEn?`<span class="ltr">${esc(j.companyEn)}</span>`:""}${isNew(j)?'<span class="new">جديد</span>':""}</div>
-      <h3 ${hasLatin(j.title)?'dir="ltr" style="text-align:right"':""}>${esc(j.title)}</h3>
+      <div class="job-co">${LANG==="en"&&j.companyEn?`<b class="ltr">${esc(j.companyEn)}</b><span>${esc(j.company)}</span>`:`<b>${esc(j.company)}</b>${j.companyEn?`<span class="ltr">${esc(j.companyEn)}</span>`:""}`}${isNew(j)?`<span class="new">${T("جديد","New")}</span>`:""}${APPLIED.has(j.id)?`<span class="appl">✓ ${T("قدّمت","Applied")}</span>`:""}</div>
+      <h3 ${hasLatin(j.title)?`dir="ltr" style="text-align:${LANG==="en"?"left":"right"}"`:""}>${esc(j.title)}</h3>
       <div class="meta">${meta}</div>
-      ${j.who?`<p class="who">${esc(j.who)}</p>`:""}
-      ${(j.keywords&&j.keywords.length&&s!=="closed")?`<a class="matchlink" href="cv.html#match-${encodeURIComponent(j.id)}">طابق سيرتك مع هالوظيفة ←</a>`:""}
+      ${whoTxt?`<p class="who">${esc(whoTxt)}</p>`:""}
+      ${(j.keywords&&j.keywords.length&&s!=="closed")?`<a class="matchlink" href="cv.html#match-${encodeURIComponent(j.id)}">${T("طابق سيرتك مع هالوظيفة ←","Match your CV to this job →")}</a>`:""}
+      ${s!=="closed"||APPLIED.has(j.id)?`<button class="applied-t" type="button" data-applied="${esc(j.id)}" aria-pressed="${APPLIED.has(j.id)}">${APPLIED.has(j.id)?T("✓ قدّمت عليها (اضغط للإلغاء)","✓ Applied (tap to undo)"):T("قدّمت عليها؟ علّمها","Applied? Mark it")}</button>`:""}
       ${adminOn?`<div><button class="del" type="button" data-del="${esc(j.id)}">حذف الإعلان</button></div>`:""}
     </div>
     <div class="job-side">
       <div class="side-top">${starBtn(j, "star-d")}<span class="pill ${s}">${STATUS[s]}</span></div>
       ${due}
-      <div class="btns"><a class="btn apply ${s==="closed"?"":"primary"}" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">${label}</a><button class="btn share ico" type="button" data-share="${esc(j.id)}" aria-label="مشاركة" title="مشاركة">${ICON.share}<span class="lbl">مشاركة</span></button>${s!=="closed"?`<button class="btn ico" type="button" data-remind="${esc(j.id)}" aria-label="ذكرني بآخر موعد" title="ذكرني بآخر موعد">${ICON.cal}<span class="lbl">ذكرني</span></button>`:""}${starBtn(j, "star-m btn ico")}</div>
+      <div class="btns"><a class="btn apply ${s==="closed"?"":"primary"}" href="${esc(j.url)}" target="_blank" rel="noopener" data-apply="${esc(j.id)}">${label}</a><button class="btn share ico" type="button" data-share="${esc(j.id)}" aria-label="${T("مشاركة","Share")}" title="${T("مشاركة","Share")}">${ICON.share}<span class="lbl">${T("مشاركة","Share")}</span></button>${s!=="closed"?`<button class="btn ico" type="button" data-remind="${esc(j.id)}" aria-label="${T("ذكرني بآخر موعد","Remind me")}" title="${T("ذكرني بآخر موعد","Remind me")}">${ICON.cal}<span class="lbl">${T("ذكرني","Remind me")}</span></button>`:""}${starBtn(j, "star-m btn ico")}</div>
       <div class="remind-menu" id="rm-${esc(j.id)}" hidden></div>
     </div>
   </article>`;
@@ -503,18 +603,18 @@ function jobHTML(j){
 
 function renderCos(){
   const sectors = ["الكل", ...new Set(COS.map(c=>c.sector))];
-  $("#secChips").innerHTML = sectors.map(s=>`<button class="chip" type="button" data-s="${s}" aria-pressed="${s===st.sector}">${s}</button>`).join("");
+  $("#secChips").innerHTML = sectors.map(s=>`<button class="chip" type="button" data-s="${s}" aria-pressed="${s===st.sector}">${sectL(s)}</button>`).join("");
   const q = norm(st.q2.trim());
   const openBy = {}; JOBS.filter(isApplyable).forEach(j=>{ if(j.companyEn) openBy[j.companyEn]=(openBy[j.companyEn]||0)+1; });
-  const list = COS.filter(c=>(st.sector==="الكل"||c.sector===st.sector) && (!q||norm([c.ar,c.en,c.sector,c.desc].join(" ")).includes(q)))
+  const list = COS.filter(c=>(st.sector==="الكل"||c.sector===st.sector) && (!q||norm([c.ar,c.en,c.sector,sectL(c.sector),c.desc,c.den||""].join(" ")).includes(q)))
     .sort((a,b)=>(openBy[b.en]||0)-(openBy[a.en]||0));
   $("#grid").innerHTML = list.map(c=>`<article class="card">
-    <div class="card-head"><div class="mono" aria-hidden="true">${esc(c.ar[0])}</div>
-      <div class="names"><h3>${esc(c.ar)}</h3><div class="en ltr">${esc(c.en)}</div></div></div>
-    <div class="meta"><span class="tag">${esc(c.sector)}</span>${openBy[c.en]?`<span class="has-jobs">${openBy[c.en]} فرصة مفتوحة للمبتدئين</span>`:""}</div>
-    <p class="desc">${esc(c.desc)}</p>
-    <div class="actions"><a class="btn primary" href="${esc(c.careers)}" target="_blank" rel="noopener">صفحة التوظيف</a><a class="btn" href="${LI(c.en)}" target="_blank" rel="noopener">وظائف المبتدئين في LinkedIn</a></div>
-  </article>`).join("") || `<div class="empty">ما فيه نتائج.</div>`;
+    <div class="card-head"><div class="mono" aria-hidden="true">${esc(LANG==="en" ? c.en[0] : c.ar[0])}</div>
+      <div class="names">${LANG==="en"?`<h3 class="ltr">${esc(c.en)}</h3><div class="en">${esc(c.ar)}</div>`:`<h3>${esc(c.ar)}</h3><div class="en ltr">${esc(c.en)}</div>`}</div></div>
+    <div class="meta"><span class="tag">${esc(sectL(c.sector))}</span>${openBy[c.en]?`<span class="has-jobs">${T(`${openBy[c.en]} فرصة مفتوحة للمبتدئين`,`${openBy[c.en]} open for beginners`)}</span>`:""}</div>
+    <p class="desc">${esc(LANG==="en" && c.den ? c.den : c.desc)}</p>
+    <div class="actions"><a class="btn primary" href="${esc(c.careers)}" target="_blank" rel="noopener">${T("صفحة التوظيف","Careers page")}</a><a class="btn" href="${LI(c.en)}" target="_blank" rel="noopener">${T("وظائف المبتدئين في LinkedIn","Entry-level jobs on LinkedIn")}</a></div>
+  </article>`).join("") || `<div class="empty">${T("ما فيه نتائج.","No results.")}</div>`;
 }
 
 function renderStats(){
@@ -524,7 +624,7 @@ function renderStats(){
   $("#nJobs").textContent = JOBS.filter(isApplyable).length;
   $("#nCos").textContent = COS.length;
   const last = JOBS.map(j=>j.checked).filter(Boolean).sort().pop();
-  if(last) $("#checkedLine").textContent = `آخر تحديث للإعلانات: ${fmtDate(last)}. الفرص تتغير بسرعة، فتأكد من الحالة في صفحة التقديم قبل ما تقدم.`;
+  if(last) $("#checkedLine").textContent = T(`آخر تحديث للإعلانات: ${fmtDate(last)}. الفرص تتغير بسرعة، فتأكد من الحالة في صفحة التقديم قبل ما تقدم.`, `Last updated: ${fmtDate(last)}. Listings change fast, so check the status on the application page before you apply.`);
 }
 function renderAll(){ renderStats(); renderJobs(); renderCos(); }
 
@@ -539,8 +639,9 @@ function reminderFor(j){
   const hasDl = !!j.deadline;
   const day = hasDl ? new Date(j.deadline+"T00:00:00") : new Date(Date.now() + 2*864e5);
   const next = new Date(day.getTime() + 864e5);
-  const title = hasDl ? `آخر يوم للتقديم: ${j.title} (${j.company})` : `قدّم على: ${j.title} (${j.company})`;
-  const details = `${j.title} في ${j.company}\nصفحة التقديم: ${j.url}\n\nمن «أول خطوة»: ${location.origin + location.pathname}#job-${j.id}`;
+  const co = LANG==="en" && j.companyEn ? j.companyEn : j.company;
+  const title = hasDl ? T(`آخر يوم للتقديم: ${j.title} (${co})`, `Last day to apply: ${j.title} (${co})`) : T(`قدّم على: ${j.title} (${co})`, `Apply to: ${j.title} (${co})`);
+  const details = T(`${j.title} في ${co}\nصفحة التقديم: ${j.url}\n\nمن «أول خطوة»: ${location.origin + location.pathname}#job-${j.id}`, `${j.title} at ${co}\nApply: ${j.url}\n\nFrom Awal Khatwa: ${location.origin + location.pathname}#job-${j.id}`);
   return {hasDl, day, next, title, details};
 }
 function icsFor(j){
@@ -560,9 +661,9 @@ function openRemind(j){
   const r = reminderFor(j);
   const g = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(r.title)}&dates=${icsDate(r.day)}/${icsDate(r.next)}&details=${encodeURIComponent(r.details)}`;
   const blob = URL.createObjectURL(new Blob([icsFor(j)], {type:"text/calendar;charset=utf-8"}));
-  box.innerHTML = `<span>${r.hasDl ? `نذكرك قبل آخر موعد (${fmtDate(j.deadline)}) بيومين وبيوم.` : "ما لهالفرصة موعد محدد، فنذكرك تقدم عليها بعد يومين."}</span>
-    <a href="${blob}" download="awal-khatwa-${esc(j.id)}.ics" data-cal="ics">📱 تقويم الجوال (آيفون وأوتلوك)</a>
-    <a href="${g}" target="_blank" rel="noopener" data-cal="google">🗓 تقويم قوقل (أندرويد)</a>`;
+  box.innerHTML = `<span>${r.hasDl ? T(`نذكرك قبل آخر موعد (${fmtDate(j.deadline)}) بيومين وبيوم.`, `We'll remind you 2 days and 1 day before the deadline (${fmtDate(j.deadline)}).`) : T("ما لهالفرصة موعد محدد، فنذكرك تقدم عليها بعد يومين.","No fixed deadline, so we'll remind you to apply in 2 days.")}</span>
+    <a href="${blob}" download="awal-khatwa-${esc(j.id)}.ics" data-cal="ics">📱 ${T("تقويم الجوال (آيفون وأوتلوك)","Phone calendar (iPhone & Outlook)")}</a>
+    <a href="${g}" target="_blank" rel="noopener" data-cal="google">🗓 ${T("تقويم قوقل (أندرويد)","Google Calendar (Android)")}</a>`;
   box.hidden = false;
   box.querySelectorAll("[data-cal]").forEach(a=>a.addEventListener("click", ()=>{ track("remind/"+a.dataset.cal, `${j.company} - ${j.title}`); setTimeout(()=>{ box.hidden = true; }, 400); }));
 }
@@ -571,19 +672,46 @@ $("#list").addEventListener("click", async e=>{
   if(sv){ const id = sv.dataset.save; if(SAVED.has(id)) SAVED.delete(id); else { SAVED.add(id); track("save/"+id, id); } persistSaved(); renderJobs(); return; }
   const rm = e.target.closest("[data-remind]");
   if(rm){ const j = JOBS.find(x=>x.id===rm.dataset.remind); if(j) openRemind(j); return; }
+  const ap = e.target.closest("[data-applied]");
+  if(ap){ toggleApplied(ap.dataset.applied); return; }
   const a = e.target.closest("[data-apply]");
-  if(a){ const j=JOBS.find(x=>x.id===a.dataset.apply); if(j) track("apply/"+j.id, `${j.company} - ${j.title}`); return; }
+  if(a){ const j=JOBS.find(x=>x.id===a.dataset.apply); if(j){ track("apply/"+j.id, `${j.company} - ${j.title}`); if(!APPLIED.has(j.id)) PENDING = j.id; } return; }
   const b = e.target.closest("[data-share]"); if(!b) return;
   const j = JOBS.find(x=>x.id===b.dataset.share); if(!j) return;
-  const url = location.origin + location.pathname + "#job-" + j.id;
-  const text = `${j.title} في ${j.company}\nلقيتها في «أول خطوة»:`;
+  const url = location.origin + location.pathname.replace(/[^/]*$/,"") + "j/" + encodeURIComponent(j.id) + ".html";
+  const text = T(`${j.title} في ${j.company}\nلقيتها في «أول خطوة»:`, `${j.title} at ${j.companyEn||j.company}\nFound it on Awal Khatwa:`);
   track("share/"+j.id, `${j.company} - ${j.title}`);
   if(navigator.share){ try{ await navigator.share({title:j.title, text, url}); return; }catch(err){ if(err && err.name==="AbortError") return; } }
   const lbl = b.querySelector(".lbl");
-  try{ await navigator.clipboard.writeText(text+"\n"+url); lbl.textContent="انتسخ ✓"; b.classList.add("done"); }
-  catch(err){ window.prompt("انسخ الرابط:", url); }
-  setTimeout(()=>{ lbl.textContent="مشاركة"; b.classList.remove("done"); }, 2200);
+  try{ await navigator.clipboard.writeText(text+"\n"+url); lbl.textContent=T("انتسخ ✓","Copied ✓"); b.classList.add("done"); }
+  catch(err){ window.prompt(T("انسخ الرابط:","Copy the link:"), url); }
+  setTimeout(()=>{ lbl.textContent=T("مشاركة","Share"); b.classList.remove("done"); }, 2200);
 });
+function toggleApplied(id){
+  if(APPLIED.has(id)) APPLIED.delete(id); else { APPLIED.add(id); track("applied/"+id, id); }
+  persistApplied(); renderJobs();
+}
+// بعد ما يرجع من صفحة التقديم نسأله: قدّمت؟
+let PENDING = null, toastTimer = null;
+function toast(msg, action, onAction){
+  const t = $("#toast"); t.textContent = "";
+  const m = document.createElement("span"); m.textContent = msg; t.append(m);
+  if(action){ const b = document.createElement("button"); b.type = "button"; b.textContent = action; b.onclick = ()=>{ onAction(); t.hidden = true; }; t.append(b); }
+  const x = document.createElement("button"); x.type = "button"; x.className = "x"; x.textContent = "✕"; x.setAttribute("aria-label",T("إغلاق","Close")); x.onclick = ()=>{ t.hidden = true; }; t.append(x);
+  t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(()=>{ t.hidden = true; }, 12000);
+}
+document.addEventListener("visibilitychange", ()=>{
+  if(document.visibilityState !== "visible" || !PENDING) return;
+  const j = JOBS.find(x=>x.id===PENDING); PENDING = null; if(!j || APPLIED.has(j.id)) return;
+  toast(T(`قدّمت على «${j.title}»؟`, `Did you apply to “${j.title}”?`), T("إيه، علّمها","Yes, mark it"), ()=>toggleApplied(j.id));
+});
+function renderSoon(){
+  const box = $("#soon");
+  const list = JOBS.filter(j=>isApplyable(j) && !APPLIED.has(j.id)).map(j=>({j, d:daysLeft(j.deadline)})).filter(x=>x.d!==null && x.d>=0 && x.d<=7).sort((a,b)=>a.d-b.d);
+  if(!list.length || st.saved){ box.hidden = true; return; }
+  box.hidden = false;
+  box.innerHTML = `<b>⏰ ${T("تقفل خلال أسبوع","Closing within a week")} (${list.length})</b><div class="soon-list">${list.map(({j,d})=>`<a href="#job-${esc(j.id)}"><strong ${hasLatin(j.title)?'dir="ltr"':""}>${esc(j.title)}</strong><span>${esc(LANG==="en"&&j.companyEn?j.companyEn:j.company)} · ${d===0?T("آخر يوم اليوم","Last day today"):d===1?T("باقي يوم","1 day left"):T(`باقي ${d} أيام`,`${d} days left`)}</span></a>`).join("")}</div>`;
+}
 function focusHash(){
   const m = location.hash.match(/^#job-(.+)$/); if(!m) return;
   const j = JOBS.find(x=>x.id===decodeURIComponent(m[1])); if(!j) return;
@@ -628,17 +756,18 @@ const adminOn=false;
 
 fetch("data/listings.json",{cache:"no-store"}).then(r=>{ if(!r.ok) throw 0; return r.json(); })
   .then(d=>{ JOBS = Array.isArray(d)?d:[]; renderAll(); focusHash(); })
-  .catch(()=>{ renderStats(); renderCos(); $("#list").innerHTML='<div class="empty">ما قدرنا نحمّل الفرص. حدّث الصفحة وجرّب مرة ثانية.</div>'; });
+  .catch(()=>{ renderStats(); renderCos(); $("#list").innerHTML=`<div class="empty">${T("ما قدرنا نحمّل الفرص. حدّث الصفحة وجرّب مرة ثانية.","Couldn't load the listings. Refresh and try again.")}</div>`; });
 renderCos();
 
 // التواصل
 (function(){
   const parts = [];
   if(CONTACT.linkedin) parts.push(`<a href="${esc(CONTACT.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`);
-  if(CONTACT.email) parts.push(`<span>للاقتراحات أو طلب إزالة إعلان: <a href="mailto:${esc(CONTACT.email)}">${esc(CONTACT.email)}</a></span>`);
+  if(CONTACT.email) parts.push(`<span>${T("للاقتراحات أو طلب إزالة إعلان:","Suggestions or removal requests:")} <a href="mailto:${esc(CONTACT.email)}">${esc(CONTACT.email)}</a></span>`);
   $("#contact").innerHTML = parts.join("");
 })();
 </script>
 <script src="feedback.js" defer></script>
+<div class="toast" id="toast" role="status" hidden></div>
 </body>
 </html>

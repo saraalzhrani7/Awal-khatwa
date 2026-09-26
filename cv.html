@@ -11,6 +11,9 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B7A5C">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B7A5C'/%3E%3Cpath d='M9 22h6v-6h8' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,6 +116,13 @@ input[dir="ltr"],textarea[dir="ltr"]{text-align:left}
 .paper .item-head span:last-child{font-weight:400; white-space:nowrap; color:#333}
 .paper .item-sub{font-style:italic; color:#333}
 .paper[dir="rtl"] .item-sub{font-style:normal}
+/* القالب الكلاسيكي: نفس الترتيب (عمود واحد)، بخط Times والاسم في النص */
+.paper.classic{font-family:"Times New Roman",Times,"Liberation Serif",Georgia,serif; font-size:11pt}
+.paper.classic h1{text-align:center; font-size:21pt; font-weight:700}
+.paper.classic .headline,.paper.classic .contact{text-align:center}
+.paper.classic h2{font-size:11.5pt; letter-spacing:.02em; border-bottom:1.2px solid #111; color:#111}
+.paper.classic .item-sub.org{font-style:normal; font-weight:700; font-size:10pt; color:#222}
+.paper.classic[lang="ar"]{font-family:"Times New Roman","Traditional Arabic",Tahoma,serif}
 /* الطباعة: لا ينفصل عنوان القسم أو عنوان الخبرة عن اللي تحته، ولا تنقسم النقطة بين صفحتين */
 .paper h2,.paper .item-head,.paper .item-sub:has(+ ul){break-after:avoid; page-break-after:avoid}
 .paper li,.paper .item-head,.paper .item-sub{break-inside:avoid; page-break-inside:avoid}
@@ -127,6 +137,10 @@ input[dir="ltr"],textarea[dir="ltr"]{text-align:left}
 @media (max-width:860px){ .match{grid-template-columns:1fr} }
 .panel{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px; display:grid; gap:10px; min-width:0}
 .panel h2{font-size:16px; margin:0}
+.panel .lbl{display:grid; gap:4px; font-size:13px; color:var(--muted)}
+.panel .actions{display:flex; gap:8px; flex-wrap:wrap}
+#p-letter .btn{justify-self:start}
+#l-need{margin-top:14px; padding:10px 12px; border:1px dashed var(--line); border-radius:10px}
 .score{font-family:"Lalezar",sans-serif; font-size:46px; line-height:1; font-variant-numeric:tabular-nums}
 .meter{height:10px; border-radius:999px; background:var(--bg); border:1px solid var(--line); overflow:hidden}
 .meter span{display:block; height:100%; background:var(--accent)}
@@ -234,6 +248,7 @@ details[open]{display:grid; gap:8px}
   <div class="tabs" role="tablist">
     <button class="tab" role="tab" id="t-build" aria-selected="true" type="button">صانع السيرة</button>
     <button class="tab" role="tab" id="t-match" aria-selected="false" type="button">طابق سيرتك مع الإعلان</button>
+    <button class="tab" role="tab" id="t-letter" aria-selected="false" type="button">خطاب التقديم ولينكدإن</button>
   </div>
 
   <!-- ===== BUILDER ===== -->
@@ -251,6 +266,9 @@ details[open]{display:grid; gap:8px}
           <div class="row">
             <label>لغة السيرة
               <select id="f-lang"><option value="en">English (أغلب الشركات الناشئة)</option><option value="ar">العربية</option></select>
+            </label>
+            <label>شكل القالب
+              <select id="f-style"><option value="modern">الحالي (Arial، الاسم يسار)</option><option value="classic">كلاسيكي (Times، الاسم في النص)</option></select>
             </label>
             <label>ترتيب الأقسام
               <select id="f-order">
@@ -361,6 +379,42 @@ details[open]{display:grid; gap:8px}
     </div>
   </section>
 
+  <!-- ===== COVER LETTER + LINKEDIN ===== -->
+  <section id="p-letter" hidden>
+    <p class="muted" id="l-need" hidden>عبّ «صانع السيرة» أول (أو ارفع سيرتك فيه)، لأن الخطاب ونبذة لينكدإن يتكتبون من معلومات سيرتك.</p>
+    <div class="match">
+      <div class="panel">
+        <h2>خطاب التقديم (Cover Letter)</h2>
+        <p class="muted">اختر الفرصة، ونكتب لك خطاب قصير من سيرتك وكلمات الإعلان. <b>عدّله بأسلوبك</b>، وكمّل الجزء اللي بين القوسين [ ] بنفسك.</p>
+        <label class="lbl">الفرصة
+          <select id="l-job"><option value="">— اختر من فرص الموقع —</option></select>
+        </label>
+        <div class="row">
+          <label class="lbl">أو اكتب الشركة<input id="l-company" placeholder="Company"></label>
+          <label class="lbl">والمسمى<input id="l-role" placeholder="Role title"></label>
+        </div>
+        <label class="lbl">لغة الخطاب
+          <select id="l-lang"><option value="en">English</option><option value="ar">العربية</option></select>
+        </label>
+        <textarea id="l-out" rows="16" dir="ltr"></textarea>
+        <div class="actions">
+          <button class="btn primary" type="button" id="l-copy">نسخ الخطاب</button>
+          <button class="btn" type="button" id="l-pdf">⬇ تحميل PDF</button>
+        </div>
+        <p class="fine" id="l-warn"></p>
+      </div>
+      <div class="panel">
+        <h2>نبذة لينكدإن</h2>
+        <p class="muted">عنوان (Headline) ونبذة (About) جاهزة من سيرتك، تنسخها وتلصقها في بروفايلك.</p>
+        <label class="lbl">Headline<textarea id="li-head" rows="2" dir="ltr"></textarea></label>
+        <button class="btn" type="button" data-copy="li-head">نسخ العنوان</button>
+        <label class="lbl">About<textarea id="li-about" rows="12" dir="ltr"></textarea></label>
+        <button class="btn" type="button" data-copy="li-about">نسخ النبذة</button>
+        <label class="lbl">أهم 5 مهارات تحطها في Top Skills<textarea id="li-skills" rows="2" dir="ltr"></textarea></label>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== PAID REVIEW ===== -->
   <section class="review" id="review">
     <div>
@@ -409,11 +463,12 @@ const FIELDS = {
   exp:  [["role","المسمى","Cybersecurity Co-op Trainee"],["org","الجهة"],["dates","التاريخ","Jun 2025 – Aug 2025"],["notes","وش سويت، كل سطر نقطة","",true]]
 };
 
-let S = {lang:"en", order:"edu", name:"", headline:"", email:"", phone:"", city:"", linkedin:"", portfolio:"", summary:"", skills:"", soft:"", certs:"", edu:[{}], proj:[{}], exp:[{}]};
+let S = {lang:"en", style:"modern", order:"edu", name:"", headline:"", email:"", phone:"", city:"", linkedin:"", portfolio:"", summary:"", skills:"", soft:"", certs:"", edu:[{}], proj:[{}], exp:[{}]};
 try{ const saved = JSON.parse(localStorage.getItem(KEY)||"null"); if(saved) S = Object.assign(S, saved); }catch(e){}
+S.style = S.style || "modern"; S.order = S.order || "edu";
 const save = () => { try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} };
 
-const SIMPLE = ["lang","order","name","headline","email","phone","city","linkedin","portfolio","summary","skills","soft","certs"];
+const SIMPLE = ["lang","style","order","name","headline","email","phone","city","linkedin","portfolio","summary","skills","soft","certs"];
 function setDirs(){
   const d = S.lang==="ar" ? "rtl" : "ltr";
   document.querySelectorAll("[data-dir]").forEach(el=>{ el.dir = d; el.style.textAlign = d==="ltr"?"left":"right"; });
@@ -461,7 +516,8 @@ function cvHTML(){
     S.linkedin && lk(url(S.linkedin.trim()), S.linkedin.trim().replace(/^https?:\/\/(www\.)?/i,"")),
     S.portfolio && lk(url(S.portfolio.trim()), S.portfolio.trim().replace(/^https?:\/\/(www\.)?/i,""))
   ].filter(Boolean).join("  |  ");
-  let h = `<div class="paper" dir="${dir}" lang="${S.lang}">`;
+  const classic = S.style === "classic";
+  let h = `<div class="paper${classic?" classic":""}" dir="${dir}" lang="${S.lang}">`;
   h += `<h1>${esc(S.name) || '<span class="empty">'+(S.lang==="ar"?"اسمك":"Your Name")+'</span>'}</h1>`;
   if(S.headline) h += `<div class="headline">${esc(S.headline)}</div>`;
   if(contact) h += `<div class="contact">${contact}</div>`;
@@ -478,7 +534,10 @@ function cvHTML(){
   { let h = "";
   const exp = S.exp.filter(has);
   if(exp.length){ h += `<h2>${t.exp}</h2>`; exp.forEach(e=>{
-    h += `<div class="item"><div class="item-head"><span>${esc(e.role)}${e.org?(S.lang==="ar"?" – ":" — ")+esc(e.org):""}</span><span>${esc(e.dates)}</span></div>`;
+    if(classic){
+      h += `<div class="item"><div class="item-head"><span>${esc(e.role)}</span><span>${esc(e.dates)}</span></div>`;
+      if(e.org) h += `<div class="item-sub org">${esc(e.org)}</div>`;
+    } else h += `<div class="item"><div class="item-head"><span>${esc(e.role)}${e.org?(S.lang==="ar"?" – ":" — ")+esc(e.org):""}</span><span>${esc(e.dates)}</span></div>`;
     const b = lines(e.notes); if(b.length) h += `<ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
     h += `</div>`; }); }
   blocks.exp = h; }
@@ -698,11 +757,11 @@ $("#printBtn").addEventListener("click", ()=>{
 $("#clearBtn").addEventListener("click", e=>{
   const b = e.currentTarget;
   if(b.dataset.confirm!=="1"){ b.dataset.confirm="1"; b.textContent="متأكد؟ اضغط مرة ثانية"; setTimeout(()=>{ b.dataset.confirm=""; b.textContent="مسح الكل"; }, 3000); return; }
-  S = {lang:S.lang, name:"", headline:"", email:"", phone:"", city:"", linkedin:"", portfolio:"", summary:"", skills:"", soft:"", certs:"", edu:[{}], proj:[{}], exp:[{}]};
+  S = {lang:S.lang, style:S.style||"modern", order:S.order||"edu", name:"", headline:"", email:"", phone:"", city:"", linkedin:"", portfolio:"", summary:"", skills:"", soft:"", certs:"", edu:[{}], proj:[{}], exp:[{}]};
   b.dataset.confirm=""; b.textContent="مسح الكل"; fillSimple(); renderLists(); update();
 });
 $("#sampleBtn").addEventListener("click", ()=>{
-  S = {lang:"en", name:"Noura Alharbi", headline:"Data Analytics Graduate", email:"noura.alharbi@email.com", phone:"+966 50 000 0000", city:"Riyadh, Saudi Arabia", linkedin:"linkedin.com/in/noura-example", portfolio:"github.com/noura-example",
+  S = {lang:"en", style:S.style||"modern", name:"Noura Alharbi", headline:"Data Analytics Graduate", email:"noura.alharbi@email.com", phone:"+966 50 000 0000", city:"Riyadh, Saudi Arabia", linkedin:"linkedin.com/in/noura-example", portfolio:"github.com/noura-example",
     summary:"Information Systems graduate focused on data analysis and visualization. Built three end-to-end dashboards using SQL and Power BI, and completed a co-op at a fintech startup. Looking for an entry-level data analyst role.",
     skills:"SQL, Python (pandas), Power BI, Excel, Tableau, Git", soft:"Arabic (Native), English (Fluent), Presentation, Teamwork", certs:"Google Data Analytics Certificate — 2026",
     edu:[{school:"King Saud University", degree:"B.Sc. Information Systems", dates:"2022 – 2026", notes:"GPA: 4.5 / 5\nRelevant courses: Databases, Statistics, Data Mining"}],
@@ -712,9 +771,13 @@ $("#sampleBtn").addEventListener("click", ()=>{
 });
 
 // tabs
-function showTab(w){ const b = w==="build"; $("#t-build").setAttribute("aria-selected",b); $("#t-match").setAttribute("aria-selected",!b); $("#p-build").hidden=!b; $("#p-match").hidden=b; }
+function showTab(w){
+  ["build","match","letter"].forEach(k=>{ $("#t-"+k).setAttribute("aria-selected", k===w); $("#p-"+k).hidden = k!==w; });
+  if(w==="letter") renderLetterTab();
+}
 $("#t-build").onclick = ()=>showTab("build");
 $("#t-match").onclick = ()=>showTab("match");
+$("#t-letter").onclick = ()=>showTab("letter");
 if(/^#match/.test(location.hash)) showTab("match");
 $("#gotoMatch").addEventListener("click", e=>{ e.preventDefault(); showTab("match"); $("#t-match").scrollIntoView({behavior:"smooth"}); });
 
@@ -1060,7 +1123,7 @@ async function importCV(file){
     const {text} = ext==="pdf" ? await readPdf(buf) : await readDocx(buf);
     if(text.replace(/\s/g,"").length < 80){ bStatus("bad","ما قدرنا نقرأ نص من سيرتك. غالبًا هي صورة أو سكان، وأنظمة ATS بعد ما تقدر تقرأها. عشان كذا الأفضل تكتبها هنا."); track("cv/import-unreadable","سيرة ما تنقرأ"); return; }
     const p = parseCV(text); const f = p._found; delete p._found;
-    S = Object.assign({lang:"en", name:"", headline:"", email:"", phone:"", city:"", linkedin:"", portfolio:"", summary:"", skills:"", soft:"", certs:"", edu:[{}], proj:[{}], exp:[{}]}, p);
+    S = Object.assign({lang:"en", style:S.style||"modern", name:"", headline:"", email:"", phone:"", city:"", linkedin:"", portfolio:"", summary:"", skills:"", soft:"", certs:"", edu:[{}], proj:[{}], exp:[{}]}, p);
     fillSimple(); renderLists(); update();
     try{ localStorage.setItem(UP_KEY, JSON.stringify({name:file.name, text:text.replace(/\s+/g," ").trim()})); UPLOADED = text.replace(/\s+/g," ").trim(); cvStatus("ok", `سيرتك «${file.name}» جاهزة للمطابقة`); }catch(e){}
     const got = [f.exp&&`${f.exp} خبرة`, f.proj&&`${f.proj} مشروع`, f.edu&&`${f.edu} تعليم`, f.skills&&"المهارات"].filter(Boolean).join("، ");
@@ -1096,10 +1159,108 @@ fetch("data/listings.json",{cache:"no-store"}).then(r=>r.ok?r.json():[]).catch((
   const today = new Date().toISOString().slice(0,10);
   MJOBS = (Array.isArray(d)?d:[]).filter(j=>Array.isArray(j.keywords) && j.keywords.length && ["open","rolling"].includes(j.status) && !(j.deadline && j.deadline < today));
   renderJobPicks();
+  fillLetterJobs();
   hashPick();
 });
 function hashPick(){ const m = location.hash.match(/^#match-(.+)$/); if(m){ showTab("match"); pickJob(decodeURIComponent(m[1])); } }
 addEventListener("hashchange", hashPick);
+
+// ===== خطاب التقديم ونبذة لينكدإن (من بيانات صانع السيرة) =====
+const lcFirst = t => t ? t.charAt(0).toLowerCase() + t.slice(1) : t;
+const trimDot = t => String(t||"").trim().replace(/[.;,]+$/,"");
+function cvFacts(){
+  const allBul = [...S.exp.filter(has).flatMap(e=>lines(e.notes).map(b=>({b, e}))), ...S.proj.filter(has).flatMap(p=>lines(p.notes).map(b=>({b, p})))];
+  const score = x => (/\d/.test(x.b)?3:0) + (VERB.test(x.b)?1:0) - (x.b.split(/\s+/).length > 30 ? 1 : 0);
+  const best = [...allBul].filter(x=>!/\[N\]/.test(x.b)).sort((a,b)=>score(b)-score(a));
+  const edu = S.edu.filter(has)[0] || {};
+  const year = ((edu.dates||"").match(/(19|20)\d{2}(?!.*(19|20)\d{2})/)||[""])[0];
+  // نقسم بالفواصل اللي برا الأقواس بس: «Power BI (DAX, data modeling)» تبقى مهارة وحدة
+  const skills = []; { let depth = 0, cur = ""; for(const ch of S.skills){ if(ch==="(") depth++; if(ch===")") depth = Math.max(0, depth-1); if((ch===","||ch==="،") && !depth){ if(cur.trim()) skills.push(cur.trim()); cur = ""; } else cur += ch; } if(cur.trim()) skills.push(cur.trim()); }
+  const proj = S.proj.filter(has)[0];
+  const exp = S.exp.filter(has)[0];
+  return {best, edu, year, skills, proj, exp};
+}
+function fillLetterJobs(){
+  const sel = $("#l-job"); if(!sel || sel.options.length > 1) return;
+  MJOBS.forEach(j=>{ const o = document.createElement("option"); o.value = j.id; o.textContent = `${j.title} — ${j.companyEn || j.company}`; sel.append(o); });
+}
+function letterText(){
+  const f = cvFacts(), ar = $("#l-lang").value === "ar";
+  const j = MJOBS.find(x=>x.id === $("#l-job").value);
+  const company = $("#l-company").value.trim() || (j ? (ar ? j.company : (j.companyEn || j.company)) : (ar ? "[اسم الشركة]" : "[Company]"));
+  const role = $("#l-role").value.trim() || (j ? j.title : (ar ? "[المسمى]" : "[Role]"));
+  const cvt = cvText().toLowerCase();
+  let matched = j ? (j.keywords||[]).filter(k=>cvHas(cvt, k) && !MATCH_NOISE.has(k) && k.length > 3 && !/^(data|performance|platforms?|systems?|tools?|quality|results?|tasks?|environments?|practices?)$/.test(k)) : f.skills.map(x=>x.replace(/\s*\(.*?\)/g,"")).filter(Boolean);
+  // نشيل التكرار: database/databases، والكلمة اللي داخل كلمة ثانية
+  { const kept = [];
+    [...matched].sort((a,b)=>b.length-a.length).forEach(k=>{ const st = k.replace(/s$/,""); if(!kept.some(o=>o.replace(/s$/,"")===st || (" "+o+" ").includes(" "+k+" "))) kept.push(k); });
+    matched = matched.filter(k=>kept.includes(k)).slice(0,4); }
+  const b1 = f.best[0], b2 = f.best.find(x=>x !== b1 && (x.e || x.p) !== (b1 && (b1.e || b1.p))) || f.best[1];
+  const name = S.name.trim() || (ar ? "[اسمك]" : "[Your Name]");
+  const contact = [S.email, S.phone].filter(Boolean).join(" | ");
+  const degree = f.edu.degree ? f.edu.degree.trim() : "";
+  const school = (f.edu.school||"").split(",")[0].trim();
+  const where = x => x.e ? (x.e.org ? (/^(freelance|self-?employed|عمل حر)/i.test(x.e.org) ? (ar ? " في عملي الحر" : " as a freelancer") : (ar ? ` في ${x.e.org.split(",")[0]}` : ` at ${x.e.org.split(",")[0]}`)) : "") : (x.p && x.p.title ? (ar ? ` في مشروع ${x.p.title}` : ` in my project ${x.p.title}`) : "");
+  if(ar){
+    return [`السادة فريق التوظيف في ${company}،`, "",
+      `أتقدم لفرصة ${role} في ${company}. ${degree||school ? `أنا ${degree ? `خريج/ة ${degree}` : ""}${school ? ` من ${school}` : ""}${f.year ? ` (${f.year})` : ""}، ` : ""}ويهمني أنضم لـ${company} لأن [اكتب سبب واحد حقيقي يخليك تبي هالشركة بالذات].`, "",
+      b1 ? `من أبرز اللي سويته${where(b1)}: ${trimDot(b1.b)}.${b2 ? ` وكذلك${where(b2)}: ${trimDot(b2.b)}.` : ""}` : "[اكتب أهم إنجاز عندك برقم أو نتيجة]",
+      matched.length ? `وهذي التجارب طورت مهاراتي في ${matched.join("، ")}، وهي من المهارات اللي يطلبها فريقكم.` : "", "",
+      `يسعدني أشرح لكم أكثر عن تجربتي في مقابلة، وشاكر/ة لكم وقتكم.`, "",
+      "مع التحية،", name, contact].filter((x,i,a)=>!(x==="" && a[i-1]==="")).join("\n");
+  }
+  return [`Dear ${company} Hiring Team,`, "",
+    `I am applying for the ${role} position at ${company}. ${degree||school ? `I recently graduated${degree ? ` with a ${degree}` : ""}${school ? ` from ${school}` : ""}${f.year ? ` (${f.year})` : ""}, and ` : ""}I would love to join ${company} because [add one real reason you want this company in particular].`, "",
+    b1 ? `Recently${where(b1)}, I ${lcFirst(trimDot(b1.b))}.${b2 ? ` I also ${lcFirst(trimDot(b2.b))}${where(b2)}.` : ""}` : "[Add your strongest achievement, with a number or result]",
+    matched.length ? `These experiences strengthened my skills in ${matched.length > 1 ? matched.slice(0,-1).join(", ") + " and " + matched.at(-1) : matched[0]}, which match what your team is looking for.` : "", "",
+    `I would welcome the chance to discuss how I can contribute to your team. Thank you for your time and consideration.`, "",
+    "Sincerely,", name, contact].filter((x,i,a)=>!(x==="" && a[i-1]==="")).join("\n");
+}
+function linkedinText(){
+  const f = cvFacts();
+  const plain = f.skills.map(x=>x.replace(/\s*\(.*?\)/g,"").trim()).filter(Boolean);
+  const hl = S.headline.trim();
+  const top = plain.filter(x=>!hl.toLowerCase().includes(x.toLowerCase())).slice(0,3);
+  const head = [hl || (f.edu.degree ? f.edu.degree.trim() : ""), top.length ? top.join(" · ") : "", f.edu.school ? `${f.edu.school.split(",")[0].trim()} ${/(19|20)\d{2}/.test(f.year) && f.year <= String(new Date().getFullYear()) ? "Graduate" : "Student"}` : ""].filter(Boolean).join(" | ");
+  const b1 = f.best[0], b2 = f.best[1];
+  const about = [
+    S.summary.trim() || `${S.headline.trim() || "Early-career professional"} passionate about turning data and ideas into real results.`,
+    "",
+    b1 ? `What I've done so far:\n• ${trimDot(b1.b)}${b2 ? `\n• ${trimDot(b2.b)}` : ""}` : "",
+    "",
+    top.length ? `Tools I work with: ${f.skills.slice(0,8).join(", ")}.` : "",
+    "",
+    `I'm looking for opportunities where I can learn fast and contribute from day one. Feel free to reach out${S.email ? ` at ${S.email.trim()}` : ""}.`
+  ].filter((x,i,a)=>!(x==="" && (a[i-1]==="" || i===a.length-1))).join("\n");
+  return {head, about, skills: plain.slice(0,5).join(", ")};
+}
+function renderLetterTab(){
+  const ready = S.name.trim() || S.exp.some(has) || S.proj.some(has);
+  $("#l-need").hidden = !!ready;
+  fillLetterJobs();
+  const ar = $("#l-lang").value === "ar";
+  $("#l-out").dir = ar ? "rtl" : "ltr";
+  $("#l-out").value = letterText();
+  $("#l-warn").textContent = /\[[^\]]+\]/.test($("#l-out").value) ? (ar ? "كمّل الأجزاء اللي بين القوسين [ ] قبل ما ترسله." : "كمّل الأجزاء اللي بين القوسين [ ] قبل ما ترسله.") : "";
+  const li = linkedinText();
+  $("#li-head").value = li.head; $("#li-about").value = li.about; $("#li-skills").value = li.skills;
+}
+["l-job","l-lang"].forEach(id=>$("#"+id).addEventListener("change", renderLetterTab));
+["l-company","l-role"].forEach(id=>$("#"+id).addEventListener("input", ()=>{ $("#l-out").value = letterText(); }));
+async function copyFrom(el, btn){
+  try{ await navigator.clipboard.writeText(el.value); const t = btn.textContent; btn.textContent = "انتسخ ✓"; setTimeout(()=>btn.textContent = t, 1800); }
+  catch(e){ el.select(); document.execCommand && document.execCommand("copy"); }
+}
+$("#l-copy").addEventListener("click", e=>{ copyFrom($("#l-out"), e.currentTarget); track("cv/letter-copy", "نسخ خطاب"); });
+document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click", ()=>{ copyFrom($("#"+b.dataset.copy), b); track("cv/linkedin-copy", b.dataset.copy); }));
+$("#l-pdf").addEventListener("click", ()=>{
+  const ar = $("#l-lang").value === "ar";
+  const body = esc($("#l-out").value).replace(/\n/g,"<br>");
+  $("#printArea").innerHTML = `<table class="pt" role="presentation"><thead><tr><td><div class="pt-top"></div></td></tr></thead><tfoot><tr><td><div class="pt-bot"></div></td></tr></tfoot><tbody><tr><td><div class="paper${S.style==="classic"?" classic":""}" dir="${ar?"rtl":"ltr"}" lang="${ar?"ar":"en"}" style="line-height:1.6">${body}</div></td></tr></tbody></table>`;
+  const prev = document.title; document.title = (S.name||"Cover").trim().replace(/\s+/g,"-") + "-Cover-Letter";
+  track("cv/letter-pdf", "تحميل خطاب");
+  window.print(); setTimeout(()=>{ document.title = prev; }, 500);
+});
 
 // ===== paid review block =====
 (function(){
