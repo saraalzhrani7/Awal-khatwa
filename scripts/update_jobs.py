@@ -90,6 +90,18 @@ CITY_AR = {"riyadh": "الرياض", "jeddah": "جدة", "jiddah": "جدة", "da
            "abqaiq": "بقيق", "kaec": "مدينة الملك عبدالله الاقتصادية", "king abdullah economic city": "مدينة الملك عبدالله الاقتصادية",
            "thuwal": "ثول", "qassim": "القصيم", "buraydah": "القصيم", "jazan": "جازان", "najran": "نجران", "hail": "حائل"}
 
+def all_cities(text):
+    """كل المدن السعودية المذكورة بالترتيب، مثل «جدة أو المدينة أو الخبر»."""
+    low, found = (text or "").lower(), []
+    for k in sorted(CITY_AR, key=len, reverse=True):
+        for m in re.finditer(r"\b" + re.escape(k) + r"\b", low):
+            found.append((m.start(), CITY_AR[k]))
+            low = low[:m.start()] + " " * len(k) + low[m.end():]
+    out = []
+    for _, c in sorted(found):
+        if c not in out: out.append(c)
+    return " أو ".join(out[:3])
+
 def guess_city(loc):
     """يطلع أول مدينة سعودية معروفة من نص الموقع (مثل «SA - Riyadh» أو «Dhahran, Saudi Arabia»)."""
     low = (loc or "").lower()
@@ -451,7 +463,7 @@ def main():
                 skipped += 1
                 print(f"   ✗ استبعدنا «{r['title']}»: الوصف يقول «{why.strip()[:70]}»")
                 continue
-            c = city_ar(r["city"]) if (r.get("city") and (r["city"] or "").lower() in CITY_AR) else city_ar(guess_city(f"{r.get('city') or ''} {r['location']}") or r.get("city"))
+            c = city_ar(r["city"]) if (r.get("city") and (r["city"] or "").lower() in CITY_AR) else all_cities(f"{r['title']} {r.get('city') or ''} {r['location']}") or city_ar(r.get("city"))
             if k in fresh:  # نفس الإعلان في أكثر من مدينة
                 if c not in fresh[k]["city"]:
                     fresh[k]["city"] += f" أو {c}"
