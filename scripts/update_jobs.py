@@ -2,12 +2,12 @@
 """
 يحدّث data/listings.json تلقائيًا من صفحات التوظيف العامة للشركات الناشئة.
 
-- يجيب الإعلانات من أنظمة التوظيف (Workable, Greenhouse, Ashby, Pinpoint)
+- يجيب الإعلانات من أنظمة التوظيف (Workable, Greenhouse, Ashby, Pinpoint, SmartRecruiters, Workday, Oracle, SuccessFactors)
 - ياخذ بس الإعلانات اللي في السعودية ومناسبة للمبتدئين
 - الإعلانات اليدوية (بدون "source": "auto") ما يلمسها أبدًا
 - إذا فشل الاتصال بشركة، يخلي إعلاناتها القديمة زي ما هي
 """
-import json, re, sys, html, datetime, urllib.request
+import json, re, sys, html, datetime, urllib.request, urllib.parse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -44,25 +44,74 @@ SOURCES = [
     {"company": "ليكورا",   "companyEn": "LAKEORA",           "ats": "ashby",      "id": "lakeora"},
     {"company": "ميراي",    "companyEn": "Mirai",             "ats": "workable",   "id": "playmirai"},
     {"company": "أدري",     "companyEn": "Adree",             "ats": "workable",   "id": "adree"},
+
+    # ---- شبه حكومي (صندوق الاستثمارات العامة والشركات المملوكة للدولة) ----
+    {"company": "القدية",   "companyEn": "Qiddiya",           "ats": "workable",   "id": "qiddiya-investment-company-1", "org": "semi"},
+    {"company": "إس تي سي", "companyEn": "stc",               "ats": "successfactors", "domain": "careers.stc.com.sa", "saudi": True, "org": "semi"},
+    {"company": "الخطوط السعودية", "companyEn": "Saudia",     "ats": "successfactors", "domain": "careers.saudia.com", "saudi": True, "org": "semi"},
+    {"company": "علم",      "companyEn": "Elm",               "ats": "successfactors", "domain": "career.elm.sa", "path": "/elm", "saudi": True, "org": "semi"},
+    {"company": "أرامكو",   "companyEn": "Aramco",            "ats": "successfactors", "domain": "careers.aramco.com", "org": "semi"},
+    {"company": "البحر الأحمر الدولية", "companyEn": "Red Sea Global", "ats": "successfactors", "domain": "careers.theredsea.sa", "saudi": True, "org": "semi"},
+    {"company": "الشركة السعودية للكهرباء", "companyEn": "Saudi Electricity", "ats": "successfactors", "domain": "jobs.se.com.sa", "saudi": True, "org": "semi"},
+    {"company": "كاوست",    "companyEn": "KAUST",             "ats": "successfactors", "domain": "careers.kaust.edu.sa", "saudi": True, "org": "semi"},
+    {"company": "أكوا باور", "companyEn": "ACWA Power",       "ats": "successfactors", "domain": "careers.acwapower.com", "org": "private"},
+
+    # ---- شركات خاصة كبيرة وعالمية (فروعها في السعودية) ----
+    {"company": "النهدي",   "companyEn": "Nahdi",             "ats": "oracle",     "host": "efan.fa.em3.oraclecloud.com", "site": "CX_1", "org": "private"},
+    {"company": "لوسد",     "companyEn": "Lucid Motors",      "ats": "greenhouse", "id": "lucidmotors", "org": "private"},
+    {"company": "كي بي إم جي", "companyEn": "KPMG",           "ats": "successfactors", "domain": "slccareers.kpmg.com", "loc": "Saudi Arabia", "org": "private"},
+    {"company": "بي دبليو سي", "companyEn": "PwC Middle East", "ats": "workday", "host": "pwc.wd3.myworkdayjobs.com", "tenant": "pwc", "site": "Global_Campus_Careers", "global": True, "org": "private"},
+    {"company": "أكسنتشر",  "companyEn": "Accenture",         "ats": "workday",    "host": "accenture.wd103.myworkdayjobs.com", "tenant": "accenture", "site": "AccentureCareers", "global": True, "org": "private"},
+    {"company": "بيكر هيوز", "companyEn": "Baker Hughes",     "ats": "workday",    "host": "bakerhughes.wd5.myworkdayjobs.com", "tenant": "bakerhughes", "site": "BakerHughes", "global": True, "org": "private"},
+    {"company": "جي إي فيرنوفا", "companyEn": "GE Vernova",   "ats": "workday",    "host": "gevernova.wd5.myworkdayjobs.com", "tenant": "gevernova", "site": "Vernova_ExternalSite", "global": True, "org": "private"},
+    {"company": "بارسونز",  "companyEn": "Parsons",           "ats": "workday",    "host": "parsons.wd5.myworkdayjobs.com", "tenant": "parsons", "site": "Search", "global": True, "org": "private"},
+    {"company": "إتش بي إي", "companyEn": "HPE",              "ats": "workday",    "host": "hpe.wd5.myworkdayjobs.com", "tenant": "hpe", "site": "WFMathpe", "global": True, "org": "private"},
+    {"company": "موتورولا سوليوشنز", "companyEn": "Motorola Solutions", "ats": "workday", "host": "motorolasolutions.wd5.myworkdayjobs.com", "tenant": "motorolasolutions", "site": "Careers", "global": True, "org": "private"},
 ]
+# نوع الجهة: startup (افتراضي) · private · semi (شبه حكومي) · gov (حكومي) · bank
+ORG_DEFAULT = "startup"
+
+# كلمات البحث في الأنظمة الكبيرة (Workday وOracle وSuccessFactors) عشان ما نحمّل آلاف الوظائف
+SEARCH_TERMS = ["intern", "graduate", "co-op", "coop", "trainee", "tamheer", "junior", "fresh graduate", "entry level", "development program"]
+# للشركات العالمية: ندور بالسعودية أول، وبعدين نفلتر وظائف المبتدئين
+GLOBAL_TERMS = ["Saudi", "Riyadh", "KSA", "Tamheer", "Jeddah", "Dhahran", "Khobar"]
 
 # ---------- الفلاتر ----------
 BEGINNER = re.compile(
-    r"\b(intern|internship|interns|trainee|traineeship|apprentice|graduate|graduates|grad|fresh|junior|jr\.?|entry[\s-]?level|co-?op|tamheer|builders)\b"
+    r"\b(intern|internship|interns|trainee|traineeship|apprentice|graduate|graduates|grad|fresh[\s-]?grad\w*|junior|jr\.?|entry[\s-]?level|co-?op|tamheer|builders)\b"
     r"|تمهير|تدريب|متدرب|حديثي|تعاوني", re.I)
 EXCLUDE = re.compile(r"\b(senior|sr\.?|lead|head|manager|director|principal|staff)\b", re.I)
-SAUDI = re.compile(r"saudi|\bksa\b|riyadh|jeddah|jiddah|dammam|khobar|makkah|mecca|madinah|medina|dhahran|السعودية|الرياض|جدة", re.I)
+SAUDI = re.compile(r"saudi|\bksa\b|riyadh|jeddah|jiddah|dammam|khobar|makkah|mecca|madinah|medina|dhahran|jubail|yanbu|ras tanura|abqaiq|tabuk|neom|abha|taif|qassim|buraydah|hail|jazan|najran|al ?ahsa|hofuf|kaec|king abdullah economic city|thuwal|السعودية|الرياض|جدة|الدمام|الخبر|الظهران", re.I)
 
 CITY_AR = {"riyadh": "الرياض", "jeddah": "جدة", "jiddah": "جدة", "dammam": "الدمام", "khobar": "الخبر",
            "al khobar": "الخبر", "makkah": "مكة", "mecca": "مكة", "madinah": "المدينة", "medina": "المدينة",
-           "dhahran": "الظهران"}
+           "dhahran": "الظهران", "jubail": "الجبيل", "yanbu": "ينبع", "tabuk": "تبوك", "neom": "نيوم", "abha": "أبها",
+           "taif": "الطائف", "al ahsa": "الأحساء", "alahsa": "الأحساء", "hofuf": "الأحساء", "ras tanura": "رأس تنورة",
+           "abqaiq": "بقيق", "kaec": "مدينة الملك عبدالله الاقتصادية", "king abdullah economic city": "مدينة الملك عبدالله الاقتصادية",
+           "thuwal": "ثول", "qassim": "القصيم", "buraydah": "القصيم", "jazan": "جازان", "najran": "نجران", "hail": "حائل"}
+
+def guess_city(loc):
+    """يطلع أول مدينة سعودية معروفة من نص الموقع (مثل «SA - Riyadh» أو «Dhahran, Saudi Arabia»)."""
+    low = (loc or "").lower()
+    best = None
+    for k in CITY_AR:
+        i = low.find(k)
+        if i >= 0 and (best is None or i < best[0] or (i == best[0] and len(k) > len(best[1]))):
+            best = (i, k)
+    return best[1] if best else ""
 
 FIELD_RULES = [
-    ("cyber",   r"secur|cyber|\bgrc\b|\bsoc\b|infosec|fraud"),
-    ("data",    r"\bdata\b|\bai\b|\bml\b|machine learning|analytic|scien|\bbi\b"),
-    ("media",   r"content|marketing|social|video|campaign|brand|creative"),
-    ("product", r"product|design|\bux\b|\bui\b"),
-    ("tech",    r"engineer|developer|devops|\bqa\b|software|frontend|backend|front-end|back-end|\bios\b|android|\bsre\b"),
+    ("cyber",       r"secur|cyber|\bgrc\b|\bsoc\b|infosec|fraud"),
+    ("data",        r"\bdata\b|\bai\b|\bml\b|machine learning|analytic|data scien|\bbi\b"),
+    ("tech",        r"software|developer|devops|\bqa\b|frontend|backend|front-end|back-end|\bios\b|android|\bsre\b|\bit\b|cloud|network|digital|technology|systems? engineer|تقنية"),
+    ("health",      r"pharma|nurs|medical|clinic|health|biolog|chemist|laborator|lab tech|dental|physio|hospital|صيدل|تمريض|صحي|طبي|مختبر"),
+    ("engineering", r"engineer|mechanical|electrical|civil|chemical|industrial|petroleum|process|structural|mechatronic|instrument|maintenance|construction|\bhse\b|operations technician|هندس"),
+    ("finance",     r"financ|account|audit|\btax\b|treasury|bank|credit|risk|investment|actuar|deals|valuation|compliance|مالي|محاسب|مراجع|تدقيق|مخاطر|بنك|استثمار"),
+    ("legal",       r"legal|law|lawyer|paralegal|contract|قانون|قانوني|محام"),
+    ("supply",      r"supply chain|procure|purchas|logistic|warehouse|inventory|sourcing|planning analyst|مشتريات|سلاسل|لوجست|مستودع"),
+    ("product",     r"product|design|\bux\b|\bui\b"),
+    ("marketing",   r"marketing|sales|brand|campaign|growth|business development|تسويق|مبيعات"),
+    ("media",       r"content|social|video|creative|media|journalis|محتوى|إعلام"),
 ]
 
 def classify_type(title, experience=""):
@@ -226,8 +275,134 @@ def smartrecruiters_desc(company, pid):
     sec = ((d.get("jobAd") or {}).get("sections") or {})
     return strip_html(" ".join((sec.get(k) or {}).get("text", "") for k in ("jobDescription", "qualifications", "additionalInformation")))
 
+# ---------- الأنظمة الكبيرة: Workday وOracle وSuccessFactors ----------
+UA = {"User-Agent": "Mozilla/5.0 (compatible; awal-khatwa-bot/1.0; +https://saraalzhrani7.github.io/Awal-khatwa/)"}
+
+def post_json(url, body):
+    req = urllib.request.Request(url, data=json.dumps(body).encode("utf-8"), method="POST",
+                                 headers={**UA, "Accept": "application/json", "Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=40) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+def get_text(url):
+    req = urllib.request.Request(url, headers={**UA, "Accept": "text/html,application/xml;q=0.9,*/*;q=0.8"})
+    with urllib.request.urlopen(req, timeout=40) as r:
+        return r.read().decode("utf-8", "replace")
+
+MONTHS = {m: i for i, m in enumerate(["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"], 1)}
+def _date(s):
+    """يحول تاريخ مثل 2026-09-22 أو Sep 22, 2026 أو Tue, 22 Sep 2026 إلى 2026-09-22."""
+    s = (s or "").strip()
+    m = re.search(r"(20\d{2})-(\d{2})-(\d{2})", s)
+    if m: return m.group(0)
+    m = re.search(r"([A-Za-z]{3})[a-z]*\.?\s+(\d{1,2}),?\s+(20\d{2})", s)
+    if m and m.group(1).lower() in MONTHS: return f"{m.group(3)}-{MONTHS[m.group(1).lower()]:02d}-{int(m.group(2)):02d}"
+    m = re.search(r"(\d{1,2})\s+([A-Za-z]{3})[a-z]*\.?\s+(20\d{2})", s)
+    if m and m.group(2).lower() in MONTHS: return f"{m.group(3)}-{MONTHS[m.group(2).lower()]:02d}-{int(m.group(1)):02d}"
+    return ""
+
+def fetch_workday(src):
+    host, tenant, site = src["host"], src["tenant"], src["site"]
+    base = f"https://{host}/wday/cxs/{tenant}/{site}"
+    seen = {}
+    for q in (GLOBAL_TERMS if src.get("global") else SEARCH_TERMS):
+        offset = 0
+        while offset < 100:
+            d = post_json(base + "/jobs", {"appliedFacets": {}, "limit": 20, "offset": offset, "searchText": q})
+            posts = d.get("jobPostings") or []
+            for p in posts:
+                if p.get("externalPath"):
+                    seen.setdefault(p["externalPath"], p)
+            offset += 20
+            if len(posts) < 20 or offset >= (d.get("total") or 0):
+                break
+    for path, p in seen.items():
+        title = p.get("title", "")
+        if not is_beginner(title):
+            continue
+        try:
+            info = (get_json(base + path) or {}).get("jobPostingInfo") or {}
+        except Exception as e:
+            print(f"   (ما قدرنا نقرأ تفاصيل {title}: {e})", file=sys.stderr)
+            info = {}
+        locs = [info.get("location") or p.get("locationsText") or ""] + list(info.get("additionalLocations") or [])
+        country = (info.get("country") or {}).get("descriptor", "")
+        loc = " ".join(filter(None, locs + [country]))
+        yield dict(title=title, url=info.get("externalUrl") or f"https://{host}/en-US/{site}{path}", location=loc,
+                   city=guess_city(loc), experience="", dept="", deadline=(info.get("endDate") or "")[:10],
+                   posted=(info.get("startDate") or "")[:10], remote=bool(re.search(r"remote", loc, re.I)),
+                   desc=strip_html(info.get("jobDescription")))
+
+def fetch_oracle(src):
+    host, site = src["host"], src["site"]
+    seen = {}
+    for q in (GLOBAL_TERMS if src.get("global") else SEARCH_TERMS):
+        finder = urllib.parse.quote(f'findReqs;siteNumber={site},limit=50,keyword="{q}",sortBy=POSTING_DATES_DESC', safe="")
+        d = get_json(f"https://{host}/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList&finder={finder}")
+        for it in d.get("items", []):
+            for r in it.get("requisitionList") or []:
+                if r.get("Id"):
+                    seen.setdefault(str(r["Id"]), r)
+    for rid, r in seen.items():
+        loc = " ".join(filter(None, [r.get("PrimaryLocation"), "Saudi Arabia" if (r.get("PrimaryLocationCountry") or "").upper() == "SA" else ""]))
+        end = (r.get("PostingEndDate") or "")[:10]
+        yield dict(title=r.get("Title", ""), url=f"https://{host}/hcmUI/CandidateExperience/en/sites/{site}/job/{rid}",
+                   location=loc, city=guess_city(loc), experience="", dept=r.get("JobFamily") or r.get("JobFunction") or "",
+                   deadline=end if end and end < "2100" else "", posted=(r.get("PostedDate") or "")[:10], remote=False,
+                   desc=strip_html(" ".join(filter(None, [r.get("ShortDescriptionStr"), r.get("ExternalResponsibilitiesStr"), r.get("ExternalQualificationsStr")]))))
+
+def _sf_rss(xml, dom):
+    rows = []
+    for item in re.findall(r"<item>(.*?)</item>", xml, flags=re.S):
+        g = lambda tag: html.unescape(re.sub(r"<!\[CDATA\[|\]\]>", "", (re.search(rf"<{tag}[^>]*>(.*?)</{tag}>", item, flags=re.S) or [None, ""])[1])).strip()
+        title, link, desc = g("title"), g("link"), strip_html(g("description"))
+        m = re.match(r"^(.*?)\s*\(([^()]*)\)\s*$", title)   # «المسمى (المدينة، SA)»
+        loc = m.group(2) if m else ""
+        if m: title = m.group(1)
+        rows.append({"title": title, "url": link, "location": f"{loc} {desc[:300]}", "posted": _date(g("pubDate"))})
+    return rows
+
+def _sf_html(page, dom):
+    rows = []
+    for chunk in re.split(r'<tr[^>]*class="[^"]*data-row', page)[1:]:
+        a = re.search(r'<a[^>]*href="(/[^"]*?/job/[^"]+|/job/[^"]+)"[^>]*>(.*?)</a>', chunk, flags=re.S)
+        if not a: continue
+        loc = re.search(r'class="jobLocation[^"]*"[^>]*>(.*?)</span>', chunk, flags=re.S)
+        dt = re.search(r'class="jobDate[^"]*"[^>]*>(.*?)</span>', chunk, flags=re.S)
+        rows.append({"title": strip_html(a.group(2)).strip(), "url": f"https://{dom}{a.group(1)}",
+                     "location": strip_html(loc.group(1)).strip() if loc else "", "posted": _date(strip_html(dt.group(1)) if dt else "")})
+    return rows
+
+def _sf_desc(url):
+    page = get_text(url)
+    m = re.search(r'class="jobdescription"[^>]*>(.*?)</span>\s*</div>', page, flags=re.S) or re.search(r'itemprop="description"[^>]*>(.*?)</(?:span|div)>\s*</div>', page, flags=re.S)
+    return strip_html(m.group(1)) if m else ""
+
+def fetch_successfactors(src):
+    dom, path = src["domain"], src.get("path", "")
+    extra = f"&locationsearch={urllib.parse.quote(src['loc'])}" if src.get("loc") else ""
+    seen = {}
+    for q in SEARCH_TERMS:
+        rows = []
+        try:
+            xml = get_text(f"https://{dom}{path}/services/rss/job/?locale=en_US&keywords={urllib.parse.quote(q)}{extra}")
+            if "<item" in xml:
+                rows = _sf_rss(xml, dom)
+        except Exception:
+            rows = []
+        if not rows:
+            rows = _sf_html(get_text(f"https://{dom}{path}/search/?q={urllib.parse.quote(q)}&locale=en_US&sortColumn=referencedate&sortDirection=desc{extra}"), dom)
+        for r in rows:
+            seen.setdefault(r["url"], r)
+    for url, r in seen.items():
+        loc = re.sub(r",\s*SA\b", ", Saudi Arabia", r["location"])
+        yield dict(title=r["title"], url=url, location=loc, city=guess_city(loc), experience="", dept="", deadline="",
+                   posted=r.get("posted", ""), remote=bool(re.search(r"remote", loc, re.I)),
+                   desc=None, load_desc=(lambda u=url: _sf_desc(u)))
+
 FETCHERS = {"workable": fetch_workable, "greenhouse": fetch_greenhouse, "ashby": fetch_ashby,
-            "pinpoint": fetch_pinpoint, "smartrecruiters": fetch_smartrecruiters}
+            "pinpoint": fetch_pinpoint, "smartrecruiters": fetch_smartrecruiters,
+            "workday": fetch_workday, "oracle": fetch_oracle, "successfactors": fetch_successfactors}
 
 # ---------- الدمج ----------
 def norm_title(t):
@@ -255,7 +430,7 @@ def main():
             continue
         kept = skipped = 0
         for r in rows:
-            if not r["url"] or not SAUDI.search(r["location"] or ""):
+            if not r["url"] or not (SAUDI.search(r["location"] or "") or src.get("saudi")):
                 continue
             if not is_beginner(r["title"], r["experience"]):
                 continue
@@ -276,7 +451,7 @@ def main():
                 skipped += 1
                 print(f"   ✗ استبعدنا «{r['title']}»: الوصف يقول «{why.strip()[:70]}»")
                 continue
-            c = city_ar(r["city"])
+            c = city_ar(r["city"]) if (r.get("city") and (r["city"] or "").lower() in CITY_AR) else city_ar(guess_city(f"{r.get('city') or ''} {r['location']}") or r.get("city"))
             if k in fresh:  # نفس الإعلان في أكثر من مدينة
                 if c not in fresh[k]["city"]:
                     fresh[k]["city"] += f" أو {c}"
@@ -286,7 +461,8 @@ def main():
             item.update({
                 "id": prev.get("id") or slug(f"{src['companyEn']}-{r['title']}"),
                 "type": prev.get("type") or classify_type(r["title"], r["experience"]),
-                "field": prev.get("field") or classify_field(f"{r['title']} {r['dept']}"),
+                "field": classify_field(f"{r['title']} {r['dept']}"),
+                "org": src.get("org", ORG_DEFAULT),
                 "city": c,
                 "status": "open",
                 "deadline": r["deadline"] or prev.get("deadline", ""),
@@ -309,6 +485,8 @@ def main():
     for k, x in old_auto.items():
         if (x.get("companyEn") or "").lower() in failed and k not in fresh:
             fresh[k] = x
+    for x in list(fresh.values()) + manual:
+        x.setdefault("org", ORG_DEFAULT)
 
     result = manual + sorted(fresh.values(), key=lambda x: x.get("posted", ""), reverse=True)
 
@@ -380,7 +558,7 @@ def write_feed(listings):
     text = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-  <title>أول خطوة: فرص المبتدئين في الشركات الناشئة السعودية</title>
+  <title>أول خطوة: فرص المبتدئين في السعودية</title>
   <link>{SITE}</link>
   <description>تدريب تعاوني وInternship وبرامج خريجين ووظائف Entry Level، تتحدث كل يوم.</description>
   <language>ar</language>
@@ -412,7 +590,7 @@ def write_job_pages(listings):
 <meta property="og:title" content="{_xml(title)}">
 <meta property="og:description" content="{_xml(desc)}">
 <meta property="og:url" content="{SITE}j/{_xml(name)}">
-<meta property="og:image" content="{SITE}og-image.jpg">
+<meta property="og:image" content="{SITE}og-image.jpg?v=2">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{SITE}#job-{_xml(x['id'])}">
 <meta http-equiv="refresh" content="0; url={_xml(target)}">
