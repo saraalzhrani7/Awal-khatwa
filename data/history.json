@@ -39,5 +39,38 @@
    "entry": 5,
    "coop": 4
   }
+ },
+ {
+  "date": "2026-09-26",
+  "open": 25,
+  "total": 29,
+  "new": 0,
+  "newIds": [],
+  "byCompany": {
+   "Tabby": 6,
+   "Lucidya": 5,
+   "Salla": 5,
+   "Ninja": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "Tamara": 1,
+   "COGNNA": 1,
+   "Mrsool": 1,
+   "Mozn": 1
+  },
+  "byField": {
+   "business": 11,
+   "tech": 5,
+   "media": 4,
+   "product": 4,
+   "data": 1
+  },
+  "byType": {
+   "internship": 10,
+   "grad": 6,
+   "entry": 5,
+   "coop": 4
+  }
  }
 ]
