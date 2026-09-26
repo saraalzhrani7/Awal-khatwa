@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>أول خطوة | تدريب تعاوني وInternship ووظائف للمبتدئين في الشركات الناشئة السعودية</title>
-<meta name="description" content="فرص تدريب تعاوني وInternship وبرامج خريجين ووظائف Entry Level لحديثي التخرج في الشركات الناشئة السعودية بالرياض وجدة والشرقية. تتحدث كل يوم من صفحات التوظيف الرسمية.">
+<title>أول خطوة | تدريب تعاوني وInternship ووظائف للمبتدئين في السعودية</title>
+<meta name="description" content="فرص تدريب تعاوني وInternship وبرامج خريجين وتمهير ووظائف Entry Level لحديثي التخرج في السعودية: الشركات الناشئة والخاصة والبنوك والجهات الحكومية وشبه الحكومية. تتحدث كل يوم ومجانًا.">
 <link rel="canonical" href="https://saraalzhrani7.github.io/Awal-khatwa/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"أول خطوة","alternateName":"Awal Khatwa","url":"https://saraalzhrani7.github.io/Awal-khatwa/","inLanguage":"ar","description":"فرص تدريب تعاوني وInternship ووظائف للمبتدئين في الشركات الناشئة السعودية"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"أول خطوة","alternateName":"Awal Khatwa","url":"https://saraalzhrani7.github.io/Awal-khatwa/","inLanguage":"ar","description":"فرص تدريب تعاوني وInternship ووظائف للمبتدئين في السعودية"}</script>
 <meta property="og:title" content="أول خطوة">
-<meta property="og:description" content="فرص تدريب ووظائف Entry Level في الشركات الناشئة السعودية للي توهم يبدون.">
+<meta property="og:description" content="فرص تدريب وبرامج خريجين ووظائف Entry Level في الشركات والبنوك والجهات الحكومية بالسعودية، للي توهم يبدون.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://saraalzhrani7.github.io/Awal-khatwa/">
-<meta property="og:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.jpg">
+<meta property="og:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:locale" content="ar_SA">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.jpg">
+<meta name="twitter:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.jpg?v=2">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="أول خطوة: فرص جديدة" href="feed.xml">
 <meta name="theme-color" content="#0B7A5C">
@@ -107,6 +107,7 @@ header.top{display:flex; flex-wrap:wrap; align-items:end; justify-content:space-
 .job h3{margin:0; font-size:17px; font-weight:600; line-height:1.35; text-wrap:balance}
 .meta{display:flex; flex-wrap:wrap; gap:6px; font-size:12.5px}
 .tag{border:1px solid var(--line); border-radius:6px; padding:1px 8px; color:var(--muted); background:var(--surface)}
+.tag.org{border-color:var(--saffron); color:var(--saffron)}
 .tag.type{border-color:transparent; background:var(--accent-soft); color:var(--accent); font-weight:600}
 .who{margin:0; font-size:14px; text-wrap:pretty; max-width:70ch}
 .job-side{display:flex; flex-direction:column; align-items:end; gap:10px; justify-content:space-between; min-width:150px}
@@ -278,12 +279,12 @@ footer .contact a{color:var(--ink); font-weight:500}
   <header class="top">
     <div class="brand">
       <h1>أول <span>خطوة</span></h1>
-      <p>فرص تدريب ووظائف Entry Level في الشركات الناشئة السعودية، للي توهم يبدون رحلتهم المهنية. كل إعلان يوديك لصفحة التقديم الرسمية.</p>
+      <p>فرص تدريب وبرامج خريجين ووظائف Entry Level في السعودية: الشركات الناشئة والخاصة، والبنوك، والجهات الحكومية وشبه الحكومية. للي توهم يبدون رحلتهم المهنية. كل إعلان يوديك لصفحة التقديم الرسمية.</p>
     </div>
     <div class="stats">
       <div class="stat"><b class="live" id="stOpen">–</b><small>فرصة مفتوحة الآن</small></div>
       <div class="stat"><b id="stAll">–</b><small>إعلان وبرنامج</small></div>
-      <div class="stat"><b id="stCo">–</b><small>شركة ناشئة</small></div>
+      <div class="stat"><b id="stCo">–</b><small>جهة وشركة</small></div>
     </div>
   </header>
 
@@ -317,6 +318,8 @@ footer .contact a{color:var(--ink); font-weight:500}
         <div class="frow" id="fToggles"></div>
         <div class="flabel">نوع الفرصة</div>
         <div class="chips" id="typeChips" role="group" aria-label="نوع الفرصة"></div>
+        <div class="flabel">نوع الجهة</div>
+        <div class="chips" id="orgChips" role="group" aria-label="نوع الجهة"></div>
         <div class="flabel">المجال</div>
         <div class="chips" id="fieldChips" role="group" aria-label="المجال"></div>
         <div class="flabel">المدينة</div>
@@ -337,6 +340,7 @@ footer .contact a{color:var(--ink); font-weight:500}
           <input id="q2" type="search" placeholder="ابحث باسم الشركة أو القطاع…" autocomplete="off">
         </label>
       </div>
+      <div class="chips" id="corgChips" role="group" aria-label="نوع الجهة"></div>
       <div class="chips" id="secChips" role="group" aria-label="القطاعات"></div>
     </div>
     <div class="grid" id="grid"></div>
@@ -370,8 +374,8 @@ const STATIC_EN = [
   ['.sitenav a[href="./"]', 'Opportunities'], ['.sitenav a[href="cv.html"]', 'CV Builder'], ['.sitenav a[href="guide.html"]', 'Beginner Guide'], ['.sitenav a[href="stats.html"]', 'Stats'],
   ['#langBtn', 'عربي'],
   ['.brand h1', 'Awal <span>Khatwa</span>'],
-  ['.brand p', 'Internships, co-op training, graduate programs and entry-level jobs at Saudi startups, for people just starting their careers. Every listing links to the official application page.'],
-  ['#stOpen + small', 'open now'], ['#stAll + small', 'listings & programs'], ['#stCo + small', 'startups'],
+  ['.brand p', 'Internships, co-op training, graduate programs and entry-level jobs in Saudi Arabia: startups, private companies, banks, government and semi-government entities. For people just starting their careers. Every listing links to the official application page.'],
+  ['#stOpen + small', 'open now'], ['#stAll + small', 'listings & programs'], ['#stCo + small', 'organizations'],
   ['#glossToggle', 'What’s the difference between these types?'],
   ['#glossary', `<div class="gloss"><span class="k">Co-op Training</span><p><b>University requirement:</b> training you need to graduate, approved and followed up by your university.</p></div>
     <div class="gloss"><span class="k">Internship</span><p><b>Not a university requirement:</b> for recent graduates or students in summer, usually 3 to 6 months and often paid.</p></div>
@@ -399,9 +403,9 @@ function applyStatic(){
   if(LANG !== "en") return;
   document.documentElement.lang = "en"; document.documentElement.dir = "ltr";
   const w = document.querySelector(".wrap"); w.setAttribute("dir","ltr"); w.setAttribute("lang","en");
-  document.title = "Awal Khatwa | Internships, Co-op and Entry-Level Jobs at Saudi Startups";
+  document.title = "Awal Khatwa | Internships, Co-op and Entry-Level Jobs in Saudi Arabia";
   STATIC_EN.forEach(([sel, html])=>{ const el = document.querySelector(sel); if(el) el.innerHTML = html; });
-  const fl = document.querySelectorAll(".flabel"); ["Type","Field","City"].forEach((t,i)=>{ if(fl[i]) fl[i].textContent = t; });
+  const fl = document.querySelectorAll(".flabel"); ["Type","Organization","Field","City"].forEach((t,i)=>{ if(fl[i]) fl[i].textContent = t; });
   Object.entries(PH_EN).forEach(([id,ph])=>{ const el = document.getElementById(id); if(el) el.placeholder = ph; });
   $("#langBtn").setAttribute("lang","ar");
 }
@@ -428,18 +432,20 @@ const REGIONS = {
   remote: {label:"عن بُعد", test:j=>!!j.remote || /عن ب[ُ]?عد/.test(j.city||"")}
 };
 const TYPES = {coop:"تدريب تعاوني", internship:"Internship", grad:"برنامج خريجين", entry:"Entry Level"};
-const FIELDS = {tech:"تقنية وبرمجة", data:"بيانات وذكاء اصطناعي", cyber:"أمن سيبراني", product:"منتج وتصميم", business:"أعمال وموارد بشرية", media:"إعلام ومحتوى"};
+const FIELDS = {tech:"تقنية وبرمجة", data:"بيانات وذكاء اصطناعي", cyber:"أمن سيبراني", finance:"مالية ومحاسبة", engineering:"هندسة", health:"صحة وعلوم", legal:"قانون", supply:"سلاسل إمداد ومشتريات", marketing:"تسويق ومبيعات", product:"منتج وتصميم", business:"أعمال وموارد بشرية", media:"إعلام ومحتوى"};
+const ORGS = {startup:"شركات ناشئة", private:"شركات خاصة", semi:"شبه حكومي", bank:"بنوك", gov:"جهات حكومية"};
 const STATUS = {open:"مفتوح", rolling:"مستمر", seasonal:"موسمي", closed:"مغلق حاليًا"};
 const LABELS = {
-  ar:{types:{...TYPES}, fields:{...FIELDS}, status:{...STATUS}, regions:{riyadh:"الرياض", west:"جدة ومكة", east:"الشرقية", remote:"عن بُعد"}},
+  ar:{types:{...TYPES}, fields:{...FIELDS}, status:{...STATUS}, orgs:{...ORGS}, regions:{riyadh:"الرياض", west:"جدة ومكة", east:"الشرقية", remote:"عن بُعد"}},
   en:{types:{coop:"Co-op Training", internship:"Internship", grad:"Graduate Program", entry:"Entry Level"},
-      fields:{tech:"Tech & Software", data:"Data & AI", cyber:"Cybersecurity", product:"Product & Design", business:"Business & HR", media:"Media & Content"},
+      fields:{tech:"Tech & Software", data:"Data & AI", cyber:"Cybersecurity", finance:"Finance & Accounting", engineering:"Engineering", health:"Health & Sciences", legal:"Law", supply:"Supply Chain & Procurement", marketing:"Marketing & Sales", product:"Product & Design", business:"Business & HR", media:"Media & Content"},
+      orgs:{startup:"Startups", private:"Private companies", semi:"Semi-government", bank:"Banks", gov:"Government"},
       status:{open:"Open", rolling:"Rolling", seasonal:"Seasonal", closed:"Closed for now"},
       regions:{riyadh:"Riyadh", west:"Jeddah & Makkah", east:"Eastern Province", remote:"Remote"}}
 };
-const SECT_EN = {"الكل":"All","إعلام ومحتوى":"Media & Content","برمجيات للأعمال":"Business Software","تقنية مالية":"Fintech","تجارة إلكترونية":"E-commerce","توصيل":"Delivery","سياحة وضيافة":"Travel & Hospitality","ذكاء اصطناعي":"AI","أمن سيبراني":"Cybersecurity","اتصالات":"Telecom","عقار وسكن":"Real Estate","فعاليات وترفيه":"Events & Entertainment","ألعاب":"Gaming","تقنية متقدمة":"Deep Tech"};
+const SECT_EN = {"الكل":"All","إعلام ومحتوى":"Media & Content","برمجيات للأعمال":"Business Software","تقنية مالية":"Fintech","تجارة إلكترونية":"E-commerce","توصيل":"Delivery","سياحة وضيافة":"Travel & Hospitality","ذكاء اصطناعي":"AI","أمن سيبراني":"Cybersecurity","اتصالات":"Telecom","عقار وسكن":"Real Estate","فعاليات وترفيه":"Events & Entertainment","ألعاب":"Gaming","تقنية متقدمة":"Deep Tech","بنوك":"Banks","طاقة وصناعة":"Energy & Industry","طيران":"Aviation","تطوير عقاري وسياحة":"Real Estate & Tourism","استثمار":"Investment","تعليم وبحث":"Education & Research","منصات حكومية":"Government Platforms","مالية ومحاسبة":"Finance","تجزئة وأغذية":"Retail & Food","صحة":"Healthcare","استشارات":"Consulting"};
 const sectL = x => LANG === "en" ? (SECT_EN[x] || x) : x;
-function applyLabels(){ const L = LABELS[LANG]; Object.assign(TYPES, L.types); Object.assign(FIELDS, L.fields); Object.assign(STATUS, L.status); Object.entries(L.regions).forEach(([k,v])=>{ REGIONS[k].label = v; }); }
+function applyLabels(){ const L = LABELS[LANG]; Object.assign(TYPES, L.types); Object.assign(FIELDS, L.fields); Object.assign(STATUS, L.status); Object.assign(ORGS, L.orgs); Object.entries(L.regions).forEach(([k,v])=>{ REGIONS[k].label = v; }); }
 const RANK = {open:0, rolling:1, seasonal:2, closed:3};
 
 const LI = n => "https://www.linkedin.com/jobs/search/?keywords=" + encodeURIComponent(n) + "&location=Saudi%20Arabia&f_E=1%2C2";
@@ -473,7 +479,7 @@ const COS = [
  {ar:"جاذر إن",en:"Gathern",sector:"سياحة وضيافة",desc:"حجز شاليهات وشقق واستراحات.",den:"Booking chalets, apartments and rest houses.",careers:"https://www.linkedin.com/company/gathern.co"},
  {ar:"لوسيديا",en:"Lucidya",sector:"ذكاء اصطناعي",desc:"تحليل تجربة العملاء بالذكاء الاصطناعي بالعربي.",den:"AI customer-experience analytics in Arabic.",careers:"https://apply.workable.com/lucidya/"},
  {ar:"مزن",en:"Mozn",sector:"ذكاء اصطناعي",desc:"ذكاء اصطناعي لمكافحة الاحتيال وتحليل البيانات.",den:"AI for fraud prevention and data analytics.",careers:"https://www.mozn.ai/careers"},
- {ar:"هيوماين",en:"HUMAIN",sector:"ذكاء اصطناعي",desc:"شركة ذكاء اصطناعي سعودية تابعة لصندوق الاستثمارات العامة.",den:"Saudi AI company owned by the Public Investment Fund.",careers:"https://hub.misk.org.sa/programs/skills/misk-x-humain-traineeship-program-future-ai-builders/"},
+ {ar:"هيوماين",en:"HUMAIN",org:"semi",sector:"ذكاء اصطناعي",desc:"شركة ذكاء اصطناعي سعودية تابعة لصندوق الاستثمارات العامة.",den:"Saudi AI company owned by the Public Investment Fund.",careers:"https://hub.misk.org.sa/programs/skills/misk-x-humain-traineeship-program-future-ai-builders/"},
  {ar:"كوقنا",en:"COGNNA",sector:"أمن سيبراني",desc:"منصة مركز عمليات أمنية (SOC) بالذكاء الاصطناعي.",den:"AI-powered security operations center (SOC) platform.",careers:"https://apply.workable.com/cognna/"},
  {ar:"سرج",en:"Sarj",sector:"ذكاء اصطناعي",desc:"وكلاء صوتيين عرب بالذكاء الاصطناعي للشركات، ويفتحون تدريب للمبتدئين.",den:"Arabic AI voice agents for enterprises; opens internships for beginners.",careers:"https://jobs.ashbyhq.com/sarjai"},
  {ar:"ديب",en:"DEEP.SA",sector:"ذكاء اصطناعي",desc:"محركات ووكلاء ذكاء اصطناعي مبنية للسوق والبيانات السعودية.",den:"AI engines and agents built for Saudi market data.",careers:"https://www.linkedin.com/company/deepforai/jobs/"},
@@ -493,8 +499,56 @@ const COS = [
  {ar:"ويبوك",en:"webook",sector:"فعاليات وترفيه",desc:"حجز التذاكر والفعاليات، ويفتحون تمهير وتدريب تعاوني وInternship.",den:"Tickets and events booking; offers Tamheer, co-op and internships.",careers:"https://apply.workable.com/webook/"},
  {ar:"ميراي",en:"Mirai",sector:"ألعاب",desc:"استوديو ألعاب ومحتوى بالذكاء الاصطناعي التوليدي.",den:"Game and content studio using generative AI.",careers:"https://apply.workable.com/playmirai/"},
  {ar:"أدري",en:"Adree",sector:"برمجيات للأعمال",desc:"اختبار البرمجيات والتحول الرقمي بتقنيات Low-code.",den:"Software testing and digital transformation with low-code.",careers:"https://apply.workable.com/adree/"},
- {ar:"آلات",en:"Alat",sector:"تقنية متقدمة",desc:"تصنيع إلكترونيات وتقنيات متقدمة، تابعة لصندوق الاستثمارات العامة.",den:"Electronics and advanced tech manufacturing, owned by PIF.",careers:"https://www.alat.com/en/careers/"},
- {ar:"نيو سبيس",en:"Neo Space Group",sector:"تقنية متقدمة",desc:"خدمات فضائية للاتصالات والرصد، تابعة لصندوق الاستثمارات العامة.",den:"Space services for communications and earth observation, owned by PIF.",careers:"https://www.linkedin.com/company/neospacegroup/jobs/"},
+ {ar:"آلات",en:"Alat",org:"semi",sector:"تقنية متقدمة",desc:"تصنيع إلكترونيات وتقنيات متقدمة، تابعة لصندوق الاستثمارات العامة.",den:"Electronics and advanced tech manufacturing, owned by PIF.",careers:"https://www.alat.com/en/careers/"},
+ {ar:"نيو سبيس",en:"Neo Space Group",org:"semi",sector:"تقنية متقدمة",desc:"خدمات فضائية للاتصالات والرصد، تابعة لصندوق الاستثمارات العامة.",den:"Space services for communications and earth observation, owned by PIF.",careers:"https://www.linkedin.com/company/neospacegroup/jobs/"},
+ {ar: "البنك الأهلي السعودي", en: "Saudi National Bank", org: "bank", sector: "بنوك", desc: "أكبر بنك في السعودية، وعنده برامج تطوير للخريجين.", den: "Saudi Arabia's largest bank, with graduate development programs.", careers: "https://www.linkedin.com/jobs/search/?keywords=Saudi%20National%20Bank&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "مصرف الراجحي", en: "Al Rajhi Bank", org: "bank", sector: "بنوك", desc: "من أكبر المصارف الإسلامية، ويفتح تدريب تعاوني وبرامج خريجين.", den: "One of the largest Islamic banks; offers co-op training and graduate programs.", careers: "https://careers.alrajhibank.com.sa/"},
+ {ar: "بنك الرياض", en: "Riyad Bank", org: "bank", sector: "بنوك", desc: "بنك سعودي كبير، وعنده برامج لحديثي التخرج.", den: "Major Saudi bank with programs for fresh graduates.", careers: "https://careers.riyadbank.com/"},
+ {ar: "البنك السعودي الأول", en: "SAB", org: "bank", sector: "بنوك", desc: "البنك السعودي الأول (ساب).", den: "Saudi Awwal Bank (SAB).", careers: "https://careers.sab.com/"},
+ {ar: "مصرف الإنماء", en: "Alinma Bank", org: "bank", sector: "بنوك", desc: "مصرف إسلامي وخدمات رقمية.", den: "Islamic bank with digital services.", careers: "https://career.alinma.com/"},
+ {ar: "البنك السعودي الفرنسي", en: "Banque Saudi Fransi", org: "bank", sector: "بنوك", desc: "بنك سعودي، ويعلن فرص لحديثي التخرج.", den: "Saudi bank that posts opportunities for fresh graduates.", careers: "https://www.bsfcareers.sa/"},
+ {ar: "البنك العربي الوطني", en: "Arab National Bank", org: "bank", sector: "بنوك", desc: "بنك سعودي بخدمات للأفراد والشركات.", den: "Saudi bank serving individuals and businesses.", careers: "https://careers.anb.sa/"},
+ {ar: "بنك البلاد", en: "Bank Albilad", org: "bank", sector: "بنوك", desc: "مصرف إسلامي سعودي.", den: "Saudi Islamic bank.", careers: "https://career.bankalbilad.com/"},
+ {ar: "بنك الجزيرة", en: "Bank AlJazira", org: "bank", sector: "بنوك", desc: "بنك سعودي بخدمات مصرفية إسلامية.", den: "Saudi bank with Islamic banking services.", careers: "https://career.bankaljazira.com/"},
+ {ar: "البنك السعودي للاستثمار", en: "Saudi Investment Bank", org: "bank", sector: "بنوك", desc: "بنك سعودي، وعنده برنامج خريجين وتدريب تعاوني.", den: "Saudi bank with a graduate program and co-op training.", careers: "https://careers.saib.com.sa/"},
+ {ar: "إس تي سي بنك", en: "STC Bank", org: "bank", sector: "بنوك", desc: "بنك رقمي سعودي (STC Pay سابقًا).", den: "Saudi digital bank (formerly STC Pay).", careers: "https://www.linkedin.com/jobs/search/?keywords=STC%20Bank&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "دال 360", en: "D360 Bank", org: "bank", sector: "بنوك", desc: "بنك رقمي سعودي جديد.", den: "New Saudi digital bank.", careers: "https://www.linkedin.com/jobs/search/?keywords=D360%20Bank&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "أرامكو السعودية", en: "Aramco", org: "semi", sector: "طاقة وصناعة", desc: "أكبر شركة طاقة في العالم، وعندها برامج تدريب وابتعاث للخريجين.", den: "The world's largest energy company, with training and graduate programs.", careers: "https://careers.aramco.com/"},
+ {ar: "سابك", en: "SABIC", org: "semi", sector: "طاقة وصناعة", desc: "شركة كيماويات عالمية سعودية.", den: "Global Saudi chemicals company.", careers: "https://jobs.sabic.com/"},
+ {ar: "معادن", en: "Ma'aden", org: "semi", sector: "طاقة وصناعة", desc: "شركة التعدين العربية السعودية، وعندها تدريب تعاوني.", den: "Saudi Arabian Mining Company; offers co-op training.", careers: "https://careers.maaden.com/"},
+ {ar: "الشركة السعودية للكهرباء", en: "Saudi Electricity", org: "semi", sector: "طاقة وصناعة", desc: "الكهرباء في المملكة، وعندها تدريب تعاوني وبرامج خريجين.", den: "Kingdom's electricity provider, with co-op and graduate programs.", careers: "https://jobs.se.com.sa/"},
+ {ar: "إس تي سي", en: "stc", org: "semi", sector: "اتصالات", desc: "أكبر شركة اتصالات وتقنية في السعودية.", den: "Saudi Arabia's largest telecom and tech company.", careers: "https://careers.stc.com.sa/"},
+ {ar: "علم", en: "Elm", org: "semi", sector: "برمجيات للأعمال", desc: "حلول رقمية وحكومية، تابعة لصندوق الاستثمارات العامة.", den: "Digital and e-government solutions, owned by PIF.", careers: "https://career.elm.sa/"},
+ {ar: "الخطوط السعودية", en: "Saudia", org: "semi", sector: "طيران", desc: "الناقل الوطني، وعندها برامج مثل برنامج الطيارين (Cadet).", den: "The national carrier, with programs like the Cadet Program.", careers: "https://careers.saudia.com/"},
+ {ar: "طيران الرياض", en: "Riyadh Air", org: "semi", sector: "طيران", desc: "شركة طيران وطنية جديدة تابعة للصندوق.", den: "New national airline owned by PIF.", careers: "https://riyadhair.tal.net/candidate/jobboard/vacancy/3/adv/"},
+ {ar: "نيوم", en: "NEOM", org: "semi", sector: "تطوير عقاري وسياحة", desc: "مشروع نيوم في شمال غرب المملكة.", den: "The NEOM giga-project in the northwest of the Kingdom.", careers: "https://careers.neom.com/"},
+ {ar: "البحر الأحمر الدولية", en: "Red Sea Global", org: "semi", sector: "تطوير عقاري وسياحة", desc: "مطور مشاريع البحر الأحمر وأمالا.", den: "Developer of The Red Sea and AMAALA destinations.", careers: "https://careers.theredsea.sa/"},
+ {ar: "القدية", en: "Qiddiya", org: "semi", sector: "تطوير عقاري وسياحة", desc: "مدينة الترفيه والرياضة في الرياض.", den: "Riyadh's entertainment and sports city.", careers: "https://apply.workable.com/qiddiya-investment-company-1/"},
+ {ar: "الدرعية", en: "Diriyah Company", org: "semi", sector: "تطوير عقاري وسياحة", desc: "تطوير الدرعية التاريخية.", den: "Developing historic Diriyah.", careers: "https://www.diriyahcompany.sa/en/careers"},
+ {ar: "روشن", en: "ROSHN", org: "semi", sector: "تطوير عقاري وسياحة", desc: "مطور عقاري وطني تابع للصندوق.", den: "National real estate developer owned by PIF.", careers: "https://www.linkedin.com/jobs/search/?keywords=ROSHN&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "صندوق الاستثمارات العامة", en: "PIF", org: "semi", sector: "استثمار", desc: "صندوق الثروة السيادي، وعنده برامج للخريجين.", den: "Saudi sovereign wealth fund, with graduate programs.", careers: "https://www.linkedin.com/jobs/search/?keywords=Public%20Investment%20Fund&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "أكوا باور", en: "ACWA Power", org: "private", sector: "طاقة وصناعة", desc: "طاقة متجددة وتحلية مياه.", den: "Renewable energy and water desalination.", careers: "https://careers.acwapower.com/"},
+ {ar: "كاوست", en: "KAUST", org: "semi", sector: "تعليم وبحث", desc: "جامعة الملك عبدالله للعلوم والتقنية، وعندها برامج تدريب صيفي.", den: "King Abdullah University of Science and Technology, with summer internships.", careers: "https://careers.kaust.edu.sa/"},
+ {ar: "مجموعة تداول السعودية", en: "Saudi Tadawul Group", org: "semi", sector: "استثمار", desc: "السوق المالية السعودية.", den: "The Saudi stock exchange group.", careers: "https://www.linkedin.com/jobs/search/?keywords=Saudi%20Tadawul%20Group&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "موبايلي", en: "Mobily", org: "private", sector: "اتصالات", desc: "شركة اتصالات سعودية.", den: "Saudi telecom company.", careers: "https://www.linkedin.com/jobs/search/?keywords=Mobily&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "جدارات", en: "Jadarat", org: "gov", sector: "منصات حكومية", desc: "المنصة الوطنية الموحدة للتوظيف: فيها الوظائف الحكومية وبرامج هدف.", den: "The national unified employment platform: government jobs and HRDF programs.", careers: "https://jadarat.sa/"},
+ {ar: "سدايا", en: "SDAIA", org: "gov", sector: "ذكاء اصطناعي", desc: "الهيئة السعودية للبيانات والذكاء الاصطناعي.", den: "Saudi Data and AI Authority.", careers: "https://www.linkedin.com/jobs/search/?keywords=SDAIA&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "الهيئة الوطنية للأمن السيبراني", en: "NCA", org: "gov", sector: "أمن سيبراني", desc: "الجهة الحكومية للأمن السيبراني في المملكة.", den: "The Kingdom's national cybersecurity authority.", careers: "https://www.linkedin.com/jobs/search/?keywords=National%20Cybersecurity%20Authority&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "هيئة الحكومة الرقمية", en: "Digital Government Authority", org: "gov", sector: "منصات حكومية", desc: "تنظيم وتطوير الخدمات الحكومية الرقمية.", den: "Regulates and develops digital government services.", careers: "https://www.linkedin.com/jobs/search/?keywords=Digital%20Government%20Authority&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "هيئة الزكاة والضريبة والجمارك", en: "ZATCA", org: "gov", sector: "مالية ومحاسبة", desc: "الزكاة والضرائب والجمارك.", den: "Zakat, tax and customs authority.", careers: "https://www.linkedin.com/jobs/search/?keywords=ZATCA&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "البنك المركزي السعودي", en: "SAMA", org: "gov", sector: "مالية ومحاسبة", desc: "البنك المركزي، وعنده برامج للخريجين.", den: "Saudi Central Bank, with graduate programs.", careers: "https://www.linkedin.com/jobs/search/?keywords=Saudi%20Central%20Bank&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "المراعي", en: "Almarai", org: "private", sector: "تجزئة وأغذية", desc: "أكبر شركة ألبان وأغذية في المنطقة، وعندها برامج خريجين.", den: "The region's largest dairy and food company, with graduate programs.", careers: "https://career5.successfactors.eu/career?company=AlMaraiP"},
+ {ar: "النهدي", en: "Nahdi", org: "private", sector: "صحة", desc: "أكبر سلسلة صيدليات في السعودية.", den: "Saudi Arabia's largest pharmacy chain.", careers: "https://efan.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs"},
+ {ar: "بوبا العربية", en: "Bupa Arabia", org: "private", sector: "صحة", desc: "تأمين صحي.", den: "Health insurance.", careers: "https://careers.bupa.com.sa/"},
+ {ar: "التعاونية", en: "Tawuniya", org: "private", sector: "مالية ومحاسبة", desc: "تأمين.", den: "Insurance.", careers: "https://careers.tawuniya.com.sa/jobs"},
+ {ar: "جرير", en: "Jarir", org: "private", sector: "تجزئة وأغذية", desc: "مكتبة ومتجر إلكترونيات.", den: "Bookstore and electronics retailer.", careers: "https://www.linkedin.com/jobs/search/?keywords=Jarir%20Bookstore&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "بي دبليو سي", en: "PwC Middle East", org: "private", sector: "استشارات", desc: "خدمات مهنية، وعندها تدريب تعاوني وبرامج خريجين في السعودية.", den: "Professional services, with co-op and graduate programs in KSA.", careers: "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers"},
+ {ar: "ديلويت", en: "Deloitte Middle East", org: "private", sector: "استشارات", desc: "خدمات مهنية واستشارات.", den: "Professional services and consulting.", careers: "https://middleeastjobs.deloitte.com/careersME/SearchJobs/"},
+ {ar: "إرنست ويونغ", en: "EY", org: "private", sector: "استشارات", desc: "خدمات مهنية وتدقيق.", den: "Professional services and audit.", careers: "https://www.linkedin.com/jobs/search/?keywords=EY&location=Saudi%20Arabia&f_E=1%2C2"},
+ {ar: "كي بي إم جي", en: "KPMG", org: "private", sector: "استشارات", desc: "تدقيق واستشارات، وعندها برنامج تدريب في المراجعة.", den: "Audit and advisory, with an audit internship program.", careers: "https://slccareers.kpmg.com/go/Saudi-Arabia/7737723/"},
+ {ar: "أكسنتشر", en: "Accenture", org: "private", sector: "استشارات", desc: "استشارات وتقنية، وعندها تدريب تعاوني في السعودية.", den: "Consulting and technology, with co-op internships in KSA.", careers: "https://accenture.wd103.myworkdayjobs.com/en-US/AccentureCareers"},
+ {ar: "لوسد", en: "Lucid Motors", org: "private", sector: "طاقة وصناعة", desc: "مصنع سيارات كهربائية في مدينة الملك عبدالله الاقتصادية.", den: "Electric vehicle factory in King Abdullah Economic City.", careers: "https://job-boards.greenhouse.io/lucidmotors"},
+ {ar: "بيكر هيوز", en: "Baker Hughes", org: "private", sector: "طاقة وصناعة", desc: "تقنيات طاقة، وعندها تدريب صيفي وتمهير في السعودية.", den: "Energy technology, with summer internships and Tamheer in KSA.", careers: "https://bakerhughes.wd5.myworkdayjobs.com/en-US/BakerHughes"},
  {ar:"أثير",en:"Atheer Connectivity",sector:"اتصالات",desc:"تقنيات اتصال لاسلكي لإيصال الإنترنت للمناطق البعيدة.",den:"Wireless tech bringing internet to remote areas.",careers:"https://freehire.me/jobs/software-engineer-intern-coop-atheer-ct-mkhhu7ik"}
 ];
 
@@ -505,7 +559,8 @@ const hasLatin = t => /[A-Za-z]/.test(t) && !/[؀-ۿ]/.test(t);
 const today = new Date(); today.setHours(0,0,0,0);
 
 let JOBS = [];
-const st = {q:"", type:"all", field:"all", region:"all", openOnly:true, saved:false, q2:"", sector:"الكل"};
+const st = {q:"", type:"all", field:"all", region:"all", org:"all", openOnly:true, saved:false, q2:"", sector:"الكل", corg:"all"};
+const orgOf = x => x.org || "startup";
 const SAVE_KEY = "awal-khatwa-saved";
 let SAVED = new Set(); try{ SAVED = new Set(JSON.parse(localStorage.getItem(SAVE_KEY)||"[]")); }catch(e){}
 const persistSaved = () => { try{ localStorage.setItem(SAVE_KEY, JSON.stringify([...SAVED])); }catch(e){} };
@@ -537,20 +592,21 @@ function chipsHTML(map, cur, counts){
 function renderJobs(){
   const mine = new Set([...SAVED, ...APPLIED].filter(id=>JOBS.some(j=>j.id===id)));
   $("#savedN").textContent = mine.size ? mine.size : "";
-  const nf = (st.type!=="all") + (st.field!=="all") + (st.region!=="all") + (!st.openOnly) + (st.saved);
+  const nf = (st.type!=="all") + (st.field!=="all") + (st.region!=="all") + (st.org!=="all") + (!st.openOnly) + (st.saved);
   $("#fCount").textContent = nf; $("#fCount").hidden = !nf;
   const pool = st.saved ? JOBS.filter(j => SAVED.has(j.id) || APPLIED.has(j.id)) : JOBS.filter(j => !st.openOnly || isApplyable(j));
-  const tc={}, fc={}, rc={};
-  pool.forEach(j=>{ tc[j.type]=(tc[j.type]||0)+1; fc[j.field]=(fc[j.field]||0)+1;
+  const tc={}, fc={}, rc={}, oc={};
+  pool.forEach(j=>{ tc[j.type]=(tc[j.type]||0)+1; fc[j.field]=(fc[j.field]||0)+1; oc[orgOf(j)]=(oc[orgOf(j)]||0)+1;
     Object.entries(REGIONS).forEach(([k,r])=>{ if(r.test(j)) rc[k]=(rc[k]||0)+1; }); });
   $("#typeChips").innerHTML = chipsHTML(TYPES, st.type, tc);
   $("#fieldChips").innerHTML = chipsHTML(FIELDS, st.field, fc);
+  $("#orgChips").innerHTML = chipsHTML(ORGS, st.org, oc);
   $("#cityChips").innerHTML = chipsHTML(Object.fromEntries(Object.entries(REGIONS).map(([k,r])=>[k,r.label])), st.region, rc);
   const q = norm(st.q.trim());
   const list = pool.filter(j =>
-    (st.type==="all"||j.type===st.type) && (st.field==="all"||j.field===st.field) &&
+    (st.type==="all"||j.type===st.type) && (st.field==="all"||j.field===st.field) && (st.org==="all"||orgOf(j)===st.org) &&
     (st.region==="all"||REGIONS[st.region].test(j)) &&
-    (!q || norm([j.company,j.companyEn,j.title,j.who,j.city,TYPES[j.type],FIELDS[j.field]].join(" ")).includes(q))
+    (!q || norm([j.company,j.companyEn,j.title,j.who,j.city,TYPES[j.type],FIELDS[j.field],ORGS[orgOf(j)]].join(" ")).includes(q))
   ).sort((a,b)=>{
     const r = RANK[effStatus(a)]-RANK[effStatus(b)]; if(r) return r;
     const n = isNew(b)-isNew(a); if(n) return n;
@@ -579,7 +635,7 @@ function jobHTML(j){
   let due = "";
   if(d!==null && d>=0) due = `<div class="due ${d<=7?"hot":""}"><span>${d===0?T("آخر يوم اليوم","Last day today"):d===1?T("باقي يوم واحد","1 day left"):T(`باقي ${d} يوم`,`${d} days left`)}</span><span class="dd">${fmtDate(j.deadline)}</span></div>`;
   else if(d!==null) due = `<div class="due">${T("انتهى التقديم","Closed on")} ${fmtDate(j.deadline)}</div>`;
-  const meta = [`<span class="tag type">${TYPES[j.type]||""}</span>`, `<span class="tag">${FIELDS[j.field]||""}</span>`, j.city&&`<span class="tag">${esc(cityL(j.city))}</span>`, (j.remote && !/عن ب/.test(j.city||""))&&`<span class="tag">${T("عن بُعد","Remote")}</span>`, j.duration&&!(LANG==="en"&&hasArabic(j.duration))&&`<span class="tag dur">${esc(j.duration)}</span>`, j.paid&&!(LANG==="en"&&hasArabic(j.paid))&&`<span class="tag">${esc(j.paid)}</span>`].filter(Boolean).join("");
+  const meta = [`<span class="tag type">${TYPES[j.type]||""}</span>`, orgOf(j)!=="startup" && `<span class="tag org">${ORGS[orgOf(j)]}</span>`, `<span class="tag">${FIELDS[j.field]||""}</span>`, j.city&&`<span class="tag">${esc(cityL(j.city))}</span>`, (j.remote && !/عن ب/.test(j.city||""))&&`<span class="tag">${T("عن بُعد","Remote")}</span>`, j.duration&&!(LANG==="en"&&hasArabic(j.duration))&&`<span class="tag dur">${esc(j.duration)}</span>`, j.paid&&!(LANG==="en"&&hasArabic(j.paid))&&`<span class="tag">${esc(j.paid)}</span>`].filter(Boolean).join("");
   const label = s==="closed" ? T("صفحة البرنامج","Program page") : T("صفحة التقديم","Apply");
   const whoTxt = LANG==="en" ? ((j.who||"").match(/^قسم (.+?)\.?$/) ? `${RegExp.$1} team.` : (hasArabic(j.who) ? "" : j.who||"")) : (j.who||"");
   return `<article class="job ${s}${APPLIED.has(j.id)?" applied":""}" id="job-${esc(j.id)}">
@@ -602,16 +658,20 @@ function jobHTML(j){
 }
 
 function renderCos(){
-  const sectors = ["الكل", ...new Set(COS.map(c=>c.sector))];
+  const coc = {}; COS.forEach(c=>{ const o = c.org||"startup"; coc[o]=(coc[o]||0)+1; });
+  $("#corgChips").innerHTML = chipsHTML(ORGS, st.corg, coc);
+  const inOrg = COS.filter(c=>st.corg==="all" || (c.org||"startup")===st.corg);
+  const sectors = ["الكل", ...new Set(inOrg.map(c=>c.sector))];
+  if(!sectors.includes(st.sector)) st.sector = "الكل";
   $("#secChips").innerHTML = sectors.map(s=>`<button class="chip" type="button" data-s="${s}" aria-pressed="${s===st.sector}">${sectL(s)}</button>`).join("");
   const q = norm(st.q2.trim());
   const openBy = {}; JOBS.filter(isApplyable).forEach(j=>{ if(j.companyEn) openBy[j.companyEn]=(openBy[j.companyEn]||0)+1; });
-  const list = COS.filter(c=>(st.sector==="الكل"||c.sector===st.sector) && (!q||norm([c.ar,c.en,c.sector,sectL(c.sector),c.desc,c.den||""].join(" ")).includes(q)))
+  const list = inOrg.filter(c=>(st.sector==="الكل"||c.sector===st.sector) && (!q||norm([c.ar,c.en,c.sector,sectL(c.sector),c.desc,c.den||""].join(" ")).includes(q)))
     .sort((a,b)=>(openBy[b.en]||0)-(openBy[a.en]||0));
   $("#grid").innerHTML = list.map(c=>`<article class="card">
     <div class="card-head"><div class="mono" aria-hidden="true">${esc(LANG==="en" ? c.en[0] : c.ar[0])}</div>
       <div class="names">${LANG==="en"?`<h3 class="ltr">${esc(c.en)}</h3><div class="en">${esc(c.ar)}</div>`:`<h3>${esc(c.ar)}</h3><div class="en ltr">${esc(c.en)}</div>`}</div></div>
-    <div class="meta"><span class="tag">${esc(sectL(c.sector))}</span>${openBy[c.en]?`<span class="has-jobs">${T(`${openBy[c.en]} فرصة مفتوحة للمبتدئين`,`${openBy[c.en]} open for beginners`)}</span>`:""}</div>
+    <div class="meta"><span class="tag">${esc(sectL(c.sector))}</span>${(c.org||"startup")!=="startup"?`<span class="tag org">${ORGS[c.org]}</span>`:""}${openBy[c.en]?`<span class="has-jobs">${T(`${openBy[c.en]} فرصة مفتوحة للمبتدئين`,`${openBy[c.en]} open for beginners`)}</span>`:""}</div>
     <p class="desc">${esc(LANG==="en" && c.den ? c.den : c.desc)}</p>
     <div class="actions"><a class="btn primary" href="${esc(c.careers)}" target="_blank" rel="noopener">${T("صفحة التوظيف","Careers page")}</a><a class="btn" href="${LI(c.en)}" target="_blank" rel="noopener">${T("وظائف المبتدئين في LinkedIn","Entry-level jobs on LinkedIn")}</a></div>
   </article>`).join("") || `<div class="empty">${T("ما فيه نتائج.","No results.")}</div>`;
@@ -631,6 +691,7 @@ function renderAll(){ renderStats(); renderJobs(); renderCos(); }
 // events
 $("#typeChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.type=b.dataset.v; renderJobs();});
 $("#fieldChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.field=b.dataset.v; renderJobs();});
+$("#orgChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.org=b.dataset.v; renderJobs();});
 $("#savedBtn").addEventListener("click",e=>{ st.saved=!st.saved; e.currentTarget.setAttribute("aria-pressed",st.saved); st.type="all"; st.field="all"; st.region="all"; renderJobs(); });
 $("#cityChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.region=b.dataset.v; renderJobs();});
 $("#q").addEventListener("input",e=>{st.q=e.target.value; renderJobs();});
@@ -724,6 +785,7 @@ window.addEventListener("hashchange", focusHash);
 $("#openBtn").addEventListener("click",e=>{st.openOnly=!st.openOnly; e.currentTarget.setAttribute("aria-pressed",st.openOnly); st.type="all"; st.field="all"; renderJobs();});
 $("#q2").addEventListener("input",e=>{st.q2=e.target.value; renderCos();});
 $("#secChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.sector=b.dataset.s; renderCos();});
+$("#corgChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.corg=b.dataset.v; st.sector="الكل"; renderCos();});
 function showTab(which){
   const jobs = which==="jobs";
   $("#tab-jobs").setAttribute("aria-selected",jobs); $("#tab-cos").setAttribute("aria-selected",!jobs);
@@ -744,7 +806,7 @@ $("#filterBtn").addEventListener("click", ()=> $("#fpanel").classList.contains("
 $("#fDone").addEventListener("click", ()=>{ closeFilters(); $("#list").scrollIntoView({block:"start"}); });
 $("#fback").addEventListener("click", closeFilters);
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && $("#fpanel").classList.contains("open")) closeFilters(); });
-$("#fReset").addEventListener("click", ()=>{ st.type="all"; st.field="all"; st.region="all"; st.saved=false; st.openOnly=true;
+$("#fReset").addEventListener("click", ()=>{ st.type="all"; st.field="all"; st.region="all"; st.org="all"; st.saved=false; st.openOnly=true;
   $("#savedBtn").setAttribute("aria-pressed","false"); $("#openBtn").setAttribute("aria-pressed","true"); renderJobs(); });
 (MOBILE.addEventListener ? MOBILE.addEventListener("change", placeToggles) : MOBILE.addListener(placeToggles));
 placeToggles();

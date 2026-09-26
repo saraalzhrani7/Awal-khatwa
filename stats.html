@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>الإحصائيات | أول خطوة</title>
-<meta name="description" content="أرقام فرص المبتدئين في الشركات الناشئة السعودية: أكثر الشركات توظيفًا، وأكثر المجالات طلبًا، وعدد الفرص عبر الوقت.">
+<meta name="description" content="أرقام فرص المبتدئين في السعودية: أكثر الشركات توظيفًا، وأكثر المجالات طلبًا، وعدد الفرص عبر الوقت.">
 <link rel="canonical" href="https://saraalzhrani7.github.io/Awal-khatwa/stats.html">
 <meta property="og:title" content="إحصائيات فرص المبتدئين | أول خطوة">
-<meta property="og:description" content="أكثر الشركات الناشئة السعودية توظيفًا للمبتدئين، وأكثر المجالات طلبًا.">
+<meta property="og:description" content="أكثر الشركات والجهات السعودية توظيفًا للمبتدئين، وأكثر المجالات طلبًا.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.jpg">
+<meta property="og:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.jpg?v=2">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0B7A5C">
@@ -104,7 +104,7 @@ footer{margin-top:28px; color:var(--muted); font-size:12.5px}
 
   <header>
     <h1>الإحصائيات</h1>
-    <p class="lead">أرقام فرص المبتدئين في الشركات الناشئة اللي يتابعها «أول خطوة»: مين يوظف أكثر، ووش المجالات المطلوبة، وكيف يتغير عدد الفرص مع الوقت.</p>
+    <p class="lead">أرقام فرص المبتدئين في الشركات والجهات اللي يتابعها «أول خطوة»: مين يوظف أكثر، ووش المجالات المطلوبة، وكيف يتغير عدد الفرص مع الوقت.</p>
   </header>
 
   <div class="tiles">
@@ -151,7 +151,7 @@ footer{margin-top:28px; color:var(--muted); font-size:12.5px}
 
 <script>
 const TYPES = {coop:"تدريب تعاوني", internship:"Internship", grad:"برنامج خريجين", entry:"Entry Level"};
-const FIELDS = {tech:"تقنية وبرمجة", data:"بيانات وذكاء اصطناعي", cyber:"أمن سيبراني", product:"منتج وتصميم", business:"أعمال وموارد بشرية", media:"إعلام ومحتوى"};
+const FIELDS = {tech:"تقنية وبرمجة", data:"بيانات وذكاء اصطناعي", cyber:"أمن سيبراني", finance:"مالية ومحاسبة", engineering:"هندسة", health:"صحة وعلوم", legal:"قانون", supply:"سلاسل إمداد ومشتريات", marketing:"تسويق ومبيعات", product:"منتج وتصميم", business:"أعمال وموارد بشرية", media:"إعلام ومحتوى"};
 const MONTHS = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
 const $ = s => document.querySelector(s);
 const today = new Date(); today.setHours(0,0,0,0);
@@ -278,7 +278,7 @@ function render(){
   const post = [
     `📊 أرقام «أول خطوة» لشهر ${month}`,
     ``,
-    `خلال ${month} نزل في الموقع ${nOpp(newMonth)} جديدة للمبتدئين في الشركات الناشئة السعودية.`,
+    `خلال ${month} نزل في الموقع ${nOpp(newMonth)} جديدة للمبتدئين في الشركات والجهات السعودية.`,
     ``,
     topCo ? `• أكثر شركة فتحت فرص للمبتدئين: ${nameAr[topCo[0]]||topCo[0]} (${nOpp(topCo[1])})` : "",
     topF ? `• أكثر مجال مطلوب: ${FIELDS[topF[0]]||"أخرى"}` : "",

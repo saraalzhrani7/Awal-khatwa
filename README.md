@@ -1,6 +1,6 @@
 # أول خطوة · Awal Khatwa
 
-**فرص التدريب ووظائف المبتدئين في الشركات الناشئة السعودية، في مكان واحد.**
+**فرص التدريب وبرامج الخريجين ووظائف المبتدئين في السعودية (الشركات الناشئة والخاصة، والبنوك، والجهات الحكومية وشبه الحكومية)، في مكان واحد.**
 
 🔗 **الموقع:** https://saraalzhrani7.github.io/Awal-khatwa/
 
@@ -20,7 +20,7 @@
   - زر مشاركة لكل فرصة، ولكل فرصة صفحة صغيرة (`j/`) عشان تطلع معاينة حلوة في واتساب وتويتر.
   - نسخة إنجليزية (زر English)، وتقدر تثبت الموقع كتطبيق على الجوال (PWA).
   - ملف RSS (`feed.xml`) للفرص الجديدة، ينفع لتطبيقات الأخبار وقنوات تيليجرام.
-- **الشركات:** دليل لأكثر من 50 شركة ناشئة سعودية، فيه روابط صفحات التوظيف.
+- **الشركات والجهات:** دليل لأكثر من 100 جهة (ناشئة، وخاصة، وبنوك، وشبه حكومية، وحكومية)، فيه روابط صفحات التوظيف.
 - **سيرتك:**
   - صانع سيرة ذاتية مجاني بقالب متوافق مع أنظمة ATS، يحملها PDF.
   - يقدر يعبّي الخانات من سيرة قديمة (PDF أو Word).
@@ -40,7 +40,7 @@ GitHub Actions (يوميًا 6 الصبح بتوقيت السعودية)
         ▼
 scripts/update_jobs.py
   ├─ يجيب الإعلانات من واجهات أنظمة التوظيف العامة:
-  │    Workable · Greenhouse · Ashby · Pinpoint · SmartRecruiters
+  │    Workable · Greenhouse · Ashby · Pinpoint · SmartRecruiters · Workday · Oracle · SuccessFactors
   ├─ يفلتر: السعودية فقط + مناسبة للمبتدئين
   │    (Intern, Junior, Graduate, Co-op, Entry Level, تمهير…)
   ├─ يصنّف النوع والمجال، ويدمج الإعلان المكرر في أكثر من مدينة
@@ -82,7 +82,9 @@ GitHub Pages ← index.html / cv.html / guide.html / stats.html
 {"company": "اسم الشركة", "companyEn": "Company", "ats": "workable", "id": "company-slug"},
 ```
 
-`ats` يكون واحد من: `workable` · `greenhouse` · `ashby` · `pinpoint` · `smartrecruiters`
+`ats` يكون واحد من: `workable` · `greenhouse` · `ashby` · `pinpoint` · `smartrecruiters` · `workday` · `oracle` · `successfactors`
+
+وحطي `"org"` لنوع الجهة: `startup` (الافتراضي) · `private` · `semi` (شبه حكومي) · `bank` · `gov`.
 
 ## الإعلانات اليدوية
 
