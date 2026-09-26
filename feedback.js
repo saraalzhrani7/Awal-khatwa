@@ -10,6 +10,7 @@ const FEEDBACK = {
 (function(){
   const css = `
   .fb-btn{position:fixed; inset-inline-start:16px; bottom:calc(16px + env(safe-area-inset-bottom,0px)); z-index:50; display:inline-flex; align-items:center; gap:6px; background:var(--accent,#0B7A5C); color:var(--accent-ink,#fff); border:0; border-radius:999px; padding:10px 16px; font:inherit; font-size:14px; font-weight:600; cursor:pointer; box-shadow:0 6px 18px rgb(0 0 0 / .18)}
+  body{padding-bottom:72px}
   .fb-btn:focus-visible{outline:2px solid var(--ink,#0F201B); outline-offset:3px}
   .fb-back{position:fixed; inset:0; z-index:60; background:rgb(0 0 0 / .45); display:grid; place-items:center; padding:16px}
   .fb-back[hidden]{display:none!important}
@@ -33,8 +34,12 @@ const FEEDBACK = {
     .fb-btn::before{content:"💬"; font-size:22px}
   }
   @media (max-width:640px){ .fb-hide-mobile .fb-btn{display:none} }
+  /* مساحة فاضية تحت الصفحة عشان الزر ما يغطي آخر سطر */
+  body.fb-pad{padding-bottom:76px}
+  @media (max-width:640px){ body.fb-pad{padding-bottom:136px} body.fb-pad.fb-hide-mobile{padding-bottom:0} }
   @media print{ .fb-btn,.fb-back{display:none!important} }`;
   const st = document.createElement("style"); st.textContent = css; document.head.append(st);
+  document.body.classList.add("fb-pad");
   // في صفحة السيرة الزر يغطي الخانات في الجوال، فنكتفي برابط الملاحظات تحت الصفحة
   if(document.getElementById("cvForm")) document.body.classList.add("fb-hide-mobile");
 
