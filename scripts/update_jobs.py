@@ -23,6 +23,16 @@ TYPES_AR = {"coop": "تدريب تعاوني", "internship": "Internship", "grad
 # ---------- الشركات ومصادرها ----------
 # لإضافة شركة: انسخي سطر وغيّري الاسم ونوع النظام ومعرّف الشركة فيه
 SOURCES = [
+    {"company": "جاذر إن", "companyEn": "Gathern", "ats": "workable", "id": "gathern", "org": "startup"},
+{"company": "الحلول المبتكرة", "companyEn": "Innovative Solutions", "ats": "workable", "id": "is", "org": "private"},
+{"company": "البرج للمختبرات", "companyEn": "Al Borg Diagnostics", "ats": "workable", "id": "alborg-diagnostics", "org": "private"},
+{"company": "عبداللطيف جميل للمعدات", "companyEn": "ALJE", "ats": "oracle", "host": "ejon.fa.em2.oraclecloud.com", "site": "CX_5001", "org": "private"},
+{"company": "موبايلي", "companyEn": "Mobily", "ats": "oracle", "host": "fa-evkz-saasfaprod1.fa.ocs.oraclecloud.com", "site": "CX_2001", "org": "private"},
+{"company": "بروكتر آند غامبل", "companyEn": "P&G", "ats": "workday", "host": "pg.wd5.myworkdayjobs.com", "tenant": "pg", "site": "1000", "global": True, "org": "private"},
+{"company": "ماستركارد", "companyEn": "Mastercard", "ats": "workday", "host": "mastercard.wd1.myworkdayjobs.com", "tenant": "mastercard", "site": "CorporateCareers", "global": True, "org": "private"},
+{"company": "إيكولاب", "companyEn": "Ecolab", "ats": "workday", "host": "ecolab.wd1.myworkdayjobs.com", "tenant": "ecolab", "site": "Ecolab_External", "global": True, "org": "private"},
+{"company": "كرافت هاينز", "companyEn": "Kraft Heinz", "ats": "workday", "host": "heinz.wd1.myworkdayjobs.com", "tenant": "heinz", "site": "KraftHeinz_Careers", "global": True, "org": "private"},
+{"company": "آر تي إكس", "companyEn": "RTX", "ats": "workday", "host": "globalhr.wd5.myworkdayjobs.com", "tenant": "globalhr", "site": "REC_RTX_Ext_Gateway", "global": True, "org": "private"},
     {"company": "تابي",     "companyEn": "Tabby",             "ats": "pinpoint",   "id": "tabby"},
     {"company": "لين",      "companyEn": "Lean Technologies", "ats": "ashby",      "id": "leantech"},
     {"company": "هلا",      "companyEn": "HALA",              "ats": "greenhouse", "id": "hala"},
