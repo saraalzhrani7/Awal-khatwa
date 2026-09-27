@@ -107,17 +107,29 @@
  },
  {
   "date": "2026-09-27",
-  "open": 43,
-  "total": 47,
-  "new": 0,
-  "newIds": [],
+  "open": 51,
+  "total": 55,
+  "new": 8,
+  "newIds": [
+   "p-g-p-g-leadgen-internship-program-2027-process-engineer-dam",
+   "p-g-p-g-leadgen-internship-program-2027-jeddah",
+   "gathern-guest-relations-associate-fresh-graduates",
+   "gathern-host-relations-associate-fresh-graduates",
+   "alje-tamheer-specialist-customer-service",
+   "gathern-tamheer-product-designer",
+   "ecolab-territory-manager-in-training-tamheer",
+   "alje-tamheer-specialist-human-resources"
+  ],
   "byCompany": {
    "webook": 10,
    "Tabby": 6,
    "Lucidya": 5,
    "Salla": 5,
    "Sarj": 3,
+   "Gathern": 3,
    "Ninja": 2,
+   "P&G": 2,
+   "ALJE": 2,
    "Atheer Connectivity": 1,
    "Unifonic": 1,
    "Thmanyah": 1,
@@ -128,15 +140,16 @@
    "Adree": 1,
    "LAKEORA": 1,
    "Mozn": 1,
+   "Ecolab": 1,
    "Parsons": 1,
    "Malaa": 1
   },
   "byField": {
-   "business": 13,
+   "business": 19,
    "marketing": 8,
+   "product": 8,
    "tech": 7,
-   "product": 7,
-   "engineering": 2,
+   "engineering": 3,
    "media": 1,
    "finance": 1,
    "supply": 1,
@@ -145,9 +158,9 @@
    "data": 1
   },
   "byType": {
-   "internship": 20,
-   "entry": 9,
-   "grad": 9,
+   "internship": 22,
+   "grad": 13,
+   "entry": 11,
    "coop": 5
   }
  }
