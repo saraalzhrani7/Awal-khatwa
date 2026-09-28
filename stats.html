@@ -302,7 +302,7 @@ $("#copySummary").addEventListener("click", async e=>{
   catch(err){ const r=document.createRange(); r.selectNodeContents($("#summaryText")); const s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "حدد النص وانسخه"; }
   setTimeout(()=>{ b.textContent = "نسخ المنشور"; }, 2200);
 });
-// قسم المنشور يطلع لسارة بس: افتحي stats.html#sara مرة وحدة، ويتذكرك المتصفح. للإخفاء: stats.html#hide
+// قسم المنشور مخفي عن الزوار. يظهر بعد فتح stats.html#sara مرة وحدة (يتذكره المتصفح)، ويختفي بـ stats.html#hide
 (function(){
   const K = "awal-khatwa-owner";
   try{
