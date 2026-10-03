@@ -404,5 +404,51 @@
    "grad": 9,
    "coop": 6
   }
+ },
+ {
+  "date": "2026-10-03",
+  "open": 43,
+  "total": 48,
+  "new": 0,
+  "newIds": [],
+  "byCompany": {
+   "webook": 10,
+   "Lucidya": 5,
+   "Salla": 5,
+   "Tabby": 5,
+   "Ninja": 2,
+   "Mrsool": 2,
+   "Mozn": 2,
+   "Sarj": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "Tamara": 1,
+   "HALA": 1,
+   "COGNNA": 1,
+   "KPMG": 1,
+   "Adree": 1,
+   "Parsons": 1,
+   "Malaa": 1
+  },
+  "byField": {
+   "business": 13,
+   "tech": 8,
+   "marketing": 6,
+   "product": 6,
+   "finance": 2,
+   "data": 2,
+   "engineering": 2,
+   "media": 1,
+   "supply": 1,
+   "legal": 1,
+   "cyber": 1
+  },
+  "byType": {
+   "internship": 18,
+   "entry": 10,
+   "grad": 9,
+   "coop": 6
+  }
  }
 ]
