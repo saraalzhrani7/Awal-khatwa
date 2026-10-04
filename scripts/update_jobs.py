@@ -66,7 +66,9 @@ SOURCES = [
     {"company": "جي إي فيرنوفا", "companyEn": "GE Vernova",   "ats": "workday",    "host": "gevernova.wd5.myworkdayjobs.com", "tenant": "gevernova", "site": "Vernova_ExternalSite", "global": True, "org": "private"},
     {"company": "بارسونز",  "companyEn": "Parsons",           "ats": "workday",    "host": "parsons.wd5.myworkdayjobs.com", "tenant": "parsons", "site": "Search", "global": True, "org": "private"},
     {"company": "إتش بي إي", "companyEn": "HPE",              "ats": "workday",    "host": "hpe.wd5.myworkdayjobs.com", "tenant": "hpe", "site": "WFMathpe", "global": True, "org": "private"},
-    {"company": "موتورولا سوليوشنز", "companyEn": "Motorola Solutions", "ats": "workday", "host": "motorolasolutions.wd5.myworkdayjobs.com", "tenant": "motorolasolutions", "site": "Careers", "global": True, "org": "private"},
+    {"company": "موتورولا سوليوشنز", "companyEn": "Motorola Solutions", "ats": "workday", "host": "motorolasolutions.wd5.myworkdayjobs.com", "tenant": "motorolasolutions", "site": "Careers", "global": True, "org": "private"},    {"company": "سيارة",    "companyEn": "Syarah",            "ats": "workable",   "id": "syarah", "org": "startup"},
+    {"company": "جاذر إن",  "companyEn": "Gathern",           "ats": "workable",   "id": "gathern", "org": "startup"},
+    {"company": "جدين",     "companyEn": "JODAYN",            "ats": "workable",   "id": "jodayn-1", "org": "private"},
 ]
 # نوع الجهة: startup (افتراضي) · private · semi (شبه حكومي) · gov (حكومي) · bank
 ORG_DEFAULT = "startup"
