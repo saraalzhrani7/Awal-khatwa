@@ -453,10 +453,13 @@
  },
  {
   "date": "2026-10-04",
-  "open": 43,
-  "total": 48,
-  "new": 0,
-  "newIds": [],
+  "open": 45,
+  "total": 50,
+  "new": 2,
+  "newIds": [
+   "jodayn-talent-acquisition-trainee-tamheer",
+   "gathern-tamheer-product-designer"
+  ],
   "byCompany": {
    "webook": 10,
    "Lucidya": 5,
@@ -474,14 +477,16 @@
    "COGNNA": 1,
    "KPMG": 1,
    "Adree": 1,
+   "JODAYN": 1,
+   "Gathern": 1,
    "Parsons": 1,
    "Malaa": 1
   },
   "byField": {
-   "business": 13,
+   "business": 14,
    "tech": 8,
+   "product": 7,
    "marketing": 6,
-   "product": 6,
    "finance": 2,
    "data": 2,
    "engineering": 2,
@@ -492,8 +497,8 @@
   },
   "byType": {
    "internship": 18,
+   "grad": 11,
    "entry": 10,
-   "grad": 9,
    "coop": 6
   }
  }
