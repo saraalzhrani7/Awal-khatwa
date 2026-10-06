@@ -551,5 +551,55 @@
    "entry": 10,
    "coop": 6
   }
+ },
+ {
+  "date": "2026-10-06",
+  "open": 45,
+  "total": 50,
+  "new": 1,
+  "newIds": [
+   "gathern-host-relations-associate-fresh-graduates"
+  ],
+  "byCompany": {
+   "webook": 10,
+   "Lucidya": 5,
+   "Salla": 5,
+   "Tabby": 4,
+   "Tamara": 2,
+   "Gathern": 2,
+   "Ninja": 2,
+   "Mrsool": 2,
+   "Sarj": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "HALA": 1,
+   "Mozn": 1,
+   "COGNNA": 1,
+   "KPMG": 1,
+   "Adree": 1,
+   "JODAYN": 1,
+   "Parsons": 1,
+   "Malaa": 1
+  },
+  "byField": {
+   "business": 15,
+   "tech": 7,
+   "product": 7,
+   "marketing": 6,
+   "finance": 2,
+   "data": 2,
+   "engineering": 2,
+   "media": 1,
+   "supply": 1,
+   "legal": 1,
+   "cyber": 1
+  },
+  "byType": {
+   "internship": 18,
+   "grad": 11,
+   "entry": 10,
+   "coop": 6
+  }
  }
 ]
