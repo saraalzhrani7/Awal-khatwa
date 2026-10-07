@@ -601,5 +601,55 @@
    "entry": 10,
    "coop": 6
   }
+ },
+ {
+  "date": "2026-10-07",
+  "open": 46,
+  "total": 51,
+  "new": 2,
+  "newIds": [
+   "ninja-it-trainee-tamheer",
+   "ninja-junior-software-engineer-tamheer"
+  ],
+  "byCompany": {
+   "webook": 10,
+   "Lucidya": 5,
+   "Salla": 5,
+   "Ninja": 4,
+   "Tabby": 4,
+   "Tamara": 2,
+   "Gathern": 2,
+   "Sarj": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "HALA": 1,
+   "Mrsool": 1,
+   "Mozn": 1,
+   "COGNNA": 1,
+   "KPMG": 1,
+   "Adree": 1,
+   "JODAYN": 1,
+   "Parsons": 1,
+   "Malaa": 1
+  },
+  "byField": {
+   "business": 15,
+   "tech": 9,
+   "product": 7,
+   "marketing": 6,
+   "finance": 2,
+   "data": 2,
+   "engineering": 2,
+   "media": 1,
+   "legal": 1,
+   "cyber": 1
+  },
+  "byType": {
+   "internship": 18,
+   "grad": 13,
+   "entry": 10,
+   "coop": 5
+  }
  }
 ]
