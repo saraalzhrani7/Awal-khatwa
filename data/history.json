@@ -651,5 +651,57 @@
    "entry": 10,
    "coop": 5
   }
+ },
+ {
+  "date": "2026-10-08",
+  "open": 47,
+  "total": 52,
+  "new": 3,
+  "newIds": [
+   "ge-vernova-co-op-internship-program",
+   "foodics-anti-money-laundering-officer",
+   "ninja-junior-software-engineer-tamheer-intern"
+  ],
+  "byCompany": {
+   "webook": 10,
+   "Lucidya": 5,
+   "Salla": 5,
+   "Ninja": 4,
+   "Tabby": 4,
+   "Tamara": 2,
+   "Gathern": 2,
+   "Sarj": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "GE Vernova": 1,
+   "Foodics": 1,
+   "KPMG": 1,
+   "HALA": 1,
+   "Mozn": 1,
+   "COGNNA": 1,
+   "Adree": 1,
+   "JODAYN": 1,
+   "Parsons": 1,
+   "Malaa": 1
+  },
+  "byField": {
+   "business": 17,
+   "tech": 8,
+   "product": 7,
+   "marketing": 6,
+   "finance": 2,
+   "data": 2,
+   "engineering": 2,
+   "media": 1,
+   "legal": 1,
+   "cyber": 1
+  },
+  "byType": {
+   "internship": 18,
+   "grad": 13,
+   "entry": 11,
+   "coop": 5
+  }
  }
 ]
