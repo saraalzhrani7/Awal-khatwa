@@ -847,5 +847,54 @@
    "entry": 11,
    "coop": 5
   }
+ },
+ {
+  "date": "2026-10-12",
+  "open": 45,
+  "total": 49,
+  "new": 1,
+  "newIds": [
+   "sarj-agent-engineer-intern"
+  ],
+  "byCompany": {
+   "webook": 10,
+   "Lucidya": 5,
+   "Salla": 5,
+   "Ninja": 4,
+   "Tabby": 3,
+   "Tamara": 2,
+   "Sarj": 2,
+   "Gathern": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "GE Vernova": 1,
+   "Foodics": 1,
+   "KPMG": 1,
+   "HALA": 1,
+   "Mozn": 1,
+   "COGNNA": 1,
+   "Adree": 1,
+   "Parsons": 1,
+   "Malaa": 1
+  },
+  "byField": {
+   "business": 16,
+   "tech": 8,
+   "marketing": 6,
+   "product": 6,
+   "engineering": 2,
+   "finance": 2,
+   "data": 2,
+   "media": 1,
+   "legal": 1,
+   "cyber": 1
+  },
+  "byType": {
+   "internship": 17,
+   "grad": 12,
+   "entry": 11,
+   "coop": 5
+  }
  }
 ]
