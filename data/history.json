@@ -896,5 +896,60 @@
    "entry": 11,
    "coop": 5
   }
+ },
+ {
+  "date": "2026-10-13",
+  "open": 50,
+  "total": 54,
+  "new": 6,
+  "newIds": [
+   "lean-technologies-sales-development-intern",
+   "lean-technologies-software-engineering-intern",
+   "lean-technologies-customer-support-intern-techops",
+   "salla-merchant-care-officer",
+   "lean-technologies-strategic-finance-intern",
+   "foodics-anti-money-laundering-specialist"
+  ],
+  "byCompany": {
+   "webook": 10,
+   "Salla": 6,
+   "Lucidya": 5,
+   "Lean Technologies": 4,
+   "Ninja": 4,
+   "Tabby": 3,
+   "Tamara": 2,
+   "Sarj": 2,
+   "Gathern": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "GE Vernova": 1,
+   "Foodics": 1,
+   "KPMG": 1,
+   "HALA": 1,
+   "Mozn": 1,
+   "COGNNA": 1,
+   "Adree": 1,
+   "Parsons": 1,
+   "Malaa": 1
+  },
+  "byField": {
+   "business": 18,
+   "tech": 9,
+   "marketing": 7,
+   "product": 6,
+   "finance": 3,
+   "engineering": 2,
+   "data": 2,
+   "media": 1,
+   "legal": 1,
+   "cyber": 1
+  },
+  "byType": {
+   "internship": 21,
+   "entry": 12,
+   "grad": 12,
+   "coop": 5
+  }
  }
 ]
