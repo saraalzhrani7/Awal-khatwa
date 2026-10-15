@@ -1,0 +1,349 @@
+{
+ "date": "2026-10-15",
+ "sources": [
+  {
+   "company": "تابي",
+   "companyEn": "Tabby",
+   "ats": "pinpoint",
+   "org": "startup",
+   "ok": true,
+   "kept": 1
+  },
+  {
+   "company": "لين",
+   "companyEn": "Lean Technologies",
+   "ats": "ashby",
+   "org": "startup",
+   "ok": true,
+   "kept": 4
+  },
+  {
+   "company": "هلا",
+   "companyEn": "HALA",
+   "ats": "greenhouse",
+   "org": "startup",
+   "ok": false,
+   "kept": 0
+  },
+  {
+   "company": "تمارا",
+   "companyEn": "Tamara",
+   "ats": "greenhouse",
+   "org": "startup",
+   "ok": true,
+   "kept": 1
+  },
+  {
+   "company": "فودكس",
+   "companyEn": "Foodics",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 2
+  },
+  {
+   "company": "سلة",
+   "companyEn": "Salla",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 6
+  },
+  {
+   "company": "لوسيديا",
+   "companyEn": "Lucidya",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 5
+  },
+  {
+   "company": "مرسول",
+   "companyEn": "Mrsool",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "ساري",
+   "companyEn": "Sary",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "نينجا",
+   "companyEn": "Ninja",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 1
+  },
+  {
+   "company": "نعناع",
+   "companyEn": "Nana",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "كوقنا",
+   "companyEn": "COGNNA",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 2
+  },
+  {
+   "company": "مزن",
+   "companyEn": "Mozn",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 1
+  },
+  {
+   "company": "زد",
+   "companyEn": "Zid",
+   "ats": "smartrecruiters",
+   "org": "startup",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "جسر",
+   "companyEn": "Jisr",
+   "ats": "smartrecruiters",
+   "org": "startup",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "ويبوك",
+   "companyEn": "webook",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 10
+  },
+  {
+   "company": "سرج",
+   "companyEn": "Sarj",
+   "ats": "ashby",
+   "org": "startup",
+   "ok": true,
+   "kept": 3
+  },
+  {
+   "company": "ملاءة",
+   "companyEn": "Malaa",
+   "ats": "pinpoint",
+   "org": "startup",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "ليكورا",
+   "companyEn": "LAKEORA",
+   "ats": "ashby",
+   "org": "startup",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "ميراي",
+   "companyEn": "Mirai",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "أدري",
+   "companyEn": "Adree",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 1
+  },
+  {
+   "company": "القدية",
+   "companyEn": "Qiddiya",
+   "ats": "workable",
+   "org": "semi",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "إس تي سي",
+   "companyEn": "stc",
+   "ats": "successfactors",
+   "org": "semi",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "الخطوط السعودية",
+   "companyEn": "Saudia",
+   "ats": "successfactors",
+   "org": "semi",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "علم",
+   "companyEn": "Elm",
+   "ats": "successfactors",
+   "org": "semi",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "أرامكو",
+   "companyEn": "Aramco",
+   "ats": "successfactors",
+   "org": "semi",
+   "ok": false,
+   "kept": 0
+  },
+  {
+   "company": "البحر الأحمر الدولية",
+   "companyEn": "Red Sea Global",
+   "ats": "successfactors",
+   "org": "semi",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "الشركة السعودية للكهرباء",
+   "companyEn": "Saudi Electricity",
+   "ats": "successfactors",
+   "org": "semi",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "كاوست",
+   "companyEn": "KAUST",
+   "ats": "successfactors",
+   "org": "semi",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "أكوا باور",
+   "companyEn": "ACWA Power",
+   "ats": "successfactors",
+   "org": "private",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "النهدي",
+   "companyEn": "Nahdi",
+   "ats": "oracle",
+   "org": "private",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "لوسد",
+   "companyEn": "Lucid Motors",
+   "ats": "greenhouse",
+   "org": "private",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "كي بي إم جي",
+   "companyEn": "KPMG",
+   "ats": "successfactors",
+   "org": "private",
+   "ok": true,
+   "kept": 1
+  },
+  {
+   "company": "بي دبليو سي",
+   "companyEn": "PwC Middle East",
+   "ats": "workday",
+   "org": "private",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "أكسنتشر",
+   "companyEn": "Accenture",
+   "ats": "workday",
+   "org": "private",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "بيكر هيوز",
+   "companyEn": "Baker Hughes",
+   "ats": "workday",
+   "org": "private",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "جي إي فيرنوفا",
+   "companyEn": "GE Vernova",
+   "ats": "workday",
+   "org": "private",
+   "ok": true,
+   "kept": 1
+  },
+  {
+   "company": "بارسونز",
+   "companyEn": "Parsons",
+   "ats": "workday",
+   "org": "private",
+   "ok": true,
+   "kept": 1
+  },
+  {
+   "company": "إتش بي إي",
+   "companyEn": "HPE",
+   "ats": "workday",
+   "org": "private",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "موتورولا سوليوشنز",
+   "companyEn": "Motorola Solutions",
+   "ats": "workday",
+   "org": "private",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "سيارة",
+   "companyEn": "Syarah",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 0
+  },
+  {
+   "company": "جاذر إن",
+   "companyEn": "Gathern",
+   "ats": "workable",
+   "org": "startup",
+   "ok": true,
+   "kept": 2
+  },
+  {
+   "company": "جدين",
+   "companyEn": "JODAYN",
+   "ats": "workable",
+   "org": "private",
+   "ok": true,
+   "kept": 0
+  }
+ ]
+}

@@ -1001,10 +1001,13 @@
  },
  {
   "date": "2026-10-15",
-  "open": 45,
-  "total": 49,
-  "new": 1,
+  "open": 47,
+  "total": 51,
+  "new": 4,
   "newIds": [
+   "foodics-receptionist-administrative-assistant",
+   "cognna-devops-engineer-intern",
+   "cognna-security-engineer-intern",
    "sarj-marketing-intern"
   ],
   "byCompany": {
@@ -1014,35 +1017,36 @@
    "Lean Technologies": 4,
    "Sarj": 3,
    "Tamara": 2,
+   "Foodics": 2,
+   "COGNNA": 2,
    "Gathern": 2,
-   "Tabby": 2,
    "Atheer Connectivity": 1,
    "Unifonic": 1,
    "Thmanyah": 1,
    "GE Vernova": 1,
-   "Foodics": 1,
    "KPMG": 1,
    "Ninja": 1,
    "HALA": 1,
    "Mozn": 1,
    "Adree": 1,
-   "Parsons": 1
+   "Parsons": 1,
+   "Tabby": 1
   },
   "byField": {
    "business": 15,
+   "tech": 8,
    "marketing": 8,
-   "tech": 7,
    "product": 6,
    "finance": 3,
+   "cyber": 2,
    "engineering": 2,
    "media": 1,
    "data": 1,
-   "legal": 1,
-   "cyber": 1
+   "legal": 1
   },
   "byType": {
-   "internship": 19,
-   "entry": 12,
+   "internship": 20,
+   "entry": 13,
    "grad": 10,
    "coop": 4
   }
