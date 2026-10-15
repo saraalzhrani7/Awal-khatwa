@@ -61,6 +61,7 @@ h1 span{color:var(--accent)}
 .tile{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px}
 .tile b{display:block; font-family:"Lalezar",sans-serif; font-weight:400; font-size:44px; line-height:1.05; font-variant-numeric:tabular-nums}
 .tile span{color:var(--muted); font-size:13.5px}
+@media (max-width:640px){ .tiles{grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px} .tile{padding:10px 12px} .tile b{font-size:30px} .tile span{font-size:12px; line-height:1.4; display:block} .panel{padding:14px 14px} }
 .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr)); gap:12px; margin-top:12px}
 .panel{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:18px 20px; display:grid; gap:12px; align-content:start; min-width:0}
 .panel h2{font-size:16px; font-weight:600; margin:0}
@@ -97,10 +98,13 @@ footer{margin-top:28px; color:var(--muted); font-size:12.5px}
 <body>
 <div class="wrap">
   <nav class="sitenav" aria-label="صفحات الموقع">
-    <a href="./">الفرص</a>
-    <a href="cv.html">سيرتك</a>
-    <a href="guide.html">دليل المبتدئ</a>
-    <a href="stats.html" aria-current="page">الإحصائيات</a>
+    <div class="navlinks">
+      <a href="./">الفرص</a>
+      <a href="cv.html">سيرتك</a>
+      <a href="guide.html">دليل المبتدئ</a>
+      <a href="stats.html" aria-current="page">الإحصائيات</a>
+      <a href="about.html">عن المنصة</a>
+    </div>
   </nav>
 
   <header>
@@ -294,7 +298,7 @@ function render(){
   ].filter((l,i,a)=>l!=="" || (a[i-1]!=="" && a[i-1]!==undefined));
   $("#summaryText").textContent = post.join("\n").replace(/\n{3,}/g,"\n\n");
   const last = HISTORY.at(-1)?.date || LISTINGS.map(j=>j.checked).filter(Boolean).sort().pop();
-  if(last) $("#foot").textContent = `آخر تحديث: ${last}. الأرقام تشمل الفرص اللي يتابعها الموقع بس، مو كل سوق العمل.`;
+  if(last) $("#foot").textContent = `آخر تحديث: ${new Date(last+"T00:00:00").toLocaleDateString("ar-SA-u-ca-gregory-nu-latn",{day:"numeric",month:"long",year:"numeric"})}. الأرقام تشمل الفرص اللي يتابعها الموقع بس، مو كل سوق العمل.`;
 }
 
 $("#copySummary").addEventListener("click", async e=>{

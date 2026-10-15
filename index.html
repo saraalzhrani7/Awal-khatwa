@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>أول خطوة | تدريب تعاوني وInternship ووظائف للمبتدئين في السعودية</title>
-<meta name="description" content="فرص تدريب تعاوني وInternship وبرامج خريجين وتمهير ووظائف Entry Level لحديثي التخرج في السعودية: الشركات الناشئة والخاصة والبنوك والجهات الحكومية وشبه الحكومية. تتحدث كل يوم ومجانًا.">
+<meta name="description" content="أول خطوة: منصة رقمية مساندة للتوظيف والتطوير المهني لحديثي التخرج والباحثين عن عمل في السعودية. تدريب تعاوني وInternship وبرامج خريجين وتمهير ووظائف Entry Level، تتحدث كل يوم.">
 <link rel="canonical" href="https://saraalzhrani7.github.io/Awal-khatwa/">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"أول خطوة","alternateName":"Awal Khatwa","url":"https://saraalzhrani7.github.io/Awal-khatwa/","inLanguage":"ar","description":"فرص تدريب تعاوني وInternship ووظائف للمبتدئين في السعودية"}</script>
 <meta property="og:title" content="أول خطوة">
@@ -65,6 +65,11 @@ header.top{display:flex; flex-wrap:wrap; align-items:end; justify-content:space-
 .brand h1{font-family:"Lalezar","IBM Plex Sans Arabic",sans-serif; font-weight:400; font-size:clamp(36px,6.5vw,56px); line-height:1.05; margin:0}
 .brand h1 span{color:var(--accent)}
 .brand p{margin:10px 0 0; color:var(--muted); max-width:52ch; text-wrap:pretty}
+.brand p.upd{font-size:13px; margin-top:8px}
+.brand p.upd a{color:var(--accent); white-space:nowrap}
+.nw{white-space:nowrap}
+@media (max-width:640px){ .brand p.upd a{display:block; width:max-content; margin-top:2px} }
+.chk{font-size:11.5px; color:var(--muted); font-weight:400; margin-inline-start:auto; white-space:nowrap}
 .stats{display:flex; gap:26px; font-variant-numeric:tabular-nums}
 .stat b{display:block; font-weight:400; font-family:"Lalezar",sans-serif; font-size:30px; line-height:1.1}
 .stat b.live{color:var(--accent)}
@@ -133,7 +138,7 @@ header.top{display:flex; flex-wrap:wrap; align-items:end; justify-content:space-
 .names .en{color:var(--muted); font-size:12.5px}
 .desc{margin:0; font-size:14px}
 .actions{display:flex; gap:8px; margin-top:auto}
-.actions .btn{flex:1; padding-inline:8px}
+.actions .btn{flex:1; padding-inline:8px; min-width:0; white-space:normal; line-height:1.35}
 .has-jobs{font-size:12px; color:var(--accent); font-weight:600}
 
 section.more{margin-top:44px; display:grid; gap:14px}
@@ -195,10 +200,32 @@ footer .contact a{color:var(--ink); font-weight:500}
 .toast button{flex:none; font:inherit; font-weight:600; border:0; border-radius:8px; padding:7px 12px; cursor:pointer; background:var(--accent); color:var(--accent-ink)}
 .toast .x{background:transparent; color:inherit; opacity:.7; padding:7px 6px}
 
-/* ===== الكمبيوتر: نفس الشكل القديم ===== */
-.gloss-toggle,.fbtn,.fhead,.flabel,.fdone,.fback,.star-m{display:none}
+/* ===== الكمبيوتر ===== */
+.gloss-toggle,.star-m{display:none}
 .btns .btn.star-m{display:none}
-.fpanel{display:grid; gap:10px}
+/* الفلاتر: زر «فلترة» يفتح لوحة تحت شريط البحث، بدل أربع صفوف ثابتة تاخذ مساحة */
+@media (min-width:641px){
+  .controls{position:sticky}
+  .fbtn{display:inline-flex; align-items:center; gap:6px; font-weight:600}
+  .fbtn[aria-expanded="true"]{border-color:var(--accent)}
+  .fpanel{display:none; position:absolute; top:calc(100% - 6px); inset-inline:0; z-index:20; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow:0 14px 34px rgb(0 0 0 / .16); max-height:70vh; overflow:auto;
+    grid-template-columns:110px 1fr; gap:10px 14px; align-items:start}
+  .fpanel.open{display:grid}
+  .fhead{grid-column:1/-1; display:flex; justify-content:space-between; align-items:center; font-size:16px}
+  .fhint{display:block; font-size:12px; font-weight:400; color:var(--muted); margin-top:2px}
+  .frow{display:none}
+  .flabel{font-size:13px; color:var(--muted); font-weight:600; padding-top:6px}
+  .fpanel .chips{flex-wrap:wrap; overflow:visible}
+  .fdone{grid-column:1/-1; justify-self:start; margin-top:4px}
+  .fback{position:fixed; inset:0; z-index:19; background:transparent}
+  .fback[hidden]{display:none}
+}
+/* الفلاتر المختارة: تطلع كأزرار صغيرة تقدر تشيلها بضغطة */
+.activef{display:flex; flex-wrap:wrap; gap:6px; align-items:center}
+.activef[hidden]{display:none}
+.af{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--accent); background:var(--accent-soft); color:var(--ink); border-radius:999px; padding:3px 6px 3px 12px; font:inherit; font-size:12.5px; cursor:pointer}
+.af span{display:inline-grid; place-items:center; width:18px; height:18px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font-size:12px; line-height:1}
+.af-clear{background:none; border:0; color:var(--muted); text-decoration:underline; font:inherit; font-size:12.5px; cursor:pointer; padding:3px 4px}
 .btn.ico{display:inline-flex; align-items:center; justify-content:center; gap:6px}
 .btn.ico .i{flex:none}
 .btn.share .i{display:none}
@@ -232,6 +259,7 @@ footer .contact a{color:var(--ink); font-weight:500}
   .fback{display:block; position:fixed; inset:0; z-index:79; background:rgb(0 0 0 / .4)}
   .fback[hidden]{display:none!important}
   .fhead{display:flex; justify-content:space-between; align-items:center; font-size:16px}
+  .fhint{display:block; font-size:12px; font-weight:400; color:var(--muted); margin-top:2px}
   .flabel{display:block; font-size:12.5px; color:var(--muted); font-weight:600; margin-top:6px}
   .frow{display:flex; gap:8px; flex-wrap:wrap}
   .frow .toggle{min-height:40px; font-size:14px}
@@ -271,16 +299,20 @@ footer .contact a{color:var(--ink); font-weight:500}
 <body>
 <div class="wrap" dir="rtl" lang="ar">
   <nav class="sitenav" aria-label="صفحات الموقع">
-    <a href="./" aria-current="page">الفرص</a>
-    <a href="cv.html">سيرتك</a>
-    <a href="guide.html">دليل المبتدئ</a>
-    <a href="stats.html">الإحصائيات</a>
+    <div class="navlinks">
+      <a href="./" aria-current="page">الفرص</a>
+      <a href="cv.html">سيرتك</a>
+      <a href="guide.html">دليل المبتدئ</a>
+      <a href="stats.html">الإحصائيات</a>
+      <a href="about.html">عن المنصة</a>
+    </div>
     <button class="langbtn" id="langBtn" type="button" lang="en">English</button>
   </nav>
   <header class="top">
     <div class="brand">
       <h1>أول <span>خطوة</span></h1>
-      <p>فرص تدريب وبرامج خريجين ووظائف Entry Level في السعودية: الشركات الناشئة والخاصة، والبنوك، والجهات الحكومية وشبه الحكومية. للي توهم يبدون رحلتهم المهنية. كل إعلان يوديك لصفحة التقديم الرسمية.</p>
+      <p>منصة رقمية مساندة للتوظيف والتطوير المهني لحديثي التخرج والباحثين عن عمل في السعودية. تجمع فرص التدريب وبرامج الخريجين ووظائف Entry Level من الشركات الناشئة والخاصة والبنوك والجهات الحكومية وشبه الحكومية، وكل إعلان يوديك لصفحة التقديم الرسمية.</p>
+      <p class="upd" id="updLine" hidden><span id="updTxt"></span> <a href="about.html">كيف نجمع الفرص؟</a></p>
     </div>
     <div class="stats">
       <div class="stat"><b class="live" id="stOpen">–</b><small>فرصة مفتوحة الآن</small></div>
@@ -315,7 +347,7 @@ footer .contact a{color:var(--ink); font-weight:500}
       </div>
       <div class="fback" id="fback" hidden></div>
       <div class="fpanel" id="fpanel" role="group" aria-label="الفلاتر">
-        <div class="fhead"><b>فلترة الفرص</b><button class="linkbtn" id="fReset" type="button">مسح الفلاتر</button></div>
+        <div class="fhead"><b>فلترة الفرص<small class="fhint">تقدر تختار أكثر من خيار في كل قسم</small></b><button class="linkbtn" id="fReset" type="button">مسح الفلاتر</button></div>
         <div class="frow" id="fToggles"></div>
         <div class="flabel">نوع الفرصة</div>
         <div class="chips" id="typeChips" role="group" aria-label="نوع الفرصة"></div>
@@ -327,6 +359,7 @@ footer .contact a{color:var(--ink); font-weight:500}
         <div class="chips" id="cityChips" role="group" aria-label="المدينة"></div>
         <button class="btn primary fdone" id="fDone" type="button">عرض النتائج</button>
       </div>
+      <div class="activef" id="activeF" hidden></div>
       <div class="resultline" id="resultline"></div>
     </div>
     <div class="soon" id="soon" hidden></div>
@@ -362,7 +395,7 @@ footer .contact a{color:var(--ink); font-weight:500}
 
   <footer>
     <div class="about">
-      <p><b>أول خطوة</b> موقع مستقل وغير تابع لأي من الشركات المذكورة. الإعلانات مأخوذة من صفحات التوظيف الرسمية، ونحدّثها تلقائيًا كل يوم.</p>
+      <p><b>أول خطوة</b> موقع مستقل وغير تابع لأي من الشركات المذكورة. الإعلانات مأخوذة من صفحات التوظيف الرسمية، ونحدّثها تلقائيًا كل يوم. <a href="about.html">منهجيتنا</a></p>
       <p id="checkedLine">الفرص تتغير بسرعة، فتأكد من الحالة في صفحة التقديم قبل ما تقدم.</p>
       <div class="contact" id="contact"></div>
     </div>
@@ -375,7 +408,7 @@ const STATIC_EN = [
   ['.sitenav a[href="./"]', 'Opportunities'], ['.sitenav a[href="cv.html"]', 'CV Builder'], ['.sitenav a[href="guide.html"]', 'Beginner Guide'], ['.sitenav a[href="stats.html"]', 'Stats'],
   ['#langBtn', 'عربي'],
   ['.brand h1', 'Awal <span>Khatwa</span>'],
-  ['.brand p', 'Internships, co-op training, graduate programs and entry-level jobs in Saudi Arabia: startups, private companies, banks, government and semi-government entities. For people just starting their careers. Every listing links to the official application page.'],
+  ['.brand p:not(.upd)', 'A digital platform supporting employment and career development for recent graduates and job seekers in Saudi Arabia. It brings together internships, graduate programs and entry-level jobs from startups, private companies, banks, government and semi-government entities, and every listing links to the official application page.'], ['#updLine a', 'How we collect listings'], ['.sitenav a[href="about.html"]', 'About'], ['footer .about a[href="about.html"]', 'Our methodology'],
   ['#stOpen + small', 'open now'], ['#stAll + small', 'listings & programs'], ['#stCo + small', 'organizations'],
   ['#glossToggle', 'What’s the difference between these types?'],
   ['#glossary', `<div class="gloss"><span class="k">Co-op Training</span><p><b>University requirement:</b> training you need to graduate, approved and followed up by your university.</p></div>
@@ -385,7 +418,7 @@ const STATIC_EN = [
   ['#tab-jobs', 'Opportunities <span class="n" id="nJobs"></span>'], ['#tab-cos', 'Companies <span class="n" id="nCos"></span>'],
   ['#filterBtn', '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filters<span class="badge" id="fCount" hidden></span>'],
   ['#openBtn', '<span class="dot"></span>Open only'], ['#savedBtn', '★ My list <span id="savedN" class="n"></span>'],
-  ['.fhead b', 'Filter opportunities'], ['#fReset', 'Clear filters'],
+  ['.fhead b', 'Filter opportunities<small class="fhint">Pick more than one in any group</small>'], ['#fReset', 'Clear filters'],
   ['.flabel:nth-of-type(1)', 'Type'],
   ['#fDone', 'Show results'],
   ['section.more h2', 'Programs and platforms for new graduates'],
@@ -396,7 +429,7 @@ const STATIC_EN = [
       <a class="board" href="https://jadarat.sa/" target="_blank" rel="noopener"><b>Jadarat</b><span>The national unified employment platform</span></a>
       <a class="board" href="https://buildsaudi.co/" target="_blank" rel="noopener"><b>BuildSaudi</b><span>Saudi startup jobs by sector</span></a>
       <a class="board" href="https://www.linkedin.com/jobs/search/?keywords=intern&location=Saudi%20Arabia&f_E=1" target="_blank" rel="noopener"><b>LinkedIn</b><span>Ready-made search for internships in Saudi Arabia</span></a>`],
-  ['footer .about p:first-child', '<b>Awal Khatwa</b> is an independent site, not affiliated with any of the companies listed. Listings come from official careers pages and update automatically every day.'],
+  ['footer .about p:first-child', '<b>Awal Khatwa</b> is an independent site, not affiliated with any of the companies listed. Listings come from official careers pages and update automatically every day. <a href="about.html">Our methodology</a>'],
   ['#checkedLine', 'Listings change fast, so check the status on the application page before you apply.']
 ];
 const PH_EN = {q:"Search by title or company… e.g. data, security, Tabby", q2:"Search by company or sector…"};
@@ -427,24 +460,27 @@ const hasArabic = t => /[\u0600-\u06FF]/.test(t||"");
 const CITY_EN = [["الرياض","Riyadh"],["جدة","Jeddah"],["الدمام","Dammam"],["الخبر","Khobar"],["الظهران","Dhahran"],["مكة","Makkah"],["المدينة","Madinah"],["الجبيل","Jubail"],["الأحساء","Al-Ahsa"],["السعودية","Saudi Arabia"],["عن بُعد","Remote"],["عن بعد","Remote"],[" أو "," or "],["،",","]];
 const cityL = c => LANG === "en" ? CITY_EN.reduce((t,[a,b])=>t.split(a).join(b), c||"") : (c||"");
 const REGIONS = {
-  riyadh: {label:"الرياض", test:j=>/الرياض/.test(j.city||"")},
-  west:   {label:"جدة ومكة", test:j=>/جدة|مكة|المدينة/.test(j.city||"")},
-  east:   {label:"الشرقية", test:j=>/الدمام|الخبر|الظهران|الشرقية|الجبيل|الأحساء/.test(j.city||"")},
-  remote: {label:"عن بُعد", test:j=>!!j.remote || /عن ب[ُ]?عد/.test(j.city||"")}
+  riyadh:  {label:"الرياض", test:j=>/الرياض/.test(j.city||"")},
+  jeddah:  {label:"جدة", test:j=>/جدة/.test(j.city||"")},
+  makkah:  {label:"مكة", test:j=>/مكة/.test(j.city||"")},
+  madinah: {label:"المدينة", test:j=>/المدينة/.test(j.city||"")},
+  east:    {label:"الشرقية", test:j=>/الدمام|الخبر|الظهران|الشرقية|الجبيل|الأحساء/.test(j.city||"")},
+  other:   {label:"مدن ثانية", test:j=>(j.city||"").replace(/الرياض|جدة|مكة|المدينة|الدمام|الخبر|الظهران|الشرقية|الجبيل|الأحساء|السعودية|عن ب[ُ]?عد/g," ").split(/[\s،,]+/).some(w=>w && w!=="أو" && w!=="و")},
+  remote:  {label:"عن بُعد", test:j=>!!j.remote || /عن ب[ُ]?عد/.test(j.city||"")}
 };
 const TYPES = {coop:"تدريب تعاوني", internship:"Internship", grad:"برنامج خريجين", entry:"Entry Level"};
 const FIELDS = {tech:"تقنية وبرمجة", data:"بيانات وذكاء اصطناعي", cyber:"أمن سيبراني", finance:"مالية ومحاسبة", engineering:"هندسة", health:"صحة وعلوم", legal:"قانون", supply:"سلاسل إمداد ومشتريات", marketing:"تسويق ومبيعات", product:"منتج وتصميم", business:"أعمال وموارد بشرية", media:"إعلام ومحتوى"};
 const ORGS = {startup:"شركات ناشئة", private:"شركات خاصة", semi:"شبه حكومي", bank:"بنوك", gov:"جهات حكومية"};
 const STATUS = {open:"مفتوح", rolling:"مستمر", seasonal:"موسمي", closed:"مغلق حاليًا"};
 const LABELS = {
-  ar:{types:{...TYPES}, fields:{...FIELDS}, status:{...STATUS}, orgs:{...ORGS}, regions:{riyadh:"الرياض", west:"جدة ومكة", east:"الشرقية", remote:"عن بُعد"}},
+  ar:{types:{...TYPES}, fields:{...FIELDS}, status:{...STATUS}, orgs:{...ORGS}, regions:{riyadh:"الرياض", jeddah:"جدة", makkah:"مكة", madinah:"المدينة", east:"الشرقية", other:"مدن ثانية", remote:"عن بُعد"}},
   en:{types:{coop:"Co-op Training", internship:"Internship", grad:"Graduate Program", entry:"Entry Level"},
       fields:{tech:"Tech & Software", data:"Data & AI", cyber:"Cybersecurity", finance:"Finance & Accounting", engineering:"Engineering", health:"Health & Sciences", legal:"Law", supply:"Supply Chain & Procurement", marketing:"Marketing & Sales", product:"Product & Design", business:"Business & HR", media:"Media & Content"},
       orgs:{startup:"Startups", private:"Private companies", semi:"Semi-government", bank:"Banks", gov:"Government"},
       status:{open:"Open", rolling:"Rolling", seasonal:"Seasonal", closed:"Closed for now"},
-      regions:{riyadh:"Riyadh", west:"Jeddah & Makkah", east:"Eastern Province", remote:"Remote"}}
+      regions:{riyadh:"Riyadh", jeddah:"Jeddah", makkah:"Makkah", madinah:"Madinah", east:"Eastern Province", other:"Other cities", remote:"Remote"}}
 };
-const SECT_EN = {"الكل":"All","إعلام ومحتوى":"Media & Content","برمجيات للأعمال":"Business Software","تقنية مالية":"Fintech","تجارة إلكترونية":"E-commerce","توصيل":"Delivery","سياحة وضيافة":"Travel & Hospitality","ذكاء اصطناعي":"AI","أمن سيبراني":"Cybersecurity","اتصالات":"Telecom","عقار وسكن":"Real Estate","فعاليات وترفيه":"Events & Entertainment","ألعاب":"Gaming","تقنية متقدمة":"Deep Tech","بنوك":"Banks","طاقة وصناعة":"Energy & Industry","طيران":"Aviation","تطوير عقاري وسياحة":"Real Estate & Tourism","استثمار":"Investment","تعليم وبحث":"Education & Research","منصات حكومية":"Government Platforms","مالية ومحاسبة":"Finance","تجزئة وأغذية":"Retail & Food","صحة":"Healthcare","استشارات":"Consulting"};
+const SECT_EN = {"الكل":"All","إعلام ومحتوى":"Media & Content","برمجيات للأعمال":"Business Software","تقنية مالية":"Fintech","تجارة إلكترونية":"E-commerce","توصيل":"Delivery","سياحة وضيافة":"Travel & Hospitality","ذكاء اصطناعي":"AI","أمن سيبراني":"Cybersecurity","اتصالات":"Telecom","عقار وسكن":"Real Estate","فعاليات وترفيه":"Events & Entertainment","ألعاب":"Gaming","تقنية متقدمة":"Deep Tech","بنوك":"Banks","طاقة وصناعة":"Energy & Industry","طيران":"Aviation","تطوير عقاري وسياحة":"Real Estate & Tourism","استثمار":"Investment","تعليم وبحث":"Education & Research","منصات حكومية":"Government Platforms","مالية ومحاسبة":"Finance","تجزئة وأغذية":"Retail & Food","صحة":"Healthcare","استشارات":"Consulting","مياه وبيئة":"Water & Environment","خدمات الأعمال":"Business Services"};
 const sectL = x => LANG === "en" ? (SECT_EN[x] || x) : x;
 function applyLabels(){ const L = LABELS[LANG]; Object.assign(TYPES, L.types); Object.assign(FIELDS, L.fields); Object.assign(STATUS, L.status); Object.assign(ORGS, L.orgs); Object.entries(L.regions).forEach(([k,v])=>{ REGIONS[k].label = v; }); }
 const RANK = {open:0, rolling:1, seasonal:2, closed:3};
@@ -518,6 +554,10 @@ const COS = [
  {ar: "سابك", en: "SABIC", org: "semi", sector: "طاقة وصناعة", desc: "شركة كيماويات عالمية سعودية.", den: "Global Saudi chemicals company.", careers: "https://jobs.sabic.com/"},
  {ar: "معادن", en: "Ma'aden", org: "semi", sector: "طاقة وصناعة", desc: "شركة التعدين العربية السعودية، وعندها تدريب تعاوني.", den: "Saudi Arabian Mining Company; offers co-op training.", careers: "https://careers.maaden.com/"},
  {ar: "الشركة السعودية للكهرباء", en: "Saudi Electricity", org: "semi", sector: "طاقة وصناعة", desc: "الكهرباء في المملكة، وعندها تدريب تعاوني وبرامج خريجين.", den: "Kingdom's electricity provider, with co-op and graduate programs.", careers: "https://jobs.se.com.sa/"},
+ {ar: "شركة المياه الوطنية", en: "National Water Company", org: "semi", sector: "مياه وبيئة", desc: "خدمات المياه والصرف الصحي في المملكة، وعندها تدريب تعاوني وبرنامج «إعداد» لتأهيل الخريجين.", den: "Water and wastewater services across the Kingdom, with co-op training and the Edad graduate program.", careers: "https://talents.nwc.com.sa/"},
+ {ar: "شركة وسط جدة للتطوير", en: "Jeddah Central Development Co.", org: "semi", sector: "تطوير عقاري وسياحة", desc: "مطوّر مشروع وسط جدة، تابعة لصندوق الاستثمارات العامة، ومكتبها في مركز زهران للأعمال بجدة.", den: "Developer of the Jeddah Central project, owned by PIF, with offices in Zahran Business Center, Jeddah.", careers: "https://www.jeddahcentral.com/en/careers"},
+ {ar: "زهران القابضة", en: "Zahran Holding", org: "private", sector: "استثمار", desc: "مجموعة سعودية متنوعة: تشغيل وصيانة، ومقاولات وعقار، وتجزئة، وسياحة. تستقبل السير الذاتية من صفحتها.", den: "Diversified Saudi group: operations and maintenance, construction and real estate, retail and travel. Accepts CVs through its page.", careers: "https://www.zahranholding.com/en/careers/"},
+ {ar: "غرفة جدة", en: "Jeddah Chamber", org: "semi", sector: "خدمات الأعمال", desc: "تخدم قطاع الأعمال في جدة، وعندها تدريب أكاديمي لطلاب الجامعات وتدريب تعاوني للخريجين، والتسجيل يفتح بفترات.", den: "Serves Jeddah's business sector, with academic training for university students and co-op training for graduates; registration opens periodically.", careers: "https://www.jcci.org.sa/en/%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8"},
  {ar: "إس تي سي", en: "stc", org: "semi", sector: "اتصالات", desc: "أكبر شركة اتصالات وتقنية في السعودية.", den: "Saudi Arabia's largest telecom and tech company.", careers: "https://careers.stc.com.sa/"},
  {ar: "علم", en: "Elm", org: "semi", sector: "برمجيات للأعمال", desc: "حلول رقمية وحكومية، تابعة لصندوق الاستثمارات العامة.", den: "Digital and e-government solutions, owned by PIF.", careers: "https://career.elm.sa/"},
  {ar: "الخطوط السعودية", en: "Saudia", org: "semi", sector: "طيران", desc: "الناقل الوطني، وعندها برامج مثل برنامج الطيارين (Cadet).", den: "The national carrier, with programs like the Cadet Program.", careers: "https://careers.saudia.com/"},
@@ -560,7 +600,11 @@ const hasLatin = t => /[A-Za-z]/.test(t) && !/[؀-ۿ]/.test(t);
 const today = new Date(); today.setHours(0,0,0,0);
 
 let JOBS = [];
-const st = {q:"", type:"all", field:"all", region:"all", org:"all", openOnly:true, saved:false, q2:"", sector:"الكل", corg:"all"};
+const st = {q:"", type:new Set(), field:new Set(), region:new Set(), org:new Set(), openOnly:true, saved:false, q2:"", sector:"الكل", corg:new Set()};
+// الفلاتر تقبل أكثر من اختيار: «الكل» يمسح، وأي خيار ثاني ينضاف أو ينشال
+const pick = (set, v) => { if(v==="all") set.clear(); else if(set.has(v)) set.delete(v); else set.add(v); };
+const any = (set, ok) => !set.size || [...set].some(ok);
+const clearFilters = () => { st.type.clear(); st.field.clear(); st.region.clear(); st.org.clear(); };
 const orgOf = x => x.org || "startup";
 const SAVE_KEY = "awal-khatwa-saved";
 let SAVED = new Set(); try{ SAVED = new Set(JSON.parse(localStorage.getItem(SAVE_KEY)||"[]")); }catch(e){}
@@ -586,14 +630,14 @@ function isApplyable(j){ const s=effStatus(j); return s==="open"||s==="rolling";
 function fmtDate(d){ try{ return new Date(d+"T00:00:00").toLocaleDateString(LANG==="en" ? "en-GB" : "ar-SA-u-ca-gregory-nu-latn",{day:"numeric",month:"long",year:"numeric"}); }catch(e){ return d; } }
 
 function chipsHTML(map, cur, counts){
-  return [`<button class="chip" type="button" data-v="all" aria-pressed="${cur==="all"}">${T("الكل","All")}</button>`]
-    .concat(Object.entries(map).filter(([k])=>counts[k]).map(([k,v])=>`<button class="chip" type="button" data-v="${k}" aria-pressed="${cur===k}"><bdi>${v}</bdi><span class="n">${counts[k]}</span></button>`)).join("");
+  return [`<button class="chip" type="button" data-v="all" aria-pressed="${!cur.size}">${T("الكل","All")}</button>`]
+    .concat(Object.entries(map).filter(([k])=>counts[k] || cur.has(k)).map(([k,v])=>`<button class="chip" type="button" data-v="${k}" aria-pressed="${cur.has(k)}"><bdi>${v}</bdi><span class="n">${counts[k]||0}</span></button>`)).join("");
 }
 
 function renderJobs(){
   const mine = new Set([...SAVED, ...APPLIED].filter(id=>JOBS.some(j=>j.id===id)));
   $("#savedN").textContent = mine.size ? mine.size : "";
-  const nf = (st.type!=="all") + (st.field!=="all") + (st.region!=="all") + (st.org!=="all") + (!st.openOnly) + (st.saved);
+  const nf = st.type.size + st.field.size + st.region.size + st.org.size + (!st.openOnly) + (st.saved);
   $("#fCount").textContent = nf; $("#fCount").hidden = !nf;
   const pool = st.saved ? JOBS.filter(j => SAVED.has(j.id) || APPLIED.has(j.id)) : JOBS.filter(j => !st.openOnly || isApplyable(j));
   const tc={}, fc={}, rc={}, oc={};
@@ -603,10 +647,14 @@ function renderJobs(){
   $("#fieldChips").innerHTML = chipsHTML(FIELDS, st.field, fc);
   $("#orgChips").innerHTML = chipsHTML(ORGS, st.org, oc);
   $("#cityChips").innerHTML = chipsHTML(Object.fromEntries(Object.entries(REGIONS).map(([k,r])=>[k,r.label])), st.region, rc);
+  const act = [["type",TYPES],["org",ORGS],["field",FIELDS],["region",Object.fromEntries(Object.entries(REGIONS).map(([k,r])=>[k,r.label]))]]
+    .flatMap(([g,map])=>[...st[g]].map(v=>`<button class="af" type="button" data-g="${g}" data-v="${v}" aria-label="${T("إزالة","Remove")} ${esc(map[v]||v)}">${esc(map[v]||v)}<span aria-hidden="true">×</span></button>`));
+  $("#activeF").innerHTML = act.join("") + (act.length>1 ? `<button class="af-clear" type="button">${T("مسح الكل","Clear all")}</button>` : "");
+  $("#activeF").hidden = !act.length;
   const q = norm(st.q.trim());
   const list = pool.filter(j =>
-    (st.type==="all"||j.type===st.type) && (st.field==="all"||j.field===st.field) && (st.org==="all"||orgOf(j)===st.org) &&
-    (st.region==="all"||REGIONS[st.region].test(j)) &&
+    any(st.type, v=>j.type===v) && any(st.field, v=>j.field===v) && any(st.org, v=>orgOf(j)===v) &&
+    any(st.region, k=>REGIONS[k].test(j)) &&
     (!q || norm([j.company,j.companyEn,j.title,j.who,j.city,TYPES[j.type],FIELDS[j.field],ORGS[orgOf(j)]].join(" ")).includes(q))
   ).sort((a,b)=>{
     const r = RANK[effStatus(a)]-RANK[effStatus(b)]; if(r) return r;
@@ -631,6 +679,8 @@ const ICON = {
 };
 function starBtn(j, cls){ const on = SAVED.has(j.id), t = on?T("إزالة من المحفوظة","Remove from saved"):T("حفظ الفرصة","Save");
   return `<button class="star ${cls}" type="button" data-save="${esc(j.id)}" aria-pressed="${on}" aria-label="${t}" title="${t}">${on?"★":"☆"}</button>`; }
+function fmtShort(d){ try{ return new Date(d+"T00:00:00").toLocaleDateString(LANG==="en" ? "en-GB" : "ar-SA-u-ca-gregory-nu-latn",{day:"numeric",month:"short"}); }catch(e){ return d; } }
+function chkLabel(d){ const n = Math.round((new Date(new Date().toDateString()) - new Date(d+"T00:00:00"))/864e5); return n<=0 ? T("✓ متحقق اليوم","✓ Checked today") : n===1 ? T("✓ متحقق أمس","✓ Checked yesterday") : T(`✓ متحقق ${fmtShort(d)}`, `✓ Checked ${fmtShort(d)}`); }
 function jobHTML(j){
   const s = effStatus(j), d = daysLeft(j.deadline);
   let due = "";
@@ -641,7 +691,7 @@ function jobHTML(j){
   const whoTxt = LANG==="en" ? ((j.who||"").match(/^قسم (.+?)\.?$/) ? `${RegExp.$1} team.` : (hasArabic(j.who) ? "" : j.who||"")) : (j.who||"");
   return `<article class="job ${s}${APPLIED.has(j.id)?" applied":""}" id="job-${esc(j.id)}">
     <div class="job-main">
-      <div class="job-co">${LANG==="en"&&j.companyEn?`<b class="ltr">${esc(j.companyEn)}</b><span>${esc(j.company)}</span>`:`<b>${esc(j.company)}</b>${j.companyEn?`<span class="ltr">${esc(j.companyEn)}</span>`:""}`}${isNew(j)?`<span class="new">${T("جديد","New")}</span>`:""}${APPLIED.has(j.id)?`<span class="appl">✓ ${T("قدّمت","Applied")}</span>`:""}</div>
+      <div class="job-co">${LANG==="en"&&j.companyEn?`<b class="ltr">${esc(j.companyEn)}</b><span>${esc(j.company)}</span>`:`<b>${esc(j.company)}</b>${j.companyEn?`<span class="ltr">${esc(j.companyEn)}</span>`:""}`}${isNew(j)?`<span class="new">${T("جديد","New")}</span>`:""}${APPLIED.has(j.id)?`<span class="appl">✓ ${T("قدّمت","Applied")}</span>`:""}${(s!=="closed"&&j.checked)?`<span class="chk" title="${T("آخر مرة تحققنا إن الإعلان موجود في صفحة الجهة","Last time we confirmed the listing is on the employer page")}">${chkLabel(j.checked)}</span>`:""}</div>
       <h3 ${hasLatin(j.title)?`dir="ltr" style="text-align:${LANG==="en"?"left":"right"}"`:""}>${esc(j.title)}</h3>
       <div class="meta">${meta}</div>
       ${whoTxt?`<p class="who">${esc(whoTxt)}</p>`:""}
@@ -661,7 +711,7 @@ function jobHTML(j){
 function renderCos(){
   const coc = {}; COS.forEach(c=>{ const o = c.org||"startup"; coc[o]=(coc[o]||0)+1; });
   $("#corgChips").innerHTML = chipsHTML(ORGS, st.corg, coc);
-  const inOrg = COS.filter(c=>st.corg==="all" || (c.org||"startup")===st.corg);
+  const inOrg = COS.filter(c=>any(st.corg, v=>(c.org||"startup")===v));
   const sectors = ["الكل", ...new Set(inOrg.map(c=>c.sector))];
   if(!sectors.includes(st.sector)) st.sector = "الكل";
   $("#secChips").innerHTML = sectors.map(s=>`<button class="chip" type="button" data-s="${s}" aria-pressed="${s===st.sector}">${sectL(s)}</button>`).join("");
@@ -685,16 +735,18 @@ function renderStats(){
   $("#nJobs").textContent = JOBS.filter(isApplyable).length;
   $("#nCos").textContent = COS.length;
   const last = JOBS.map(j=>j.checked).filter(Boolean).sort().pop();
+  if(last){ const dm = new Date(last+"T00:00:00").toLocaleDateString(LANG==="en" ? "en-GB" : "ar-SA-u-ca-gregory-nu-latn",{day:"numeric",month:"long"}); $("#updTxt").innerHTML = T(`🔄 يتحدث تلقائيًا كل يوم · آخر تحديث: <span class="nw">${dm}</span>`, `🔄 Updated automatically every day · Last update: <span class="nw">${dm}</span>`); $("#updLine").hidden = false; }
   if(last) $("#checkedLine").textContent = T(`آخر تحديث للإعلانات: ${fmtDate(last)}. الفرص تتغير بسرعة، فتأكد من الحالة في صفحة التقديم قبل ما تقدم.`, `Last updated: ${fmtDate(last)}. Listings change fast, so check the status on the application page before you apply.`);
 }
 function renderAll(){ renderStats(); renderJobs(); renderCos(); }
 
 // events
-$("#typeChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.type=b.dataset.v; renderJobs();});
-$("#fieldChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.field=b.dataset.v; renderJobs();});
-$("#orgChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.org=b.dataset.v; renderJobs();});
-$("#savedBtn").addEventListener("click",e=>{ st.saved=!st.saved; e.currentTarget.setAttribute("aria-pressed",st.saved); st.type="all"; st.field="all"; st.region="all"; renderJobs(); });
-$("#cityChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.region=b.dataset.v; renderJobs();});
+$("#typeChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; pick(st.type, b.dataset.v); renderJobs();});
+$("#fieldChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; pick(st.field, b.dataset.v); renderJobs();});
+$("#orgChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; pick(st.org, b.dataset.v); renderJobs();});
+$("#savedBtn").addEventListener("click",e=>{ st.saved=!st.saved; e.currentTarget.setAttribute("aria-pressed",st.saved); clearFilters(); renderJobs(); });
+$("#activeF").addEventListener("click",e=>{ const a=e.target.closest(".af"); if(a){ st[a.dataset.g].delete(a.dataset.v); renderJobs(); return; } if(e.target.closest(".af-clear")){ clearFilters(); renderJobs(); } });
+$("#cityChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; pick(st.region, b.dataset.v); renderJobs();});
 $("#q").addEventListener("input",e=>{st.q=e.target.value; renderJobs();});
 function icsDate(d){ return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`; }
 function reminderFor(j){
@@ -783,10 +835,10 @@ function focusHash(){
   if(el){ el.classList.add("target"); el.scrollIntoView({block:"center"}); }
 }
 window.addEventListener("hashchange", focusHash);
-$("#openBtn").addEventListener("click",e=>{st.openOnly=!st.openOnly; e.currentTarget.setAttribute("aria-pressed",st.openOnly); st.type="all"; st.field="all"; renderJobs();});
+$("#openBtn").addEventListener("click",e=>{st.openOnly=!st.openOnly; e.currentTarget.setAttribute("aria-pressed",st.openOnly); renderJobs();});
 $("#q2").addEventListener("input",e=>{st.q2=e.target.value; renderCos();});
 $("#secChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.sector=b.dataset.s; renderCos();});
-$("#corgChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; st.corg=b.dataset.v; st.sector="الكل"; renderCos();});
+$("#corgChips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(!b) return; pick(st.corg, b.dataset.v); st.sector="الكل"; renderCos();});
 function showTab(which){
   const jobs = which==="jobs";
   $("#tab-jobs").setAttribute("aria-selected",jobs); $("#tab-cos").setAttribute("aria-selected",!jobs);
@@ -807,7 +859,7 @@ $("#filterBtn").addEventListener("click", ()=> $("#fpanel").classList.contains("
 $("#fDone").addEventListener("click", ()=>{ closeFilters(); $("#list").scrollIntoView({block:"start"}); });
 $("#fback").addEventListener("click", closeFilters);
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && $("#fpanel").classList.contains("open")) closeFilters(); });
-$("#fReset").addEventListener("click", ()=>{ st.type="all"; st.field="all"; st.region="all"; st.org="all"; st.saved=false; st.openOnly=true;
+$("#fReset").addEventListener("click", ()=>{ clearFilters(); st.saved=false; st.openOnly=true;
   $("#savedBtn").setAttribute("aria-pressed","false"); $("#openBtn").setAttribute("aria-pressed","true"); renderJobs(); });
 (MOBILE.addEventListener ? MOBILE.addEventListener("change", placeToggles) : MOBILE.addListener(placeToggles));
 placeToggles();

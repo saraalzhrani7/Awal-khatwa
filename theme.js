@@ -47,6 +47,17 @@
   .th-md button+button{border-inline-start:1px solid var(--line)}
   .th-md button[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink)}
   @media (max-width:640px){ .th-btn .th-lbl{display:none} }
+  /* قائمة الصفحات: في الجوال سطر واحد يتمرر بالعرض، وزر المظهر واللغة ثابتين على طرفه */
+  .sitenav .navlinks{display:contents}
+  @media (max-width:640px){
+    nav.sitenav{flex-wrap:nowrap; align-items:center; gap:6px}
+    .sitenav .navlinks{display:flex; flex:1 1 auto; min-width:0; gap:2px; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; mask-image:linear-gradient(to left, #000 85%, transparent); -webkit-mask-image:linear-gradient(to left, #000 85%, transparent)}
+    [dir="ltr"] .sitenav .navlinks{mask-image:linear-gradient(to right, #000 85%, transparent); -webkit-mask-image:linear-gradient(to right, #000 85%, transparent)}
+    .sitenav .navlinks::-webkit-scrollbar{display:none}
+    .sitenav .navlinks a{flex:none; white-space:nowrap}
+    .sitenav .th-wrap, .sitenav .langbtn{flex:none; margin-inline-start:0}
+    .sitenav .langbtn{padding:5px 10px}
+  }
   @media print{ .th-wrap{display:none!important} }`;
   const st = document.createElement("style"); st.id = "theme-css"; st.textContent = css;
   document.head.append(st);
@@ -103,6 +114,8 @@
     document.addEventListener("keydown", e=>{ if(e.key === "Escape" && !pop.hidden){ pop.hidden = true; btn.focus(); } });
     const lang = nav.querySelector(".langbtn");
     if(lang) lang.before(wrap); else nav.append(wrap);
+    const curLink = nav.querySelector('.navlinks [aria-current="page"]'), strip = nav.querySelector(".navlinks");
+    if(curLink && strip && strip.scrollWidth > strip.clientWidth){ const r = curLink.getBoundingClientRect(), sr = strip.getBoundingClientRect(); if(r.left < sr.left || r.right > sr.right) strip.scrollLeft += (r.left + r.width/2) - (sr.left + sr.width/2); }
   }
   if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", build); else build();
 })();

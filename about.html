@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>عن المنصة ومنهجيتها | أول خطوة</title>
+<meta name="description" content="مين يدير «أول خطوة»، ومن وين تجي الفرص، وكيف نتحقق منها ونحدّثها كل يوم: المصادر وقواعد الجودة وسجل التغييرات.">
+<link rel="canonical" href="https://saraalzhrani7.github.io/Awal-khatwa/about.html">
+<meta property="og:title" content="عن المنصة ومنهجيتها | أول خطوة">
+<meta property="og:description" content="المصادر، وقواعد الجودة، وطريقة التحديث، وسجل التغييرات.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://saraalzhrani7.github.io/Awal-khatwa/og-image.jpg?v=2">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B7A5C">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Lalezar&display=swap">
+<style>
+:root{
+  --bg:#F2F5F3; --surface:#FFFFFF; --ink:#0F201B; --muted:#5A6B65; --line:#D9E2DE;
+  --accent:#0B7A5C; --accent-ink:#FFFFFF; --accent-soft:#E0F0EA;
+  --saffron:#A8651A; --saffron-soft:#F8EBD8; --focus:#0B7A5C;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0C1613; --surface:#13211D; --ink:#E3EEEA; --muted:#93A8A0; --line:#243731;
+    --accent:#3CC39A; --accent-ink:#06231A; --accent-soft:#16372D;
+    --saffron:#E3A857; --saffron-soft:#3A2B17; --focus:#3CC39A;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C1613; --surface:#13211D; --ink:#E3EEEA; --muted:#93A8A0; --line:#243731;
+  --accent:#3CC39A; --accent-ink:#06231A; --accent-soft:#16372D;
+  --saffron:#E3A857; --saffron-soft:#3A2B17; --focus:#3CC39A;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg); color:var(--ink); font-family:"IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif; font-size:16px; line-height:1.8; padding-inline:16px; padding-block:0 56px}
+.wrap{max-width:860px; margin-inline:auto}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--focus); outline-offset:2px; border-radius:6px}
+.sitenav{display:flex; gap:4px; flex-wrap:wrap; padding-top:16px; font-size:14px}
+.sitenav a{text-decoration:none; color:var(--muted); padding:6px 12px; border-radius:8px}
+.sitenav a[aria-current="page"]{color:var(--ink); background:var(--surface); border:1px solid var(--line)}
+.sitenav a:hover{color:var(--ink)}
+header{padding-block:36px 8px}
+h1{font-family:"Lalezar","IBM Plex Sans Arabic",sans-serif; font-weight:400; font-size:clamp(34px,6vw,50px); line-height:1.1; margin:0}
+h1 span{color:var(--accent)}
+.lead{color:var(--muted); margin:10px 0 0; max-width:60ch}
+.toc{display:flex; gap:8px; flex-wrap:wrap; margin-top:18px}
+.toc a{text-decoration:none; color:var(--ink); border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:5px 14px; font-size:14px}
+section{margin-top:44px}
+h2{font-family:"Lalezar",sans-serif; font-weight:400; font-size:28px; margin:0 0 6px; text-wrap:balance}
+h3{font-size:17px; margin:0; line-height:1.4}
+p{margin:0 0 10px; max-width:68ch}
+.sub{color:var(--muted); margin-bottom:16px}
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; min-width:680px; font-size:14.5px; line-height:1.6}
+th,td{text-align:right; padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+th{font-size:13px; color:var(--muted); font-weight:600; background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600; white-space:nowrap}
+td:first-child small{display:block; color:var(--muted); font-weight:400; direction:ltr; text-align:right}
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px; display:grid; gap:6px; align-content:start}
+.card p{margin:0; font-size:14.5px}
+.do{color:var(--accent); font-weight:600; font-size:13px}
+.dont{color:var(--saffron); font-weight:600; font-size:13px}
+.cv{display:grid; gap:0; border:1px solid var(--line); border-radius:12px; background:var(--surface); overflow:hidden}
+.cv div{display:grid; grid-template-columns:150px 1fr; gap:14px; padding:12px 16px; border-bottom:1px solid var(--line)}
+.cv div:last-child{border-bottom:0}
+.cv b{font-weight:600}
+.cv span{color:var(--muted); font-size:14.5px}
+@media (max-width:560px){ .cv div{grid-template-columns:1fr; gap:2px} }
+.timeline{display:grid; gap:10px}
+.when{display:grid; grid-template-columns:150px 1fr; gap:16px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px 18px}
+.when .t{font-weight:600; color:var(--accent)}
+.when p{margin:0; font-size:14.5px}
+@media (max-width:560px){ .when{grid-template-columns:1fr; gap:4px} }
+.star{display:grid; gap:4px; background:var(--surface); border:1px solid var(--line); border-inline-start:4px solid var(--accent); border-radius:12px; padding:12px 16px; margin-bottom:12px; font-size:14px}
+.star span{color:var(--muted)}
+.star span b{color:var(--accent)}
+.qa{display:grid; gap:8px}
+.qa details{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:0 16px}
+.qa summary{cursor:pointer; font-weight:600; padding:12px 0; list-style-position:inside}
+.qa ol{margin:0 0 12px; padding-inline-start:20px; display:grid; gap:10px}
+.qa li{font-size:14px}
+.qa q{display:block; direction:ltr; text-align:left; font-weight:600; quotes:none; unicode-bidi:isolate}
+.qa li span{color:var(--muted); font-size:13.5px}
+.note{font-size:13.5px; color:var(--muted); border-inline-start:3px solid var(--saffron); padding-inline-start:12px; margin-top:12px}
+ol.steps{padding-inline-start:22px; margin:0; display:grid; gap:8px; max-width:68ch}
+.back{display:inline-block; margin-top:44px; text-decoration:none; background:var(--accent); color:var(--accent-ink); padding:10px 18px; border-radius:8px; font-weight:600}
+
+.facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-top:22px}
+.fact{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px 16px}
+.fact b{display:block; font-size:24px; font-variant-numeric:tabular-nums; line-height:1.3}
+.fact small{color:var(--muted); font-size:13px}
+.pillars{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px}
+.pillar{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px}
+.pillar h3{display:flex; align-items:center; gap:8px; margin-bottom:6px}
+.pillar h3 span{display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:13px}
+.pillar ul{margin:0; padding-inline-start:18px; display:grid; gap:4px; font-size:14.5px}
+.pillar li{max-width:none}
+ol.steps li{font-size:15px}
+ul.steps{padding-inline-start:22px; margin:0; display:grid; gap:8px; max-width:68ch}
+.srcbox{margin-top:14px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:0 16px}
+.srcbox summary{cursor:pointer; font-weight:600; padding:12px 0}
+.srcbox .tablewrap{border:0; border-radius:0; margin:0 -16px}
+.srcbox table{min-width:520px}
+.srcbox td:first-child{white-space:normal}
+.ok{color:var(--accent); font-weight:600}
+.bad{color:var(--saffron); font-weight:600}
+.ltr{direction:ltr; unicode-bidi:isolate}
+.log{display:grid; gap:10px}
+.log .when .t{font-variant-numeric:tabular-nums}
+.log ul{margin:0; padding-inline-start:18px; font-size:14.5px}
+@media (max-width:640px){
+  .srcbox table{min-width:0}
+  .srcbox thead{display:none}
+  .srcbox tr{display:flex; flex-wrap:wrap; gap:2px 10px; padding:10px 16px; border-bottom:1px solid var(--line)}
+  .srcbox td{padding:0; border:0; font-size:13px; color:var(--muted)}
+  .srcbox td:first-child{flex-basis:100%; color:var(--ink); font-size:14.5px}
+  .srcbox td:first-child small{display:inline; margin:0 8px}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .when{padding:12px 14px}
+}
+</style>
+<script data-goatcounter="https://awal-khatwa.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script src="theme.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <nav class="sitenav" aria-label="صفحات الموقع">
+    <div class="navlinks">
+      <a href="./">الفرص</a>
+      <a href="cv.html">سيرتك</a>
+      <a href="guide.html">دليل المبتدئ</a>
+      <a href="stats.html">الإحصائيات</a>
+      <a href="about.html" aria-current="page">عن المنصة</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>عن <span>أول خطوة</span> ومنهجيتها</h1>
+    <p class="lead">منصة رقمية مساندة للتوظيف والتطوير المهني لحديثي التخرج والباحثين عن عمل في السعودية. هنا نوضح مين يدير المنصة، ومن وين تجي الفرص، وكيف نتحقق منها ونحدّثها.</p>
+    <div class="toc">
+      <a href="#how">كيف تشتغل</a><a href="#governance">الحوكمة</a><a href="#sources">المصادر</a><a href="#privacy">الخصوصية</a><a href="#changelog">سجل التغييرات</a>
+    </div>
+    <div class="facts" aria-live="polite">
+      <div class="fact"><b id="fOpen">–</b><small>فرصة مفتوحة الآن</small></div>
+      <div class="fact"><b id="fSrc">–</b><small>مصدر نتابعه تلقائيًا</small></div>
+      <div class="fact"><b>+100</b><small>جهة في دليل الشركات</small></div>
+      <div class="fact"><b id="fUpd">–</b><small>آخر تحديث</small></div>
+    </div>
+  </header>
+
+  <section id="how">
+    <h2>كيف تشتغل المنصة؟</h2>
+    <p class="sub">كل يوم الساعة 6 الصبح بتوقيت السعودية يشتغل تحديث آلي يمر بهالخطوات:</p>
+    <ol class="steps">
+      <li><b>الجمع:</b> نقرأ الوظائف مباشرة من أنظمة التوظيف الرسمية للجهات (مثل Workable وGreenhouse وWorkday وSAP SuccessFactors)، مو من مواقع وسيطة.</li>
+      <li><b>الفلترة:</b> نخلي الوظائف اللي داخل السعودية، واللي مسمّاها يدل إنها للمبتدئين (Intern وGraduate وCo-op وTrainee وTamheer وJunior وEntry Level).</li>
+      <li><b>الاستبعاد:</b> نقرأ وصف كل إعلان بالعربي والإنجليزي، ونستبعد اللي يطلب خبرة سنتين أو أكثر، أو يقول إنه ما يقبل حديثي التخرج.</li>
+      <li><b>التصنيف:</b> نحدد نوع الفرصة والمجال (12 مجال) والمدينة ونوع الجهة تلقائيًا.</li>
+      <li><b>التحديث:</b> الإعلان اللي تشيله الجهة من صفحتها ينشال من المنصة في التحديث اللي بعده، وتتحدث الإحصائيات وصفحات المشاركة.</li>
+    </ol>
+    <p class="note">فيه فرص نضيفها يدويًا، مثل البرامج الموسمية (التدريب التعاوني وبرامج الخريجين) اللي ما تنزل في أنظمة توظيف. هذي نتحقق منها من صفحة الجهة نفسها، وتنشال تلقائيًا بعد آخر موعد للتقديم.</p>
+  </section>
+
+  <section id="governance">
+    <h2>الحوكمة</h2>
+    <p class="sub">ستة مبادئ نمشي عليها في إدارة المنصة.</p>
+    <div class="pillars">
+      <div class="pillar"><h3><span>1</span>المسؤولية</h3><ul>
+        <li>مشروع مستقل تديره سارة الزهراني، وغير تابع لأي من الجهات المذكورة.</li>
+        <li>نشر الفرص مجاني، وما فيه إعلانات مدفوعة في الموقع.</li>
+        <li>أي خطأ أو طلب إزالة يوصلنا من زر «ملاحظاتك» أو الإيميل، ونصلحه بأسرع وقت.</li>
+      </ul></div>
+      <div class="pillar"><h3><span>2</span>الشفافية</h3><ul>
+        <li>قائمة كل المصادر اللي نتابعها منشورة <a href="#sources">تحت</a>، وتتحدث تلقائيًا.</li>
+        <li>كل إعلان يوديك لصفحة التقديم الرسمية عند الجهة.</li>
+        <li>الكود مفتوح على <a href="https://github.com/saraalzhrani7/Awal-khatwa" target="_blank" rel="noopener">GitHub</a>.</li>
+      </ul></div>
+      <div class="pillar"><h3><span>3</span>الجودة</h3><ul>
+        <li>نستبعد الإعلانات اللي تطلب خبرة سنتين أو أكثر.</li>
+        <li>نفس المسمى في نفس الجهة يطلع مرة وحدة، ونجمع مدنه في سطر واحد.</li>
+        <li>نقفل الفرص المنتهية تلقائيًا.</li>
+      </ul></div>
+      <div class="pillar"><h3><span>4</span>الموثوقية</h3><ul>
+        <li>كل إعلان عليه تاريخ آخر تحقق.</li>
+        <li>الفرصة اليدوية اللي ما تحققنا منها 60 يوم تنقفل لحالها.</li>
+        <li>تأكد دايم من صفحة الجهة قبل التقديم، وما فيه جهة تطلب فلوس مقابل وظيفة.</li>
+      </ul></div>
+      <div class="pillar"><h3><span>5</span>الاستدامة</h3><ul>
+        <li>تحديث آلي يومي بدون تدخل يدوي.</li>
+        <li>بدون خادم وبدون قاعدة بيانات، فتكلفة التشغيل شبه صفر.</li>
+        <li>إذا تعطل مصدر يوم، تبقى إعلاناته السابقة لين يرجع.</li>
+      </ul></div>
+      <div class="pillar"><h3><span>6</span>التوثيق</h3><ul>
+        <li>طريقة العمل موثقة في <a href="https://github.com/saraalzhrani7/Awal-khatwa#readme" target="_blank" rel="noopener">ملف README</a>.</li>
+        <li>كل تغيير مهم مسجل في <a href="#changelog">سجل التغييرات</a>.</li>
+        <li>سجل يومي لعدد الفرص يغذي <a href="stats.html">صفحة الإحصائيات</a>.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section id="sources">
+    <h2>المصادر</h2>
+    <p class="sub" id="srcLine">الجهات اللي نقرأ وظائفها تلقائيًا كل يوم، ونظام التوظيف اللي تستخدمه. البنوك والجهات الحكومية موجودة في <a href="./#companies">دليل الشركات</a> بروابط صفحاتها، لأن أنظمتها ما تسمح بالقراءة التلقائية.</p>
+    <details class="srcbox" id="srcBox">
+      <summary id="srcSum">عرض كل المصادر</summary>
+      <div class="tablewrap"><table>
+        <thead><tr><th>الجهة</th><th>نوع الجهة</th><th>نظام التوظيف</th><th>آخر اتصال</th></tr></thead>
+        <tbody id="srcRows"><tr><td colspan="4">القائمة تظهر بعد أول تحديث تلقائي.</td></tr></tbody>
+      </table></div>
+    </details>
+  </section>
+
+  <section id="privacy">
+    <h2>البيانات والخصوصية</h2>
+    <ul class="steps">
+      <li>ما نطلب تسجيل ولا بيانات شخصية.</li>
+      <li>صانع السيرة يشتغل داخل متصفحك، وسيرتك ما تنرفع لأي خادم.</li>
+      <li>الفرص المحفوظة واللي قدّمت عليها تنحفظ في متصفحك بس.</li>
+      <li>نستخدم <a href="https://www.goatcounter.com" target="_blank" rel="noopener">GoatCounter</a> لعدّ الزيارات بشكل عام، بدون كوكيز.</li>
+    </ul>
+  </section>
+
+  <section id="changelog">
+    <h2>سجل التغييرات</h2>
+    <p class="sub">المنصة تنبني على مراحل، وكل مرحلة تضيف على اللي قبلها.</p>
+    <div class="log">
+      <div class="when"><span class="t">16 أكتوبر 2026</span><ul><li>صفحة «عن المنصة ومنهجيتها» وقائمة المصادر.</li><li>تاريخ آخر تحقق على كل إعلان، و«آخر تحديث» في الصفحة الرئيسية.</li></ul></div>
+      <div class="when"><span class="t">28 سبتمبر 2026</span><ul><li>زر المظهر: لونين (أخضر وكحلي)، وفاتح أو داكن.</li><li>جهات جديدة في دليل الشركات من جدة.</li></ul></div>
+      <div class="when"><span class="t">26 سبتمبر 2026</span><ul><li>التوسع لكل الجهات: الشركات الخاصة والبنوك والجهات الحكومية وشبه الحكومية.</li><li>12 مجال، وأنظمة توظيف جديدة (Workday وOracle وSuccessFactors).</li><li>نسخة إنجليزية، وتثبيت الموقع كتطبيق، و«قدّمت عليها»، والتذكير بآخر موعد.</li></ul></div>
+      <div class="when"><span class="t">25 سبتمبر 2026</span><ul><li>الإطلاق: الفرص، وصانع السيرة، ودليل المبتدئ، والإحصائيات.</li></ul></div>
+    </div>
+    <a class="back" href="./">تصفح الفرص المتاحة الحين</a>
+  </section>
+</div>
+<script>
+const ATS = {workable:"Workable", greenhouse:"Greenhouse", ashby:"Ashby", pinpoint:"Pinpoint", smartrecruiters:"SmartRecruiters", workday:"Workday", oracle:"Oracle Cloud", successfactors:"SAP SuccessFactors"};
+const ORGS = {startup:"شركة ناشئة", private:"شركة خاصة", semi:"شبه حكومي", bank:"بنك", gov:"جهة حكومية"};
+const esc = s => String(s??"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtDate = d => { try{ return new Date(d+"T00:00:00").toLocaleDateString("ar-SA-u-ca-gregory-nu-latn",{day:"numeric",month:"long"}); }catch(e){ return d; } };
+const live = s => s==="open" || s==="rolling";
+fetch("data/listings.json",{cache:"no-store"}).then(r=>r.ok?r.json():[]).then(L=>{
+  L = Array.isArray(L)?L:[];
+  document.getElementById("fOpen").textContent = L.filter(j=>live(j.status) && !(j.deadline && j.deadline < new Date().toISOString().slice(0,10))).length;
+  const last = L.map(j=>j.checked).filter(Boolean).sort().pop();
+  if(last) document.getElementById("fUpd").textContent = fmtDate(last);
+}).catch(()=>{});
+fetch("data/sources.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>{
+  if(!d || !Array.isArray(d.sources) || !d.sources.length) return;
+  const RANK = {startup:0, private:1, bank:2, semi:3, gov:4};
+  const S = d.sources.slice().sort((a,b)=>((RANK[a.org]??9)-(RANK[b.org]??9)) || a.company.localeCompare(b.company,"ar"));
+  const ok = S.filter(s=>s.ok).length;
+  document.getElementById("fSrc").textContent = S.length;
+  document.getElementById("srcSum").textContent = `عرض كل المصادر (${S.length})، ونجح الاتصال بـ ${ok} منها في آخر تحديث (${fmtDate(d.date)})`;
+  document.getElementById("srcRows").innerHTML = S.map(s=>`<tr><td>${esc(s.company)} <small class="ltr">${esc(s.companyEn)}</small></td><td>${ORGS[s.org]||""}</td><td class="ltr">${ATS[s.ats]||esc(s.ats)}</td><td>${s.ok?'<span class="ok">✓ تم</span>':'<span class="bad">تعذّر</span>'}</td></tr>`).join("");
+}).catch(()=>{});
+</script>
+<script src="feedback.js" defer></script>
+</body>
+</html>

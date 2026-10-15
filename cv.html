@@ -177,6 +177,7 @@ details[open]{display:grid; gap:8px}
 .fine{font-size:12.5px; color:var(--muted)}
 
 .pvtoggle{display:none}
+@media (max-width:430px){ .row{grid-template-columns:1fr!important} }
 @media (max-width:640px){
   body{font-size:14px; line-height:1.55; padding-inline:12px}
   header{padding-block:16px 10px}
@@ -185,7 +186,8 @@ details[open]{display:grid; gap:8px}
   .privacy{font-size:12px; padding:5px 10px; margin-top:8px}
   .sitenav{padding-top:10px; font-size:13px; gap:2px}
   .sitenav a{padding:5px 9px}
-  .tab{padding:8px 10px; font-size:14px}
+  .tabs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0}
+  .tab{padding:8px 4px; font-size:13px; line-height:1.35; text-align:center}
   .builder,.match{gap:12px; margin-top:12px}
   .form{gap:10px}
   fieldset{padding:10px 12px 12px; gap:8px; border-radius:10px}
@@ -234,10 +236,13 @@ details[open]{display:grid; gap:8px}
 <body>
 <div class="wrap">
   <nav class="sitenav" aria-label="صفحات الموقع">
-    <a href="./">الفرص</a>
-    <a href="cv.html" aria-current="page">سيرتك</a>
-    <a href="guide.html">دليل المبتدئ</a>
-    <a href="stats.html">الإحصائيات</a>
+    <div class="navlinks">
+      <a href="./">الفرص</a>
+      <a href="cv.html" aria-current="page">سيرتك</a>
+      <a href="guide.html">دليل المبتدئ</a>
+      <a href="stats.html">الإحصائيات</a>
+      <a href="about.html">عن المنصة</a>
+    </div>
   </nav>
 
   <header>

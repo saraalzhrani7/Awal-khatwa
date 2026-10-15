@@ -96,6 +96,17 @@ td:first-child small{display:block; color:var(--muted); font-weight:400; directi
 .note{font-size:13.5px; color:var(--muted); border-inline-start:3px solid var(--saffron); padding-inline-start:12px; margin-top:12px}
 ol.steps{padding-inline-start:22px; margin:0; display:grid; gap:8px; max-width:68ch}
 .back{display:inline-block; margin-top:44px; text-decoration:none; background:var(--accent); color:var(--accent-ink); padding:10px 18px; border-radius:8px; font-weight:600}
+@media (max-width:640px){
+  .tablewrap{overflow:visible; border:0; background:none}
+  .tablewrap table{min-width:0}
+  .tablewrap thead{display:none}
+  .tablewrap tr{display:grid; gap:4px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px}
+  .tablewrap td{display:grid; grid-template-columns:76px 1fr; gap:8px; padding:0; border:0; font-size:14px}
+  .tablewrap td::before{content:attr(data-label); color:var(--muted); font-size:12.5px; font-weight:600}
+  .tablewrap td:first-child{display:block; font-size:16px; padding-bottom:4px; border-bottom:1px solid var(--line); margin-bottom:4px}
+  .tablewrap td:first-child::before{content:none}
+  .tablewrap td:first-child small{display:inline; margin:0 8px}
+}
 </style>
 <script data-goatcounter="https://awal-khatwa.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script src="theme.js"></script>
@@ -103,10 +114,13 @@ ol.steps{padding-inline-start:22px; margin:0; display:grid; gap:8px; max-width:6
 <body>
 <div class="wrap">
   <nav class="sitenav" aria-label="صفحات الموقع">
-    <a href="./">الفرص</a>
-    <a href="cv.html">سيرتك</a>
-    <a href="guide.html" aria-current="page">دليل المبتدئ</a>
-    <a href="stats.html">الإحصائيات</a>
+    <div class="navlinks">
+      <a href="./">الفرص</a>
+      <a href="cv.html">سيرتك</a>
+      <a href="guide.html" aria-current="page">دليل المبتدئ</a>
+      <a href="stats.html">الإحصائيات</a>
+      <a href="about.html">عن المنصة</a>
+    </div>
   </nav>
 
   <header>
@@ -260,6 +274,7 @@ ol.steps{padding-inline-start:22px; margin:0; display:grid; gap:8px; max-width:6
     <a class="back" href="./">تصفح الفرص المتاحة الحين</a>
   </section>
 </div>
+<script>document.querySelectorAll(".tablewrap table").forEach(t=>{ const h=[...t.querySelectorAll("thead th")].map(th=>th.textContent.trim()); t.querySelectorAll("tbody tr").forEach(tr=>[...tr.children].forEach((td,i)=>td.setAttribute("data-label", h[i]||""))); });</script>
 <script src="feedback.js" defer></script>
 </body>
 </html>
