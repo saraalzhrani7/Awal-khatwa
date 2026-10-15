@@ -113,9 +113,9 @@ footer{margin-top:28px; color:var(--muted); font-size:12.5px}
   </header>
 
   <div class="tiles">
-    <div class="tile"><b id="tOpen">–</b><span>فرصة مفتوحة الحين</span></div>
+    <div class="tile"><b id="tOpen">–</b><span>فرصة مفتوحة الآن</span></div>
     <div class="tile"><b id="tNew">–</b><span id="tNewLbl">فرصة جديدة هالشهر</span></div>
-    <div class="tile"><b id="tCos">–</b><span>شركة توظف مبتدئين الحين</span></div>
+    <div class="tile"><b id="tCos">–</b><span>شركة توظف مبتدئين الآن</span></div>
   </div>
 
   <div class="panel" style="margin-top:12px">
@@ -128,12 +128,12 @@ footer{margin-top:28px; color:var(--muted); font-size:12.5px}
   <div class="grid2">
     <div class="panel">
       <h2>أكثر الشركات توظيفًا للمبتدئين</h2>
-      <p class="hint">عدد الفرص المفتوحة الحين لكل شركة</p>
+      <p class="hint">عدد الفرص المفتوحة الآن لكل شركة</p>
       <div class="bars" id="byCompany"></div>
     </div>
     <div class="panel">
       <h2>أكثر المجالات طلبًا</h2>
-      <p class="hint">عدد الفرص المفتوحة الحين حسب المجال</p>
+      <p class="hint">عدد الفرص المفتوحة الآن حسب المجال</p>
       <div class="bars" id="byField"></div>
       <h2 style="margin-top:8px">حسب نوع الفرصة</h2>
       <div class="bars" id="byType"></div>
@@ -211,7 +211,7 @@ function renderTrend(hist){
   const head = tbl.insertRow(); ["التاريخ","فرص مفتوحة","جديدة ذاك اليوم"].forEach(t=>{ const th=document.createElement("th"); th.textContent=t; head.append(th); });
   pts.slice().reverse().forEach(h=>{ const r=tbl.insertRow(); [h.date, h.open, h.new ?? 0].forEach(v=>{ r.insertCell().textContent=v; }); });
   if(pts.length < 2){
-    box.innerHTML = `<div class="empty">الرسم يبدأ يطلع بعد يومين من التسجيل. ${pts.length? "عندنا الحين قراءة وحدة: "+pts[0].open+" فرصة مفتوحة.":""}</div>`;
+    box.innerHTML = `<div class="empty">الرسم يبدأ يطلع بعد يومين من التسجيل. ${pts.length? "عندنا الآن قراءة وحدة: "+pts[0].open+" فرصة مفتوحة.":""}</div>`;
     return;
   }
   const W = Math.max(320, box.clientWidth), H = 220, pad = {t:16, r:40, b:28, l:48};
@@ -289,7 +289,7 @@ function render(){
     topF ? `• أكثر مجال مطلوب: ${FIELDS[topF[0]]||"أخرى"}` : "",
     topT ? `• وأكثر نوع: ${TYPES[topT[0]]||"أخرى"}` : "",
     ``,
-    `والحين فيه ${nOpp(open.length)} مفتوحة للتقديم في ${byCo.length} شركة.`,
+    `والآن فيه ${nOpp(open.length)} مفتوحة للتقديم في ${byCo.length} شركة.`,
     ``,
     `إذا تعرف أحد يدور على تدريب تعاوني أو وظيفته الأولى، أرسل له الرابط 👇`,
     `https://saraalzhrani7.github.io/Awal-khatwa/`,

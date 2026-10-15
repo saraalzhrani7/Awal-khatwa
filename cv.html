@@ -1147,7 +1147,7 @@ function renderJobPicks(){
   const q = mnorm($("#m-search").value.trim());
   const list = MJOBS.filter(j=>!q || mnorm(j.title+" "+j.company+" "+j.companyEn).includes(q));
   const box = $("#m-jobs"); box.textContent = "";
-  if(!MJOBS.length){ box.innerHTML = '<p class="muted">القائمة تتعبى تلقائيًا مع تحديث الفرص اليومي. إلى ذاك الحين، الصق وصف الوظيفة تحت.</p>'; $("#m-paste").open = true; return; }
+  if(!MJOBS.length){ box.innerHTML = '<p class="muted">القائمة تتعبى تلقائيًا مع تحديث الفرص اليومي. إلى ذلك الوقت، الصق وصف الوظيفة تحت.</p>'; $("#m-paste").open = true; return; }
   if(!list.length){ box.innerHTML = '<p class="muted">ما لقينا وظيفة بهالاسم.</p>'; return; }
   list.forEach(j=>{
     const b = document.createElement("button"); b.type="button"; b.className="jobpick"; b.dataset.id=j.id; b.setAttribute("aria-pressed","false");
@@ -1279,7 +1279,7 @@ $("#l-pdf").addEventListener("click", ()=>{
     const ob = $("#orderBtn"); if(ob) ob.addEventListener("click", ()=>track("cv/order","طلب مراجعة"));
   } else {
     $("#reviewPrice").innerHTML = `<span class="soon">قريبًا</span>`;
-    $("#reviewCta").innerHTML = `<p class="muted">الخدمة بتفتح قريب. إلى ذاك الحين، استخدم صانع السيرة والمطابقة مجانًا.</p>`;
+    $("#reviewCta").innerHTML = `<p class="muted">الخدمة بتفتح قريب. إلى ذلك الوقت، استخدم صانع السيرة والمطابقة مجانًا.</p>`;
   }
 })();
 
