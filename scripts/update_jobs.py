@@ -449,13 +449,14 @@ def main():
     old_auto = {key_of(x): x for x in old if x.get("source") == "auto"}
     manual_keys = {key_of(x) for x in manual}
 
-    fresh, failed = {}, set()
+    fresh, failed, report = {}, set(), []
     for src in SOURCES:
         try:
             rows = list(FETCHERS[src["ats"]](src))
         except Exception as e:
             print(f"!! {src['companyEn']}: {e}", file=sys.stderr)
             failed.add(src["companyEn"].lower())
+            report.append({"company": src["company"], "companyEn": src["companyEn"], "ats": src["ats"], "org": src.get("org", ORG_DEFAULT), "ok": False, "kept": 0})
             continue
         kept = skipped = 0
         for r in rows:
@@ -509,6 +510,7 @@ def main():
             fresh[k] = item
             kept += 1
         print(f"{src['companyEn']}: {len(rows)} وظيفة، {kept} مناسبة للمبتدئين" + (f"، واستبعدنا {skipped} تطلب خبرة" if skipped else ""))
+        report.append({"company": src["company"], "companyEn": src["companyEn"], "ats": src["ats"], "org": src.get("org", ORG_DEFAULT), "ok": True, "kept": kept})
 
     # الشركات اللي فشل الاتصال فيها: نخلي إعلاناتها القديمة
     for k, x in old_auto.items():
@@ -520,6 +522,8 @@ def main():
     result = manual + sorted(fresh.values(), key=lambda x: x.get("posted", ""), reverse=True)
 
     record_history(result)
+    # قائمة المصادر لصفحة «عن المنصة»: كل جهة، ونظام التوظيف، وهل نجح الاتصال فيها اليوم
+    write_if_changed(ROOT / "data" / "sources.json", json.dumps({"date": TODAY, "sources": report}, ensure_ascii=False, indent=1) + "\n")
     write_feed(result)
     write_job_pages(result)
 
