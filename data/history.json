@@ -1050,5 +1050,52 @@
    "grad": 10,
    "coop": 4
   }
+ },
+ {
+  "date": "2026-10-16",
+  "open": 47,
+  "total": 51,
+  "new": 0,
+  "newIds": [],
+  "byCompany": {
+   "webook": 10,
+   "Salla": 6,
+   "Lucidya": 5,
+   "Lean Technologies": 4,
+   "Sarj": 3,
+   "Tamara": 2,
+   "Foodics": 2,
+   "COGNNA": 2,
+   "Gathern": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "GE Vernova": 1,
+   "KPMG": 1,
+   "Ninja": 1,
+   "HALA": 1,
+   "Mozn": 1,
+   "Adree": 1,
+   "Parsons": 1,
+   "Tabby": 1
+  },
+  "byField": {
+   "business": 15,
+   "tech": 8,
+   "marketing": 8,
+   "product": 6,
+   "finance": 3,
+   "cyber": 2,
+   "engineering": 2,
+   "media": 1,
+   "data": 1,
+   "legal": 1
+  },
+  "byType": {
+   "internship": 20,
+   "entry": 13,
+   "grad": 10,
+   "coop": 4
+  }
  }
 ]
