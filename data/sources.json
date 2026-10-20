@@ -1,5 +1,5 @@
 {
- "date": "2026-10-19",
+ "date": "2026-10-20",
  "sources": [
   {
    "company": "تابي",
@@ -175,7 +175,7 @@
    "ats": "workable",
    "org": "semi",
    "ok": true,
-   "kept": 0
+   "kept": 1
   },
   {
    "company": "إس تي سي",

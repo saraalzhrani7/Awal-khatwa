@@ -1249,5 +1249,57 @@
    "entry": 13,
    "grad": 10
   }
+ },
+ {
+  "date": "2026-10-20",
+  "open": 57,
+  "total": 61,
+  "new": 3,
+  "newIds": [
+   "qiddiya-coordinator-legal-operations",
+   "elm-elm-co-op-training-program-january-2027-intake-marketing",
+   "elm-elm-co-op-training-program-january-2027-intake-managemen"
+  ],
+  "byCompany": {
+   "Elm": 10,
+   "webook": 10,
+   "Salla": 6,
+   "Lucidya": 5,
+   "Lean Technologies": 4,
+   "Sarj": 3,
+   "Tamara": 2,
+   "Foodics": 2,
+   "COGNNA": 2,
+   "Gathern": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "Qiddiya": 1,
+   "GE Vernova": 1,
+   "KPMG": 1,
+   "Ninja": 1,
+   "HALA": 1,
+   "Mozn": 1,
+   "Adree": 1,
+   "Parsons": 1
+  },
+  "byField": {
+   "business": 18,
+   "tech": 10,
+   "marketing": 9,
+   "product": 6,
+   "finance": 4,
+   "legal": 3,
+   "engineering": 3,
+   "cyber": 2,
+   "media": 1,
+   "data": 1
+  },
+  "byType": {
+   "internship": 19,
+   "coop": 14,
+   "entry": 14,
+   "grad": 10
+  }
  }
 ]
