@@ -1,5 +1,5 @@
 {
- "date": "2026-10-23",
+ "date": "2026-10-24",
  "sources": [
   {
    "company": "تابي",
@@ -151,7 +151,7 @@
    "ats": "ashby",
    "org": "startup",
    "ok": true,
-   "kept": 0
+   "kept": 1
   },
   {
    "company": "ميراي",
@@ -199,7 +199,7 @@
    "ats": "successfactors",
    "org": "semi",
    "ok": true,
-   "kept": 11
+   "kept": 10
   },
   {
    "company": "أرامكو",
@@ -286,7 +286,7 @@
    "companyEn": "Baker Hughes",
    "ats": "workday",
    "org": "private",
-   "ok": true,
+   "ok": false,
    "kept": 0
   },
   {
@@ -294,23 +294,23 @@
    "companyEn": "GE Vernova",
    "ats": "workday",
    "org": "private",
-   "ok": true,
-   "kept": 1
+   "ok": false,
+   "kept": 0
   },
   {
    "company": "بارسونز",
    "companyEn": "Parsons",
    "ats": "workday",
    "org": "private",
-   "ok": true,
-   "kept": 1
+   "ok": false,
+   "kept": 0
   },
   {
    "company": "إتش بي إي",
    "companyEn": "HPE",
    "ats": "workday",
    "org": "private",
-   "ok": true,
+   "ok": false,
    "kept": 0
   },
   {
@@ -318,7 +318,7 @@
    "companyEn": "Motorola Solutions",
    "ats": "workday",
    "org": "private",
-   "ok": true,
+   "ok": false,
    "kept": 0
   },
   {
