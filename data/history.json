@@ -1504,5 +1504,57 @@
    "entry": 14,
    "grad": 10
   }
+ },
+ {
+  "date": "2026-10-25",
+  "open": 55,
+  "total": 59,
+  "new": 2,
+  "newIds": [
+   "elm-elm-co-op-training-program-january-2027-intake-accountin",
+   "elm-elm-co-op-training-program-january-2027-intake-informati"
+  ],
+  "byCompany": {
+   "Elm": 11,
+   "webook": 8,
+   "Salla": 6,
+   "Lucidya": 5,
+   "Lean Technologies": 4,
+   "Sarj": 3,
+   "Tamara": 2,
+   "Foodics": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "LAKEORA": 1,
+   "Qiddiya": 1,
+   "COGNNA": 1,
+   "GE Vernova": 1,
+   "KPMG": 1,
+   "Gathern": 1,
+   "Ninja": 1,
+   "HALA": 1,
+   "Mozn": 1,
+   "Adree": 1,
+   "Parsons": 1
+  },
+  "byField": {
+   "business": 18,
+   "tech": 10,
+   "marketing": 9,
+   "finance": 5,
+   "engineering": 4,
+   "product": 4,
+   "legal": 2,
+   "media": 1,
+   "data": 1,
+   "cyber": 1
+  },
+  "byType": {
+   "internship": 17,
+   "coop": 15,
+   "entry": 14,
+   "grad": 9
+  }
  }
 ]
