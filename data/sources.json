@@ -1,5 +1,5 @@
 {
- "date": "2026-10-25",
+ "date": "2026-10-26",
  "sources": [
   {
    "company": "تابي",
@@ -95,7 +95,7 @@
    "ats": "workable",
    "org": "startup",
    "ok": true,
-   "kept": 1
+   "kept": 3
   },
   {
    "company": "مزن",
@@ -199,7 +199,7 @@
    "ats": "successfactors",
    "org": "semi",
    "ok": true,
-   "kept": 11
+   "kept": 10
   },
   {
    "company": "أرامكو",
@@ -319,7 +319,7 @@
    "ats": "workday",
    "org": "private",
    "ok": true,
-   "kept": 0
+   "kept": 1
   },
   {
    "company": "سيارة",
@@ -335,7 +335,7 @@
    "ats": "workable",
    "org": "startup",
    "ok": true,
-   "kept": 1
+   "kept": 2
   },
   {
    "company": "جدين",
