@@ -1773,5 +1773,57 @@
    "entry": 13,
    "grad": 10
   }
+ },
+ {
+  "date": "2026-10-30",
+  "open": 54,
+  "total": 58,
+  "new": 1,
+  "newIds": [
+   "elm-elm-co-op-training-program-january-2027-intake-computer-"
+  ],
+  "byCompany": {
+   "Elm": 10,
+   "webook": 8,
+   "Lucidya": 5,
+   "Salla": 5,
+   "Sarj": 3,
+   "Lean Technologies": 3,
+   "Tamara": 2,
+   "Gathern": 2,
+   "Foodics": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "JODAYN": 1,
+   "Motorola Solutions": 1,
+   "COGNNA": 1,
+   "LAKEORA": 1,
+   "Qiddiya": 1,
+   "GE Vernova": 1,
+   "KPMG": 1,
+   "HALA": 1,
+   "Mozn": 1,
+   "Adree": 1,
+   "Parsons": 1
+  },
+  "byField": {
+   "business": 18,
+   "tech": 9,
+   "marketing": 8,
+   "engineering": 5,
+   "finance": 4,
+   "product": 4,
+   "legal": 3,
+   "media": 1,
+   "data": 1,
+   "cyber": 1
+  },
+  "byType": {
+   "internship": 16,
+   "coop": 15,
+   "entry": 13,
+   "grad": 10
+  }
  }
 ]
