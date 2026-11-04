@@ -1,5 +1,5 @@
 {
- "date": "2026-11-03",
+ "date": "2026-11-04",
  "sources": [
   {
    "company": "تابي",
@@ -199,7 +199,7 @@
    "ats": "successfactors",
    "org": "semi",
    "ok": true,
-   "kept": 10
+   "kept": 11
   },
   {
    "company": "أرامكو",
@@ -327,7 +327,7 @@
    "ats": "workable",
    "org": "startup",
    "ok": true,
-   "kept": 0
+   "kept": 3
   },
   {
    "company": "جاذر إن",
