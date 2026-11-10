@@ -1,5 +1,5 @@
 {
- "date": "2026-11-09",
+ "date": "2026-11-10",
  "sources": [
   {
    "company": "تابي",
@@ -39,7 +39,7 @@
    "ats": "workable",
    "org": "startup",
    "ok": true,
-   "kept": 2
+   "kept": 1
   },
   {
    "company": "سلة",
@@ -79,7 +79,7 @@
    "ats": "workable",
    "org": "startup",
    "ok": true,
-   "kept": 0
+   "kept": 1
   },
   {
    "company": "نعناع",
@@ -279,7 +279,7 @@
    "ats": "workday",
    "org": "private",
    "ok": true,
-   "kept": 0
+   "kept": 2
   },
   {
    "company": "بيكر هيوز",
@@ -303,7 +303,7 @@
    "ats": "workday",
    "org": "private",
    "ok": true,
-   "kept": 1
+   "kept": 3
   },
   {
    "company": "إتش بي إي",

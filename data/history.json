@@ -2348,5 +2348,63 @@
    "grad": 11,
    "coop": 5
   }
+ },
+ {
+  "date": "2026-11-10",
+  "open": 48,
+  "total": 52,
+  "new": 5,
+  "newIds": [
+   "accenture-it-one-sap-mm-internship",
+   "accenture-it-one-sap-co-internship",
+   "ninja-operation-trainee-coop",
+   "parsons-cybersecurity-intern-tamheer-program-saudi-national",
+   "parsons-it-programmer-intern-tamheer-program-saudi-national"
+  ],
+  "byCompany": {
+   "Lucidya": 5,
+   "Salla": 5,
+   "Parsons": 3,
+   "KPMG": 3,
+   "Syarah": 3,
+   "Sarj": 3,
+   "webook": 3,
+   "Tamara": 2,
+   "Accenture": 2,
+   "Mozn": 2,
+   "Gathern": 2,
+   "Lean Technologies": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "Ninja": 1,
+   "JODAYN": 1,
+   "Motorola Solutions": 1,
+   "COGNNA": 1,
+   "LAKEORA": 1,
+   "Qiddiya": 1,
+   "Foodics": 1,
+   "GE Vernova": 1,
+   "HALA": 1,
+   "Adree": 1
+  },
+  "byField": {
+   "business": 15,
+   "tech": 10,
+   "marketing": 5,
+   "finance": 4,
+   "engineering": 4,
+   "product": 4,
+   "cyber": 2,
+   "legal": 2,
+   "media": 1,
+   "data": 1
+  },
+  "byType": {
+   "internship": 17,
+   "grad": 13,
+   "entry": 12,
+   "coop": 6
+  }
  }
 ]
