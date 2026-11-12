@@ -1,5 +1,5 @@
 {
- "date": "2026-11-11",
+ "date": "2026-11-12",
  "sources": [
   {
    "company": "تابي",
@@ -47,7 +47,7 @@
    "ats": "workable",
    "org": "startup",
    "ok": true,
-   "kept": 5
+   "kept": 3
   },
   {
    "company": "لوسيديا",
@@ -127,7 +127,7 @@
    "ats": "workable",
    "org": "startup",
    "ok": true,
-   "kept": 1
+   "kept": 0
   },
   {
    "company": "سرج",
@@ -263,7 +263,7 @@
    "ats": "successfactors",
    "org": "private",
    "ok": true,
-   "kept": 3
+   "kept": 2
   },
   {
    "company": "بي دبليو سي",
@@ -303,7 +303,7 @@
    "ats": "workday",
    "org": "private",
    "ok": true,
-   "kept": 3
+   "kept": 2
   },
   {
    "company": "إتش بي إي",
