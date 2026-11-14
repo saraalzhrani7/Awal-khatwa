@@ -2559,5 +2559,55 @@
    "grad": 10,
    "coop": 7
   }
+ },
+ {
+  "date": "2026-11-14",
+  "open": 40,
+  "total": 44,
+  "new": 0,
+  "newIds": [],
+  "byCompany": {
+   "Lucidya": 5,
+   "Syarah": 3,
+   "Sarj": 3,
+   "Salla": 3,
+   "Tamara": 2,
+   "Qiddiya": 2,
+   "Accenture": 2,
+   "Parsons": 2,
+   "Mozn": 2,
+   "KPMG": 2,
+   "Gathern": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "Ninja": 1,
+   "JODAYN": 1,
+   "Motorola Solutions": 1,
+   "COGNNA": 1,
+   "LAKEORA": 1,
+   "Foodics": 1,
+   "GE Vernova": 1,
+   "HALA": 1,
+   "Adree": 1
+  },
+  "byField": {
+   "business": 15,
+   "tech": 7,
+   "marketing": 5,
+   "engineering": 4,
+   "finance": 3,
+   "product": 2,
+   "media": 1,
+   "cyber": 1,
+   "legal": 1,
+   "data": 1
+  },
+  "byType": {
+   "internship": 13,
+   "entry": 10,
+   "grad": 10,
+   "coop": 7
+  }
  }
 ]
