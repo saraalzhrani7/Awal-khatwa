@@ -1,5 +1,5 @@
 {
- "date": "2026-11-14",
+ "date": "2026-11-15",
  "sources": [
   {
    "company": "تابي",
@@ -95,7 +95,7 @@
    "ats": "workable",
    "org": "startup",
    "ok": true,
-   "kept": 1
+   "kept": 0
   },
   {
    "company": "مزن",
@@ -286,7 +286,7 @@
    "companyEn": "Baker Hughes",
    "ats": "workday",
    "org": "private",
-   "ok": false,
+   "ok": true,
    "kept": 0
   },
   {
@@ -294,23 +294,23 @@
    "companyEn": "GE Vernova",
    "ats": "workday",
    "org": "private",
-   "ok": false,
-   "kept": 0
+   "ok": true,
+   "kept": 1
   },
   {
    "company": "بارسونز",
    "companyEn": "Parsons",
    "ats": "workday",
    "org": "private",
-   "ok": false,
-   "kept": 0
+   "ok": true,
+   "kept": 1
   },
   {
    "company": "إتش بي إي",
    "companyEn": "HPE",
    "ats": "workday",
    "org": "private",
-   "ok": false,
+   "ok": true,
    "kept": 0
   },
   {
@@ -318,8 +318,8 @@
    "companyEn": "Motorola Solutions",
    "ats": "workday",
    "org": "private",
-   "ok": false,
-   "kept": 0
+   "ok": true,
+   "kept": 1
   },
   {
    "company": "سيارة",
