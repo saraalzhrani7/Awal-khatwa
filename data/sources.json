@@ -1,5 +1,5 @@
 {
- "date": "2026-11-15",
+ "date": "2026-11-16",
  "sources": [
   {
    "company": "تابي",
@@ -175,7 +175,7 @@
    "ats": "workable",
    "org": "semi",
    "ok": true,
-   "kept": 2
+   "kept": 1
   },
   {
    "company": "إس تي سي",
@@ -335,7 +335,7 @@
    "ats": "workable",
    "org": "startup",
    "ok": true,
-   "kept": 2
+   "kept": 3
   },
   {
    "company": "جدين",
