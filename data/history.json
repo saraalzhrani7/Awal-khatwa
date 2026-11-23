@@ -2988,5 +2988,51 @@
    "grad": 9,
    "entry": 5
   }
+ },
+ {
+  "date": "2026-11-23",
+  "open": 35,
+  "total": 39,
+  "new": 1,
+  "newIds": [
+   "jodayn-information-systems-analyst"
+  ],
+  "byCompany": {
+   "Lucidya": 5,
+   "Nahdi": 4,
+   "Syarah": 3,
+   "Salla": 3,
+   "Tamara": 2,
+   "JODAYN": 2,
+   "Accenture": 2,
+   "KPMG": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "Ninja": 1,
+   "Gathern": 1,
+   "Motorola Solutions": 1,
+   "LAKEORA": 1,
+   "Foodics": 1,
+   "Sarj": 1,
+   "GE Vernova": 1,
+   "HALA": 1,
+   "Parsons": 1
+  },
+  "byField": {
+   "business": 15,
+   "tech": 8,
+   "finance": 4,
+   "marketing": 3,
+   "engineering": 2,
+   "product": 2,
+   "media": 1
+  },
+  "byType": {
+   "internship": 11,
+   "coop": 9,
+   "grad": 9,
+   "entry": 6
+  }
  }
 ]
