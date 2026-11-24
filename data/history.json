@@ -3034,5 +3034,50 @@
    "grad": 9,
    "entry": 6
   }
+ },
+ {
+  "date": "2026-11-24",
+  "open": 35,
+  "total": 39,
+  "new": 1,
+  "newIds": [
+   "gathern-guest-relations-associate-fresh-graduates"
+  ],
+  "byCompany": {
+   "Lucidya": 5,
+   "Nahdi": 4,
+   "Syarah": 3,
+   "Salla": 3,
+   "Tamara": 2,
+   "Gathern": 2,
+   "JODAYN": 2,
+   "Accenture": 2,
+   "KPMG": 2,
+   "Atheer Connectivity": 1,
+   "Unifonic": 1,
+   "Thmanyah": 1,
+   "Ninja": 1,
+   "Motorola Solutions": 1,
+   "LAKEORA": 1,
+   "Foodics": 1,
+   "GE Vernova": 1,
+   "HALA": 1,
+   "Parsons": 1
+  },
+  "byField": {
+   "business": 16,
+   "tech": 8,
+   "finance": 4,
+   "engineering": 2,
+   "marketing": 2,
+   "product": 2,
+   "media": 1
+  },
+  "byType": {
+   "internship": 10,
+   "coop": 9,
+   "grad": 9,
+   "entry": 7
+  }
  }
 ]
