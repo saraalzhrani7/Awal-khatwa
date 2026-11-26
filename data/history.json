@@ -3117,5 +3117,43 @@
    "grad": 8,
    "entry": 5
   }
+ },
+ {
+  "date": "2026-11-26",
+  "open": 29,
+  "total": 37,
+  "new": 0,
+  "newIds": [],
+  "byCompany": {
+   "Lucidya": 5,
+   "Nahdi": 4,
+   "Salla": 3,
+   "Gathern": 2,
+   "JODAYN": 2,
+   "Accenture": 2,
+   "KPMG": 2,
+   "Syarah": 2,
+   "Ninja": 1,
+   "Motorola Solutions": 1,
+   "LAKEORA": 1,
+   "GE Vernova": 1,
+   "Tamara": 1,
+   "HALA": 1,
+   "Parsons": 1
+  },
+  "byField": {
+   "business": 14,
+   "tech": 6,
+   "finance": 3,
+   "engineering": 2,
+   "marketing": 2,
+   "product": 2
+  },
+  "byType": {
+   "internship": 9,
+   "coop": 8,
+   "grad": 7,
+   "entry": 5
+  }
  }
 ]
