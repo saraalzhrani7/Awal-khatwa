@@ -1,5 +1,5 @@
 {
- "date": "2026-11-27",
+ "date": "2026-11-28",
  "sources": [
   {
    "company": "تابي",
@@ -279,7 +279,7 @@
    "ats": "workday",
    "org": "private",
    "ok": true,
-   "kept": 2
+   "kept": 0
   },
   {
    "company": "بيكر هيوز",
